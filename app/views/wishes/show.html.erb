@@ -1,0 +1,12 @@
+<div class="container">
+    <h1><%= @wish.title %></h1>
+    <p><%= @wish.description %></p>
+
+    <% @comments.each do |comment| %>
+        <p><%= comment.content %></p>
+    <% end %>
+    <%= simple_form_for [@wish, @comment] do |f| %>
+        <%= f.input :content %>
+        <%= f.submit "Add comment" %>
+    <% end %>
+</div>

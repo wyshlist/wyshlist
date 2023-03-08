@@ -1,20 +1,22 @@
 <div class="container">
-    <h1> Wishlists </h1>
+    <h1> <%= current_user.has_an_organization? ? @organization.name : "Your" %> wishlists</h1>
 
     <% @wishlists.each do |wishlist| %>
-    <div class="card-product">
-        <div class="card-product__info">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
-            <div class="card-product-infos">
-                <h2><%= wishlist.title %></h2>
-                <p><%= wishlist.description %></p>
+        <%= link_to wishlist_path(wishlist) do %>
+        <div class="card-product">
+            <div class="card-product__info">
+                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                <div class="card-product-infos">
+                    <h2><%= wishlist.title %></h2>
+                    <p><%= wishlist.description %></p>
+                </div>
+            </div>
+            <div class="card-product__votes">
+                <small>Total votes</small>
+                <div class="card-product__vote-count"><%= wishlist.wishes.extract_associated(:votes).count %></div>
             </div>
         </div>
-        <div class="card-product__votes">
-            <small>Total votes</small>
-            <div class="card-product__vote-count"><%= wishlist.wishes.extract_associated(:votes).count %></div>
-        </div>
-    </div>
+        <% end %>
     <% end %>
 </div>
 

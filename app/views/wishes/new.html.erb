@@ -1,0 +1,8 @@
+   
+<%= turbo_frame_tag "new-wish" do %>
+    <%= simple_form_for [@wishlist, @wish] do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description, as: :text %>
+        <%= f.submit %>
+    <% end %>
+<% end %>
