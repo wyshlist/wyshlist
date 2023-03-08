@@ -11,9 +11,11 @@ Wishlist.destroy_all
 Wish.destroy_all
 Vote.destroy_all
 Comment.destroy_all
+Organization.destroy_all
 puts "Creating main sample user..."
 # Create a main sample user.
-user = User.create!(email: "user1@gmail.com", password: "123123", username: "user1")
+organization = Organization.create(name: "Le Wagon")
+user = User.create!(email: "user1@gmail.com", password: "123123", username: "user1", organization: organization)
 
 # Generate a bunch of additional users.
 99.times do |n|
@@ -21,38 +23,75 @@ user = User.create!(email: "user1@gmail.com", password: "123123", username: "use
     email = Faker::Internet.email
     password = "123123"
     User.create!(email: email, password: password, username: name)
+    print "*"
 end
 puts "Creating main sample wishlist..."
 # Create a main sample wishlist.
 Wishlist.create!(title: "Wishlist 1", description: "This is the first wishlist.", user: user)
+puts ""
 puts "Creating main sample wish..."
 # Generate a bunch of additional wishlists.
 99.times do |n|
+    print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
     Wishlist.create!(title: title, description: description, user: User.all.sample)
 end
-
+puts ""
 puts "Creating main sample wish..."
 # Generate a bunch of additional wishes.
 99.times do |n|
+    print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
     Wish.create!(title: title, description: description, wishlist: Wishlist.all.sample)
 end
 
 # Create a main sample vote.
-Vote.create!(user: user, wish: Wish.all.sample)
+puts ""
 puts "Creating main sample vote..."
 # Generate a bunch of additional votes.
-99.times do |n|
-    Vote.create!(user: User.all.sample, wish: Wish.all.sample)
+User.all.each do |user|
+    print "*"
+    Vote.create!(user: user, wish: Wish.all.sample)
 end
+puts ""
 puts "Creating main sample comment..."
 # Generate a bunch of additional comments.
 99.times do |n|
+    print "*"
     body = Faker::Lorem.sentence(word_count: 10)
     Comment.create!(content: body, user: User.all.sample, wish: Wish.all.sample)
 end
 
+puts ". . . . . . . . . . .*. . . . . . . ** *
+. . . . .. . . . . .*** . . * . . *****
+. . . . . . . . . . .** . . **. . . . .*
+. . . . . . . . . . ***.*. . *. . . . .*
+. . . . . . . . . .****. . . .** . . . ******
+. . . . . . . . . ***** . . . .**.*. . . . . **
+. . . . . . . . .*****. . . . . **. . . . . . *.**
+. . . . . . . .*****. . . . . .*. . . . . . *
+. . . . . . . .******. . . . .*. . . . . *
+. . . . . . . .******* . . .*. . . . .*
+. . . . . . . . .*********. . . . . *
+. . . . . . . . . .******* . ***
+*******. . . . . . . . .**
+.*******. . . . . . . . *
+. ******. . . . . . . . * *
+. .***. . *. . . . . . .**
+. . . . . . .*. . . . . *
+. . . . .****.*. . . .*
+. . . *******. .*. .*
+. . .*******. . . *.
+. . .*****. . . . *
+. . .**. . . . . .*
+. . .*. . . . . . **.*
+. . . . . . . . . **
+. . . . . . . . .*
+. . . . . . . . .*
+. . . . . . . . .*
+. . . . . . . . *
+. . . . . . . . *
+"
 

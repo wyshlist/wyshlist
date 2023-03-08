@@ -1,6 +1,12 @@
 class WishlistsController < ApplicationController
-    skip_before_action :authenticate_user!, only: [ :index ]
     def index
-        @wishlists = Wishlist.all
+        @organization = current_user.organization
+        @wishlists = current_user.has_an_organization? ? @organization.wishlists : current_user.wishlists
+    end
+
+    def show
+        @wishlist = Wishlist.find(params[:id])
+        @wishes = @wishlist.wishes
+        @vote = Vote.new
     end
 end

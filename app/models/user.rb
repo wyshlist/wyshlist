@@ -6,4 +6,11 @@ class User < ApplicationRecord
   has_many :wishlists, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :wishes, through: :votes
+  has_many :comments, dependent: :destroy
+  belongs_to :organization, optional: true
+
+  def has_an_organization?
+    !organization.nil?
+  end
+  
 end
