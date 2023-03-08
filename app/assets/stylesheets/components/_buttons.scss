@@ -1,4 +1,27 @@
 .upvote-button {
     background-color: $primary-color;
     color: white;
+    padding: 5px 10px;
+    border-radius: 0.25rem;
 }
+
+.btn-flat {
+    color: white;
+    padding: 12px 34px;
+    border-radius: 0.5rem;
+    background: $primary-color;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-flat:hover {
+    background: #4D04C4;
+    color: white;
+  }
+
+  .new-wish-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  

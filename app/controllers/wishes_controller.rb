@@ -23,4 +23,11 @@ class WishesController < ApplicationController
             render 'wishlists/show', status: :unprocessable_entity
         end
     end
+
+
+    private
+
+    def wish_params
+        params.require(:wish).permit(:title, :description)
+    end
 end

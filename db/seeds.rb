@@ -44,7 +44,7 @@ puts "Creating main sample wish..."
     print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
-    Wish.create!(title: title, description: description, wishlist: Wishlist.all.sample)
+    Wish.create!(title: title, description: description, wishlist: Wishlist.all.sample, user: User.all.sample)
 end
 
 # Create a main sample vote.
@@ -63,7 +63,7 @@ puts "Creating main sample comment..."
     body = Faker::Lorem.sentence(word_count: 10)
     Comment.create!(content: body, user: User.all.sample, wish: Wish.all.sample)
 end
-
+puts "Seeds completed!"
 puts ". . . . . . . . . . .*. . . . . . . ** *
 . . . . .. . . . . .*** . . * . . *****
 . . . . . . . . . . .** . . **. . . . .*

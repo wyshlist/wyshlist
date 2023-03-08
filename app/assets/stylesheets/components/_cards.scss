@@ -24,6 +24,11 @@
     border-radius: 0.5rem;
   }
 
+  .new-wish-card {
+    width: auto;
+    // padding: 20px 0px;
+  }
+
   .card-product__link {
     color: #000;
     text-decoration: none;
@@ -49,6 +54,9 @@
   .card-product__vote-count {
     font-size: 25px;
     text-align: center;
+    border: 1px solid #e6e6e6;
+    border-radius: 0.25rem;
+    margin-bottom: 10px;
   }
 
   .card-product__votes small {
@@ -58,5 +66,21 @@
 
   .card-product__vote {
     display: block;
+  }
+
+  .card-product__icons {
+    padding: 10px 0px;
+
+    color: #b8b8b8;
+    align-items: start;
+  }
+
+  .card-product__icon {
+    display: flex;
+    align-items: center; 
+  }
+
+  .card-product__icon i {
+    padding-right: 5px;
   }
   
