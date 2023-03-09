@@ -1,5 +1,5 @@
 <div class="container">
-    <h1> <%= current_user.has_an_organization? ? @organization.name : "Your" %> wishlists</h1>
+    <h1> <%= current_user.has_an_organization? ? @organization.name.capitalize : "Your" %> wishlists</h1>
 
     <% @wishlists.each do |wishlist| %>
         <%= link_to wishlist_path(wishlist) do %>
