@@ -2,8 +2,9 @@
     <div class="card-product form-wrapper">
         <h1>Join a team</h1>
         <%= simple_form_for @organization do |f| %>
-            <%= f.input :name %>
+            <%= f.input :name, required: true %>
             <%= f.submit "Join a team", class: "btn-flat"%>
         <% end %>
+        <%= link_to "Sign in", new_user_session_path %>
     </div>
 </div>
