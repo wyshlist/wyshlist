@@ -6,7 +6,8 @@
 }
 
 .btn-flat {
-    color: white;
+    color: white !important;
+    font-weight: bold;
     padding: 12px 34px;
     border-radius: 0.5rem;
     background: $primary-color;
@@ -14,7 +15,7 @@
   }
   
   .btn-flat:hover {
-    background: #4D04C4;
+    background: $primary-color-hover;
     color: white;
   }
 
