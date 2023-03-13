@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
     end
 
     def create
-        @organization = Organization.find_or_create_by(organization_params).downcase
+        @organization = Organization.find_or_create_by(organization_params)
         if @organization
             current_user.update(organization: @organization)
             redirect_to wishlists_path
