@@ -1,10 +1,14 @@
 <div class="container">
-    <h1> <%= @wishlist.title %> </h1>
+    <div class="title-wrapper">
+        <h1> <%= @wishlist.title %></h1>
+        <div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
+        <%= render_breadcrumbs :separator => " / " %>
+    </div>
     <% @wishes.each do |wish| %>
         <%= link_to wish_path(wish), class: "card-product__link" do %>
         <div class="card-product">
             <div class="card-product__info">
-                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                <div class="card-product__color" style="background-color: #<%= wish.wishlist.color %>"></div>
                 <div class="card-product-infos">
                     <h2><%= wish.title %></h2>
                     <p><%= wish.description %></p>

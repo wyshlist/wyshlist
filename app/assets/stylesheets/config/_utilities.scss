@@ -6,3 +6,24 @@ a {
 .highlight {
     color: $primary-color ;
 }
+
+input[type="submit"] {
+    border-width: 0px !important;
+}
+
+.title-main-highlight {
+    height: 20px;
+    border-radius: 20px;
+    margin-top: -25px;
+}
+
+.title-wrapper {
+    width: fit-content;
+    margin-bottom: 35px;
+}
+
+.title-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0px;
+}

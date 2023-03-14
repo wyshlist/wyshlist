@@ -10,18 +10,22 @@
     padding: 15px;
   }
 
-  .card-product__info {
-    display: flex;
-    align-items: start;
-    padding: 1rem;
+  .card-product:hover {
+    box-shadow: 10px 10px 30px #00000012;
   }
-  
-  .card-product img {
+
+  .card-product__color {
     margin-right: 20px;
     height: 3.5rem;
     width: 3.5rem;
     object-fit: cover;
     border-radius: 0.5rem;
+  }
+
+  .card-product__info {
+    display: flex;
+    align-items: start;
+    padding: 1rem;
   }
 
   .new-wish-card {
