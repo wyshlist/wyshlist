@@ -27,3 +27,15 @@ input[type="submit"] {
     justify-content: space-between;
     margin: 50px 0px;
 }
+
+.header-icons {
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+}
+
+.header-icons:hover {
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+}
