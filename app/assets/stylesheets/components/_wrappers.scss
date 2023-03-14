@@ -6,12 +6,28 @@
     padding: 150px 0px;
 }
 
+.page-wrapper {
+    min-height: 90vh;
+}
+
 .about-us-section {
     h2 {
         font-size: 2.25rem;
         font-weight: bold;
         margin: 0;
     }
+}
+
+.about-us-section__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 0.5rem;
+    background-color: $primary-color;
+    margin-right: 20px;
+    margin-bottom: 1rem;
 }
 
 .about-us-section__grid-card {
