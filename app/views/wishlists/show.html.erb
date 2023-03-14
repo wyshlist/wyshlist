@@ -9,7 +9,7 @@
         <%= link_to edit_wishlist_path(@wishlist) do %>
             <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
-        <%= link_to wishlist_path(@wishlist), data: {turbo_method: "delete" } do %>
+        <%= link_to wishlist_path(@wishlist), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
             <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
         </div>
@@ -26,6 +26,11 @@
                         <div class="card-product__icon">
                             <i class="fas fa-comment"></i>
                             <small><%= wish.comments.count %> comments</small>
+                        </div>
+                        <div class="card-product__icon">
+                            <div class="card-product__status">
+                                <%= wish.status %>
+                            </div>
                         </div>
                     </div>
                 </div>

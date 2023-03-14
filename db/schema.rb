@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_181304) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.string "status", default: "pending"
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_wishes_on_user_id"
     t.index ["wishlist_id"], name: "index_wishes_on_wishlist_id"
   end
@@ -74,7 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_181304) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "color", default: "#3F4BF2"
+    t.string "color", default: "3F4BF2"
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
