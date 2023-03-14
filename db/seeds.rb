@@ -35,7 +35,7 @@ puts "Creating main sample wish..."
     print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
-    Wishlist.create!(title: title, description: description, user: User.all.sample, color: Wishlist::COLOR.sample)
+    Wishlist.create!(title: title, description: description, user: User.all.sample, color: Wishlist::COLORS.sample)
 end
 puts ""
 puts "Creating main sample wish..."
@@ -44,7 +44,7 @@ puts "Creating main sample wish..."
     print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
-    Wish.create!(title: title, description: description, wishlist: Wishlist.all.sample, user: User.all.sample)
+    Wish.create!(title: title, description: description, wishlist: Wishlist.all.sample, user: User.all.sample, status: Wish.statuses.to_a.sample[1])
 end
 
 # Create a main sample vote.

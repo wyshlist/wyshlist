@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  resources :organizations, only: [:new, :create]
-  devise_for :users
-  root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+  root to: "pages#home"  
+
+  resources :organizations, only: [:new, :create]
 
   resources :wishlists do
     resources :wishes, only: [:new, :create]

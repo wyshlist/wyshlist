@@ -6,4 +6,5 @@ class Wish < ApplicationRecord
   has_many :users
   belongs_to :user
   has_many :comments, dependent: :destroy
+  enum status: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
 end
