@@ -35,7 +35,7 @@ puts "Creating main sample wish..."
     print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
-    Wishlist.create!(title: title, description: description, user: User.all.sample)
+    Wishlist.create!(title: title, description: description, user: User.all.sample, color: Wishlist::COLOR.sample)
 end
 puts ""
 puts "Creating main sample wish..."
