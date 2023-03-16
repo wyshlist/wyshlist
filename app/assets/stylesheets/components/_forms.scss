@@ -36,44 +36,50 @@
   }
   
   .category-selector:checked + label {
-    border: 3px solid $primary-color;
+    border: 3px solid $light-gray !important;
     background-color: #EAEAEA;
   }
   
 #wishlist_color_ecedfe + label {
     color: #ECEDFE;
-    background-color: #ECEDFE !important;
+    background-color: #ECEDFE;
     border-radius: 100%; 
+    border: 3px solid #ECEDFE;
 }
 
 #wishlist_color_effeec + label {
     color: #EFFEEC;
     background-color: #EFFEEC;
     border-radius: 100%; 
+    border: 3px solid #EFFEEC;
 }
 
 #wishlist_color_feecec + label {
     color: #FEFCEC;
     background-color: #FEFCEC;
     border-radius: 100%; 
+    border: 3px solid #FEFCEC;
 }
 
 #wishlist_color_fefcec + label {
     color: #FEECEC;
     background-color: #FEECEC;
     border-radius: 100%; 
+    border: 3px solid #FEECEC;
 }
 
 #wishlist_color_f9ecfe + label {
     color: #F9ECFE;
     background-color: #F9ECFE;
     border-radius: 100%; 
+    border: 3px solid #F9ECFE;
 }
 
 #wishlist_color_ecfefe + label {
     color: #ECFEFE;
     background-color: #ECFEFE;
     border-radius: 100%; 
+    border: 3px solid #ECFEFE;
 }
 
 .new_wishlist {

@@ -1,9 +1,11 @@
 <div class="container">
     <div class="title-header">
         <div class="title-wrapper">
+            <%= render_breadcrumbs :separator => " / " %>
             <h1> <%= @wishlist.title %></h1>
             <div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
-            <%= render_breadcrumbs :separator => " / " %>
+            <br>
+            <small><%= @wishlist.description %></small>
         </div>
         <div>
         <%= link_to edit_wishlist_path(@wishlist) do %>
@@ -14,34 +16,10 @@
         <% end %>
         </div>
     </div>
-    <% @wishes.each do |wish| %>
-        <%= link_to wish_path(wish), class: "card-product__link" do %>
-        <div class="card-product">
-            <div class="card-product__info">
-                <div class="card-product__color" style="background-color: #<%= wish.wishlist.color %>"></div>
-                <div class="card-product-infos">
-                    <h2><%= wish.title %></h2>
-                    <p><%= wish.description %></p>
-                    <div class="card-product__icons">
-                        <div class="card-product__icon">
-                            <i class="fas fa-comment"></i>
-                            <small><%= wish.comments.count %> comments</small>
-                        </div>
-                        <div class="card-product__icon">
-                            <div class="card-product__status">
-                                <%= wish.status %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-product__votes">
-                <div class="card-product__vote-count"><%= wish.votes.count %> <small>votes</small></div>
-                <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button" %>
-            </div>
-        </div>
-        <% end %>
-    <% end %>
+    <%= turbo_stream.append 'wishes', partial: "wishlists/wishes", locals: {wishes: @wishes} %>
+    <%= turbo_frame_tag "wishes" do %>
+        <%= render "wishlists/wishes", wishes: @wishes %>
+   <% end %>
     <%= turbo_frame_tag "new-wish" do %>
         <div class="new-wish-wrapper">
             <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>

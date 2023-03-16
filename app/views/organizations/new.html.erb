@@ -1,8 +1,8 @@
 <div class="my-container">
     <div class="card-product form-wrapper">
-        <h1>Join a team</h1>
+        <h1>Join or create a team</h1>
         <%= simple_form_for @organization do |f| %>
-            <%= f.input :name, required: true %>
+            <%= f.input :name, required: true, label: false, placeholder: "Search or create a team" %>
             <%= f.submit "Join a team", class: "btn-flat"%>
         <% end %>
         <%= link_to "Sign in", new_user_session_path %>
