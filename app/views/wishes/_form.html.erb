@@ -1,0 +1,5 @@
+    <%= simple_form_for [@wishlist, @wish] do |f| %>
+        <%= f.input :title, label: false, placeholder: "Title" %>
+        <%= f.input :description, label: false, placeholder: "Description", as: :text %>
+        <%= f.submit "Add a wish", class: "btn-flat"%>
+    <% end %>

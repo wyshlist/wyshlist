@@ -1,13 +1,23 @@
-<div class="container">
+<div class="my-container">
     <%= render_breadcrumbs :separator => " / " %>
-    <h1><%= @wish.title %></h1>
-    <p><%= @wish.description %></p>
-
-    <% @comments.each do |comment| %>
-        <p><%= comment.content %></p>
-    <% end %>
-    <%= simple_form_for [@wish, @comment] do |f| %>
-        <%= f.input :content %>
-        <%= f.submit "Add comment" %>
-    <% end %>
+    <div class="title-header">
+        <h1><%= @wish.title %></h1>
+        <div>
+            <%= link_to edit_wish_path(@wish) do %>
+                <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+            <% end %>
+            <%= link_to edit_wish_path(@wish), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+                <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+            <% end %>
+        </div>
+    </div>
+        <p><%= @wish.description %></p>
+    <h2>Comments</h2>
+        <% @comments.each do |comment| %>
+            <p><%= comment.content %></p>
+        <% end %>
+        <%= simple_form_for [@wish, @comment] do |f| %>
+            <%= f.input :content %>
+            <%= f.submit "Add comment" %>
+        <% end %>
 </div>

@@ -70,14 +70,20 @@
 
   .card-product__icons {
     padding: 10px 0px;
-
+    display: flex;
     color: #b8b8b8;
-    align-items: start;
+    align-items: center;
   }
 
   .card-product__icon {
     display: flex;
     align-items: center; 
+  }
+
+  .card-product__status {
+    margin-right: 25px;
+    padding: 5px 15px;
+    border-radius: 25px;
   }
 
   .card-product__icon i {
