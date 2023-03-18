@@ -16,10 +16,7 @@
         <% end %>
         </div>
     </div>
-    <%= turbo_stream.append 'wishes', partial: "wishlists/wishes", locals: {wishes: @wishes} %>
-    <%= turbo_frame_tag "wishes" do %>
-        <%= render "wishlists/wishes", wishes: @wishes %>
-   <% end %>
+    <%= render "wishes/wishes", wishes: @wishes %>
     <%= turbo_frame_tag "new-wish" do %>
         <div class="new-wish-wrapper">
             <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>

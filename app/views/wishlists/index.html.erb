@@ -7,7 +7,7 @@
         <%= render_breadcrumbs :separator => "  /  " %>
     </div>
     <% @wishlists.each do |wishlist| %>
-        <%= link_to wishlist_path(wishlist) do %>
+        <%= link_to wishlist_wishes_path(wishlist) do %>
         <div class="card-product">
             <div class="card-product__info">
                 <div class="card-product__color" style="background-color: #<%= wishlist.color %>"></div>

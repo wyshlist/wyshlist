@@ -7,14 +7,6 @@ class WishlistsController < ApplicationController
         add_breadcrumb "whislists", wishlists_path
     end
 
-    def show
-        @wishlist = Wishlist.find(params[:id])
-        @wishes = @wishlist.wishes
-        @vote = Vote.new
-        @wish = Wish.new
-        add_breadcrumb "#{@wishlist.title}", wishlist_path(@wishlist)
-    end
-
     def new
         @wishlist = Wishlist.new
     end
