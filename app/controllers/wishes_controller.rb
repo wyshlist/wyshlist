@@ -13,14 +13,23 @@ class WishesController < ApplicationController
         @wishlist = Wishlist.find(params[:wishlist_id])
     end
 
+    def index
+        @wishlist = Wishlist.find(params[:wishlist_id])
+        @wishes = @wishlist.wishes
+        @vote = Vote.new
+        add_breadcrumb "#{@wishlist.title}", wishlist_path(@wishlist)
+    end
+
     def create
         @wish = Wish.new(wish_params)
         @wish.user = current_user
         @wish.wishlist = Wishlist.find(params[:wishlist_id])
         if @wish.save
-            redirect_to wishlist_path(@wish.wishlist)
+            flash[:notice] = "Wish created successfully"
+            redirect_to wishlist_wishes_path(@wish.wishlist)
         else
-            render 'wishlists/show', status: :unprocessable_entity
+            flash[:alert] = "Wish not created, try again later"
+            render :new, status: :unprocessable_entity
         end
     end
 

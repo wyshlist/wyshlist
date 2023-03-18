@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:new, :create]
 
-  resources :wishlists do
-    resources :wishes, only: [:new, :create]
+  resources :wishlists, except: :show do
+    resources :wishes, only: [:new, :create, :index]
   end
 
   resources :wishes, only: [:show, :edit, :update, :destroy] do

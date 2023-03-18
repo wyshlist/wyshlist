@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="title-header">
+        <div class="title-wrapper">
+            <%= render_breadcrumbs :separator => " / " %>
+            <h1> <%= @wishlist.title %></h1>
+            <div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
+            <br>
+            <small><%= @wishlist.description %></small>
+        </div>
+        <div>
+        <%= link_to edit_wishlist_path(@wishlist) do %>
+            <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+        <% end %>
+        <%= link_to wishlist_path(@wishlist), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+            <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+        <% end %>
+        </div>
+    </div>
+    <%= render "wishes/wishes", wishes: @wishes %>
+    <%= turbo_frame_tag "new-wish" do %>
+        <div class="new-wish-wrapper">
+            <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+        </div>
+    <% end %>
+</div>
+
