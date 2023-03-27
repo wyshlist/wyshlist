@@ -7,7 +7,7 @@
                 <p><%= @wish.description %></p>
             </div>
         </div>
-        <div class="card-product__status">
+        <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
             <%= @wish.stage %>
         </div>
     </div>

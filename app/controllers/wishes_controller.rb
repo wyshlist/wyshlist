@@ -15,7 +15,11 @@ class WishesController < ApplicationController
 
     def index
         @wishlist = Wishlist.find(params[:wishlist_id])
-        @wishes = @wishlist.wishes
+        if params[:stage]
+            @wishes = @wishlist.wishes.where(stage: params[:stage])
+        else
+            @wishes = @wishlist.wishes
+        end
         @vote = Vote.new
         add_breadcrumb "#{@wishlist.title}", wishlist_path(@wishlist)
     end

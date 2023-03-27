@@ -18,7 +18,14 @@
     </div>
     <div class="cards-columns">
         <div class="wishes-wrapper">
+            <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
+            <% else %>
+                <div class="no-wishes">
+                    <h2> No ideas yet! </h2>
+                    <p> Be the first to add an idea to this wishlist! </p>
+                </div>
+            <% end %>
             <%= turbo_frame_tag "new-wish" do %>
                 <div class="new-wish-wrapper">
                     <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
@@ -26,11 +33,12 @@
             <% end %>
         </div>
         <div class="wishes-filter">
-            <ul>
+            <ul class="wishes-filter__list">
+                <h2> Filter by stage </h2>
                 <% Wish.stages.each do |stage| %>
-                    <li>
-                        <%= link_to stage[0], wishlist_path(@wishlist, stage: stage)%>
-                    </li>
+                    <%= link_to wishlist_wishes_path(@wishlist, stage: stage) do%>
+                    <li><%= stage[0] %></li>
+                    <% end %>
                 <% end %>
             </ul>
         </div>
