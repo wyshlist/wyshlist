@@ -8,19 +8,19 @@
     </div>
     <% @wishlists.each do |wishlist| %>
         <%= link_to wishlist_wishes_path(wishlist) do %>
-        <div class="card-product">
-            <div class="card-product__info">
-                <div class="card-product__color" style="background-color: #<%= wishlist.color %>"></div>
-                <div class="card-product-infos">
-                    <h2><%= wishlist.title %></h2>
-                    <p><%= wishlist.description %></p>
+            <div class="card-product">
+                <div class="card-product__info">
+                    <div class="card-product__color" style="background-color: #<%= wishlist.color %>"></div>
+                    <div class="card-product-infos">
+                        <h2><%= wishlist.title %></h2>
+                        <p><%= wishlist.description %></p>
+                    </div>
+                </div>
+                <div class="card-product__votes">
+                    <small>Contributors</small>
+                    <div class="card-product__vote-count"><%= wishlist.wishes.extract_associated(:votes).count %></div>
                 </div>
             </div>
-            <div class="card-product__votes">
-                <small>Contributors</small>
-                <div class="card-product__vote-count"><%= wishlist.wishes.extract_associated(:votes).count %></div>
-            </div>
-        </div>
         <% end %>
     <% end %>
 </div>

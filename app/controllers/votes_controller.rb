@@ -8,7 +8,7 @@ class VotesController < ApplicationController
             redirect_to wishlist_wishes_path(@vote.wish.wishlist)
         else
             flash[:notice] = "You can't vote twice for the same wish"
-            redirect_to wishlist_path(@vote.wish.wishlist), status: :unprocessable_entity
+            redirect_to wishlist_wishes_path(@vote.wish.wishlist), status: :unprocessable_entity
         end
     end
 end

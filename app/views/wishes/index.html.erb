@@ -16,11 +16,24 @@
         <% end %>
         </div>
     </div>
-    <%= render "wishes/wishes", wishes: @wishes %>
-    <%= turbo_frame_tag "new-wish" do %>
-        <div class="new-wish-wrapper">
-            <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+    <div class="cards-columns">
+        <div class="wishes-wrapper">
+            <%= render "wishes/wishes", wishes: @wishes %>
+            <%= turbo_frame_tag "new-wish" do %>
+                <div class="new-wish-wrapper">
+                    <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+                </div>
+            <% end %>
         </div>
-    <% end %>
+        <div class="wishes-filter">
+            <ul>
+                <% Wish.stages.each do |stage| %>
+                    <li>
+                        <%= link_to stage[0], wishlist_path(@wishlist, stage: stage)%>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
 </div>
 
