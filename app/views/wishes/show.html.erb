@@ -1,23 +1,34 @@
 <div class="my-container">
     <%= render_breadcrumbs :separator => " / " %>
-    <div class="title-header">
-        <h1><%= @wish.title %></h1>
-        <div>
-            <%= link_to edit_wish_path(@wish) do %>
-                <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
-            <% end %>
-            <%= link_to edit_wish_path(@wish), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
-                <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
-            <% end %>
+    <div class="card-product">
+        <div class="card-product__info">
+            <div class="card-product-infos">
+                <h1><%= @wish.title %></h1>
+                <p><%= @wish.description %></p>
+            </div>
+        </div>
+        <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
+            <%= @wish.stage %>
         </div>
     </div>
-        <p><%= @wish.description %></p>
-    <h2>Comments</h2>
-        <% @comments.each do |comment| %>
-            <p><%= comment.content %></p>
-        <% end %>
-        <%= simple_form_for [@wish, @comment] do |f| %>
-            <%= f.input :content %>
-            <%= f.submit "Add comment" %>
-        <% end %>
+    <div class="card-product__icons">
+        <div class="card-product__icon">
+            <i class="fas fa-comment"></i>
+            <small><%= @wish.comments.count %> comments</small>
+        </div>
+    </div>
+    <% @comments.each do |comment| %>
+        <div class="card-comment">
+            <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle" %>
+            <%#= image_tag comment.user.photo, alt: "text" %>
+            <div class="card-product-infos">
+                <p><strong><%= comment.user.email %></strong><p>
+                <p><%= comment.content %></p>
+            </div>
+        </div>
+    <% end %>
+    <%= simple_form_for [@wish, @comment] do |f| %>
+        <%= f.input :content %>
+        <%= f.submit "Add comment", class: "btn-flat" %>
+    <% end %>
 </div>

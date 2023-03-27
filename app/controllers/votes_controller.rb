@@ -11,4 +11,11 @@ class VotesController < ApplicationController
             redirect_to wishlist_wishes_path(@vote.wish.wishlist), status: :unprocessable_entity
         end
     end
+    
+    def destroy
+        @vote = Vote.find(params[:id])
+        @vote.destroy
+        flash[:success] = "You removed your vote"
+        redirect_to wishlist_wishes_path(@vote.wish.wishlist)
+    end
 end
