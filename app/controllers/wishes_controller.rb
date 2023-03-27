@@ -26,7 +26,7 @@ class WishesController < ApplicationController
         @wish.wishlist = Wishlist.find(params[:wishlist_id])
         if @wish.save
             flash[:notice] = "Wish created successfully"
-            redirect_to wishlist_wishes_path(@wish.wishlist)
+            redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
         else
             flash[:alert] = "Wish not created, try again later"
             render :new, status: :unprocessable_entity

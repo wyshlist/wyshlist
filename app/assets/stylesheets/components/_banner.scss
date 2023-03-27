@@ -1,6 +1,7 @@
 .banner {
     background-color: $white;
-    padding: 250px 0;
+    padding: 150px 0;
+    position: relative;
   }
   
   .banner h1 {
@@ -25,4 +26,22 @@
     text-align: center;
     padding: 0 20px;
   }
+
+  // .banner__mockup {
+  //   width: 100%;
+  //   max-width: 800px;
+  //   margin: 30px auto;
+  //   position: absolute;
+  //   right: -250px;
+  //   top: 150px
+  // }
+
+  // .banner__doodle {
+  //   position: absolute;
+  //   bottom: -50px;
+  //   right: 0px;
+  //   z-index: 10;
+  //   width: 100%;
+  //   max-width: 600px;
+  // }
   

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
+  resources :votes, only: :destroy
+
   resources :users, only: [:show] do
     resources :wishlists, only: [:index]
   end
