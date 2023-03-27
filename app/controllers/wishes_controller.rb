@@ -33,6 +33,10 @@ class WishesController < ApplicationController
         end
     end
 
+    def edit
+        @wish = Wish.find(params[:id])
+    end
+
 
     private
 

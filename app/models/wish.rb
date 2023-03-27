@@ -12,4 +12,14 @@ class Wish < ApplicationRecord
   def user_vote(user)
     votes.find_by(user: user)
   end
+
+  def stage_color
+    case stage
+      when "Backlog" then "#F9ECFE"
+      when "In process" then "#ECFEFE"
+      when "In review" then "#ECEDFE"
+      when "Beta" then "#FEFCEC"
+      when "Launched" then "#EFFEEC"
+    end
+  end
 end
