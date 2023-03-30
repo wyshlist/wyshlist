@@ -4,6 +4,7 @@
         <div class="card-product__info">
             <div class="card-product-infos">
                 <h1><%= @wish.title %></h1>
+                <small>Posted by <%= @wish.user.email %></small>
                 <p><%= @wish.description %></p>
             </div>
         </div>
@@ -13,8 +14,8 @@
     </div>
     <div class="card-product__icons">
         <div class="card-product__icon">
-            <i class="fas fa-comment"></i>
-            <small><%= @wish.comments.count %> comments</small>
+            
+            <small><i class="fas fa-comment"></i> <%= @wish.comments.count %> comments</small>
         </div>
     </div>
     <% @comments.each do |comment| %>
