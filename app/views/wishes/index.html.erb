@@ -1,4 +1,4 @@
-<div class="container">
+<div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
             <%= render_breadcrumbs :separator => " / " %>
@@ -20,15 +20,26 @@
         <div class="wishes-wrapper">
             <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
+            <% elsif params[:stage]%>
+                <div class="no-wishes">
+                    <h2> No ideas For this stage yet </h2>
+                    <p> Stay tuned for upcoming changes in the pipeline</p>
+                </div>
             <% else %>
                 <div class="no-wishes">
                     <h2> No ideas yet! </h2>
                     <p> Be the first to add an idea to this wishlist! </p>
                 </div>
             <% end %>
-            <%= turbo_frame_tag "new-wish" do %>
+            <% if user_signed_in? %>
+                <%= turbo_frame_tag "new-wish" do %>
+                    <div class="new-wish-wrapper">
+                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+                    </div>
+                <% end %>
+            <% else %>
                 <div class="new-wish-wrapper">
-                    <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat" %>
                 </div>
             <% end %>
         </div>

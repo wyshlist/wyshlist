@@ -1,7 +1,7 @@
 <div class="banner">
   <div class="my-container">
   <div class="banner__body">
-        <h1>One platform for your team to <span class="highlight">contribute & vote</span> on the next product lunch</h1>
+        <h1>One platform for your team or customers to <span class="highlight">contribute & vote</span> on the next product lunch</h1>
         <p>Community based wishlists for product managers and tech teams.</p>
         <% if user_signed_in? %>
             <%= link_to "Wishlists", wishlists_path, class: "btn-flat" %>
@@ -10,47 +10,54 @@
         <% end %>
     </div>
   </div>
+  <%= image_tag "home-mockup.png", alt: "text", class: "banner__mockup" %>
 </div>
 <div class="my-container">
     <section class="section-wrapper">
-    <div class="about-us-section">
-        <div class="about-us-section__body">
-            <h2>Brainstorm. Prioritize. Communicate.</h2>
-            <p>
-               Are you tired of endless meetings debating which product to launch next? Are you ready to let your community have a say?
-               Let them contribute and vote on the next product launch. 
-            </p>
-        </div>
+        <div class="about-us-section">
+            <div class="about-us-section__body">
+                <h2>Gather. Prioritize. Communicate.</h2>
+                <p>
+                Are you tired of endless meetings debating which product to launch next? Are you ready to let your community have a say?
+                Let them contribute and vote on the next product launch. 
+                </p>
+            </div>
 
-        <div class="about-us-section__grid">
-            <div class="about-us-section__grid-card">
-                <%= image_tag "coffee.png", alt: "text", class: "about-us-section__icon" %>
-                <div>
-                    <h2>Brainstorm as a team</h2>
-                    <p>
-                       Allow your team to submit ideas and existing pains that they would like to be solved.
-                    </p>
+            <div class="about-us-section__grid">
+                <div class="about-us-section__grid-card">
+                    <%= image_tag "coffee.png", alt: "text", class: "about-us-section__icon" %>
+                    <div>
+                        <h2>Gather ideas</h2>
+                        <p>
+                        Allow your team or customers to submit ideas and existing pains that they would like to be solved.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-us-section__grid-card">
-                <%= image_tag "kanban.png", alt: "text", class: "about-us-section__icon" %>
-                <div>
-                    <h2>Expose your pipeline</h2>
-                    <p>
-                        Backlog, in development, In review ... Thanks to our intruitive tags system, you can easily inform stakeholders of the stage each products or idea.
-                    </p>
+                <div class="about-us-section__grid-card">
+                    <%= image_tag "kanban.png", alt: "text", class: "about-us-section__icon" %>
+                    <div>
+                        <h2>Expose your pipeline</h2>
+                        <p>
+                            Backlog, in development, in review ... Thanks to our intruitive tags system, you can easily inform stakeholders of the stage each product or idea.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="about-us-section__grid-card">
-                <%= image_tag "vote.png", alt: "text", class: "about-us-section__icon" %>
-                <div>
-                    <h2>Let the votes speak</h2>
-                    <p>
-                        Democracy at its best, easily prioritize your product development based on your team's or customers' votes.
-                    </p>
+                <div class="about-us-section__grid-card">
+                    <%= image_tag "vote.png", alt: "text", class: "about-us-section__icon" %>
+                    <div>
+                        <h2>Let the votes speak</h2>
+                        <p>
+                            Democracy at its best, easily prioritize your product development based on your team's or customers' votes.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <div class="my-container">
+    <section class="section-wrapper">
+        <div class="about-us-section">
+            <h2></h2>
+        </div>
     </section>
 </div>

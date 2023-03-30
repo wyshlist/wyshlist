@@ -1,4 +1,4 @@
-<div class="container">
+<div class="my-container">
     <div class="title-header">
         <h1> <%= current_user.has_an_organization? ? @organization.name.capitalize : "Your" %> wishlists</h1>
         <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
