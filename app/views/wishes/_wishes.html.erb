@@ -5,7 +5,10 @@
                     <div class="card-product__color" style="background-color: #<%= wish.wishlist.color %>"></div>
                     <div class="card-product-infos">
                         <h2><%= wish.title %></h2>
-                        <p><%= wish.description %></p>
+                            <div class="card-product__icon">
+                                <small>Posted by  <%= wish.user.email %></small>
+                            </div>
+                        <p><%= wish.description.truncate(250) %></p>
                         <div class="card-product__icons">
                             <div class="card-product__icon">
                                 <div class="card-product__status" style="background-color: <%= wish.stage_color %>">
@@ -13,8 +16,7 @@
                                 </div>
                             </div>
                             <div class="card-product__icon">
-                                <i class="fas fa-comment"></i>
-                                <small><%= wish.comments.count %> comments</small>
+                                <small><i class="fas fa-comment"></i> <%= wish.comments.count %> comments</small>
                             </div>
                         </div>
                     </div>
