@@ -25,10 +25,18 @@
     color: white;
   }
 
-  .new-wish-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
+
+  @media (max-width: 768px) {
+    .upvote-button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-flat {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
   

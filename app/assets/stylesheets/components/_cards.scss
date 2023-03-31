@@ -165,4 +165,40 @@
   }
 
 
+  @media (max-width: 768px) {
+    .card-product {
+      flex-direction: column;
+      align-items: normal;
+    }
+
+    .wishes-filter {
+      display: none;
+    }
+
+    .card-product__info {
+      flex-direction: column;
+    }
+
+    .card-product__link {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .card-product__vote-count {
+      width: 100%;
+    }
+
+    .cards-columns {
+      display: block;
+    }
+
+    .form-wrapper {
+      padding: 30px;
+      form {
+        margin: 10px 0px 0px 0px;
+      }
+    }
+    
+  }
+
   
