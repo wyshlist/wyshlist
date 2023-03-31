@@ -16,8 +16,9 @@ class WishlistsController < ApplicationController
         @wishlist.user = current_user
         if @wishlist.save
             flash[:notice] = "Wishlist created successfully"
-            redirect_to wishlist_path(@wishlist)
+            redirect_to wishlist_wishes_path(@wishlist)
         else
+            flash[:alert] = "There was a problem creating your wishlist, try again later"
             render :new
         end
     end
@@ -36,6 +37,6 @@ class WishlistsController < ApplicationController
     private
 
     def wishlist_params
-        params.require(:wishlist).permit(:title, :description, :color)
+        params.require(:wishlist).permit(:title, :description, :color, :private)
     end
 end

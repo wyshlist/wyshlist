@@ -6,6 +6,7 @@ class WishesController < ApplicationController
         @wishlist = @wish.wishlist
         @comments = @wish.comments
         @comment = Comment.new
+        add_breadcrumb "< Back to Wishlist", wishlist_wishes_path(@wishlist)
     end
 
     def new
