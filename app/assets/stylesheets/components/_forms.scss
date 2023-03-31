@@ -97,6 +97,10 @@
   padding-left: 40px;
 }
 
+.form-check {
+  margin: 15p 0px;
+}
+
 .toggle + label::before {
   content: '';
   display: block;
@@ -130,4 +134,12 @@
 
 .toggle:checked + label::after {
   left: 18px;
+}
+
+@media (max-width: 768px) {
+  .category-selector + label {
+    padding: 15px;
+    width: 55px;
+    margin: 15px;
+  }
 }
