@@ -12,5 +12,12 @@ class User < ApplicationRecord
   def has_an_organization?
     !organization.nil?
   end
-  
+
+  def owner?(wishlist)
+    wishlist.user == self
+  end
+
+  def all_wishlists
+    wishlists + organization.wishlists + votes.map(&:wish).map(&:wishlist)
+  end
 end

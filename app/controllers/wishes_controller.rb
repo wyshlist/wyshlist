@@ -42,6 +42,17 @@ class WishesController < ApplicationController
         @wish = Wish.find(params[:id])
     end
 
+    def update
+        @wish = Wish.find(params[:id])
+        if @wish.update(wish_params)
+            flash[:notice] = "Wish updated successfully, only you as wishlist owner can update the stage of a wish"
+            redirect_to wish_path(@wish)
+        else
+            flash[:alert] = "Wish not updated, try again later"
+            render "show", status: :unprocessable_entity
+        end
+    end
+
     def verify_private_wishlist
         @wishlist = Wishlist.find(params[:wishlist_id])
         @wishlist.private == false
@@ -51,6 +62,6 @@ class WishesController < ApplicationController
 
 
     def wish_params
-        params.require(:wish).permit(:title, :description)
+        params.require(:wish).permit(:title, :description, :stage)
     end
 end
