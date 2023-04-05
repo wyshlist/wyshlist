@@ -2,8 +2,8 @@
     <div class="title-header">
         <div class="title-wrapper">
             <%= render_breadcrumbs :separator => " / " %>
-            <h1> <%= @wishlist.title %></h1>
-            <div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
+            <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
+</h1>
             <br>
             <small><%= @wishlist.description %></small>
         </div>
