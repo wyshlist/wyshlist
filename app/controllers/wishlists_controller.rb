@@ -30,7 +30,22 @@ class WishlistsController < ApplicationController
             redirect_to wishlists_path
         else
             flash[:alert] = "Wishlist not deleted, try again later"
-            redirect_to wishlist_path(@wishlist)
+            redirect_to wishlist_wishes_path(@wishlist)
+        end
+    end
+
+    def edit
+        @wishlist = Wishlist.find(params[:id])
+    end
+
+    def update
+        @wishlist = Wishlist.find(params[:id])
+        if @wishlist.update(wishlist_params)
+            flash[:notice] = "Wishlist updated successfully"
+            redirect_to wishlist_wishes_path(@wishlist)
+        else
+            flash[:alert] = "There was a problem updating your wishlist, try again later"
+            render :edit
         end
     end
 

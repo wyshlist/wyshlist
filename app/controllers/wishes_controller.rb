@@ -1,5 +1,5 @@
 class WishesController < ApplicationController
-    skip_before_action :authenticate_user!, only: [ :index, :show ]
+    skip_before_action :authenticate_user!, only: [ :show, :index ] if :verify_private_wishlist
 
     def show
         @wish = Wish.find(params[:id])
@@ -42,8 +42,13 @@ class WishesController < ApplicationController
         @wish = Wish.find(params[:id])
     end
 
+    def verify_private_wishlist
+        @wishlist = Wishlist.find(params[:wishlist_id])
+        @wishlist.private == false
+    end
 
     private
+
 
     def wish_params
         params.require(:wish).permit(:title, :description)

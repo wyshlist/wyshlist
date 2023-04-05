@@ -1,0 +1,14 @@
+ <%= simple_form_for @wishlist do |f| %>
+    <%= f.input :title, required: true, label: false, placeholder: "Title" %>
+    <%= f.input :description, label: false, placeholder: "Description", type: :text %>
+    <%= f.input :private, label: "Make this list private", input_html: { class: "toggle" } %>
+    <%= f.input :color, 
+        collection: Wishlist::COLORS, 
+        as: :radio_buttons,             
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'category-wrapper',
+        item_wrapper_class: 'category-item',
+        input_html: {class: 'category-selector'}
+    %>
+    <%= f.submit "Create a wishlist", class: "btn-flat"%>
+<% end %>
