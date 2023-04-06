@@ -5,6 +5,7 @@ const application = Application.start()
 
 // Configure Stimulus development experience
 application.debug = false
-window.Stimulus   = application
 application.register('clipboard', Clipboard)
+
+window.Stimulus   = application
 export { application }
