@@ -2,8 +2,7 @@
     <div class="title-header">
         <div class="title-wrapper">
             <%= render_breadcrumbs :separator => " / " %>
-            <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div>
-</h1>
+            <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div></h1>
             <br>
             <small><%= @wishlist.description %></small>
         </div>
@@ -51,6 +50,8 @@
                     <li><%= stage[0] %></li>
                     <% end %>
                 <% end %>
+                <small>Invite stakeholders to contribute to this wishlist</small>
+                <%= social_share_button_tag(@wishlist.title, 'data-twitter-title' => '') %>
             </ul>
         </div>
     </div>
