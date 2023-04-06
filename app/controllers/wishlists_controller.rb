@@ -3,7 +3,7 @@ class WishlistsController < ApplicationController
 
     def index
         @organization = current_user.organization
-        @wishlists =  current_user ? current_user.all_wishlists : []
+        @wishlists =  current_user ? current_user.all_wishlists.uniq : []
         add_breadcrumb "whislists", wishlists_path
     end
 
