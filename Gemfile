@@ -29,6 +29,8 @@ gem "jbuilder"
 gem "breadcrumbs_on_rails"
 gem 'image_processing', '~> 1.2'
 gem "cloudinary"
+gem "rails_admin", "3.0"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -80,3 +82,4 @@ group :test do
 end
 
 gem "faker"
+gem "sassc-rails"

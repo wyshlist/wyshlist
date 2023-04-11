@@ -15,7 +15,7 @@ Organization.destroy_all
 puts "Creating main sample user..."
 # Create a main sample user.
 organization = Organization.create(name: "Le Wagon")
-user = User.create!(email: "user1@gmail.com", password: "123123", username: "user1", organization: organization)
+user = User.create!(email: "user1@gmail.com", password: "123123", username: "user1", organization: organization, role: 1)
 
 # Generate a bunch of additional users.
 99.times do |n|
