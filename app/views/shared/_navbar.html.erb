@@ -24,7 +24,9 @@
               <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%#= link_to "Action", "#", class: "dropdown-item" %>
+              <% if Wishlist.find(104) %>
+                <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.find(104)), class: "dropdown-item main-link" %>
+              <% end %>
               <%= link_to "My account", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
