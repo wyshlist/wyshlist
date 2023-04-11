@@ -6,13 +6,18 @@
     <div class="card-product">
         <div class="card-product__info">
             <div class="card-product-infos">
+                <%#= link_to edit_wish_path(@wish) do %>
+                    <%#= image_tag "edit.png", alt: "Edit wish", class: "header-icons" %>
+                <%# end %>
                 <h1><%= @wish.title %></h1>
                 <small>Posted by <%= @wish.user.email %></small>
                 <p><%= @wish.description %></p>
             </div>
         </div>
         <% if current_user.owner?(@wish.wishlist) %>
-            <%= render "stage_form" %>
+            <div>
+                <%= render "stage_form" %>
+            </div>
         <% else %>
             <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
                 <%= @wish.stage %>
