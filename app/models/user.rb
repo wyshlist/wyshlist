@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def all_wishlists
     if has_an_organization?
-      organization.wishlists.uniq + votes.map(&:wish).map(&:wishlist)
+      organization.wishlists.uniq + votes.map(&:wish).map(&:wishlist) + wishlists
     else
       votes.map(&:wish).map(&:wishlist) + wishlists
     end

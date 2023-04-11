@@ -1,3 +1,6 @@
+<% content_for :meta_title, "#{@wish.title} | Wyshlist" %>
+<% content_for :meta_description, @wish.description %>
+
 <div class="my-container">
     <%= render_breadcrumbs :separator => " / " %>
     <div class="card-product">
