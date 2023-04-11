@@ -9,10 +9,15 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :organization, optional: true
   has_one_attached :photo
+  enum :role => [:user, :admin]
 
 
   def has_an_organization?
     !organization.nil?
+  end
+
+  def admin?
+    role == "admin"
   end
 
   def owner?(wishlist)
