@@ -47,69 +47,73 @@
 
 
 .new-wish-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.big-wrapper {
+  padding: 100px 0px;
+}
 
   // Smallest device
-  @media (min-width: 100px) and (max-width: 575px) {
-    .about-us-section__grid {
-        grid-template-columns: 1fr;
-        grid-gap: 36px;
-    }
-
-    .about-us-section__grid-card {
-        flex-direction: column;
-    }
-
-    .section-wrapper {
-        padding: 50px 0px;
-    }
-
-    .new-wish-wrapper {
-        padding: 50px 0px;
-    }
-  }
-  
-  // Small devices (landscape phones, 576px and up)
-  @media (min-width: 576px) {
-    .about-us-section__grid {
+@media (min-width: 100px) and (max-width: 575px) {
+  .about-us-section__grid {
       grid-template-columns: 1fr;
-    }
+      grid-gap: 36px;
+  }
 
-    .about-us-section__grid-card {
-        flex-direction: column;
-    }
+  .about-us-section__grid-card {
+      flex-direction: column;
+  }
 
-    .section-wrapper {
-        padding: 50px 0px;
-    }
+  .section-wrapper {
+      padding: 50px 0px;
   }
-  
-  // Medium devices (tablets, 768px and up)
-  @media (min-width: 768px) {
-    .about-us-section__grid {
-      grid-template-columns: 1fr 1fr;
-    }
 
-    .section-wrapper {
-        padding: 50px 0px;
-    }
+  .new-wish-wrapper {
+      padding: 50px 0px;
   }
-  
-  // Large devices (desktops, 992px and up)
-  @media (min-width: 992px) {
-    .about-us-section__grid {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .about-us-section__grid {
+    grid-template-columns: 1fr;
   }
-  
-  // Extra large devices (large desktops, 1200px and up)
-  @media (min-width: 1200px) {
-    .about-us-section__grid {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+
+  .about-us-section__grid-card {
+      flex-direction: column;
   }
+
+  .section-wrapper {
+      padding: 50px 0px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .about-us-section__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .section-wrapper {
+      padding: 50px 0px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .about-us-section__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .about-us-section__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 
