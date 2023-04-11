@@ -23,7 +23,7 @@ class User < ApplicationRecord
     if has_an_organization?
       organization.wishlists.uniq + votes.map(&:wish).map(&:wishlist)
     else
-      votes.map(&:wish).map(&:wishlist)
+      votes.map(&:wish).map(&:wishlist) + wishlists
     end
   end
 end
