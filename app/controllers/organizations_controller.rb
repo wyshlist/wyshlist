@@ -14,9 +14,31 @@ class OrganizationsController < ApplicationController
         end
     end
 
+    def edit
+        @organization = Organization.find(params[:id])
+    end
+
+    def update
+        @organization = Organization.find(params[:id])
+        if @organization.update(organization_params)
+            flash[:notice] = "Organization updated successfully"
+            redirect_to organization_path(@organization)
+        else
+            flash[:alert] = "Organization not updated, try again later"
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @organization = Organization.find(params[:id])
+        @organization.destroy
+        flash[:notice] = "Organization deleted successfully"
+        redirect_to organizations_path
+    end
+
     private
 
     def organization_params
-        params.require(:organization).permit(:name)
+        params.require(:organization).permit(:name, :logo)
     end
 end

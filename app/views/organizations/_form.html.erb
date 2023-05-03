@@ -1,0 +1,5 @@
+<%= simple_form_for @organization do |f| %>
+    <%= f.input :name, required: true, label: false, placeholder: "Search or create a team" %>
+    <%= f.input :logo, as: :file, label: false, placeholder: "Upload a logo" %>
+    <%= f.submit "Submit", class: "btn-flat"%>
+<% end %>

@@ -6,7 +6,7 @@ class WishesController < ApplicationController
         @wishlist = @wish.wishlist
         @comments = @wish.comments
         @comment = Comment.new
-        add_breadcrumb "< Back to Wishlist", wishlist_wishes_path(@wishlist)
+        add_breadcrumb "Wishes", wishlist_wishes_path(@wishlist)
     end
 
     def new
@@ -22,7 +22,7 @@ class WishesController < ApplicationController
             @wishes = @wishlist.wishes
         end
         @vote = Vote.new
-        add_breadcrumb "< Back to Wishlists", wishlists_path
+        add_breadcrumb "Wishlists", wishlists_path
     end
 
     def create

@@ -2,7 +2,7 @@
 <% content_for :meta_description, @wish.description %>
 
 <div class="my-container">
-    <%= render_breadcrumbs :separator => " / " %>
+    <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist) %> <br>
     <div class="card-product">
         <div class="card-product__info">
             <div class="card-product-infos">
