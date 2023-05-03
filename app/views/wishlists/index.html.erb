@@ -9,7 +9,7 @@
         <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
     </div>
     <div class="breadcrumbs-wrapper">
-        <%= render_breadcrumbs :separator => "  /  " %>
+        <small><%= render_breadcrumbs :separator => "  /  " %></small>
     </div>
     <% @wishlists.each do |wishlist| %>
         <%= link_to wishlist_wishes_path(wishlist) do %>

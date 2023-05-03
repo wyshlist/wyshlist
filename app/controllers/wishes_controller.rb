@@ -22,7 +22,7 @@ class WishesController < ApplicationController
             @wishes = @wishlist.wishes
         end
         @vote = Vote.new
-        add_breadcrumb "Wishlists", wishlists_path
+        add_breadcrumb "< Wishlists", wishlists_path
     end
 
     def create

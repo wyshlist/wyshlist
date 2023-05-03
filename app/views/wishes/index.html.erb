@@ -4,8 +4,7 @@
 <div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
-            <%= link_to "< Back", wishlists_path, class: "back-link" %>
-            <br>
+     
             <div>
             <% if @wishlist.user.has_an_organization? && @wishlist.user.organization.logo.attached? %>
                 <%= cl_image_tag @wishlist.user.organization.logo.key, alt: "#{@wishlist.user.organization}-logo", class: "avatar-large" %>
@@ -23,6 +22,9 @@
             <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
         </div>
+    </div>
+    <div class="breadcrumbs-wrapper">
+        <small><%= render_breadcrumbs :separator => " / " %></small>
     </div>
     <div class="cards-columns">
         <div class="wishes-wrapper">
