@@ -2,7 +2,7 @@
     <div class="title-header">
         <h1> 
             <% if current_user.has_an_organization? && current_user.organization.logo.attached? %>
-                <%= image_tag current_user.organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
+                <%= cl_image_tag current_user.organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
             <% end %>
             <%= current_user.has_an_organization? ? @organization.name : "Your" %> wishlists
         </h1>
