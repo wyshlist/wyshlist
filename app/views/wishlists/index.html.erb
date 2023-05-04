@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div class="card-product__votes">
-                    <small>Contributors</small>
-                    <div class="card-product__vote-count"><%= wishlist.wishes.extract_associated(:votes).count %></div>
+                    <small>Contributions</small>
+                    <div class="card-product__vote-count"><%= wishlist.wishes.count %></div>
                 </div>
             </div>
         <% end %>
