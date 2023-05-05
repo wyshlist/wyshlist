@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :wishes, only: [:show, :edit, :update, :destroy] do
     resources :votes, only: [:create]
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy, :edit, :update]
   end
 
   resources :votes, only: :destroy
