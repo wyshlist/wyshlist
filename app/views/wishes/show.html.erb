@@ -7,7 +7,7 @@
         <div class="card-product__info">
             <div class="card-product-infos">
                 <h1><%= @wish.title %></h1>
-                <small>Posted by <%= @wish.user.email %></small>
+                <small>Posted by <%= @wish.user.full_name %></small>
                 <p><%= @wish.description %></p>
             </div>
         </div>
@@ -31,7 +31,7 @@
             <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle" %>
             <%#= image_tag comment.user.photo, alt: "text" %>
             <div class="card-product-infos">
-                <p><strong><%= comment.user.email %></strong><p>
+                <p><strong><%= comment.user.full_name %></strong><p>
                 <p><%= comment.content %></p>
             </div>
         </div>
