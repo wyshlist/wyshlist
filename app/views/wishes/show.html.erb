@@ -6,9 +6,6 @@
     <div class="card-product">
         <div class="card-product__info">
             <div class="card-product-infos">
-                <%#= link_to edit_wish_path(@wish) do %>
-                    <%#= image_tag "edit.png", alt: "Edit wish", class: "header-icons" %>
-                <%# end %>
                 <h1><%= @wish.title %></h1>
                 <small>Posted by <%= @wish.user.email %></small>
                 <p><%= @wish.description %></p>
