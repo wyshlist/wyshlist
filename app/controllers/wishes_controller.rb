@@ -18,7 +18,7 @@ class WishesController < ApplicationController
 
     def index
         @wishlist = Wishlist.find(params[:wishlist_id])
-        @wishes = policy_scope(@wishlist.wishes)
+        @wishes = policy_scope(@wishlist.wishes).sorted_by_votes
         if params[:stage]
           @wishes = @wishes.where(stage_params)
         end
@@ -30,6 +30,7 @@ class WishesController < ApplicationController
         @wish = Wish.new(wish_params)
         @wish.user = current_user
         @wish.wishlist = Wishlist.find(params[:wishlist_id])
+        @wishlist = @wish.wishlist
         authorize @wish
         if @wish.save
             flash[:notice] = "Wish created successfully"

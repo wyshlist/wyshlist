@@ -3,7 +3,7 @@ class WishlistsController < ApplicationController
 
     def index
         @organization = current_user.organization
-        @wishlists =  policy_scope(Wishlist).sorted_by_votes
+        @wishlists =  policy_scope(Wishlist).left_joins(:wishes).group(:id).order('COUNT(wishes.id) DESC')
         add_breadcrumb "Wishlists", wishlists_path
     end
 

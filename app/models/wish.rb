@@ -1,5 +1,5 @@
 class Wish < ApplicationRecord
-  belongs_to :wishlist, counter_cache: true
+  belongs_to :wishlist
   validates :title, presence: true
   has_many :votes, dependent: :destroy
   has_many :users
@@ -11,6 +11,12 @@ class Wish < ApplicationRecord
 
   def user_vote(user)
     votes.find_by(user: user)
+  end
+
+  def self.sorted_by_votes
+    left_joins(:votes)
+      .group(:id)
+      .order('COUNT(votes.id) DESC')
   end
 
   def stage_color

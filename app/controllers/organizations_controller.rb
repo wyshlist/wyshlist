@@ -5,6 +5,11 @@ class OrganizationsController < ApplicationController
         authorize @organization
     end
 
+    def show
+        @organization = Organization.find(params[:id])
+        authorize @organization
+    end
+
     def create
         @organization = Organization.find_by(organization_params.except(:logo)) || Organization.create(organization_params)
         authorize @organization

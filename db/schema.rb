@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_09_153015) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_09_153435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_153015) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "stage", default: 0
+    t.integer "votes_count"
     t.index ["user_id"], name: "index_wishes_on_user_id"
     t.index ["wishlist_id"], name: "index_wishes_on_wishlist_id"
   end
