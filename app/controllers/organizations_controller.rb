@@ -2,10 +2,17 @@ class OrganizationsController < ApplicationController
 
     def new 
         @organization = Organization.new
+        authorize @organization
+    end
+
+    def show
+        @organization = Organization.find(params[:id])
+        authorize @organization
     end
 
     def create
         @organization = Organization.find_by(organization_params.except(:logo)) || Organization.create(organization_params)
+        authorize @organization
         if @organization.save
             current_user.update(organization: @organization)
             redirect_to wishlists_path
@@ -16,10 +23,12 @@ class OrganizationsController < ApplicationController
 
     def edit
         @organization = Organization.find(params[:id])
+        authorize @organization
     end
 
     def update
         @organization = Organization.find(params[:id])
+        authorize @organization
         if @organization.update(organization_params)
             flash[:notice] = "Organization updated successfully"
             redirect_to organization_path(@organization)
@@ -31,6 +40,7 @@ class OrganizationsController < ApplicationController
 
     def destroy
         @organization = Organization.find(params[:id])
+        authorize @organization
         @organization.destroy
         flash[:notice] = "Organization deleted successfully"
         redirect_to organizations_path

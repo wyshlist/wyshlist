@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"  
 
-  resources :organizations, only: [:new, :create, :edit, :update, :destroy]
+  resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 
   resources :wishlists, except: :show do
     resources :wishes, only: [:new, :create, :index]

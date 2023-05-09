@@ -4,6 +4,7 @@ class VotesController < ApplicationController
         @vote = Vote.new
         @vote.user = current_user if current_user
         @vote.wish = Wish.find(params[:wish_id])
+        authorize @vote
         if @vote.save
             flash[:success] = "You voted for this wish"
             redirect_to wishlist_wishes_path(@vote.wish.wishlist)
@@ -15,6 +16,7 @@ class VotesController < ApplicationController
     
     def destroy
         @vote = Vote.find(params[:id])
+        authorize @vote
         @vote.destroy
         flash[:success] = "You removed your vote"
         redirect_to wishlist_wishes_path(@vote.wish.wishlist)

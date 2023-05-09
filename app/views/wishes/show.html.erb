@@ -13,7 +13,7 @@
         </div>
         <% if current_user.owner?(@wish.wishlist) %>
             <div>
-                <%= render "stage_form" %>
+                <%= render "wishes/stage_form" %>
             </div>
         <% else %>
             <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
@@ -28,8 +28,11 @@
     </div>
     <% @comments.each do |comment| %>
         <div class="card-comment">
+        <% if comment.user.photo_attached? %>
+            <%= cl_image_tag comment.user.photo.key, alt: "#{comment.user.full_name} wyshlist profile photo", class: "avatar dropdown-toggle" %>
+        <% else %>
             <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle" %>
-            <%#= image_tag comment.user.photo, alt: "text" %>
+        <% end %>
             <div class="card-product-infos">
                 <p><strong><%= comment.user.full_name %></strong><p>
                 <p><%= comment.content %></p>

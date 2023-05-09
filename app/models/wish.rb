@@ -13,6 +13,12 @@ class Wish < ApplicationRecord
     votes.find_by(user: user)
   end
 
+  def self.sorted_by_votes
+    left_joins(:votes)
+      .group(:id)
+      .order('COUNT(votes.id) DESC')
+  end
+
   def stage_color
     case stage
       when "Backlog" then "#F9ECFE"
