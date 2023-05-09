@@ -11,7 +11,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def edit?
-    user_is_owner_or_admin?
+    record.users.include?(user)
   end
 
   def create?
@@ -19,10 +19,10 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_owner_or_admin?
+    record.users.include?(user)
   end
 
   def destroy?
-    user_is_owner_or_admin?
+    record.users.include?(user)
   end
 end
