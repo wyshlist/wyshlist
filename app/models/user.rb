@@ -20,6 +20,10 @@ class User < ApplicationRecord
     role == "admin"
   end
 
+  def photo_attached?
+    photo.attached?
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

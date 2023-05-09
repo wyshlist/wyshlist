@@ -6,20 +6,21 @@ class WishesController < ApplicationController
         @wishlist = @wish.wishlist
         @comments = @wish.comments
         @comment = Comment.new
+        authorize @wish
         add_breadcrumb "Wishes", wishlist_wishes_path(@wishlist)
     end
 
     def new
         @wish = Wish.new
         @wishlist = Wishlist.find(params[:wishlist_id])
+        authorize @wish
     end
 
     def index
         @wishlist = Wishlist.find(params[:wishlist_id])
+        @wishes = policy_scope(@wishlist.wishes)
         if params[:stage]
-            @wishes = @wishlist.wishes.where(stage: params[:stage])
-        else
-            @wishes = @wishlist.wishes
+          @wishes = @wishes.where(stage_params)
         end
         @vote = Vote.new
         add_breadcrumb "< Wishlists", wishlists_path
@@ -29,6 +30,7 @@ class WishesController < ApplicationController
         @wish = Wish.new(wish_params)
         @wish.user = current_user
         @wish.wishlist = Wishlist.find(params[:wishlist_id])
+        authorize @wish
         if @wish.save
             flash[:notice] = "Wish created successfully"
             redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
@@ -40,10 +42,12 @@ class WishesController < ApplicationController
 
     def edit
         @wish = Wish.find(params[:id])
+        authorize @wish
     end
 
     def update
         @wish = Wish.find(params[:id])
+        authorize @wish
         if @wish.update(wish_params)
             flash[:notice] = "Wish updated successfully, only you as wishlist owner can update the stage of a wish"
             redirect_to wish_path(@wish)
@@ -59,6 +63,10 @@ class WishesController < ApplicationController
     end
 
     private
+
+    def stage_params
+        params.permit(:stage)
+    end
 
 
     def wish_params

@@ -3,17 +3,19 @@ class WishlistsController < ApplicationController
 
     def index
         @organization = current_user.organization
-        @wishlists =  current_user ? current_user.all_wishlists.uniq : []
+        @wishlists =  policy_scope(Wishlist)
         add_breadcrumb "Wishlists", wishlists_path
     end
 
     def new
         @wishlist = Wishlist.new
+        authorize @wishlist
     end
 
     def create
         @wishlist = Wishlist.new(wishlist_params)
         @wishlist.user = current_user
+        authorize @wishlist
         if @wishlist.save
             flash[:notice] = "Wishlist created successfully"
             redirect_to wishlist_wishes_path(@wishlist)
@@ -25,6 +27,7 @@ class WishlistsController < ApplicationController
 
     def destroy
         @wishlist = Wishlist.find(params[:id])
+        authorize @wishlist
         if @wishlist.destroy
             flash[:notice] = "Wishlist deleted successfully"
             redirect_to wishlists_path
@@ -36,10 +39,12 @@ class WishlistsController < ApplicationController
 
     def edit
         @wishlist = Wishlist.find(params[:id])
+        authorize @wishlist
     end
 
     def update
         @wishlist = Wishlist.find(params[:id])
+        authorize @wishlist
         if @wishlist.update(wishlist_params)
             flash[:notice] = "Wishlist updated successfully"
             redirect_to wishlist_wishes_path(@wishlist)
