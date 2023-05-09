@@ -32,20 +32,8 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
-  def sorted_wishlists_by_votes
-    wishlists
-      .select('wishlists.*, COALESCE(SUM(votes.value), 0) AS votes_sum')
-      .left_joins(wishes: :votes_for_wish)
-      .group('wishlists.id')
-      .order('votes_sum DESC')
-  end
-
-  def sorted_wishes_by_votes
-    Wish
-      .select('wishes.*, COALESCE(SUM(votes.value), 0) AS votes_sum')
-      .left_joins(:votes)
-      .group('wishes.id')
-      .order('votes_sum DESC')
+  def can_edit_organization?
+    organization.present? && policy(organization).edit?
   end
 
   def all_wishlists
