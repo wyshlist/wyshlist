@@ -19,10 +19,10 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def update?
-    record.users.include?(user)
+    record.organization_owner?(user)
   end
 
   def destroy?
-    record.users.include?(user)
+    record.organization_owner?(user)
   end
 end

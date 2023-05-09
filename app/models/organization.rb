@@ -8,4 +8,8 @@ class Organization < ApplicationRecord
     def titleize_name
         self.name = self.name.titleize
     end
+
+    def organization_owner?(user)
+        users.first == user
+    end
 end
