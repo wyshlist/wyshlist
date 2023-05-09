@@ -32,10 +32,6 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
-  def can_edit_organization?
-    organization.present? && policy(organization).edit?
-  end
-
   def all_wishlists
     if has_an_organization?
       organization.wishlists.uniq + votes.map(&:wish).map(&:wishlist) + wishlists
