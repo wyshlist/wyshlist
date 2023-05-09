@@ -3,7 +3,7 @@ class WishlistsController < ApplicationController
 
     def index
         @organization = current_user.organization
-        @wishlists =  policy_scope(Wishlist)
+        @wishlists =  policy_scope(Wishlist).sorted_by_votes
         add_breadcrumb "Wishlists", wishlists_path
     end
 

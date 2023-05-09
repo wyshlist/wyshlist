@@ -1,5 +1,5 @@
 class Wish < ApplicationRecord
-  belongs_to :wishlist
+  belongs_to :wishlist, counter_cache: true
   validates :title, presence: true
   has_many :votes, dependent: :destroy
   has_many :users
