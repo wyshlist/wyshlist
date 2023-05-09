@@ -5,8 +5,8 @@ class OrganizationsController < ApplicationController
     end
 
     def create
-        @organization = Organization.find_or_create_by(organization_params)
-        if @organization
+        @organization = Organization.find_by(organization_params.except(:logo)) || Organization.create(organization_params)
+        if @organization.save
             current_user.update(organization: @organization)
             redirect_to wishlists_path
         else
