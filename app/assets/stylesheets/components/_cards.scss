@@ -13,7 +13,7 @@
   .card-product__color {
     margin-right: 20px;
     height: 3.5rem;
-    width: 3.5rem;
+    min-width: 3.5rem;
     object-fit: cover;
     border-radius: 0.5rem;
   }
