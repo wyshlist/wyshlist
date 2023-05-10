@@ -37,7 +37,8 @@ class User < ApplicationRecord
       organization.wishlists.uniq.or(votes.map(&:wish).map(&:wishlist)).or(wishlists)
     else
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
-      Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists))
+      relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
+      
     end
   end
 end
