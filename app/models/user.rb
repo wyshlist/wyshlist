@@ -34,12 +34,12 @@ class User < ApplicationRecord
 
   def all_wishlists
     if has_an_organization?
-      Wishlist.where(id: organization.wishlists.uniq.map(&:id)) |
-      Wishlist.where(id: votes.map(&:wish).map(&:wishlist).map(&:id)) |
-      Wishlist.where(id: wishlists.map(&:id))    
+      votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
+      relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id))).or(Wishlist.where(user: organization.users))
     else
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
-      Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
+      relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
+      
     end
   end
 end
