@@ -8,7 +8,7 @@
             <div>
             <% if @wishlist.user.has_an_organization? && @wishlist.user.organization.logo.attached? %>
                 <% if @wishlist.id == 104 %>
-                    <%= image_tag "logo-short", alt: "Wishlist logo", class: "avatar-large" %>
+                    <%= image_tag "logo-short.png", alt: "Wishlist logo", class: "avatar-large" %>
                 <% else %>
                     <%= cl_image_tag @wishlist.user.organization.logo.key, alt: "#{@wishlist.user.organization}-logo", class: "avatar-large" %>
                 <% end %>
