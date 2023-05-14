@@ -10,6 +10,10 @@ class OrganizationPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def edit?
     record.users.include?(user)
   end

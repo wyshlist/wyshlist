@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
 
     def show
         @organization = Organization.find(params[:id])
+        @wishlists = @organization.wishlists
         authorize @organization
     end
 

@@ -1,11 +1,6 @@
 <div class="my-container">
     <div class="title-header">
-        <h1> 
-            <% if current_user.has_an_organization? && current_user.organization.logo.attached? %>
-                <%= cl_image_tag current_user.organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
-            <% end %>
-            <%= current_user.has_an_organization? ? @organization.name : "Your" %> wishlists
-        </h1>
+        <h1>Your Feed</h1>
         <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
     </div>
     <div class="breadcrumbs-wrapper">
