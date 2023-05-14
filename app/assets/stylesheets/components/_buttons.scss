@@ -16,6 +16,13 @@
     transition: background 0.3s ease;
   }
 
+  .wish-update-secondary {
+    margin-top: 15px;
+    font-size: 16px !important;
+    padding: 5px 10px;
+    width: 100%;
+  }
+
   .btn-black {
     background: black;
   }
@@ -28,6 +35,13 @@
 
   @media (max-width: 768px) {
     .upvote-button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wish-update-secondary {
+      margin-top: 0px;
       width: 100%;
       display: flex;
       justify-content: center;

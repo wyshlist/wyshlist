@@ -1,8 +1,8 @@
 <%= simple_form_for @wish do |f| %>
     <%= f.input :stage, collection: Wish.stages.keys, as: :select, default: @wish.stage, label: false, class: "card-product__status", style: "background-color:  #{@wish.stage_color}", prompt: "Stage of this feature" %>
-    <%= f.submit "Update", class: "upvote-button" %>
-    or
-    <%= link_to edit_wish_path(@wish) do %>
-        <%= image_tag "edit.png", alt: "Edit wish", class: "header-icons" %>
-    <% end %>
+    <div class="wish-update-butons">
+        <%= f.submit "Update state", class: "upvote-button", style: "margin-bottom: 10px;" %> <br>
+        <%= link_to "Edit wish", edit_wish_path(@wish), class: "card-product__vote-count wish-update-secondary" %>
+        <%#= image_tag "edit.png", alt: "Edit wish", class: "header-icons" %>
+        </div>
 <% end %>

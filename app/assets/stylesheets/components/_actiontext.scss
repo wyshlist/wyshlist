@@ -28,13 +28,19 @@
 
 .trix-content action-text-attachment .attachment {
   padding: 0 !important;
-  max-width: 100% !important;
+  max-width: 50% !important;
 }
 
 trix-editor {
   margin-bottom: 20px;
   border-radius: 8px;
   border: 1px solid #e6e6e6;
+  text-align: left;
+  width: 100%;
+}
+
+.trix-content {
+  overflow-wrap: anywhere;
 }
 
 trix-toolbar .trix-button-group {
