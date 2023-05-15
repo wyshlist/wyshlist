@@ -1,7 +1,7 @@
 <div class="my-container">
     <div class="title-header">
         <h1> 
-            <%= cl_image_tag current_user.organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
+            <%= cl_image_tag @organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
             <%=  @organization.name  %> wishlists
         </h1>
         <%= link_to " New wishlist", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>

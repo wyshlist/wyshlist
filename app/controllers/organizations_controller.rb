@@ -44,7 +44,7 @@ class OrganizationsController < ApplicationController
         authorize @organization
         @organization.destroy
         flash[:notice] = "Organization deleted successfully"
-        redirect_to organizations_path
+        redirect_to root_path
     end
 
     private
