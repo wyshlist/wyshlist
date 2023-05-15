@@ -4,6 +4,7 @@
         <% if @organization.logo && @organization.logo.key %>
             <%= cl_image_tag @organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
             <%=  @organization.name  %> wishlists
+        <% end %>
         </h1>
         <%= link_to " New wishlist", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>
     </div>
