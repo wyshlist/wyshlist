@@ -170,6 +170,5 @@ RSpec.feature 'Wishlists', type: :feature do
       
         # Additional assertions or expectations if needed
       end
-
 end 
 
