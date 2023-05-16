@@ -2,8 +2,8 @@
   <div class="footer-copyright">
     <div class="footer-links">
       Wyshlist © 2023 by Wyshlist
-      <% if Wishlist.find(104) %>
-        <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.find(104)), class: "main-link" %>
+      <% if Wishlist.admin_wishlists.any? %>
+        <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.admin_wishlists.first), class: "main-link" %>
       <% end %>
     </div>
   </div>

@@ -22,7 +22,7 @@
         <%= link_to edit_wishlist_path(@wishlist) do %>
             <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
-        <%= link_to wishlist_path(@wishlist), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+        <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
             <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
         </div>

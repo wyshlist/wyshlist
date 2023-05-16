@@ -5,4 +5,12 @@ class Wishlist < ApplicationRecord
   has_many :wishes, dependent: :destroy
 
   COLORS = ["ECEDFE", "EFFEEC", "FEFCEC", "FEECEC", "F9ECFE", "ECFEFE"]
+
+  def admin_wishlist?
+    status == "admin"
+  end
+
+  def self.admin_wishlists
+    Wishlist.where(status: "admin")
+  end
 end

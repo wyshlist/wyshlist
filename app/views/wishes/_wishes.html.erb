@@ -1,6 +1,6 @@
  <% @wishes.each do |wish| %>
         <%= link_to wish_path(wish), class: "card-product__link" do %>
-            <div class="card-product" id="wish-<%= wish.id %>%>">
+            <div class="card-product" id="wish-<%= wish.id %>">
                 <div class="card-product__info">
                     <div class="card-product__color" style="background-color: #<%= wish.wishlist.color %>"></div>
                     <div class="card-product-infos">
@@ -25,7 +25,7 @@
                     <% if wish.user_vote(current_user) %>
                         <%= link_to "downvote", vote_path(wish.user_vote(current_user)), data: { turbo_method: "delete" }, class: "upvote-button" %>
                     <% else %>
-                        <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button" %>
+                        <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button", id: "Upvote" %>
                     <% end %>
                 </div>
             </div>
