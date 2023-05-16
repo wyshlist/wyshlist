@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_09_153435) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_094118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_153435) do
     t.string "color", default: "3F4BF2"
     t.boolean "private", default: false
     t.integer "votes_count"
+    t.string "status", default: "active"
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 

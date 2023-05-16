@@ -22,7 +22,7 @@
         <%= link_to edit_wishlist_path(@wishlist) do %>
             <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
-        <%= link_to wishlist_path(@wishlist), data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+        <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
             <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
         <% end %>
         </div>
@@ -48,12 +48,12 @@
             <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>
                     <div class="new-wish-wrapper">
-                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat", id: "add-wish" %>
                     </div>
                 <% end %>
             <% else %>
                 <div class="new-wish-wrapper">
-                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat" %>
+                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat", id: "add-wish"%>
                 </div>
             <% end %>
         </div>

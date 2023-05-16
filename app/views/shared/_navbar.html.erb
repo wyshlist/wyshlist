@@ -29,8 +29,8 @@
               <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <% if Wishlist.find(104) %>
-                <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.find(104)), class: "dropdown-item main-link" %>
+              <% if Wishlist.admin_wishlists.any? %>
+                <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.admin_wishlists.first), class: "dropdown-item main-link" %>
               <% end %>
               <% if current_user&.organization.present? && policy(current_user&.organization).edit? %>
                 <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item" %>
