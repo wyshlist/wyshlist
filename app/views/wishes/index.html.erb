@@ -48,12 +48,12 @@
             <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>
                     <div class="new-wish-wrapper">
-                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat" %>
+                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat", id: "add-wish" %>
                     </div>
                 <% end %>
             <% else %>
                 <div class="new-wish-wrapper">
-                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat" %>
+                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat", id: "add-wish"%>
                 </div>
             <% end %>
         </div>
