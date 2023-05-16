@@ -104,12 +104,22 @@ RSpec.feature 'Wishlists', type: :feature do
     expect(page).not_to have_text('Other User Wishlist')
   end
 
+  scenario 'User can vote for a wish' do
+    wish = Wish.create!(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+
+    visit wishlist_wishes_path(other_wishlist)
+
+    first('#upvote').click
+
+    expect(Vote.last).to eq(Vote.find_by(user: user, wish: wish))
+  end
+
   scenario 'User views a wishlist in the feed after voting for a wish' do
     wish = Wish.create!(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
 
     visit wishlist_wishes_path(other_wishlist)
 
-    click_button 'Upvote'
+    first('#upvote').click
 
     visit wishlists_path
 

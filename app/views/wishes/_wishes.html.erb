@@ -23,9 +23,9 @@
                 <div class="card-product__votes">
                     <div class="card-product__vote-count"><%= wish.votes.count %> <small>votes</small></div>
                     <% if wish.user_vote(current_user) %>
-                        <%= link_to "downvote", vote_path(wish.user_vote(current_user)), data: { turbo_method: "delete" }, class: "upvote-button" %>
+                        <%= link_to "downvote", vote_path(wish.user_vote(current_user)), data: { turbo_method: "delete" }, class: "upvote-button", id: "downvote" %>
                     <% else %>
-                        <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button", id: "Upvote" %>
+                        <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button", id: "upvote" %>
                     <% end %>
                 </div>
             </div>
