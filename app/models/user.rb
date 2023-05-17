@@ -16,6 +16,10 @@ class User < ApplicationRecord
     !organization.nil?
   end
 
+  def team_members
+    organization.users unless organization.nil?
+  end
+
   def admin?
     role == "admin"
   end

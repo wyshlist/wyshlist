@@ -7,7 +7,7 @@ class WishlistPolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    record.private == false || user_is_owner_or_team_member_or_admin?
   end
 
   def edit?
@@ -19,10 +19,6 @@ class WishlistPolicy < ApplicationPolicy
   end
 
   def create?
-    true
-  end
-
-  def show?
     true
   end
 

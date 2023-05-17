@@ -80,12 +80,23 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(page).to have_text('Test Wishlist')
     end
 
-    scenario 'User views a private wishlist' do
+    scenario 'User not teammate views a private wishlist' do
         other_wishlist = Wishlist.create(title: 'Other User Wishlist', user: other_user, description: 'A wishlist', private: true)
 
         visit wishlist_wishes_path(other_wishlist)
 
-        expect(page).to have_text('You are not authorized to access this page.')
+        expect(page).to have_text('You are not authorized to perform this action.')
+    end
+
+    scenario 'User teammate views a private wishlist' do
+        organization = Organization.create(name: 'Test Organization')
+        user.update(organization: organization)
+        other_user.update(organization: organization)
+        other_wishlist = Wishlist.create(title: 'Other User Wishlist', user: other_user, description: 'A wishlist', private: true)
+        
+        visit wishlist_wishes_path(other_wishlist)
+
+        expect(page).to have_text('Other User Wishlist')
     end
 
     scenario 'User views a wishlist in the feed' do
