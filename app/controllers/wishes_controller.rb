@@ -1,5 +1,7 @@
 class WishesController < ApplicationController
     skip_before_action :authenticate_user!, only: [ :show, :index ] if :verify_private_wishlist
+    after_action :verify_authorized
+
 
     def show
         @wish = Wish.find(params[:id])
@@ -19,6 +21,7 @@ class WishesController < ApplicationController
     def index
         @wishlist = Wishlist.find(params[:wishlist_id])
         @wishes = policy_scope(@wishlist.wishes).sorted_by_votes
+        authorize @wishlist
         if params[:stage]
           @wishes = @wishes.where(stage_params)
         end
