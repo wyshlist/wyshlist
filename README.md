@@ -51,3 +51,22 @@ rails db:seed
 ```dev```
 
 Access Wyshlist in your web browser by visiting http://localhost:3000.
+
+
+## How to contribute
+
+**Pull the code**
+
+```git pull origin master```
+
+**Create a new branch**
+
+Before creating a new branch make sure that it is always assigned to an issue.
+
+```gco -b 46-add-button-to-homepage```
+
+46 being the issue number.
+
+***Create pull request***
+
+Always add the issue number with the keyword 'closes', ex -> "closes #46" in the description to close the issue 46 when the PR is merged.
