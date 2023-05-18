@@ -61,6 +61,18 @@ class WishesController < ApplicationController
         end
     end
 
+    def destroy
+        @wish = Wish.find(params[:id])
+        authorize @wish
+        if @wish.destroy
+            flash[:notice] = "Wish deleted successfully"
+            redirect_to wishlist_wishes_path(@wish.wishlist)
+        else
+            flash[:alert] = "Wish not deleted, try again later"
+            redirect_to wish_path(@wish)
+        end
+    end
+
     def verify_private_wishlist
         @wishlist = Wishlist.find(params[:wishlist_id])
         @wishlist.private == false

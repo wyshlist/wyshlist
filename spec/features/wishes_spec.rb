@@ -23,5 +23,4 @@ RSpec.feature 'Wishes', type: :feature do
         @wishes = page.all('.card-product')
         expect(@wishes[0]).to have_content(wish3.title)
     end
-
 end
