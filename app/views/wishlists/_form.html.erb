@@ -1,4 +1,7 @@
  <%= simple_form_for @wishlist do |f| %>
+    <% if @organization %>
+        <% f.hidden_field :organization, value: @organization %>
+    <% end %>
     <%= f.input :title, required: true, label: false, placeholder: "Title" %>
     <%= f.input :description, label: false, placeholder: "Description", type: :text %>
     <%= f.input :private, label: "Make this list private", input_html: { class: "toggle" } %>
@@ -8,7 +11,8 @@
         collection_wrapper_tag: 'div',
         collection_wrapper_class: 'category-wrapper',
         item_wrapper_class: 'category-item',
-        input_html: {class: 'category-selector'}
+        input_html: {class: 'category-selector'},
+        placeholder: "Color"
     %>
     <%= f.submit "Submit", class: "btn-flat"%>
 <% end %>

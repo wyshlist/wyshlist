@@ -1,7 +1,9 @@
 class Wishlist < ApplicationRecord
   belongs_to :user
+  belongs_to :organization, optional: true
   validates :title, presence: true
   validates :description, presence: true
+  validates :color, presence: true
   has_many :wishes, dependent: :destroy
 
   COLORS = ["ECEDFE", "EFFEEC", "FEFCEC", "FEECEC", "F9ECFE", "ECFEFE"]

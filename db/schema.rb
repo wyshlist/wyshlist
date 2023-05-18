@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_094118) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_095124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -119,6 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_094118) do
     t.boolean "private", default: false
     t.integer "votes_count"
     t.string "status", default: "active"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_wishlists_on_organization_id"
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
@@ -131,5 +133,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_094118) do
   add_foreign_key "votes", "wishes"
   add_foreign_key "wishes", "users"
   add_foreign_key "wishes", "wishlists"
+  add_foreign_key "wishlists", "organizations"
   add_foreign_key "wishlists", "users"
 end

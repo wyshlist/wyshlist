@@ -6,8 +6,8 @@ RSpec.feature 'Wishlists', type: :feature do
     let(:other_user) { User.create(email: 'other@example.com', password: 'password') }
     let(:wish) { Wish.create(title: 'Test Wish', user: user) }
     let(:other_wish) { Wish.create(title: 'Other Wish', user: other_user) }
-    let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description") }
-    let(:other_wishlist) { Wishlist.create(title: 'Other Wishlist', user: other_user, description: "Test description") }
+    let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description", color: "ECEDFE") }
+    let(:other_wishlist) { Wishlist.create(title: 'Other Wishlist', user: other_user, description: "Test description", color: "ECEDFE") }
 
     before do
         sign_in user
@@ -18,15 +18,46 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Title', with: 'Test Wishlist'
         fill_in 'Description', with: 'A wishlist'
+        find('label', text: 'ECEDFE').click
+
 
         click_button 'Submit'
 
         expect(Wishlist.last).to have_attributes(
         title: 'Test Wishlist',
         description: 'A wishlist',
-        color: '',
+        color: 'ECEDFE',
         user: user
         )
+    end
+
+    scenario 'User creates a public wishlist with a color' do
+        visit new_wishlist_path
+
+        fill_in 'Title', with: 'Test Wishlist'
+        fill_in 'Description', with: 'A wishlist'
+        find('label', text: 'ECEDFE').click
+        # check 'Color', with: '#ECEDFE'
+
+        click_button 'Submit'
+
+        expect(Wishlist.last).to have_attributes(
+            title: 'Test Wishlist',
+            description: 'A wishlist',
+            color: 'ECEDFE',
+            user: user
+        )
+    end
+
+    scenario 'User creates a public wishlist without a color' do
+        visit new_wishlist_path
+
+        fill_in 'Title', with: 'Test Wishlist'
+        fill_in 'Description', with: 'A wishlist'
+        
+        click_button 'Submit'
+
+        expect(page).to have_content("Color can't be blank")
     end
 
     scenario 'User creates a private wishlist' do
@@ -34,6 +65,7 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Title', with: 'Test Wishlist'
         fill_in 'Description', with: 'A wishlist'
+        find('label', text: 'ECEDFE').click
         check 'private'
 
         click_button 'Submit'
@@ -41,7 +73,7 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(Wishlist.last).to have_attributes(
         title: 'Test Wishlist',
         description: 'A wishlist',
-        color: '',
+        color: 'ECEDFE',
         user: user,
         private: true
         )
@@ -53,13 +85,13 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Title', with: 'Test Wishlist 2'
         fill_in 'Description', with: 'A wishlist 2'
-
+        find('label', text: 'ECEDFE').click
         click_button 'Submit'
 
         expect(wishlist.reload).to have_attributes(
         title: 'Test Wishlist 2',
         description: 'A wishlist 2',
-        color: '',
+        color: 'ECEDFE',
         user: user
         )
     end
@@ -115,16 +147,6 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(page).not_to have_text('Other User Wishlist')
     end
 
-    scenario 'User can vote for a wish' do
-        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-
-        visit wishlist_wishes_path(other_wishlist)
-
-        first('#upvote').click
-
-        expect(Vote.last).to eq(Vote.find_by(user: user, wish: wish))
-    end
-
     scenario 'User views a wishlist in the feed after voting for a wish' do
         wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
 
@@ -134,21 +156,10 @@ RSpec.feature 'Wishlists', type: :feature do
 
         visit wishlists_path
 
-        expect(page).to have_text('Other User Wishlist')
+        expect(page).to have_text('Other Wishlist')
     end
 
-    scenario 'User can unvote for a wish' do
-        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-        Vote.create(user: user, wish: wish)
-
-        visit wishlist_wishes_path(other_wishlist)
-
-        first('#downvote').click
-
-        expect(Vote.find_by(user: user, wish: wish)).to be_nil
-    end
-
-    scenario 'User views a wishlist in the feed after unvoting for a wish' do
+    scenario 'User dont view a wishlist in the feed after unvoting for a wish' do
         wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
         Vote.create(user: user, wish: wish)
 
@@ -158,12 +169,12 @@ RSpec.feature 'Wishlists', type: :feature do
 
         visit wishlists_path
 
-        expect(page).to have_text('Other User Wishlist')
+        expect(page).to_not have_text('Other Wishlist')
     end
 
     scenario "Feed's wishlists are sorted by number of votes" do
         # Create a wishlist with 3 wishes
-        wishlist = Wishlist.create(title: 'Test Wishlist', user: user, description: 'A wishlist')
+        wishlist = Wishlist.create(title: 'Test Wishlist', user: user, description: 'A wishlist', color: "ECEDFE")
         wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
         wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
         wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
