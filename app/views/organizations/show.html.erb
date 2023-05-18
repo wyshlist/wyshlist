@@ -6,7 +6,7 @@
             <%=  @organization.name  %> wishlists
         <% end %>
         </h1>
-        <%= link_to " New wishlist", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>
+        <%= link_to " New Team wishlist", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>
     </div>
     <div class="breadcrumbs-wrapper">
         <small><%= render_breadcrumbs :separator => "  /  " %></small>

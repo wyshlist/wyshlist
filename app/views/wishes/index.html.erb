@@ -6,7 +6,7 @@
         <div class="title-wrapper">
      
             <div>
-            <% if @wishlist.user.has_an_organization? && @wishlist.user.organization.logo.attached? %>
+            <% if @wishlist.organization && @wishlist.organization.logo.attached? %>
                 <% if @wishlist.id == 104 %>
                     <%= image_tag "logo-short.png", alt: "Wishlist logo", class: "avatar-large" %>
                 <% else %>

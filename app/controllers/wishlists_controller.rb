@@ -3,11 +3,20 @@ class WishlistsController < ApplicationController
 
     def index
         @organization = current_user.organization
-        @wishlists =  policy_scope(Wishlist).left_joins(:wishes).group(:id).order('COUNT(wishes.id) DESC')
+        @wishlists = policy_scope(Wishlist)
+        .joins("LEFT JOIN wishes ON wishes.wishlist_id = wishlists.id")
+        .joins("LEFT JOIN votes ON votes.wish_id = wishes.id")
+        .joins("LEFT JOIN comments ON comments.wish_id = wishes.id")
+        .where("wishlists.user_id = ? OR wishes.user_id = ? OR comments.user_id = ? OR votes.user_id = ?", current_user.id, current_user.id, current_user.id, current_user.id)
+        .select("wishlists.*, COUNT(DISTINCT wishes.id) AS wishes_count")
+        .group("wishlists.id")
+        .distinct
+        .order("wishes_count DESC")
         add_breadcrumb "Wishlists", wishlists_path
     end
 
     def new
+        @organization = Organization.find(params[:organization]) if params[:organization]
         @wishlist = Wishlist.new
         authorize @wishlist
     end
@@ -21,7 +30,7 @@ class WishlistsController < ApplicationController
             redirect_to wishlist_wishes_path(@wishlist)
         else
             flash[:alert] = "There was a problem creating your wishlist, try again later"
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
 

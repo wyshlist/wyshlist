@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Wishes', type: :feature do
+RSpec.feature 'votes', type: :feature do
     let(:user) { User.create(email: 'test@example.com', password: 'password') }
     let(:other_user) { User.create(email: 'other@example.com', password: 'password') }
     let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description") }
@@ -12,16 +12,18 @@ RSpec.feature 'Wishes', type: :feature do
         sign_in user
     end
 
-    scenario 'Wishes are ordered by number of votes' do
+    scenario 'User can vote for a wish' do
         wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-        wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
-        wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
-
         visit wishlist_wishes_path(other_wishlist)
-        page.all('#upvote')[2].click
-        
-        @wishes = page.all('.card-product')
-        expect(@wishes[0]).to have_content(wish3.title)
+        first('#upvote').click
+        expect(Vote.last).to eq(Vote.find_by(user: user, wish: wish))
     end
 
+    scenario 'User can unvote for a wish' do
+        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+        Vote.create(user: user, wish: wish)
+        visit wishlist_wishes_path(other_wishlist)
+        first('#downvote').click
+        expect(Vote.find_by(user: user, wish: wish)).to be_nil
+    end
 end
