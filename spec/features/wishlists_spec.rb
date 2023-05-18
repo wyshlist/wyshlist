@@ -6,8 +6,9 @@ RSpec.feature 'Wishlists', type: :feature do
     let(:other_user) { User.create(email: 'other@example.com', password: 'password') }
     let(:wish) { Wish.create(title: 'Test Wish', user: user) }
     let(:other_wish) { Wish.create(title: 'Other Wish', user: other_user) }
-    let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description", color: "ECEDFE") }
-    let(:other_wishlist) { Wishlist.create(title: 'Other Wishlist', user: other_user, description: "Test description", color: "ECEDFE") }
+    let(:organization) { Organization.create(name: 'Test Organization') }
+    let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description", color: "ECEDFE", organization: organization) }
+    let(:other_wishlist) { Wishlist.create(title: 'Other Wishlist', user: other_user, description: "Test description", color: "ECEDFE", organization: organization) }
 
     before do
         sign_in user
@@ -191,6 +192,27 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(wishlist_titles).to eq(['Other Wishlist', 'Test Wishlist'])
       
         # Additional assertions or expectations if needed
-      end
+    end
+
+    scenario "organization's wishlists are sorted by number of votes" do
+        # Create a wishlist with 3 wishes
+        wishlist = Wishlist.create(title: 'Test Wishlist', user: user, description: 'A wishlist', color: "ECEDFE", organization: organization)
+        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+        wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
+        wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
+        Vote.create(user: user, wish: wish)
+        Vote.create(user: user, wish: wish)
+        Vote.create(user: user, wish: wish3)
+      
+        visit organization_path(organization)
+      
+        # Assuming the wishlist titles are displayed in a certain order, you can check the order of the titles
+        wishlist_titles = page.all('.wishlist-title').map(&:text)
+      
+        # Make sure the wishlists are sorted by number of votes in descending order
+        expect(wishlist_titles).to eq(['Other Wishlist', 'Test Wishlist'])
+      
+        # Additional assertions or expectations if needed
+    end
 end 
 
