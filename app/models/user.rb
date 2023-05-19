@@ -43,7 +43,7 @@ class User < ApplicationRecord
     else
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
       relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
-      
+
     end
   end
 end
