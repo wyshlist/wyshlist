@@ -1,3 +1,3 @@
-# module asana
-#     class Error < StandardError; end
-# end
+module asana_api
+    class Error < StandardError; end
+end
