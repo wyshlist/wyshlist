@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 
   resources :wishlists, except: :show do
+    resources :integrations, only: [:new, :create]
     resources :wishes, only: [:new, :create, :index]
   end
 
@@ -16,8 +17,10 @@ Rails.application.routes.draw do
   end
 
   resources :votes, only: :destroy
+  resources :integrations, only: :destroy
 
   resources :users, only: [:show] do
     resources :wishlists, only: [:index]
   end
+
 end

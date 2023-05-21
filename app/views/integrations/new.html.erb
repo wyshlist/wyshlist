@@ -1,0 +1,23 @@
+<div class="my-container">
+    <div class="card-product form-wrapper" data-controller="integration" >
+        <h1> New API connection </h1>
+        <%= simple_form_for [@wishlist, @integration] do |f|%>
+            <div class="integration-form__provider-info" data-integration-target="providerInfo">
+                <%= f.select :name, options_for_select(Integration::APPS), label: "Provider", placeholder: "Provider" %>
+                <%= f.input :api_token, placeholder: "ei: 6be47a4fee3f78d359[...]", label: "Insert your API token" %>
+                
+                <a data-action="click->integration#showWorkspaces" class="btn-flat btn-flat--primary">
+                    Show workspaces
+                </a>
+            </div>
+            <div class="integration-form__workspaces" >
+                <select data-integration-target="workspaces">
+                </select>
+            </div>
+            <div class="integration-form__action" data-integration-target="actions">
+                <%= f.select :action, options_for_select(Integration::ACTIONS), label: "Choose an automation", placeholder: "Action" %>
+                <%= f.submit "Add a wish", class: "btn-flat", data: { turbo: false }%>
+            </div>
+        <% end %>
+    </div>
+</div>
