@@ -58,7 +58,7 @@ class OrganizationsController < ApplicationController
     end
 
     def handle_existing_organization(organization_name)
-        @organization = Organization.find_by(name: organization_name) || @organization = Organization.new
+        @organization = Organization.where('LOWER(name) ILIKE ?', organization_name.downcase).first || @organization = Organization.new
         if @organization.id
             update_user_and_redirect(@organization)
             authorize @organization
@@ -70,6 +70,6 @@ class OrganizationsController < ApplicationController
       
     def update_user_and_redirect(organization)
         current_user.update(organization: organization)
-        redirect_to wishlists_path
+        redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
     end
 end
