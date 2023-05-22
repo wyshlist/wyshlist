@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
     def new 
         @organization = Organization.new
         authorize @organization
+        @organization_search = ""
     end
 
     def show
@@ -12,13 +13,16 @@ class OrganizationsController < ApplicationController
     end
 
     def create
-        @organization = Organization.find_by(organization_params.except(:logo)) || Organization.create(organization_params)
-        authorize @organization
-        if @organization.save
-            current_user.update(organization: @organization)
-            redirect_to wishlists_path
+        if params[:organization_search] && params[:organization_search] != ""
+            handle_existing_organization(params[:organization_search])
         else
-            render :new
+            @organization = Organization.create(organization_params)
+            authorize @organization
+            if @organization.save
+                update_user_and_redirect(@organization)
+            else
+                render :new, status: :unprocessable_entity
+            end
         end
     end
 
@@ -51,5 +55,21 @@ class OrganizationsController < ApplicationController
 
     def organization_params
         params.require(:organization).permit(:name, :logo)
+    end
+
+    def handle_existing_organization(organization_name)
+        @organization = Organization.find_by(name: organization_name) || @organization = Organization.new
+        if @organization.id
+            update_user_and_redirect(@organization)
+            authorize @organization
+        else
+            redirect_to new_organization_path, alert: "Team not found, maybe you should create it?"
+            authorize @organization
+        end
+    end
+      
+    def update_user_and_redirect(organization)
+        current_user.update(organization: organization)
+        redirect_to wishlists_path
     end
 end

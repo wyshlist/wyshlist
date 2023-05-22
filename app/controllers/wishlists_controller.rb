@@ -12,7 +12,6 @@ class WishlistsController < ApplicationController
         .group("wishlists.id")
         .distinct
         .order("wishes_count DESC")
-        add_breadcrumb "Wishlists", wishlists_path
     end
 
     def new

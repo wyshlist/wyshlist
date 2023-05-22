@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
+    <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
       <%= image_tag "logo.jpg", class: "logo"%>
     <% end %>
 
@@ -20,7 +20,7 @@
             </li>
           <% end %>
           <li class="nav-item">
-            <%= link_to "New wishlist", new_wishlist_path, class: " nav-link" %>
+            <%= link_to "New wishlist", new_wishlist_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.attached? %>
@@ -34,6 +34,8 @@
               <% end %>
               <% if current_user&.organization.present? && policy(current_user&.organization).edit? %>
                 <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item" %>
+              <% else %>
+                <%= link_to "Your team", new_organization_path, class: "dropdown-item"  %>
               <% end %>
               <%= link_to "My account", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
@@ -41,10 +43,10 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Create a team", new_organization_path, class: "nav-link" %>
+            <%= link_to "Join now", new_user_registration_path, class: "nav-link primary-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link primary-link" %>
           </li>
         <% end %>
       </ul>

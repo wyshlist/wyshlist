@@ -6,7 +6,7 @@
         <% if user_signed_in? %>
             <%= link_to "Wishlists", wishlists_path, class: "btn-flat" %>
         <% else %>
-            <%= link_to "Get started", new_organization_path, class: "btn-flat" %>
+            <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
         <% end %>
     </div>
   </div>

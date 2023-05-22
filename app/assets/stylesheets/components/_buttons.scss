@@ -32,6 +32,15 @@
     color: white;
   }
 
+  .primary-link {
+    color: $primary-color;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    &:hover {
+      color: $primary-color-hover !important;
+    }
+  }
+
 
   @media (max-width: 768px) {
     .upvote-button {
