@@ -8,6 +8,8 @@
     margin-bottom: 20px;
     justify-content: space-between;
     padding: 15px;
+    color: $font-color;
+
   }
 
   .card-product__color {
@@ -170,6 +172,9 @@
     .card-product {
       flex-direction: column;
       align-items: normal;
+      h2 {
+        margin-top: 15px;
+      }
     }
 
     .wishes-filter {
