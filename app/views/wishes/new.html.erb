@@ -2,7 +2,7 @@
 <%= turbo_frame_tag "new-wish" do %>
     <%= simple_form_for [@wishlist, @wish], id: "add-wish" do |f| %>
         <%= f.input :title, label: false, placeholder: "Title" %>
-        <%= f.rich_text_area :description, label: false, placeholder: "Description", as: :text %>
-        <%= f.submit "Add a wish", class: "btn-flat", data: { turbo: false }%>
+        <%= f.rich_text_area :description, label: "Add a decription for this ticket", placeholder: "i.e: At the moment our current solution is this, it would be great to have...", as: :text %>
+        <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }%>
     <% end %>
 <% end %>

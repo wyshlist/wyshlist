@@ -170,6 +170,19 @@
   left: 18px;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+.nav-pills .nav-link {
+  color: $font-color;
+}
+
+.nav-pills {
+  margin-top: 25px;
+}
+
 @media (max-width: 768px) {
   .category-selector + label {
     padding: 15px;

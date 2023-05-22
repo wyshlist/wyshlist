@@ -2,11 +2,11 @@
   <div class="my-container">
   <div class="banner__body">
         <h1>Let your stakeholders <span class="highlight">contribute & vote</span> on the next product decision</h1>
-        <p>Community based wishlists for product managers and tech teams.</p>
+        <p>Community based wishlist for product managers and tech teams.</p>
         <% if user_signed_in? %>
-            <%= link_to "Wishlists", wishlists_path, class: "btn-flat" %>
+            <%= link_to "Boards", wishlists_path, class: "btn-flat" %>
         <% else %>
-            <%= link_to "Get started", new_organization_path, class: "btn-flat" %>
+            <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
         <% end %>
     </div>
   </div>

@@ -3,9 +3,13 @@
         <h1>Your Feed</h1>
         <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
     </div>
-    <div class="breadcrumbs-wrapper">
-        <small><%= render_breadcrumbs :separator => "  /  " %></small>
-    </div>
-    <%= render "wishlists_cards", wishlists: @wishlists  %>
+    <% if @wishlists.empty? %>
+        <div class="card-product">
+            <p>There are no boards yet.</p>
+            <p>Click on the button above to create one.</p>
+        </div>
+    <% else %>
+        <%= render "wishlists_cards", wishlists: @wishlists  %>
+    <% end %>
 </div>
 

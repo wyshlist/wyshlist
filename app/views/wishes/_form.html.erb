@@ -1,5 +1,5 @@
 <%= simple_form_for [@wishlist, @wish] do |f| %>
-    <%= f.input :title, label: false, placeholder: "Title" %>
-    <%= f.rich_text_area :description, label: false, placeholder: "Description", as: :text %>
+    <%= f.input :title, label: "Title for this ticket", placeholder: "i.e: Add user referral system..." %>
+    <%= f.rich_text_area :description, label: "Description of the ticket", placeholder: "At the moment this the solution we have....", as: :text %>
     <%= f.submit "Update", class: "btn-flat", data: { turbo: false }%>
 <% end %>

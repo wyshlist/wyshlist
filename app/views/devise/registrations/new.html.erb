@@ -9,23 +9,28 @@
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
+                      placeholder: "ei: John",
                       input_html: { autocomplete: "First name" } %>
           <%= f.input :last_name,
                       required: true,
+                      placeholder: "ei: Doe",
                       autofocus: true,
                       input_html: { autocomplete: "Last name" } %>
           <%= f.input :email,
                       required: true,
+                      placeholder: "ei: john.doe@gmail.com",
                       autofocus: true,
                       input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                       required: true,
+                      placeholder: "Minimum 6 characters",
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :password_confirmation,
+                      placeholder: "Minimum 6 characters",
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
-          <%= f.input :photo, as: :file %>
+          <%= f.input :photo, as: :file, label: "Add a picture for your avatar" %>
         </div>
 
         <div class="form-actions">

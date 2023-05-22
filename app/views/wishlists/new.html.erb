@@ -1,11 +1,11 @@
 <div class="my-container">
     <div class="card-product form-wrapper">
         <% if @organization %>
-            <h1>New Team wishlist for <%= current_user.organization.name.capitalize %></h1>
+            <h1>New Team board for <%= current_user.organization.name.capitalize %></h1>
         <% else %>
-            <h1>Add a new wishlist</h1>
+            <h1>Add a new board</h1>
         <% end %>
-        <p>Create a new wishlist for your teammates or customers to collaborate on new ideas for product development and vote on their most important one.</p>
+        <p>Create a new board for your teammates or customers to collaborate on new ideas for product development and vote on their most important one.</p>
         <%= render "form" %>
     </div>
 </div>
