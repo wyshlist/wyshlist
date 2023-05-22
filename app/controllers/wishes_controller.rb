@@ -9,7 +9,7 @@ class WishesController < ApplicationController
         @comments = @wish.comments
         @comment = Comment.new
         authorize @wish
-        add_breadcrumb "Wishes", wishlist_wishes_path(@wishlist)
+        add_breadcrumb "Tickets", wishlist_wishes_path(@wishlist)
     end
 
     def new
@@ -26,7 +26,7 @@ class WishesController < ApplicationController
           @wishes = @wishes.where(stage_params)
         end
         @vote = Vote.new
-        add_breadcrumb "< Wishlists", wishlists_path
+        add_breadcrumb "< Boards", wishlists_path
     end
 
     def create
@@ -36,10 +36,10 @@ class WishesController < ApplicationController
         @wishlist = @wish.wishlist
         authorize @wish
         if @wish.save
-            flash[:notice] = "Wish created successfully"
+            flash[:notice] = "Ticket created successfully"
             redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
         else
-            flash[:alert] = "Wish not created, try again later"
+            flash[:alert] = "Ticket not created, try again later"
             render :new, status: :unprocessable_entity
         end
     end
@@ -53,10 +53,10 @@ class WishesController < ApplicationController
         @wish = Wish.find(params[:id])
         authorize @wish
         if @wish.update(wish_params)
-            flash[:notice] = "Wish updated successfully, only you as wishlist owner can update the stage of a wish"
+            flash[:notice] = "Ticket updated successfully, only you as a board owner can update the stage of a wish"
             redirect_to wish_path(@wish)
         else
-            flash[:alert] = "Wish not updated, try again later"
+            flash[:alert] = "Ticket not updated, try again later"
             render "show", status: :unprocessable_entity
         end
     end
@@ -65,10 +65,10 @@ class WishesController < ApplicationController
         @wish = Wish.find(params[:id])
         authorize @wish
         if @wish.destroy
-            flash[:notice] = "Wish deleted successfully"
+            flash[:notice] = "Ticket deleted successfully"
             redirect_to wishlist_wishes_path(@wish.wishlist)
         else
-            flash[:alert] = "Wish not deleted, try again later"
+            flash[:alert] = "Ticket not deleted, try again later"
             redirect_to wish_path(@wish)
         end
     end

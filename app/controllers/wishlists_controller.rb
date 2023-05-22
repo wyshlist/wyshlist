@@ -25,10 +25,10 @@ class WishlistsController < ApplicationController
         @wishlist.user = current_user
         authorize @wishlist
         if @wishlist.save
-            flash[:notice] = "Wishlist created successfully"
+            flash[:notice] = "Board created successfully"
             redirect_to wishlist_wishes_path(@wishlist)
         else
-            flash[:alert] = "There was a problem creating your wishlist, try again later"
+            flash[:alert] = "There was a problem creating your board, try again later"
             render :new, status: :unprocessable_entity
         end
     end
@@ -37,10 +37,10 @@ class WishlistsController < ApplicationController
         @wishlist = Wishlist.find(params[:id])
         authorize @wishlist
         if @wishlist.destroy
-            flash[:notice] = "Wishlist deleted successfully"
+            flash[:notice] = "Board deleted successfully"
             redirect_to wishlists_path
         else
-            flash[:alert] = "Wishlist not deleted, try again later"
+            flash[:alert] = "Board not deleted, try again later"
             redirect_to wishlist_wishes_path(@wishlist)
         end
     end

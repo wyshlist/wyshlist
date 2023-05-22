@@ -42,18 +42,18 @@
             <% else %>
                 <div class="no-wishes">
                     <h2> No ideas yet! </h2>
-                    <p> Be the first to add an idea to this wishlist! </p>
+                    <p> Be the first to add an idea to this board! Create a new ticket! 🚀</p>
                 </div>
             <% end %>
             <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>
                     <div class="new-wish-wrapper">
-                        <%= link_to "Add a new idea", new_wishlist_wish_path(@wishlist), class: "btn-flat", id: "add-wish" %>
+                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat", id: "add-wish" %>
                     </div>
                 <% end %>
             <% else %>
                 <div class="new-wish-wrapper">
-                    <%= link_to "Add a new idea", new_user_session_path, class: "btn-flat", id: "add-wish"%>
+                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish"%>
                 </div>
             <% end %>
         </div>
@@ -65,7 +65,7 @@
                     <li><%= stage[0] %></li>
                     <% end %>
                 <% end %>
-                <small>Copy the link and invite stakeholders to contribute to this wishlist 🚀</small>
+                <small>Copy the link and invite stakeholders to contribute to this board 🚀</small>
                 <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="wishes__copy">
                     <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
                     <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
