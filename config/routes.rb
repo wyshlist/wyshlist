@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
+  get 'privacy_policy', to: 'pages#privacy_policy'
+  get 'terms_of_service', to: 'pages#terms_of_service'
+  
   devise_for :users
   authenticated(:user) do
     root to: "wishlists#index", as: :authenticated_root
