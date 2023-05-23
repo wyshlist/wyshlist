@@ -1,3 +1,3 @@
-module asana_api
+module AsanaApi
     class Error < StandardError; end
 end

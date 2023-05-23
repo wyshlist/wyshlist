@@ -4,7 +4,7 @@ class Integration < ApplicationRecord
 
   validates :name, presence: true
   validates :api_token, presence: true
-  APPS = %w[asana].freeze
+  APPS = %w[Asana].freeze
   ACTIONS = ["Create a new task"].freeze
   # after_create :create_automation
 

@@ -50,10 +50,8 @@ module AsanaApi
             @client = AsanaApi::AsanaClient.new(@api_token).call
         end
 
-        def call(workspace, project, task)
-            @client.tasks.create_in_workspace(workspace: workspace, projects: [project], name: task)
+        def call(workspace, project, task, description)
+            @client.tasks.create_in_workspace(workspace: workspace, projects: [project], name: task, notes: description)
         end
     end
 end
-
-p AsanaApi::SendTask.new('1/1204496492204507:6be47a9c4b4fee3f78d359d69f4943a9').call("567515270913709", "1204538749618949", "Test Task Wyshlist 2")

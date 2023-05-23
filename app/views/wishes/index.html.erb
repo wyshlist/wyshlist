@@ -4,7 +4,6 @@
 <div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
-     
             <div>
             <% if @wishlist.organization && @wishlist.organization.logo.attached? %>
                 <% if @wishlist.id == 104 %>
@@ -19,12 +18,14 @@
             <small><%= @wishlist.description %></small>
         </div>
         <div>
-        <%= link_to edit_wishlist_path(@wishlist) do %>
-            <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
-        <% end %>
-        <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
-            <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
-        <% end %>
+            <% if @wishlist.user == current_user %>
+                <%= link_to edit_wishlist_path(@wishlist) do %>
+                    <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+                <% end %>
+                <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+                    <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+                <% end %>
+            <% end %>
         </div>
     </div>
     <div class="breadcrumbs-wrapper">
@@ -58,6 +59,13 @@
             <% end %>
         </div>
         <div class="wishes-filter">
+            <% unless @wishlist.asana_integration.present? %>
+                <%= link_to new_wishlist_integration_path(@wishlist) do %>
+                    <div class="integration-box">
+                            Connect to <%= image_tag "asana.svg", alt: "Asana logo" %>
+                    </div>
+                <% end %>
+            <% end %>
             <ul class="wishes-filter__list">
                 <h2> Filter by stage </h2>
                 <% Wish.stages.each do |stage| %>

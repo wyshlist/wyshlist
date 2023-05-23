@@ -1,3 +1,4 @@
+require_relative '../services/asana_api/client'
 class Wish < ApplicationRecord
   belongs_to :wishlist
   validates :title, presence: true
@@ -7,6 +8,7 @@ class Wish < ApplicationRecord
   has_rich_text :description
   has_many :comments, dependent: :destroy
   enum stage: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
+  after_create :send_to_asana
   # after_create_commit { broadcast_append_to "wishes" }
 
   def user_vote(user)
@@ -27,5 +29,12 @@ class Wish < ApplicationRecord
       when "Beta" then "#FEFCEC"
       when "Launched" then "#EFFEEC"
     end
+  end
+
+  private
+
+  def send_to_asana
+    asana = self.wishlist.asana_integration
+    AsanaApi::SendTask.new(asana.api_token).call(asana.workspace, asana.project, title, description.to_plain_text)
   end
 end
