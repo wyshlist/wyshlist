@@ -1,7 +1,8 @@
 <div class="my-container">
     <div class="card-product form-wrapper">
       <h1>Sign up</h1>
-
+      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
+      <hr>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
         <%= f.error_notification %>
 
