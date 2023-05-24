@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>The change you wanted was rejected 422</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    .hit-the-floor {
+      color: black;
+      font-size: 12em;
+      font-weight: bold;
+      font-family: Helvetica;
+      text-shadow: 
+      0 1px 0 #ccc, 
+      0 2px 0 #c9c9c9, 
+      0 3px 0 #bbb, 
+      0 4px 0 #b9b9b9, 
+      0 5px 0 #aaa, 
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .btn-flat {
+      color: white !important;
+      font-weight: bold;
+      padding: 12px 34px;
+      border-radius: 0.5rem;
+      background: #333cc2;
+      text-decoration: none;
+    } 
+    
+    .hit-the-floor {
+      text-align: center;
+    }
+    
+    .error-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      font: 1em/1.5 Helvetica, Arial, sans-serif; 
+      text-align: center;
+      height: 90vh;
+    }
+    .my-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 
-<body class="rails-default-error-page">
+<body class="error-wrapper">
   <!-- This file lives in public/422.html -->
-  <div class="dialog">
+  <div class="my-container">
     <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+      <img src="https://www.wyshlist.net/assets/logo-087e78c08af123ef29284793918422f8c22da0ffc663e15fb4db0aa0b2ff7109.jpg" alt="422" class="w-1/2 mx-auto">
+      <div class="hit-the-floor">422</div>
+      <div class="alternative-versions absolute bottom-0 w-full flex justify-center underline space-x-4 p-12">
+        <p>"Whoopsie-daisy! Our wysh-gathering gnomes are having trouble deciphering the fantastical language of your input. It seems they've encountered a mystical creature called 'Unprocessable Entity.' Don't worry, our enchanters are working their magic to tame this creature and ensure your wyshes can be properly understood. Please bear with us as we conjure a solution!"</p>
+        <a href="/" class="btn-flat">Back to home</a>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>
