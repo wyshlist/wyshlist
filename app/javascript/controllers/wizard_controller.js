@@ -31,6 +31,7 @@ export default class extends Controller {
       }
     } catch (error) {
       console.error(error);
+      alert(`${error} Please try again.`);
       // Handle the error (e.g., display an error message to the user)
     }
   }
@@ -64,6 +65,7 @@ export default class extends Controller {
       }
     } catch (error) {
       console.error(error);
+      alert(`${error} Please try again.`);
       // Handle the error (e.g., display an error message to the user)
     }
   }

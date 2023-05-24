@@ -2,8 +2,7 @@
     <div class="card-product form-wrapper">
         <%= image_tag "asana.png", class: "avatar-x-large" %>
         <h1> New API connection </h1>
-        <small>Connecting to baord: <%= @wishlist.title %></small>
-        <p>Please enter your Asana API key below to enable the submission of ticket ideas from users to your Asana projects. The API key will be used to authenticate your requests to the Asana API and ensure secure communication. Make sure to obtain the API key from your Asana account before proceeding.</p>
+        <strong>Connecting to baord: <%= @wishlist.title %></strong>
         <div data-controller="wizard">
             <%= simple_form_for [@wishlist, @integration] do |f|%>
                 <div data-wizard-target="step">
@@ -12,7 +11,10 @@
                         <div class="hidden">
                             <%= f.select :name, options_for_select(Integration::APPS), label: "Provider", placeholder: "Provider" %>  
                         </div>
-                        <%= f.input :api_token, required: true, placeholder: "ei: 6be47a4fee3f78d359[...]", label: "Insert your API token", id: "integration_api_token" %>
+                        <p>Please enter your Asana API key below to enable the submission of ticket ideas from users to your Asana projects. Make sure to obtain the API key from your <%= link_to "Asana developer account", "https://app.asana.com/0/my-apps", class: "link-primary" %> before proceeding.</p>
+                        <br>
+                        <small>Insert your Api Key.</small>
+                        <%= f.input :api_token, required: true, placeholder: "ei: 6be47a4fee3f78d359[...]", label: false, id: "integration_api_token" %>
                     </div>
                     
                 <%= button_tag "Next", type: "button",
@@ -24,7 +26,8 @@
 
                 <div data-wizard-target="step" class="hidden">
                     <div class="integration-form__workspaces" >
-                        <%= f.select :workspace, options_for_select("loading"), label: "Choose an Asana Workspace", placeholder: "Workspace", id: "integration_workspace" %>
+                        <small>Choose a workspace to connect to your board</small>
+                        <%= f.select :workspace, options_for_select(["loading..."]), label: "Choose an Asana Workspace", placeholder: "Workspace", id: "integration_workspace" %>
                     </div>
 
                     <%= button_tag "Previous", type: "button",
@@ -41,7 +44,8 @@
 
                 <div data-wizard-target="step" class="hidden">
                     <div class="integration-form__projects" >
-                        <%= f.select :project, options_for_select("loading"), label: "Choose an Asana project", placeholder: "Action", id: "integration_project" %>
+                        <small>Choose a project to connect to your board</small>
+                        <%= f.select :project, options_for_select(["loading..."]), label: "Choose an Asana project", placeholder: "Action", id: "integration_project" %>
                     </div>
 
                 <%= button_tag "Previous", type: "button",
@@ -58,6 +62,7 @@
                 
                 <div data-wizard-target="step" class="hidden">
                     <div class="integration-form__action" data-integration-target="actions">
+                        <small>Choose an automation to connect to your board</small>
                         <%= f.select :action, options_for_select(Integration::ACTIONS), label: "Choose an automation", placeholder: "Action" %>
                     </div>
 
@@ -66,7 +71,7 @@
                     action: "click->wizard#goToPrevious",
                     previous_step: "3"
                     } %>
-                <%= f.button :submit, class: "btn-primary" %>
+                <%= f.button :submit, class: "btn-flat" %>
                 </div>
             <% end %>
         </div>
