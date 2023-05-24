@@ -10,7 +10,7 @@ class User < ApplicationRecord
   belongs_to :organization, optional: true
   has_one_attached :photo
   enum :role => [:user, :admin]
-  # after_create :signup_email
+  after_create :signup_email
 
 
   
