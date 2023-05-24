@@ -7,7 +7,7 @@ class IntegrationPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    record.wishlist.user == user
   end
 
   def create?

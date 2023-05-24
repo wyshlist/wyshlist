@@ -2,7 +2,7 @@ class IntegrationsController < ApplicationController
 
     def new
         @wishlist = Wishlist.find(params[:wishlist_id])
-        @integration = Integration.new
+        @integration = Integration.new(wishlist: @wishlist)
         authorize @integration
     end
 
