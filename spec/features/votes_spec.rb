@@ -26,4 +26,11 @@ RSpec.feature 'votes', type: :feature do
         first('#downvote').click
         expect(Vote.find_by(user: user, wish: wish)).to be_nil
     end
+
+    # scenario 'User can vote for a wish if not signed in on public wishlist' do
+    #     sign_out user
+    #     visit wishlist_wishes_path(other_wishlist)
+    #     first('#upvote').click
+    #     expect(Vote.last).to eq(Vote.find_by(user: nil, wish: other_wish))
+    # end
 end
