@@ -16,14 +16,16 @@
             <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div></h1>
             </div>
             <br>
-            <small><%= @wishlist.description %></small>
+            <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
         <div>
-        <%= link_to edit_wishlist_path(@wishlist) do %>
-            <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
-        <% end %>
-        <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
-            <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+        <% if current_user.owner?(@wishlist) %>
+            <%= link_to edit_wishlist_path(@wishlist) do %>
+                <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+            <% end %>
+            <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+                <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+            <% end %>
         <% end %>
         </div>
     </div>

@@ -12,7 +12,8 @@
         collection_wrapper_class: 'category-wrapper',
         item_wrapper_class: 'category-item',
         input_html: {class: 'category-selector'},
-        placeholder: "Color"
+        placeholder: "Color",
+        checked: Wishlist::COLORS.sample
     %>
     <%= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
     <%= f.submit "Submit", class: "btn-flat"%>

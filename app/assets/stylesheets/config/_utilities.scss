@@ -24,6 +24,10 @@ input[type="submit"] {
     }
 }
 
+.title-header__description {
+    overflow-wrap: anywhere;
+}
+
 .title-header {
     display: flex;
     justify-content: space-between;
