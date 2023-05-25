@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="tab"
 export default class extends Controller {
-  targets = ["first", "second"]  
+  static targets = ["first", "second"]  
   connect() {
   }
 
@@ -11,6 +11,6 @@ export default class extends Controller {
     console.log(this.firstTarget)
     event.preventDefault()
     this.firstTarget.classList.toggle("hidden")
-    this.secondTarget.classList.toggle("hidden")
+    this.secondTarget.classList.toggle("show")
   }
 }

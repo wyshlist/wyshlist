@@ -41,11 +41,11 @@
     }
   }
 
-  .google-signin-button {
-    display: inline-block;
+  .btn-secondary {
+    display: block;
     color: $primary-color;
     border-radius: 8px;
-    padding: 12px 24px;
+    padding: 12px 34px;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
@@ -55,7 +55,7 @@
     background-color: white;
   }
   
-  .google-signin-button:hover {
+  .btn-secondary:hover {
     background-color: $primary-color-hover;
     color: white;
   }
