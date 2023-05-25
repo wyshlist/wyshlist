@@ -36,6 +36,23 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+
+    # Uncomment the section below if you want users to be created if they don't exist
+    unless user
+        user = User.create(name: data['name'],
+           first_name: data['first_name'],
+           last_name: data['last_name'],
+           email: data['email'],
+           photo: data['image'],
+           password: Devise.friendly_token[0,20]
+        )
+    end
+    user
+  end
+
   def all_wishlists
     if has_an_organization?
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)

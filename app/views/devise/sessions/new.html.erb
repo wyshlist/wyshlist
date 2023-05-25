@@ -20,5 +20,9 @@
       <% end %>
 
       <%= render "devise/shared/links" %>
+      or
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "google-signin-button", data: { turbo: false } do %>
+        <span class="google-signin-button-text">Sign in with Google</span>
+      <% end %>
     </div>
 </div>

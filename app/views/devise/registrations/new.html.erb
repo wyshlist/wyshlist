@@ -1,44 +1,59 @@
 <div class="my-container">
-    <div class="card-product form-wrapper">
-      <h1>Sign up</h1>
-      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
-      <hr>
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-        <%= f.error_notification %>
+  <div class="card-product form-wrapper" data-controller="tab">
+    <h1>Sign up</h1>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-email-tab" href="#pills-email" role="tab" data-action="click->tab#toggle">Sign in with Email</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#pills-google" role="tab">Sign in with google</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div data-tab-target="first">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+          <%= f.error_notification %>
 
-        <div class="form-inputs">
-          <%= f.input :first_name,
-                      required: true,
-                      autofocus: true,
-                      placeholder: "ei: John",
-                      input_html: { autocomplete: "First name" } %>
-          <%= f.input :last_name,
-                      required: true,
-                      placeholder: "ei: Doe",
-                      autofocus: true,
-                      input_html: { autocomplete: "Last name" } %>
-          <%= f.input :email,
-                      required: true,
-                      placeholder: "ei: john.doe@gmail.com",
-                      autofocus: true,
-                      input_html: { autocomplete: "email" }%>
-          <%= f.input :password,
-                      required: true,
-                      placeholder: "Minimum 6 characters",
-                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :password_confirmation,
-                      placeholder: "Minimum 6 characters",
-                      required: true,
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :photo, as: :file, label: "Add a picture for your avatar" %>
-        </div>
+          <div class="form-inputs">
+            <%= f.input :first_name,
+                        required: true,
+                        autofocus: true,
+                        placeholder: "ei: John",
+                        input_html: { autocomplete: "First name" } %>
+            <%= f.input :last_name,
+                        required: true,
+                        placeholder: "ei: Doe",
+                        autofocus: true,
+                        input_html: { autocomplete: "Last name" } %>
+            <%= f.input :email,
+                        required: true,
+                        placeholder: "ei: john.doe@gmail.com",
+                        autofocus: true,
+                        input_html: { autocomplete: "email" }%>
+            <%= f.input :password,
+                        required: true,
+                        placeholder: "Minimum 6 characters",
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" } %>
+            <%= f.input :password_confirmation,
+                        placeholder: "Minimum 6 characters",
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+            <%= f.input :photo, as: :file, label: "Add a picture for your avatar" %>
+          </div>
 
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: "btn-flat" %>
-        </div>
-      <% end %>
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class: "btn-flat" %>
+          </div>
+        <% end %>
 
-      <%= render "devise/shared/links" %>
+        <%= render "devise/shared/links" %>
+      </div>
+      <div data-tab-target="second">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "google-signin-button", data: { turbo: false } do %>
+          <span class="google-signin-button-text">Sign in with Google</span>
+        <% end %>    
+      </div>
+    </div>
   </div>
 </div>

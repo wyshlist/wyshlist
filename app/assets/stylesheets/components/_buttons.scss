@@ -41,6 +41,26 @@
     }
   }
 
+  .google-signin-button {
+    display: inline-block;
+    color: $primary-color;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    border: solid 1px $primary-color;
+    transition: background-color 0.3s ease;
+    background-color: white;
+  }
+  
+  .google-signin-button:hover {
+    background-color: $primary-color-hover;
+    color: white;
+  }
+  
+
 
   @media (max-width: 768px) {
     .upvote-button {
