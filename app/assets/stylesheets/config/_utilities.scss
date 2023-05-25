@@ -46,6 +46,12 @@ input[type="submit"] {
     display: none;
 }
 
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
 small {
     font-size: 12px;
     color: $light-gray;

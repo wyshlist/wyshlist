@@ -7,11 +7,20 @@
     height: fit-content;
 }
 
+.connect-icon {
+    height: 20px;
+    width: 20px;
+    object-fit: center;
+    margin-left: 15px;
+    margin-top: -2px;
+}
+
 .btn-flat {
     color: white !important;
     font-weight: bold;
     padding: 12px 34px;
     border-radius: 0.5rem;
+    border: solid 1px $primary-color;
     background: $primary-color;
     transition: background 0.3s ease;
   }
@@ -28,8 +37,10 @@
   }
   
   .btn-flat:hover {
-    background: $primary-color-hover;
-    color: white;
+    background: white;
+    color: $primary-color !important;
+    border: solid 1px $primary-color;
+    border-radius: 8px;
   }
 
   .primary-link {
@@ -42,10 +53,9 @@
   }
 
   .btn-secondary {
-    display: block;
     color: $primary-color;
-    border-radius: 8px;
     padding: 12px 34px;
+    border-radius: 0.5rem;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
@@ -56,7 +66,7 @@
   }
   
   .btn-secondary:hover {
-    background-color: $primary-color-hover;
+    background-color: $primary-color;
     color: white;
   }
   
@@ -67,6 +77,10 @@
       width: 100%;
       display: flex;
       justify-content: center;
+    }
+
+    .btn-secondary {
+      margin-top: 15px;
     }
 
     .wish-update-secondary {

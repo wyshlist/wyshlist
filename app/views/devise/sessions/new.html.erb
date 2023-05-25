@@ -1,28 +1,34 @@
 <div class="my-container">
-    <div class="card-product form-wrapper">
+    <div class="card-product form-wrapper" data-controller="tab">
       <h1>Log in</h1>
+      <p>Log in to your account to start creating boards and gathering feedback from your users.</p>
+      <div data-tab-target="second">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat", data: { turbo: false } do %>
+          <span class="google-signin-button-text">Login with  <%= image_tag "google.png", class: "connect-icon" %></span>
+        <% end %>    
+      </div>
+      <a class="btn-secondary" href="#pills-email" role="tab" data-action="click->tab#toggle">Login with email</a>
+      <div class="tab-content">
+        <div data-tab-target="first" class="hidden">
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+              <%= f.input :password,
+                          required: false,
+                          input_html: { autocomplete: "current-password" } %>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
 
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
-        <div class="form-inputs">
-          <%= f.input :email,
-                      required: false,
-                      autofocus: true,
-                      input_html: { autocomplete: "email" } %>
-          <%= f.input :password,
-                      required: false,
-                      input_html: { autocomplete: "current-password" } %>
-          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            <div class="form-actions">
+              <%= f.button :submit, "Log in", class: "btn-flat" %>
+            </div>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
         </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Log in", class: "btn-flat" %>
-        </div>
-      <% end %>
-
-      <%= render "devise/shared/links" %>
-      or
-      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "google-signin-button", data: { turbo: false } do %>
-        <span class="google-signin-button-text">Sign in with Google</span>
-      <% end %>
+      </div> 
     </div>
 </div>

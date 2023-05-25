@@ -1,7 +1,13 @@
 <div class="my-container">
   <div class="card-product form-wrapper" data-controller="tab">
     <h1>Sign up</h1>
-    <a class="btn-secondary" href="#pills-email" role="tab" data-action="click->tab#toggle">Sign in with Email</a>
+    <p>Create a new account with your email or sign in with Google.</p>
+    <div data-tab-target="second">
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat", data: { turbo: false } do %>
+        <span class="google-signin-button-text">Join with  <%= image_tag "google.png", class: "connect-icon" %></span>
+      <% end %>    
+    </div>
+    <a class="btn-secondary" href="#pills-email" role="tab" data-action="click->tab#toggle">Join with email</a>
     <div class="tab-content">
       <div data-tab-target="first" class="hidden">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
@@ -42,11 +48,6 @@
         <% end %>
 
         <%= render "devise/shared/links" %>
-      </div>
-      <div data-tab-target="second">
-        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat", data: { turbo: false } do %>
-          <span class="google-signin-button-text">Sign in with Google</span>
-        <% end %>    
       </div>
     </div>
   </div>
