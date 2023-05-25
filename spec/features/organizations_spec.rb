@@ -12,7 +12,7 @@ RSpec.feature 'Organizations', type: :feature do
     scenario 'User creates an organization' do
         visit new_organization_path
         fill_in 'Create your team', with: 'Test Organization'
-        attach_file 'Logo for your team', Rails.root.join('spec/support/assets/images/logo.png')
+        attach_file '📷 Upload a logo for your team', Rails.root.join('spec/support/assets/images/logo.png')
         click_button 'Submit'
 
         expect(Organization.last).to have_attributes(
