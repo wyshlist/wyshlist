@@ -2,12 +2,12 @@
         <%= link_to wish_path(wish), class: "card-product__link" do %>
             <div class="card-product" id="wish-<%= wish.id %>">
                 <div class="card-product__info">
-                    <div class="card-product__color" style="background-color: #<%= wish.wishlist.color %>"></div>
                     <div class="card-product-infos">
                         <h2><%= wish.title %></h2>
-                            <div class="card-product__icon">
-                                <small>Posted by  <%= wish.user.full_name %></small>
-                            </div>
+                        <div class="card-product__icon">
+                            <small>Posted by  <%= wish.user.full_name %></small>
+                        </div>
+                        <%= wish.description %>
                         <div class="card-product__icons">
                             <div class="card-product__icon">
                                 <div class="card-product__status" style="background-color: <%= wish.stage_color %>">

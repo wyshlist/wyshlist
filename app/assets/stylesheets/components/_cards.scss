@@ -5,9 +5,9 @@
     border-radius: .75rem;
     display: flex;
     align-items: start;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: space-between;
-    padding: 15px;
+    padding: 10px;
     color: $font-color;
     &:hover {
       border: solid 2px $light-gray;
@@ -19,11 +19,15 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 16px;
     .card-product {
-      height: 350px;
+      height: 250px;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+    .card-product h2 {
+      font-size: 1.5rem;
+      margin: 0;
     }
     .card-product__votes {
       width: 100%;
@@ -39,10 +43,13 @@
     border-radius: 0.5rem;
   }
 
+  .card-product__description {
+    font-color: #b8b8b8;
+  }
+
   .card-product__info {
     display: flex;
     align-items: start;
-    padding: 1rem;
   }
 
   .new-wish-card {
@@ -59,7 +66,8 @@
   }
   
   .card-product h2 {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
     margin: 0;
   }
   
@@ -77,6 +85,7 @@
     border: 1px solid #e6e6e6;
     border-radius: 0.25rem;
     margin-bottom: 10px;
+    background-color: #f0f0f0;
   }
 
   .card-product__votes small {
@@ -89,7 +98,7 @@
   }
 
   .card-product__icons {
-    padding: 10px 0px;
+    padding: 10px 0px 0px 0px;
     display: flex;
     color: #b8b8b8;
     align-items: center;

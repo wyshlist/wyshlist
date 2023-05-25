@@ -3,9 +3,7 @@
 
 <div class="my-container">
     <div class="title-header">
-        <div class="title-wrapper">
-     
-            <div>
+        <div>
             <% if @wishlist.organization && @wishlist.organization.logo.attached? %>
                 <% if @wishlist.id == 104 %>
                     <%= image_tag "logo-short.png", alt: "Wishlist logo", class: "avatar-large" %>
@@ -13,8 +11,7 @@
                     <%= cl_image_tag @wishlist.user.organization.logo.key, alt: "#{@wishlist.user.organization}-logo", class: "avatar-large" %>
                 <% end %>
             <% end %>
-            <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div></h1>
-            </div>
+            <h1><%= @wishlist.title %></h1>
             <br>
             <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
