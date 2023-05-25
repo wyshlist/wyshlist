@@ -1,5 +1,6 @@
-<%= simple_form_for @organization do |f| %>
+<%= simple_form_for @organization, html: {data: {controller: "photo-preview"}} do |f| %>
+    <%= image_tag "", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
+    <%= f.input :logo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a logo for your team'%>
     <%= f.input :name, required: true, label: "Create your team", placeholder: "ie: My Company", name: "name"  %>
-    <%= f.input :logo, as: :file, label: "Logo for your team", placeholder: "Upload a logo", name: "logo" %>
     <%= f.submit "Submit", class: "btn-flat"%>
 <% end %>

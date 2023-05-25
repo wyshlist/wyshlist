@@ -1,10 +1,13 @@
 <div class="footer">
   <div class="footer-copyright">
+      <%= link_to "Privacy policy", privacy_policy_path, class: "primary-link" %>
+      |
+      <%= link_to "Terms of service", terms_of_service_path, class: "primary-link" %>
     <div class="footer-links">
-      Wyshlist © 2023 by Wyshlist
       <% if Wishlist.admin_wishlists.any? %>
         <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.admin_wishlists.first), class: "main-link" %>
       <% end %>
+      Wyshlist © 2023 by Wyshlist
     </div>
   </div>
 </div>
