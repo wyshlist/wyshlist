@@ -17,8 +17,8 @@ RSpec.feature 'Wishlists', type: :feature do
     scenario 'User creates a public wishlist' do
         visit new_wishlist_path
 
-        fill_in 'Title', with: 'Test Wishlist'
-        fill_in 'Description', with: 'A wishlist'
+        fill_in 'Insert a descriptive title', with: 'Test Wishlist'
+        fill_in 'Summarize the goals of this board', with: 'A wishlist'
         find('label', text: 'ECEDFE').click
 
 
@@ -35,8 +35,8 @@ RSpec.feature 'Wishlists', type: :feature do
     scenario 'User creates a public wishlist with a color' do
         visit new_wishlist_path
 
-        fill_in 'Title', with: 'Test Wishlist'
-        fill_in 'Description', with: 'A wishlist'
+        fill_in 'Insert a descriptive title', with: 'Test Wishlist'
+        fill_in 'Summarize the goals of this board', with: 'A wishlist'
         find('label', text: 'ECEDFE').click
         # check 'Color', with: '#ECEDFE'
 
@@ -53,8 +53,8 @@ RSpec.feature 'Wishlists', type: :feature do
     scenario 'User creates a public wishlist without a color' do
         visit new_wishlist_path
 
-        fill_in 'Title', with: 'Test Wishlist'
-        fill_in 'Description', with: 'A wishlist'
+        fill_in 'Insert a descriptive title', with: 'Test Wishlist'
+        fill_in 'Summarize the goals of this board', with: 'A wishlist'
         
         click_button 'Submit'
 
@@ -64,10 +64,11 @@ RSpec.feature 'Wishlists', type: :feature do
     scenario 'User creates a private wishlist' do
         visit new_wishlist_path
 
-        fill_in 'Title', with: 'Test Wishlist'
-        fill_in 'Description', with: 'A wishlist'
+ 
+        fill_in 'Insert a descriptive title', with: 'Test Wishlist'
+        fill_in 'Summarize the goals of this board', with: 'A wishlist'
         find('label', text: 'ECEDFE').click
-        check 'private'
+        check 'Make this board private'
 
         click_button 'Submit'
 
@@ -84,8 +85,8 @@ RSpec.feature 'Wishlists', type: :feature do
 
         visit edit_wishlist_path(wishlist)
 
-        fill_in 'Title', with: 'Test Wishlist 2'
-        fill_in 'Description', with: 'A wishlist 2'
+        fill_in 'Insert a descriptive title', with: 'Test Wishlist 2'
+        fill_in 'Summarize the goals of this board', with: 'A wishlist 2'
         find('label', text: 'ECEDFE').click
         click_button 'Submit'
 
