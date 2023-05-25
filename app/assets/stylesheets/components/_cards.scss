@@ -9,8 +9,27 @@
     justify-content: space-between;
     padding: 15px;
     color: $font-color;
-
+    &:hover {
+      border: solid 2px $light-gray;
+    }
   }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
+    .card-product {
+      height: 350px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-product__votes {
+      width: 100%;
+    }
+  } 
+
 
   .card-product__color {
     margin-right: 20px;
@@ -40,8 +59,7 @@
   }
   
   .card-product h2 {
-    font-size: 1.125rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     margin: 0;
   }
   
@@ -178,6 +196,10 @@
       }
     }
 
+    .cards {
+      grid-template-columns: 1fr;
+    }
+
     .wishes-filter {
       display: none;
     }
@@ -207,5 +229,7 @@
     }
     
   }
+
+  
 
   
