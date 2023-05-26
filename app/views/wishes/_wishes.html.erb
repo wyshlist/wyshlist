@@ -7,7 +7,7 @@
                         <div class="card-product__icon">
                             <small>Posted by  <%= wish.user.full_name %></small>
                         </div>
-                        <%= wish.description %>
+                        <%= wish.description.to_plain_text.truncate(150) %>
                         <div class="card-product__icons">
                             <div class="card-product__icon">
                                 <div class="card-product__status" style="background-color: <%= wish.stage_color %>">
