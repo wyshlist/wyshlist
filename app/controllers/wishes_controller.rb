@@ -2,7 +2,6 @@ class WishesController < ApplicationController
     skip_before_action :authenticate_user!, only: [ :show, :index ] if :verify_private_wishlist
     after_action :verify_authorized
 
-
     def show
         @wish = Wish.find(params[:id])
         @wishlist = @wish.wishlist
