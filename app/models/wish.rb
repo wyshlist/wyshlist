@@ -8,6 +8,7 @@ class Wish < ApplicationRecord
   has_many :comments, dependent: :destroy
   enum stage: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
   # after_create_commit { broadcast_append_to "wishes" }
+  after_create :upvote
 
   def user_vote(user)
     votes.find_by(user: user)
@@ -27,5 +28,9 @@ class Wish < ApplicationRecord
       when "Beta" then "#FEFCEC"
       when "Launched" then "#EFFEEC"
     end
+  end
+
+  def upvote
+    Vote.create!(wish: self, user: self.user)
   end
 end
