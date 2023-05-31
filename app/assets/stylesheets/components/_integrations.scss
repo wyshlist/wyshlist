@@ -1,0 +1,26 @@
+.integration-box {
+    text-align: center;
+  background-color: #a5a8ab;
+  padding: 5px 30px;
+  border: 1px solid gray;
+  margin: 10px 0px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+    img {
+        width: 50px;
+    }
+    &:hover {
+        background-color: #e6e6e6;
+    }
+}
+
+.integration-form__action, .integration-form__projects, .integration-form__workspaces {
+    padding: 10px 0px;
+    select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        margin-bottom: 10px;
+    }
+}

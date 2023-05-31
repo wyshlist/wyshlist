@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_095124) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_151024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_095124) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["wish_id"], name: "index_comments_on_wish_id"
+  end
+
+  create_table "integrations", force: :cascade do |t|
+    t.string "name"
+    t.string "api_token"
+    t.string "action", default: "Create a new task"
+    t.bigint "wishlist_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "project"
+    t.string "workspace"
+    t.index ["user_id"], name: "index_integrations_on_user_id"
+    t.index ["wishlist_id"], name: "index_integrations_on_wishlist_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -128,6 +142,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_095124) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "wishes"
+  add_foreign_key "integrations", "users"
+  add_foreign_key "integrations", "wishlists"
   add_foreign_key "users", "organizations"
   add_foreign_key "votes", "users"
   add_foreign_key "votes", "wishes"
