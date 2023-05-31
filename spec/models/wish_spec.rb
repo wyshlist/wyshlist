@@ -29,4 +29,16 @@ RSpec.describe Wish, type: :model do
       expect(association.macro).to eq(:has_many)
     end
   end
+
+  describe 'after commit' do
+    let(:organization) { Organization.create(name: "New Organization") }
+    let(:owner) { User.create(email: "john@example.com", organization_id: organization.id, password: '123123') }
+    let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
+
+    it "automatically upvotes the wish by the owner" do
+      wish = Wish.create(title: "New Wish", wishlist: wishlist, user: owner)
+      expect(wish.votes.count).to eq(1)
+      expect(wish.votes.first.user).to eq(owner)
+    end
+  end
 end
