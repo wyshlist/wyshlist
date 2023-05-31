@@ -1,4 +1,4 @@
-require_relative '../services/asana_api/client'
+require_relative '../services/asana_api/asana_client'
 class Wish < ApplicationRecord
   belongs_to :wishlist
   validates :title, presence: true
