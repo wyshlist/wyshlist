@@ -3,14 +3,21 @@
         <h1> 
         <% if @organization.logo && @organization.logo.key %>
             <%= cl_image_tag @organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
-            <%=  @organization.name  %> wishlists
+            <%=  @organization.name  %> boards
         <% end %>
         </h1>
-        <%= link_to " New Team wishlist", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>
+        <%= link_to " New Team board", new_wishlist_path(organization: current_user.organization), class: " nav-link upvote-button btn-black" %>
     </div>
     <div class="breadcrumbs-wrapper">
         <small><%= render_breadcrumbs :separator => "  /  " %></small>
     </div>
-    <%= render "wishlists/wishlists_cards", wishlists: @wishlists  %>
+    <% if @wishlists.any? %>
+        <%= render "wishlists/wishlists_cards", wishlists: @wishlists  %>
+    <% else %>
+        <div class="card-product">
+            <p>There are no boards yet.</p>
+            <p>Click on the button above to create one.</p>
+        </div>
+    <% end %>
 </div>
 

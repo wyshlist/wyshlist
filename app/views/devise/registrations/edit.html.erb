@@ -2,12 +2,19 @@
     <div class="card-product form-wrapper">
       <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, html: {data: {controller: "photo-preview"}}) do |f| %>
         <%= f.error_notification %>
 
         <div class="form-inputs">
+          <% if current_user.photo.attached? %>
+            <%= cl_image_tag current_user.photo.key, class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
+          <% else %>
+            <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
+          <% end %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
+          <%= f.input :first_name, required: true, autofocus: true %>
+          <%= f.input :last_name, required: true, autofocus: true %>
           <%= f.input :email, required: true, autofocus: true %>
-
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
@@ -23,9 +30,7 @@
                       hint: "we need your current password to confirm your changes",
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
-          <%= f.input :photo, as: :file %>
         </div>
-
         <div class="form-actions">
           <%= f.button :submit, "Update", class: "btn-flat" %>
         </div>

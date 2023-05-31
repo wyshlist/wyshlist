@@ -1,0 +1,6 @@
+<%= form_tag organizations_path, method: "post", class: "form-search" do |f| %>
+    <%= label_tag(:organization_search, "Search for your team") %>
+    <%= text_field_tag :organization_search, nil, class: "form-control" %>
+    <br>
+    <%= submit_tag "Search", class: "btn-flat" %>
+<% end %>

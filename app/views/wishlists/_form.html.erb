@@ -2,17 +2,19 @@
     <% if @organization %>
         <% f.hidden_field :organization, value: @organization %>
     <% end %>
-    <%= f.input :title, required: true, label: false, placeholder: "Title" %>
-    <%= f.input :description, label: false, placeholder: "Description", type: :text %>
-    <%= f.input :private, label: "Make this list private", input_html: { class: "toggle" } %>
+    <%= f.input :title, required: true, label: "Insert a descriptive title", placeholder: "i.e: Product development, Improve wyshlist.net..." %>
+    <%= f.input :description, label: "Summarize the goals of this board", placeholder: "Description", type: :text, placeholder: "i.e: This board is for the product development team..." %>
     <%= f.input :color, 
         collection: Wishlist::COLORS, 
-        as: :radio_buttons,             
+        as: :radio_buttons,
+        label: "Choose a color for your board",             
         collection_wrapper_tag: 'div',
         collection_wrapper_class: 'category-wrapper',
         item_wrapper_class: 'category-item',
         input_html: {class: 'category-selector'},
-        placeholder: "Color"
+        placeholder: "Color",
+        checked: Wishlist::COLORS.sample
     %>
+    <%= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
     <%= f.submit "Submit", class: "btn-flat"%>
 <% end %>

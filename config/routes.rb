@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
+  get 'privacy_policy', to: 'pages#privacy_policy'
+  get 'terms_of_service', to: 'pages#terms_of_service'
+  
   devise_for :users
-  root to: "pages#home"  
+  authenticated(:user) do
+    root to: "wishlists#index", as: :authenticated_root
+  end
+  
+  unauthenticated(:user) do
+    root to: "pages#home", as: :unauthenticated_root
+  end
 
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 

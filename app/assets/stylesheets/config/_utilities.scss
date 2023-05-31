@@ -1,6 +1,5 @@
 a {
     text-decoration: none !important;
-    color: $font-color !important;
 }
 
 .highlight {
@@ -19,16 +18,20 @@ input[type="submit"] {
 
 .title-wrapper {
     width: fit-content;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     h1 {
         width: fit-content;
     }
 }
 
+.title-header__description {
+    overflow-wrap: anywhere;
+}
+
 .title-header {
     display: flex;
     justify-content: space-between;
-    margin: 30px 0px;
+    margin: 20px 0px;
 }
 
 .header-icons {

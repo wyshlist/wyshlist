@@ -166,6 +166,29 @@
   left: 18px;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+.nav-pills .nav-link {
+  color: $font-color;
+}
+
+.nav-pills {
+  margin-top: 25px;
+}
+
+.upload-photo {
+  border: 1px solid #d3d3d3;
+  padding: 16px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  background: white;
+  border-radius: 8px;
+  min-width: 30vw;
+}
+
 @media (max-width: 768px) {
   .category-selector + label {
     padding: 15px;

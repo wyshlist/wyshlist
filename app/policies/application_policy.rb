@@ -54,10 +54,10 @@ class ApplicationPolicy
   private
 
   def user_is_owner_or_admin?
-    record.user == user || user.admin?
+    record.user == user || user.admin? if !user.nil?
   end
 
   def user_is_owner_or_team_member_or_admin?
-    record.user == user || record.user.team_members&.include?(user) || user.admin?
+    record.user == user || record.user.team_members&.include?(user) || user.admin? if !user.nil?
   end
 end
