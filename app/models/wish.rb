@@ -8,6 +8,7 @@ class Wish < ApplicationRecord
   has_many :comments, dependent: :destroy
   enum stage: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
   # after_create_commit { broadcast_append_to "wishes" }
+  after_update :create_comment
 
   def user_vote(user)
     votes.find_by(user: user)
@@ -26,6 +27,12 @@ class Wish < ApplicationRecord
       when "In review" then "#ECEDFE"
       when "Beta" then "#FEFCEC"
       when "Launched" then "#EFFEEC"
+    end
+  end
+
+  def create_comment
+    if saved_change_to_stage?
+      Comment.create(content: "The stage of this ticket has been updated to: #{stage}", user: user, wish: self)
     end
   end
 end

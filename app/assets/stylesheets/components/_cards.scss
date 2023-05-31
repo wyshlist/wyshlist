@@ -32,7 +32,7 @@
     .card-product__votes {
       width: 100%;
     }
-  } 
+  }
 
 
   .card-product__color {
@@ -64,13 +64,13 @@
       color:#404040
     }
   }
-  
+
   .card-product h2 {
     font-size: 1.1rem;
     font-weight: bold;
     margin: 0;
   }
-  
+
   .card-product p {
     font-size: .875rem;
     line-height: 1.4;
@@ -106,7 +106,7 @@
 
   .card-product__icon {
     display: flex;
-    align-items: center; 
+    align-items: center;
   }
 
   .card-product__status {
@@ -142,8 +142,13 @@
     p {
       padding-left: 2rem;
     }
+
+    .pill {
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
   }
-  
+
   .cards-columns {
     display: flex;
   }
@@ -236,9 +241,5 @@
         margin: 10px 0px 0px 0px;
       }
     }
-    
+
   }
-
-  
-
-  
