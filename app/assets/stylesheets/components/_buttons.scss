@@ -7,6 +7,13 @@
     height: fit-content;
 }
 
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: none;
+}
+
 .btn-flat {
     color: white !important;
     font-weight: bold;
@@ -14,6 +21,7 @@
     border-radius: 0.5rem;
     background: $primary-color;
     transition: background 0.3s ease;
+    border-width: 0px !important;
   }
 
   .wish-update-secondary {

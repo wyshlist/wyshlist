@@ -51,6 +51,10 @@ small {
     color: $light-gray;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .title-header {
         flex-direction: column;
