@@ -13,9 +13,9 @@ RSpec.feature 'Wishes', type: :feature do
     end
 
     scenario 'Wishes are ordered by number of votes' do
-        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-        wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
-        wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
+        wish = Wish.create!(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+        wish2 = Wish.create!(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
+        wish3 = Wish.create!(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
 
         visit wishlist_wishes_path(other_wishlist)
         page.all('#upvote')[2].click
