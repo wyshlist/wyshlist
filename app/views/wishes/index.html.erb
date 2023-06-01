@@ -67,16 +67,7 @@
             <ul class="wishes-filter__list">
                 <h2> Filter by stage </h2>
                 <% Wish.stages.each do |stage| %>
-                    <div class="wishes-filter__item" style="<%= "background-color: #{Wish.new(stage: stage[1]).stage_color}" if (params[:stage] && (params[:stage][0] == stage[0])) %>">
-                        <%= link_to wishlist_wishes_path(@wishlist, stage: stage), class: "flex-grow-1" do %>
-                          <li><%= stage[0] %></li>
-                        <% end %>
-                        <% if (params[:stage] && (params[:stage][0] == stage[0])) %>
-                          <%= link_to wishlist_wishes_path(@wishlist) do %>
-                            <%= image_tag "close.png", alt: "text", width: 10 %>
-                          <% end %>
-                        <% end %>
-                    </div>
+                    <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
                 <% end %>
                 <small>Copy the link and invite stakeholders to contribute to this board 🚀</small>
                 <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="wishes__copy">
