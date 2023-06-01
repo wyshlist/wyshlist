@@ -167,13 +167,19 @@
       list-style: none;
       padding: 0;
     }
-    li {
+    .wishes-filter__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 10px !important;
       border-bottom: 1px solid #e6e6e6;
-      color: $font-color;
+
       &:hover {
         background: $bg-color;
       }
+    }
+    a {
+      color: $font-color;
     }
   }
 

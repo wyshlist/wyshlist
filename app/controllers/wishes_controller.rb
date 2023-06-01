@@ -80,7 +80,7 @@ class WishesController < ApplicationController
     private
 
     def stage_params
-        params.permit(:stage)
+        params.permit(stage: [])
     end
 
 
