@@ -49,6 +49,25 @@ button {
     }
   }
 
+  .btn-secondary {
+    color: $primary-color;
+    padding: 12px 34px;
+    border-radius: 0.5rem;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    border: solid 1px $primary-color;
+    transition: background-color 0.3s ease;
+    background-color: white;
+  }
+  
+  .btn-secondary:hover {
+    // background-color: $primary-color;
+    // color: white;
+    cursor: auto;
+  }
+
 
   @media (max-width: 768px) {
     .upvote-button {

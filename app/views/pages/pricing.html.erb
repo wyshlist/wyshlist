@@ -2,9 +2,10 @@
 <% content_for :meta_description, "Pricing subscriptions for wyshlist's premium features" %>
 
 <div class="my-container">
-    <div class="title-header">
-        <div class="title-wrapper">
+    <div class="title-header title__pricing">
+        <div class="title-wrapper__pricing">
             <h1>Pricing</h1>
+            <p>Get started for free and prioritize your product roadmap effectively</p>
         </div>
     </div>
     <div class="cards">
@@ -14,8 +15,8 @@
                 <div class="price-card__price">
                     Current Plan
                 </div>
-            </div>
             <hr>
+            </div>
             <ul>
                 <li>Unlimited contributors</li>
                 <li>Unlinmited end users</li>
@@ -31,8 +32,8 @@
                 <div class="price-card__price">
                     Coming Soon
                 </div>
-            </div>
             <hr>
+            </div>
             <ul>
                 <li>Unlimited contributors</li>
                 <li>Unlinmited end users</li>
@@ -43,25 +44,20 @@
                 <li>Up to 3 Boards</li>
                 <li>Generic roadmap tags</li>
             </ul>
-
-            <%= link_to "Get started!", class: "" %>
-
+            <%= link_to "Available soon!", "#", class: "btn-secondary" %>
         </div>
         <div class="pricing-card">
             <div>
-                <h2>Starter Pack</h2>
+                <h2>Enterprise</h2>
                 <div class="price-card__price">
-                    Coming Soon
+                    Custom pack
                 </div>
-            </div>
             <hr>
+            </div>
             <ul>
-                <li>Unlimited contributors</li>
-                <li>Unlinmited end users</li>
-                <li>Unlimited contributions</li>
-                <li>Up to 3 Boards</li>
-                <li>Generic roadmap tags</li>
+                <li>Custom features</li>
             </ul>
+            <%= link_to "Available soon!", "#", class: "btn-secondary" %>
         </div>
     </div>
 </div>

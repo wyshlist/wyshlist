@@ -68,7 +68,7 @@
   .pricing-card {
     text-align: center !important;
     border-radius: .75rem;
-    padding: 45px;
+    padding: 30px;
     border: solid 2px #e6e6e6;
     display: flex;
     flex-direction: column;
@@ -80,6 +80,7 @@
     }
     ul {
       padding-left: 0px;
+      flex-grow: 1;
     }
   }
 
