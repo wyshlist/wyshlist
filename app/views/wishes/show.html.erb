@@ -11,7 +11,7 @@
                 <p><%= @wish.description %></p>
             </div>
         </div>
-        <% if current_user.owner?(@wish.wishlist) %>
+        <% if user_signed_in? && current_user.owner?(@wish.wishlist) %>
             <div>
                 <%= render "wishes/stage_form" %>
             </div>

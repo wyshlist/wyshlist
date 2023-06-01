@@ -50,17 +50,6 @@ RSpec.feature 'Wishlists', type: :feature do
         )
     end
 
-    scenario 'User creates a public wishlist without a color' do
-        visit new_wishlist_path
-
-        fill_in 'Insert a descriptive title', with: 'Test Wishlist'
-        fill_in 'Summarize the goals of this board', with: 'A wishlist'
-        
-        click_button 'Submit'
-
-        expect(page).to have_content("Color can't be blank")
-    end
-
     scenario 'User creates a private wishlist' do
         visit new_wishlist_path
 

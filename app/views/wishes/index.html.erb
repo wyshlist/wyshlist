@@ -16,7 +16,7 @@
             <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
         <div>
-        <% if current_user.owner?(@wishlist) %>
+        <% if user_signed_in? && current_user.owner?(@wishlist) %>
             <%= link_to edit_wishlist_path(@wishlist) do %>
                 <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
             <% end %>
