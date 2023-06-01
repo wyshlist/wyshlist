@@ -34,6 +34,16 @@ RSpec.describe Wish, type: :model do
     end
   end
 
+  describe 'after update' do
+    let(:owner) { User.create(email: "john@example.com", password: '123123') }
+    let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
+
+    it 'create a new comment everytime there is an update' do
+      wish = Wish.create(title: "New Wish", wishlist: wishlist, user: owner)
+      expect { wish.update(stage: 'In review') }.to change { wish.comments.count }.by(1)
+    end
+  end
+
   describe 'after commit' do
     let(:organization) { Organization.create(name: "New Organization") }
     let(:owner) { User.create(email: "john@example.com", organization_id: organization.id, password: '123123') }
