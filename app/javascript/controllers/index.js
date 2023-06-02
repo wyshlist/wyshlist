@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
-import WizardController from "./wizard_controller"
-application.register("wizard", WizardController)
+import ClipboardController from "./clipboard_controller"
+application.register("clipboard", ClipboardController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
 import PhotoPreviewController from "./photo_preview_controller"
 application.register("photo-preview", PhotoPreviewController)
+
+import WizardController from "./wizard_controller"
+application.register("wizard", WizardController)

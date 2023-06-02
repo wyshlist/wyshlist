@@ -70,7 +70,7 @@
                     <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
                 <% end %>
                 <small>Copy the link and invite stakeholders to contribute to this board 🚀</small>
-                <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="wishes__copy">
+                <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
                     <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
                     <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
                         <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
