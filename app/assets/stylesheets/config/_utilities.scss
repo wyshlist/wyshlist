@@ -24,6 +24,16 @@ input[type="submit"] {
     }
 }
 
+.title-wrapper__pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title__pricing {
+    justify-content: center !important;
+}
+
 .title-header__description {
     overflow-wrap: anywhere;
 }

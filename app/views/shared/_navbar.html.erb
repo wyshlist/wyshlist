@@ -22,6 +22,9 @@
           <li class="nav-item">
             <%= link_to "New board", new_wishlist_path, class: "nav-link" %>
           </li>
+          <li class="nav-item active">
+            <%= link_to "Pricing", pricing_path, class: "nav-link" %>
+          </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.attached? %>
               <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -42,11 +45,14 @@
             </div>
           </li>
         <% else %>
-          <li class="nav-item">
-            <%= link_to "Join now", new_user_registration_path, class: "nav-link primary-link" %>
+          <li class="nav-item active">
+            <%= link_to "Pricing", pricing_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link primary-link" %>
+            <%= link_to "Join now", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
