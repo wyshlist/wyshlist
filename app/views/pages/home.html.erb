@@ -1,55 +1,49 @@
-<div class="banner">
-  <div class="my-container">
-  <div class="banner__body">
-        <h1>Let your users <span class="highlight">contribute & vote</span> on the next product decision</h1>
-        <p>Community based wishlist for product managers and tech teams.</p>
-        <% if user_signed_in? %>
-            <%= link_to "Boards", wishlists_path, class: "btn-flat" %>
-        <% else %>
-            <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
-            <br>
-            <small>Free sign up & no credit card required </small>
-        <% end %>
+<div class="my-container">
+    <div class="banner">
+        <div class="banner__body">
+            <h1>Let your users <br><em><span class="highlight">contribute & vote</span></em><br> on the next<br> product decision</h1>
+            <% if user_signed_in? %>
+                <%= link_to "Boards", wishlists_path, class: "btn-flat" %>
+            <% else %>
+                <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
+                <p>Free sign up & no credit card required </p>
+            <% end %>
+        </div>
+        <%= image_tag "home-mockup.svg", alt: "text", class: "banner__mockup" %>
     </div>
-  </div>
-  <%= image_tag "home-mockup.png", alt: "text", class: "banner__mockup" %>
 </div>
 <div class="my-container">
     <section class="section-wrapper">
         <div class="about-us-section">
             <div class="about-us-section__body">
-                <h2>Gather. Prioritize. Communicate.</h2>
-                <p>
-                Are you tired of endless meetings debating which product to launch next? Are you ready to let your community have a say?
-                Let them contribute and vote on the next product improvement. 
-                </p>
+                <h2>How it works</h2>
             </div>
 
             <div class="about-us-section__grid">
                 <div class="about-us-section__grid-card">
-                    <%= image_tag "coffee.png", alt: "text", class: "about-us-section__icon" %>
+                    <%= image_tag "ideas_icon.svg", alt: "ideas icon for wishlist", class: "about-us-section__icon" %>
                     <div>
-                        <h2>Gather ideas</h2>
+                        <h3>Gather ideas</h3>
                         <p>
                         Allow your team or customers to submit improvement ideas they would like to be solved.
                         </p>
                     </div>
                 </div>
                 <div class="about-us-section__grid-card">
-                    <%= image_tag "kanban.png", alt: "text", class: "about-us-section__icon" %>
+                    <%= image_tag "roadmap_icon.svg", alt: "roadmap icon for product managers", class: "about-us-section__icon" %>
                     <div>
-                        <h2>Expose your roadmap</h2>
+                        <h3>Expose your roadmap</h3>
                         <p>
                             Backlog, in development, in review ... Thanks to our intruitive tags system, you can easily inform stakeholders of the stage each product or idea.
                         </p>
                     </div>
                 </div>
                 <div class="about-us-section__grid-card">
-                    <%= image_tag "vote.png", alt: "text", class: "about-us-section__icon" %>
+                    <%= image_tag "votes_icon.svg", alt: "voting feature for product managers", class: "about-us-section__icon" %>
                     <div>
-                        <h2>Let the votes speak</h2>
+                        <h3>Let the votes speak</h3>
                         <p>
-                            Easily prioritize your product development based on your users votes.
+                            Easily prioritize your product development based on your <br>users votes.
                         </p>
                     </div>
                 </div>

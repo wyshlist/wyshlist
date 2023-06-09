@@ -11,11 +11,15 @@
 }
 
 .about-us-section {
-    h2 {
-        font-size: 2.25rem;
-        font-weight: bold;
-        margin: 0;
-    }
+}
+
+.about-us-section__body {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 50px 0px;
 }
 
 .breadcrumbs-wrapper {
@@ -24,25 +28,25 @@
 }
 
 .about-us-section__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 70px;
-    border-radius: 0.5rem;
-    background-color: $primary-color;
+    width: 121px;
+    height: 121px;
     margin-right: 20px;
     margin-bottom: 1rem;
 }
 
 .about-us-section__grid-card {
     display: flex;
+    text-align: center;
+    align-items: center;
+    h3 {
+      font-weight: 400;
+    }
 }
 
 .about-us-section__grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 16px;
+    grid-gap: 105px;
 }
 
 
