@@ -51,16 +51,73 @@
         </div>
     </section>
     <section>
-        <div class="product-card-right">
-            <div class="product-card__img">
-            <div class="product_">
-            <h2>Father ideas</h2>
-            <p>
-                Allow your team or customers to submit improvement ideas they would like to be solved.
-            </p>
+        <div class="card-info">
+            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image desktop-display" %>
+            <div class="card-info__body">
+                <h2>Improve your product decision-making process</h2>
+                <p>
+                    Gain insights into the most requested features, easily filter feedback based on user segments and impact, and establish clear use cases from the beginning. Avoid wasting valuable time on developing irrelevant functionalities.
+                </p>
+            </div>
+            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image mobile-display" %>
+            <%= image_tag "line-inverted.svg", class: "vector-inverted mobile-display" %>
+        </div>
+        <div class="card-info">
+            <%= image_tag "roadmap.svg", class: "card-info__img left-image" %>
+            <div class="card-info__body">
+                <h2>Maintain active engagement with product updates</h2>
+                <p>
+                   Ensure seamless communication by automatically providing updates to users whenever a new feature is released. Keep the feedback loop throughout the entire product development process.
+                </p>
+            </div>
+             <%= image_tag "line-s.svg", class: "vector mobile-display" %>
+        </div>
+        <div class="card-info">
+            <%= image_tag "votes.svg", class: "card-info__img right-image desktop-display" %>
+            <div class="card-info__body">
+                <h2>Leverage a product feature voting board to organize customer feedback</h2>
+                <p>
+                    Create a dedicated feedback board where customers can openly or privately share their input. As ideas are shared, the most popular ones naturally emerge to the top.
+                    <ul>
+                        <li>Efficiently group similar requests</li>
+                        <li>Facilitate communication among users with shared requests, votes and encourage discussions</li>
+                    </ul>
+                </p>
+            </div>
+            <%= image_tag "votes.svg", class: "card-info__img right-image mobile-display" %>
         </div>
     </section>
+</div>
+<section  class="bg-section">
     <div class="my-container">
+        <div class="testimonial-wrapper">
+            <div class="desktop-display">
+                <%= image_tag "testimonial.svg", class: "testimonial-img" %>
+                <p class= "testimonial-name">Mike Torello</p>
+                <p class= "testimonial-position">Product Manager at Avenist</p>
+            </div>
+            <div class="testimonial-body">
+                <h2>Why our users <em>love</em>Wyshlist.</h2>
+                <div class="testimonial-text-card">
+                    <p>
+                        "Wyshlist is a great tool to collect feedback from our users. It helps us to prioritize our product roadmap and to communicate with our users."
+                    </p>
+                </div>
+                <div class="mobile-display">
+                    <div class="mobile-display-testimonial">
+                        <%= image_tag "testimonial.svg", class: "testimonial-img" %>
+                        <div class="mobile-display-testimonial-text">
+                            <p class= "testimonial-name">Mike Torello</p>
+                            <p class= "testimonial-position">Product Manager at Avenist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <div class="my-container">
+<div class="my-container">
     <section class="section-wrapper">
           <div class="banner__body big-wrapper">
             <h2>Let's fullfill wishes! 🚀</h2>

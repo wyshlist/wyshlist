@@ -10,6 +10,51 @@
     min-height: 90vh;
 }
 
+.testimonial-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 39px;
+    width: 819px;
+    margin: 0 auto;
+}
+
+.testimonial-name {
+  color: $primary-color;
+  margin: 15px 0px 0px 0px; 
+}
+
+.testimonial-body {
+  margin-left: 25px;
+  h2 {
+    font-size: 56px;
+    font-weight: 500;
+    margin-bottom: 25px;
+  }
+  em {
+    color: $primary-color;
+  }
+}
+
+.testimonial-text-card {
+  background-color: $primary-color;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  font-size: 34px;
+  line-height: 41px;
+  height: 433px;
+}
+
+.testimonial-img {
+  height: 433px;
+}
+
+.bg-section {
+    background: $bg-grey;
+    padding: 100px 0px;
+}
+
 .about-us-section {
 }
 
@@ -61,8 +106,16 @@
   padding: 100px 0px;
 }
 
+.desktop-display {
+  display: block !important;
+}
+
+.mobile-display {
+  display: none !important;
+}
+
   // Smallest device
-@media (min-width: 100px) and (max-width: 575px) {
+@media (min-width: 100px) and (max-width: 775px) {
   .about-us-section__grid {
       grid-template-columns: 1fr;
       grid-gap: 36px;
@@ -79,31 +132,64 @@
   .new-wish-wrapper {
       padding: 50px 0px;
   }
-}
 
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-  .about-us-section__grid {
-    grid-template-columns: 1fr;
+  .testimonial-wrapper {
+    display: block;
+    width: 100%;
+    padding: 0px;
   }
 
-  .about-us-section__grid-card {
-      flex-direction: column;
+  .testimonial-body {
+    margin-left: 0px;
+    h2 {
+      font-size: 36px;
+      text-align: center;
+    }
+  }
+  
+  .testimonial-text-card {
+    font-size: 1.2rem;
+    height: 100%;
   }
 
-  .section-wrapper {
-      padding: 50px 0px;
-  }
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-  .about-us-section__grid {
-    grid-template-columns: 1fr 1fr;
+  .testimonial-img {
+    height: 60px;
+    margin: 10px 20px 20px 0px;
   }
 
-  .section-wrapper {
-      padding: 50px 0px;
+  .desktop-display {
+    display: none !important;
+  }
+
+  .mobile-display {
+    display: block !important;
+  }
+
+  .mobile-display-testimonial {
+    display: flex;
+  }
+
+  .card-info {
+    display: block;
+    text-align: center;
+    margin: 150px 0px;
+    li {
+      list-style: none;
+    }
+  }
+
+  .card-info__img {
+    width: 70%;
+    text-align: center;
+    margin: 0px auto 25px auto;
+  }
+
+  .right-image {
+    margin-right: 12px;
+  }
+
+  .left-image {
+    margin-left: 12px;
   }
 }
 
