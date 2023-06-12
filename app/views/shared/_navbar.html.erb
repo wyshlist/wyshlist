@@ -1,3 +1,12 @@
+<div class="announcement-bar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <p class="announcement-bar-text">📣 Announcing: lifetime free features for all beta users subscribed before 09/2023</p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
@@ -43,10 +52,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Join now", new_user_registration_path, class: "nav-link primary-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link primary-link" %>
+            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
           </li>
         <% end %>
       </ul>

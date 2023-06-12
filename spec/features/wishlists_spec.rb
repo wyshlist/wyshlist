@@ -19,7 +19,6 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
         fill_in 'Summarize the goals of this board', with: 'A wishlist'
-        find('label', text: 'ECEDFE').click
 
 
         click_button 'Submit'
@@ -27,7 +26,6 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(Wishlist.last).to have_attributes(
         title: 'Test Wishlist',
         description: 'A wishlist',
-        color: 'ECEDFE',
         user: user
         )
     end
@@ -37,7 +35,6 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
         fill_in 'Summarize the goals of this board', with: 'A wishlist'
-        find('label', text: 'ECEDFE').click
         # check 'Color', with: '#ECEDFE'
 
         click_button 'Submit'
@@ -45,7 +42,6 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(Wishlist.last).to have_attributes(
             title: 'Test Wishlist',
             description: 'A wishlist',
-            color: 'ECEDFE',
             user: user
         )
     end
@@ -56,7 +52,6 @@ RSpec.feature 'Wishlists', type: :feature do
  
         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
         fill_in 'Summarize the goals of this board', with: 'A wishlist'
-        find('label', text: 'ECEDFE').click
         check 'Make this board private'
 
         click_button 'Submit'
@@ -64,7 +59,6 @@ RSpec.feature 'Wishlists', type: :feature do
         expect(Wishlist.last).to have_attributes(
         title: 'Test Wishlist',
         description: 'A wishlist',
-        color: 'ECEDFE',
         user: user,
         private: true
         )
@@ -76,13 +70,11 @@ RSpec.feature 'Wishlists', type: :feature do
 
         fill_in 'Insert a descriptive title', with: 'Test Wishlist 2'
         fill_in 'Summarize the goals of this board', with: 'A wishlist 2'
-        find('label', text: 'ECEDFE').click
         click_button 'Submit'
 
         expect(wishlist.reload).to have_attributes(
         title: 'Test Wishlist 2',
         description: 'A wishlist 2',
-        color: 'ECEDFE',
         user: user
         )
     end

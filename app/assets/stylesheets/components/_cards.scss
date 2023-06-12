@@ -205,6 +205,40 @@
     }
   }
 
+  .card-info {
+    display: flex;
+    margin: 200px 0px;
+    align-items: center;
+    position: relative;
+  }
+  .card-info__image {
+    
+  }
+
+  .left-image{
+    margin-right: 50px;
+    z-index: 100;
+  }
+
+  .right-image{
+    margin-left: 50px;
+    z-index: 100;
+  }
+
+  .vector-inverted {
+    position: absolute;
+    bottom: -245px;
+    z-index: 1;
+    right: 350px;
+  }
+
+  .vector {
+    position: absolute;
+    bottom: -245px;
+    z-index: 1;
+    left: 350px;
+  }
+
 
   @media (max-width: 768px) {
     .card-product {
@@ -245,6 +279,14 @@
       form {
         margin: 10px 0px 0px 0px;
       }
+    }
+
+    .left-image{
+      margin-right: 0px;
+    }
+  
+    .right-image{
+      margin-left: 0px;
     }
 
   }

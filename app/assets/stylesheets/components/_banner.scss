@@ -1,36 +1,29 @@
 .banner {
     background-color: $white;
     padding: 150px 0;
-    position: relative;
-    text-align: center;
+    display: flex;
   }
   
   .banner h1 {
-    margin: 0;
-    color: $font-color;
-    font-size: 4rem;
-    font-weight: bold;
-  }
-  
-  .banner p {
-    font-size: 1.50rem;
-    color: $font-color;
-    opacity: .7;
     margin-bottom: 30px;
+    color: $font-color;
+    font-size: 56px;
+    line-height: 58px;
+    font-weight: 500;
   }
 
   .banner__body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    display: block;
     padding: 0 20px;
+    p {
+      margin: 25px 0px;
+      font-size: 14px;;
+    }
   }
 
   .banner__mockup {
-    max-width: 800px;
-    margin: 30px auto;
+    max-width: 900px;
+    margin: -22px auto 0px auto;
   }
 
   // .banner__doodle {
@@ -43,17 +36,25 @@
   // }
   
   // Smallest device
-@media (min-width: 100px) and (max-width: 575px) {
+@media (min-width: 100px) and (max-width: 775px) {
   .banner__mockup {
-    max-width: 300px;
+    max-width: 100%;
+    margin: 0px auto
+
   }
 
   .banner {
     padding: 70px 0;
+    display: block;
+    p {
+      text-align: center;
+    }
   }
 
   .banner h1 {
     font-size: 2.5rem;
+    text-align: center;
+    line-height: 47px;
   }
 }
 
