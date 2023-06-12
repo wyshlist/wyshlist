@@ -54,7 +54,7 @@ class OrganizationsController < ApplicationController
     private
 
     def organization_params
-        params.require(:organization).permit(:name, :logo)
+        params.require(:organization).permit(:name, :logo, :color)
     end
 
     def handle_existing_organization(organization_name)

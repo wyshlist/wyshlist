@@ -52,15 +52,15 @@
     </section>
     <section>
         <div class="card-info">
-            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image desktop-display" %>
+            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
                 <h2>Improve your product decision-making process</h2>
                 <p>
                     Gain insights into the most requested features, easily filter feedback based on user segments and impact, and establish clear use cases from the beginning. Avoid wasting valuable time on developing irrelevant functionalities.
                 </p>
             </div>
-            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image mobile-display" %>
-            <%= image_tag "line-inverted.svg", class: "vector-inverted mobile-display" %>
+            <%= image_tag "gather-ideas.svg", class: "card-info__img right-image desktop-display" %>
+            <%= image_tag "line-inverted.svg", class: "vector-inverted desktop-display" %>
         </div>
         <div class="card-info">
             <%= image_tag "roadmap.svg", class: "card-info__img left-image" %>
@@ -70,10 +70,10 @@
                    Ensure seamless communication by automatically providing updates to users whenever a new feature is released. Keep the feedback loop throughout the entire product development process.
                 </p>
             </div>
-             <%= image_tag "line-s.svg", class: "vector mobile-display" %>
+             <%= image_tag "line-s.svg", class: "vector desktop-display" %>
         </div>
         <div class="card-info">
-            <%= image_tag "votes.svg", class: "card-info__img right-image desktop-display" %>
+            <%= image_tag "votes.svg", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
                 <h2>Leverage a product feature voting board to organize customer feedback</h2>
                 <p>
@@ -84,7 +84,7 @@
                     </ul>
                 </p>
             </div>
-            <%= image_tag "votes.svg", class: "card-info__img right-image mobile-display" %>
+            <%= image_tag "votes.svg", class: "card-info__img right-image desktop-display" %>
         </div>
     </section>
 </div>
@@ -120,12 +120,14 @@
 <div class="my-container">
     <section class="section-wrapper">
           <div class="banner__body big-wrapper">
-            <h2>Let's fullfill wishes! 🚀</h2>
-            <p>Create your free account today*.</p>
+            <%= image_tag "wish-icon.svg", alt: "icon of wishes for product managers", class: "wish-icon" %>
+            <h2>Let's fullfill wishes!</h2>
+            <p>Create your free account today</p>
             <br>
             <%= link_to "Get started", new_organization_path, class: "btn-flat" %>
-            <br>
-            <small>*lifetime free features for all beta users subscribed before 09/2023</small>
+            <p>
+            <small>Free sign up & no credit card required</small>
+            </p>
         </div>
     </section>
 </div>

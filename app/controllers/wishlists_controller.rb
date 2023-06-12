@@ -52,7 +52,9 @@ class WishlistsController < ApplicationController
 
     def update
         @wishlist = Wishlist.find(params[:id])
+        wishlist_params[:organization_id] ? wishlist_params[:organization_id] = current_user.organization.id : wishlist_params[:organization_id] = nil
         authorize @wishlist
+        raise
         if @wishlist.update(wishlist_params)
             flash[:notice] = "Wishlist updated successfully"
             redirect_to wishlist_wishes_path(@wishlist)
