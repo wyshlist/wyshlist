@@ -3,16 +3,9 @@
         <%= link_to wishlist_wishes_path(wishlist) do %>
             <div class="card-product">
                 <div class="card-product__info">
-                <div class="card-product-infos">
                     <h2 class="wishlist-title"><%= wishlist.title.truncate(25) %></h2>
-                    <small>Created by <%= wishlist.user.full_name %> - <%= wishlist.private ? "private board" : "public board" %></small>
-                    <p><%= wishlist.description.truncate(50) %></p>
                 </div>
-                </div>
-                <div class="card-product__votes">
-                    <small>Contributions</small>
-                    <div class="card-product__vote-count" ><%= wishlist.wishes.count %></div>
-                </div>
+                <%= wishlist.wishes.count %>
             </div>
         <% end %>
     <% end %>
