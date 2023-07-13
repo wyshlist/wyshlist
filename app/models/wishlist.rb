@@ -12,6 +12,10 @@ class Wishlist < ApplicationRecord
     status == "admin"
   end
 
+  def has_an_organization?
+    !organization.nil?
+  end
+
   def self.admin_wishlists
     Wishlist.where(status: "admin")
   end

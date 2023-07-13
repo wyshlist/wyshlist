@@ -1,16 +1,9 @@
 <% content_for :meta_title, "#{@wishlist.title} | Wyshlist" %>
 <% content_for :meta_description, @wishlist.description %>
-
+<%= render "shared/user_navbar" %>
 <div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
-            <% if @wishlist.organization && @wishlist.organization.logo.attached? %>
-                <% if @wishlist.id == 104 %>
-                    <%= image_tag "logo-short.png", alt: "Wishlist logo", class: "avatar-large" %>
-                <% else %>
-                    <%= cl_image_tag @wishlist.user.organization.logo.key, alt: "#{@wishlist.user.organization}-logo", class: "avatar-large" %>
-                <% end %>
-            <% end %>
             <h1><%= @wishlist.title %></h1>
             <br>
             <small class="title-header__description"><%= @wishlist.description %></small>
@@ -75,13 +68,14 @@
                 <% Wish.stages.each do |stage| %>
                     <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
                 <% end %>
-                <small>Copy the link and invite stakeholders to contribute to this board 🚀</small>
+                <br>
                 <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
                     <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
                     <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
                         <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
                     </button>
                 </div>
+                <small> Powered by Wyshlist©</small>
             </ul>
         </div>
     </div>

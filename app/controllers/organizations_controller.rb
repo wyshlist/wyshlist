@@ -9,6 +9,7 @@ class OrganizationsController < ApplicationController
     def show
         @organization = Organization.find(params[:id])
         @wishlists = @organization.wishlists.sort { |a,b| b.wishes.count <=> a.wishes.count }
+        @wishlist = @organization.wishlists.first
         authorize @organization
     end
 
