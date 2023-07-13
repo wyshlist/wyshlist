@@ -23,7 +23,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNRQJX4"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <%= render "shared/navbar" %>
+    <%= render "shared/navbar" if params[:controller] != "wishes" && (params[:controller] != "organizations" && params[:action] != "show") %>
     <%= render "shared/flashes" %>
     <div class="page-wrapper">
       <%= yield %>

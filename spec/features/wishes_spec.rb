@@ -36,4 +36,9 @@ RSpec.feature 'Wishes', type: :feature do
         @wishes = page.all('.card-product')
         expect(@wishes[0]).to have_content(wish3.title)
     end
+
+    scenario 'End user cant see the wyshlist navbar' do
+        visit wishlist_wishes_path(wishlist)
+        expect(page).to_not have_content('New board')
+    end
 end

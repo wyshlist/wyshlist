@@ -1,0 +1,29 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <% if @wishlist.has_an_organization? && @wishlist.organization.logo.attached? %>
+        <%= link_to organization_path(@wishlist.organization), class: "navbar-brand" do %>
+            <%= image_tag @wishlist.organization.logo , class: "logo"%>
+        <% end %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+            <li class="nav-item active">
+                <% if @wishlist.has_an_organization? %>
+                    <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+                <% end %>
+            </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

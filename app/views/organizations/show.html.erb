@@ -1,8 +1,8 @@
+<%= render "shared/user_navbar" %>
 <div class="my-container">
     <div class="title-header">
         <h1> 
         <% if @organization.logo && @organization.logo.key %>
-            <%= cl_image_tag @organization.logo.key, alt: "#{current_user.organization}-logo", class: "avatar-large" %>
             <%=  @organization.name  %> boards
         <% end %>
         </h1>
