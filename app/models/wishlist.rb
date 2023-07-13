@@ -6,6 +6,7 @@ class Wishlist < ApplicationRecord
   has_many :wishes, dependent: :destroy
   has_many :integrations, dependent: :destroy
 
+  COLORS = ["ECEDFE", "EFFEEC", "FEFCEC", "FEECEC", "F9ECFE", "ECFEFE"]
 
   def admin_wishlist?
     status == "admin"
