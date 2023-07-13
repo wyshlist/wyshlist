@@ -26,11 +26,17 @@
         <% end %>
         </div>
     </div>
-    <div class="breadcrumbs-wrapper">
-        <small><%= render_breadcrumbs :separator => " / " %></small>
-    </div>
     <div class="cards-columns">
         <div class="wishes-wrapper">
+            <div class="breadcrumbs-wrapper breadcrumbs-search">
+                <small><%= render_breadcrumbs :separator => " / " %></small>
+                <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
+                    <div class="tickets-searchbar">
+                        <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
+                        <% submit_tag "Search", class: "tickets-searchbar__button" %>
+                    </div>
+                <% end %>
+            </div>
             <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
             <% elsif params[:stage] %>

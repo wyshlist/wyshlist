@@ -223,6 +223,9 @@ GEM
       version_gem (~> 1.1)
     orm_adapter (0.5.0)
     pg (1.4.6)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     postmark (1.24.0)
       json
     postmark-rails (0.22.1)
@@ -382,6 +385,7 @@ DEPENDENCIES
   jsbundling-rails
   letter_opener
   pg (~> 1.1)
+  pg_search
   postmark-rails
   puma (~> 5.0)
   pundit
