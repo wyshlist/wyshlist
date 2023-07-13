@@ -9,36 +9,41 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :organization, optional: true
   has_one_attached :photo
-  enum :role => [:user, :admin]
+  enum :role => [:user, :team_member, :admin]
   after_create :signup_email
 
+  def is_team_member?
+    team_member_since.present?
+  end
 
-  
-  
+  def is_user?
+    user_since.present?
+  end
+
   def has_an_organization?
     !organization.nil?
   end
-  
+
   def team_members
     organization.users unless organization.nil?
   end
-  
+
   def admin?
     role == "admin"
   end
-  
+
   def photo_attached?
     photo.attached?
   end
-  
+
   def full_name
     "#{first_name} #{last_name}"
   end
-  
+
   def owner?(wishlist)
     wishlist.user == self
   end
-  
+
   def all_wishlists
     if has_an_organization?
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
