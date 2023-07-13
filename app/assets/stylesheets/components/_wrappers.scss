@@ -72,6 +72,13 @@
     color: $primary-color;
 }
 
+.breadcrumbs-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
 .about-us-section__icon {
     width: 121px;
     height: 121px;

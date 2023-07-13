@@ -13,6 +13,13 @@ class Wish < ApplicationRecord
   after_update :create_comment, if: :saved_change_to_stage?
   after_create :upvote
 
+  include PgSearch::Model
+  pg_search_scope :search_by_title_and_description,
+    against: [ :title, :description ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
   def user_vote(user)
     votes.find_by(user: user)
   end
