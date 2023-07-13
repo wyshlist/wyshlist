@@ -19,18 +19,14 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 16px;
     .card-product {
-      height: 250px;
       width: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
     }
     .card-product h2 {
       font-size: 1.5rem;
+      font-weight: 400;
       margin: 0;
-    }
-    .card-product__votes {
-      width: 100%;
     }
   }
 
