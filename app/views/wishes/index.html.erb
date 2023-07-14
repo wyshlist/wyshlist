@@ -9,27 +9,19 @@
             <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
         <div>
-        <% if user_signed_in? && current_user.owner?(@wishlist) %>
-            <%= link_to edit_wishlist_path(@wishlist) do %>
-                <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
-            <% end %>
-            <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
-                <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
-            <% end %>
-        <% end %>
+        <%# Move to Dashboard edit boards %>
+        <%# if user_signed_in? && current_user.owner?(@wishlist) %>
+            <%#= link_to edit_wishlist_path(@wishlist) do %>
+                <%#= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+            <%# end %>
+            <%#= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+                <%#= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+            <%# end %>
+        <%# end %>
         </div>
     </div>
     <div class="cards-columns">
         <div class="wishes-wrapper">
-            <div class="breadcrumbs-wrapper breadcrumbs-search">
-                <small><%= render_breadcrumbs :separator => " / " %></small>
-                <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
-                    <div class="tickets-searchbar">
-                        <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
-                        <% submit_tag "Search", class: "tickets-searchbar__button" %>
-                    </div>
-                <% end %>
-            </div>
             <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
             <% elsif params[:stage] %>
@@ -56,12 +48,19 @@
             <% end %>
         </div>
         <div class="wishes-filter">
-            <% unless @wishlist.asana_integration.present? %>
-                <%= link_to new_wishlist_integration_path(@wishlist) do %>
-                    <div class="integration-box">
+            <%# Move to dashboard integrations %>
+            <%# unless @wishlist.asana_integration.present? %>
+                <%#= link_to new_wishlist_integration_path(@wishlist) do %>
+                    <%# <div class="integration-box">
                             Connect to <%= image_tag "asana.svg", alt: "Asana logo" %>
+                    <%# </div> %>
+                <%# end %>
+            <%# end %>
+             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
+                    <div class="tickets-searchbar">
+                        <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
+                        <% submit_tag "Search", class: "tickets-searchbar__button" %>
                     </div>
-                <% end %>
             <% end %>
             <ul class="wishes-filter__list">
                 <h2> Filter by stage </h2>

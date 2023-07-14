@@ -1,6 +1,6 @@
 <% content_for :meta_title, "#{@wish.title} | Wyshlist" %>
 <% content_for :meta_description, @wish.description %>
-
+<%= render "shared/user_navbar" %>
 <div class="my-container">
     <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist) %> <br>
     <div class="card-product">
