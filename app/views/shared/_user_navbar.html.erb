@@ -1,29 +1,40 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <% if @wishlist.has_an_organization? && @wishlist.organization.logo.attached? %>
-        <%= link_to organization_path(@wishlist.organization), class: "navbar-brand" do %>
-            <%= image_tag @wishlist.organization.logo , class: "logo"%>
-        <% end %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-            <li class="nav-item active">
-                <% if @wishlist.has_an_organization? %>
-                    <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+<div class="my-container">
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+        <div class="container-fluid">
+            <% if @wishlist.has_an_organization? && @wishlist.organization.logo.attached? %>
+                <%= link_to organization_path(@wishlist.organization), class: "navbar-brand" do %>
+                    <%= image_tag @wishlist.organization.logo , class: "logo"%>
                 <% end %>
-            </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
-          </li>
-        <% end %>
-      </ul>
+            <% end %>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <% if user_signed_in? %>
+                    <li class="nav-item active">
+                        <% if @wishlist.has_an_organization? %>
+                            <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <%= link_to "Give feedback", "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <% @wishlist.organization.wishlists.each do |wishlist| %>
+                            <%= link_to wishlist.title, wishlist_wishes_path(wishlist), class: "dropdown-item" %>
+                        <% end %>
+                    </div>
+                </li>
+
+                <% else %>
+                <li class="nav-item">
+                    <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+                </li>
+                <% end %>
+            </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
