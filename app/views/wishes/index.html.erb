@@ -21,6 +21,43 @@
         </div>
     </div>
     <div class="cards-columns">
+        <div class="wishes-filter">
+            <%# Move to dashboard integrations %>
+            <%# unless @wishlist.asana_integration.present? %>
+                <%#= link_to new_wishlist_integration_path(@wishlist) do %>
+                    <%# <div class="integration-box">
+                            Connect to <%= image_tag "asana.svg", alt: "Asana logo" %>
+                    <%# </div> %>
+                <%# end %>
+            <%# end %>
+            <ul class="wishes-filter__list">
+                <h3> Filter by stage </h3>
+                <% Wish.stages.each do |stage| %>
+                    <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
+                <% end %>
+                <br>
+             <% if user_signed_in? %>
+                <%= turbo_frame_tag "new-wish" do %>
+                    <div class="new-wish-wrapper new-wish-sidebar-wrapper">
+                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat sidebar-button", style: "background-color: #{@wishlist&.organization&.color}", id: "add-wish" %>
+                    </div>
+                <% end %>
+            <% else %>
+                <div class="new-wish-wrapper">
+                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish" , style: "background-color: #{@wishlist&.organization&.color}"%>
+                </div>
+            <% end %>
+            <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
+                <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
+                <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
+                    <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
+                </button>
+            </div>
+            <br>
+            <small> Powered by Wyshlist©</small>
+
+            </ul>
+        </div>
         <div class="wishes-wrapper">
             <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
@@ -46,36 +83,6 @@
                     <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish" , style: "background-color: #{@wishlist&.organization&.color}"%>
                 </div>
             <% end %>
-        </div>
-        <div class="wishes-filter">
-            <%# Move to dashboard integrations %>
-            <%# unless @wishlist.asana_integration.present? %>
-                <%#= link_to new_wishlist_integration_path(@wishlist) do %>
-                    <%# <div class="integration-box">
-                            Connect to <%= image_tag "asana.svg", alt: "Asana logo" %>
-                    <%# </div> %>
-                <%# end %>
-            <%# end %>
-             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
-                    <div class="tickets-searchbar">
-                        <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
-                        <% submit_tag "Search", class: "tickets-searchbar__button" %>
-                    </div>
-            <% end %>
-            <ul class="wishes-filter__list">
-                <h2> Filter by stage </h2>
-                <% Wish.stages.each do |stage| %>
-                    <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
-                <% end %>
-                <br>
-                <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
-                    <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
-                    <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
-                        <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
-                    </button>
-                </div>
-                <small> Powered by Wyshlist©</small>
-            </ul>
         </div>
     </div>
 </div>

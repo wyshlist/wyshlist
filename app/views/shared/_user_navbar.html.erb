@@ -13,6 +13,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
+                <li>
+                    <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
+                        <div class="tickets-searchbar">
+                            <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
+                            <% submit_tag "Search", class: "tickets-searchbar__button" %>
+                        </div>
+                    <% end %>
+                </li>
                 <% if user_signed_in? %>
                     <li class="nav-item active">
                         <% if @wishlist.has_an_organization? %>
