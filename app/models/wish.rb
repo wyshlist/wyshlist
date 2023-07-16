@@ -1,12 +1,14 @@
 require_relative '../services/asana_api/asana_client'
 class Wish < ApplicationRecord
   belongs_to :wishlist
+  has_one :organization, through: :wishlist
   validates :title, presence: true
   has_many :votes, dependent: :destroy
   # has_many :users
   belongs_to :user
   has_rich_text :description
   has_many :comments, dependent: :destroy
+
   enum stage: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
   after_create :send_to_asana, if: :asana_integration?
   # after_create_commit { broadcast_append_to "wishes" }

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   }
 
   authenticated(:user) do
-    root to: "wishlists#index", as: :authenticated_root
+    root to: "organizations#feedback", as: :authenticated_root
   end
 
   unauthenticated(:user) do

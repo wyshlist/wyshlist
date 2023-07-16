@@ -29,4 +29,8 @@ class OrganizationPolicy < ApplicationPolicy
   def destroy?
     record.organization_owner?(user)
   end
+
+  def feedback?
+    record.organization_member?(user) || user.admin?
+  end
 end
