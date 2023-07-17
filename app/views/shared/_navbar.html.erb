@@ -20,16 +20,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Feed", wishlists_path, class: "nav-link" %>
-          </li>
           <% if current_user.has_an_organization? %>
             <li class="nav-item active">
-              <%= link_to "Your team's boards", organization_path(current_user.organization), class: "nav-link" %>
+              <%= link_to "Feedback", authenticated_root_path, class: "nav-link" %>
             </li>
           <% end %>
           <li class="nav-item">
-            <%= link_to "New board", new_wishlist_path, class: "nav-link" %>
+            <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.attached? %>
