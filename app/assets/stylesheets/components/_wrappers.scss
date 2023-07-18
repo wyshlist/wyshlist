@@ -229,3 +229,22 @@
   }
 }
 
+.feedback-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.feedback__column-left {
+  width: 800px;
+}
+
+.feedback__column-right {
+  width: 100%;
+}
+
+.separator {
+  flex-basis: 1px;
+  background-color: gray;
+  margin: 0 10px;
+}
