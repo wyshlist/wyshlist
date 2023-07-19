@@ -88,6 +88,9 @@ group :test do
   gem 'rspec-rails'
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'pundit-matchers', '~> 1.4', '>= 1.4.1'
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
 end
 
 gem "faker"
