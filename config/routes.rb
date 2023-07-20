@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'terms_of_service', to: 'pages#terms_of_service'
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
 
   unauthenticated(:user) do

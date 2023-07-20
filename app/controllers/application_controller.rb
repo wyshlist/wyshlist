@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -10,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   # Uncomment when you *really understand* Pundit!
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(authenticated_root_path)
@@ -42,11 +44,12 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
-  def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || request.referer || root_url(subdomain: resource.organization.subdomain)
-  end
+  # def after_sign_in_path_for(resource_or_scope)
+  #   redirect_to authenticated_root_url(subdomain: resource_or_scope.organization.subdomain), allow_other_host: true
+  #   # stored_location_for(resource_or_scope) || request.referer || authenticated_root_url(subdomain: resource_or_scope.organization.subdomain)
+  # end
 
-# Overwriting the sign_out redirect path method
+  # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     new_organization_path(subdomain: '')
   end

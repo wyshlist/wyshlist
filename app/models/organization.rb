@@ -37,6 +37,5 @@ class Organization < ApplicationRecord
         nil
         # find_by(subdomain: request.subdomain)
       end
-      raise
     end
 end
