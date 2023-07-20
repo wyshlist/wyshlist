@@ -17,4 +17,26 @@ class Organization < ApplicationRecord
     def organization_member?(user)
       users.include?(user)
     end
+
+    def subdomain
+      self.name.gsub(" ", "_").downcase
+    end
+
+    def self.find_by_request(request)
+      uri = URI(request.original_url)
+
+      if uri.host =~ /.*\.(127.0.0.1|localhost|lvh.me|herokuapp.com)/
+        begin
+          all.map(&:subdomain).include? request.subdomain
+          # find_by(subdomain: request.params[:subdomain])
+        rescue StandardError
+          nil
+        end
+      else
+        # all.map(&:subdomain).include? request.subdomain
+        nil
+        # find_by(subdomain: request.subdomain)
+      end
+      raise
+    end
 end

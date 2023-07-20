@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(authenticated_root_path)
   end
-  
+
   private
 
   def skip_pundit?
@@ -43,11 +43,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || request.referer || root_path
+    stored_location_for(resource_or_scope) || request.referer || root_url(subdomain: resource.organization.subdomain)
   end
 
 # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
-    new_organization_path
+    new_organization_path(subdomain: '')
   end
 end
