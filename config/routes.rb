@@ -16,10 +16,11 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:new, :create]
 
+  authenticated(:user) do
+    root to: "organizations#feedback", as: :authenticated_root
+  end
+
   constraints SubdomainConstraint do
-    authenticated(:user) do
-      root to: "organizations#feedback", as: :authenticated_root
-    end
 
     resources :organizations, only: [:edit, :update, :destroy, :show]
 

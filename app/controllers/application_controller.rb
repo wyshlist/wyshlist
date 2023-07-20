@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :check_subdomain
   before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -15,6 +16,12 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(authenticated_root_path)
+  end
+
+  def check_subdomain
+    if user_signed_in? && (request.subdomain != current_user.organization.subdomain)
+      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+    end
   end
 
   private
