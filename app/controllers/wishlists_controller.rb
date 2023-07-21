@@ -15,7 +15,8 @@ class WishlistsController < ApplicationController
     end
 
     def new
-        @organization = Organization.find(params[:organization]) if params[:organization]
+        # @organization = Organization.find(params[:organization]) if params[:organization]
+        @organization = current_user.organization
         @wishlist = Wishlist.new
         authorize @wishlist
     end

@@ -1,47 +1,54 @@
 <div class="my-container">
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
         <div class="container-fluid">
-            <% if @wishlist.has_an_organization? && @wishlist.organization.logo.attached? %>
-                <%= link_to organization_path(@wishlist.organization), class: "navbar-brand" do %>
-                    <%= image_tag @wishlist.organization.logo , class: "logo"%>
+            <% if @wishlist %>
+                <%= link_to organization_path(@wishlist ? @wishlist.organization : @organization), class: "navbar-brand" do %>
+                    <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
+                <% end %>
+            <% else %>
+                <%= link_to organization_path(@organization), class: "navbar-brand" do %>
+                    <%= image_tag @organization.logo.attached? ? @wishlist.organization.logo : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
-                <li>
-                    <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
-                        <div class="tickets-searchbar">
-                            <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
-                            <% submit_tag "Search", class: "tickets-searchbar__button" %>
-                        </div>
+                <ul class="navbar-nav me-auto">
+                    <% if @wishlist %>
+                        <li>
+                            <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
+                                <div class="tickets-searchbar">
+                                    <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
+                                    <% submit_tag "Search", class: "tickets-searchbar__button" %>
+                                </div>
+                            <% end %>
+                        </li>
+                        <% if user_signed_in? %>
+                            <li class="nav-item active">
+                                <% if @wishlist.has_an_organization? %>
+                                    <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+                                <% end %>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <%= link_to "Give feedback", "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <% @wishlist.organization.wishlists.each do |wishlist| %>
+                                        <%= link_to wishlist.title, wishlist_wishes_path(wishlist), class: "dropdown-item" %>
+                                    <% end %>
+                                </div>
+                            </li>
+                        <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+                            </li>
+                        <% end %>
+                    <% else %>
+                        <%= link_to " New wishlist", new_wishlist_path, class: "nav-link upvote-button btn-flat mx-auto" %>
                     <% end %>
-                </li>
-                <% if user_signed_in? %>
-                    <li class="nav-item active">
-                        <% if @wishlist.has_an_organization? %>
-                            <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
-                        <% end %>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <%= link_to "Give feedback", "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <% @wishlist.organization.wishlists.each do |wishlist| %>
-                            <%= link_to wishlist.title, wishlist_wishes_path(wishlist), class: "dropdown-item" %>
-                        <% end %>
-                    </div>
-                </li>
-
-                <% else %>
-                <li class="nav-item">
-                    <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
-                </li>
-                <% end %>
-            </ul>
+                </ul>
             </div>
         </div>
     </div>
