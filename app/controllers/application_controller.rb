@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_subdomain
-    if user_signed_in? && (request.subdomain != current_user.organization.subdomain)
+    if user_signed_in? && current_user.organization && (request.subdomain != current_user.organization.subdomain)
       redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
     end
   end
