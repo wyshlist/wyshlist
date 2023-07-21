@@ -3,11 +3,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get 'privacy_policy', to: 'pages#privacy_policy'
   get 'terms_of_service', to: 'pages#terms_of_service'
-  
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
   authenticated(:user) do
-    root to: "wishlists#index", as: :authenticated_root
+    root to: "organizations#feedback", as: :authenticated_root
   end
-  
+
   unauthenticated(:user) do
     root to: "pages#home", as: :unauthenticated_root
   end
@@ -15,6 +18,7 @@ Rails.application.routes.draw do
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 
   resources :wishlists, except: :show do
+    resources :integrations, only: [:new, :create]
     resources :wishes, only: [:new, :create, :index]
   end
 
@@ -24,8 +28,10 @@ Rails.application.routes.draw do
   end
 
   resources :votes, only: :destroy
+  resources :integrations, only: :destroy
 
   resources :users, only: [:show] do
     resources :wishlists, only: [:index]
   end
+
 end

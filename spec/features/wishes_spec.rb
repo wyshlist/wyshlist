@@ -13,14 +13,32 @@ RSpec.feature 'Wishes', type: :feature do
     end
 
     scenario 'Wishes are ordered by number of votes' do
-        wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-        wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
-        wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
+        wish = Wish.create!(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+        wish2 = Wish.create!(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
+        wish3 = Wish.create!(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
 
         visit wishlist_wishes_path(other_wishlist)
         page.all('#upvote')[2].click
         
         @wishes = page.all('.card-product')
         expect(@wishes[0]).to have_content(wish3.title)
+    end
+
+    scenario 'User can search wishes index' do
+        wish3 = Wish.create!(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
+        wish = Wish.create!(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
+        wish2 = Wish.create!(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
+
+        visit wishlist_wishes_path(other_wishlist)
+        fill_in 'Search for a ticket', with: 'Test Wish 3'
+        keypress_script = '$.Event("keypress", { keyCode: 13 });'
+
+        @wishes = page.all('.card-product')
+        expect(@wishes[0]).to have_content(wish3.title)
+    end
+
+    scenario 'End user cant see the wyshlist navbar' do
+        visit wishlist_wishes_path(wishlist)
+        expect(page).to_not have_content('New board')
     end
 end

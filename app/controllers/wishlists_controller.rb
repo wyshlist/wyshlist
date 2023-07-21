@@ -15,7 +15,8 @@ class WishlistsController < ApplicationController
     end
 
     def new
-        @organization = Organization.find(params[:organization]) if params[:organization]
+        # @organization = Organization.find(params[:organization]) if params[:organization]
+        @organization = current_user.organization
         @wishlist = Wishlist.new
         authorize @wishlist
     end
@@ -52,6 +53,7 @@ class WishlistsController < ApplicationController
 
     def update
         @wishlist = Wishlist.find(params[:id])
+        wishlist_params[:organization_id] ? wishlist_params[:organization_id] = current_user.organization.id : wishlist_params[:organization_id] = nil
         authorize @wishlist
         if @wishlist.update(wishlist_params)
             flash[:notice] = "Wishlist updated successfully"
@@ -65,6 +67,6 @@ class WishlistsController < ApplicationController
     private
 
     def wishlist_params
-        params.require(:wishlist).permit(:title, :description, :color, :private)
+        params.require(:wishlist).permit(:title, :description, :color, :private, :organization_id)
     end
 end

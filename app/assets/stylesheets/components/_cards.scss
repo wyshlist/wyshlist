@@ -5,12 +5,31 @@
     border-radius: .75rem;
     display: flex;
     align-items: start;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: space-between;
-    padding: 15px;
+    padding: 10px;
     color: $font-color;
-
+    &:hover {
+      border: solid 2px $light-gray;
+    }
   }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
+    .card-product {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .card-product h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
 
   .card-product__color {
     margin-right: 20px;
@@ -20,10 +39,13 @@
     border-radius: 0.5rem;
   }
 
+  .card-product__description {
+    font-color: #b8b8b8;
+  }
+
   .card-product__info {
     display: flex;
     align-items: start;
-    padding: 1rem;
   }
 
   .new-wish-card {
@@ -38,13 +60,13 @@
       color:#404040
     }
   }
-  
+
   .card-product h2 {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     font-weight: bold;
     margin: 0;
   }
-  
+
   .card-product p {
     font-size: .875rem;
     line-height: 1.4;
@@ -59,6 +81,7 @@
     border: 1px solid #e6e6e6;
     border-radius: 0.25rem;
     margin-bottom: 10px;
+    background-color: #f0f0f0;
   }
 
   .card-product__votes small {
@@ -71,7 +94,7 @@
   }
 
   .card-product__icons {
-    padding: 10px 0px;
+    padding: 10px 0px 0px 0px;
     display: flex;
     color: #b8b8b8;
     align-items: center;
@@ -79,7 +102,7 @@
 
   .card-product__icon {
     display: flex;
-    align-items: center; 
+    align-items: center;
   }
 
   .card-product__status {
@@ -115,8 +138,13 @@
     p {
       padding-left: 2rem;
     }
+
+    .pill {
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
   }
-  
+
   .cards-columns {
     display: flex;
   }
@@ -126,23 +154,28 @@
   }
 
   .wishes-filter {
-    width: 15rem;
+    width: 20rem;
     flex-grow: 0;
-    margin-left: 50px;
+    margin-right: 50px;
     position: relative;
     .wishes-filter__list {
-      width: 12rem;
+      width: 100%;
       list-style: none;
       padding: 0;
-      position: fixed;
     }
-    li {
+    .wishes-filter__item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 10px !important;
       border-bottom: 1px solid #e6e6e6;
-      color: $font-color;
+
       &:hover {
         background: $bg-color;
       }
+    }
+    a {
+      color: $font-color;
     }
   }
 
@@ -168,6 +201,40 @@
     }
   }
 
+  .card-info {
+    display: flex;
+    margin: 200px 0px;
+    align-items: center;
+    position: relative;
+  }
+  .card-info__image {
+    
+  }
+
+  .left-image{
+    margin-right: 50px;
+    z-index: 100;
+  }
+
+  .right-image{
+    margin-left: 50px;
+    z-index: 100;
+  }
+
+  .vector-inverted {
+    position: absolute;
+    bottom: -245px;
+    z-index: 1;
+    right: 350px;
+  }
+
+  .vector {
+    position: absolute;
+    bottom: -245px;
+    z-index: 1;
+    left: 350px;
+  }
+
 
   @media (max-width: 768px) {
     .card-product {
@@ -176,6 +243,10 @@
       h2 {
         margin-top: 15px;
       }
+    }
+
+    .cards {
+      grid-template-columns: 1fr;
     }
 
     .wishes-filter {
@@ -205,7 +276,13 @@
         margin: 10px 0px 0px 0px;
       }
     }
-    
-  }
 
+    .left-image{
+      margin-right: 0px;
+    }
   
+    .right-image{
+      margin-left: 0px;
+    }
+
+  }

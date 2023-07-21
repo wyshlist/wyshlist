@@ -1,6 +1,9 @@
 <div class="my-container">
     <div class="title-header">
-        <h1>Your Feed</h1>
+        <div class="title-wrapper">
+            <h1>Your Feed</h1>
+            <small>Here you can find all the boards you have created or contributed to either by creating a ticket, voting or commenting</small>
+        </div>
         <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
     </div>
     <% if @wishlists.empty? %>

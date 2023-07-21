@@ -1,14 +1,14 @@
 class OrganizationsController < ApplicationController
-
-    def new 
+    before_action :set_organization, only: [:show, :edit, :update, :destroy]
+    def new
         @organization = Organization.new
         authorize @organization
         @organization_search = ""
     end
 
     def show
-        @organization = Organization.find(params[:id])
         @wishlists = @organization.wishlists.sort { |a,b| b.wishes.count <=> a.wishes.count }
+        @wishlist = @organization.wishlists.first
         authorize @organization
     end
 
@@ -27,12 +27,10 @@ class OrganizationsController < ApplicationController
     end
 
     def edit
-        @organization = Organization.find(params[:id])
         authorize @organization
     end
 
     def update
-        @organization = Organization.find(params[:id])
         authorize @organization
         if @organization.update(organization_params)
             flash[:notice] = "Organization updated successfully"
@@ -44,17 +42,27 @@ class OrganizationsController < ApplicationController
     end
 
     def destroy
-        @organization = Organization.find(params[:id])
         authorize @organization
         @organization.destroy
         flash[:notice] = "Organization deleted successfully"
         redirect_to root_path
     end
 
+    def feedback
+      organization = current_user.organization
+      authorize organization
+      @wishes = organization.wishes
+    end
+
     private
 
+    def set_organization
+      @organization = Organization.find(params[:id])
+      authorize @organization
+    end
+
     def organization_params
-        params.require(:organization).permit(:name, :logo)
+        params.require(:organization).permit(:name, :logo, :color)
     end
 
     def handle_existing_organization(organization_name)
@@ -67,7 +75,7 @@ class OrganizationsController < ApplicationController
             authorize @organization
         end
     end
-      
+
     def update_user_and_redirect(organization)
         current_user.update(organization: organization)
         redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"

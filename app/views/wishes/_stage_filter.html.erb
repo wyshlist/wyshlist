@@ -1,0 +1,10 @@
+<div class="wishes-filter__item" style="<%= "background-color: #{Wish.new(stage: stage[1]).stage_color}" if (params[:stage] && (params[:stage][0] == stage[0])) %>">
+    <%= link_to wishlist_wishes_path(wishlist, stage: stage), class: "flex-grow-1" do %>
+      <li><%= stage[0] %></li>
+    <% end %>
+    <% if (params[:stage] && (params[:stage][0] == stage[0])) %>
+      <%= link_to wishlist_wishes_path(wishlist) do %>
+        <%= image_tag "close.png", alt: "text", width: 10 %>
+      <% end %>
+    <% end %>
+</div>

@@ -1,40 +1,67 @@
 <% content_for :meta_title, "#{@wishlist.title} | Wyshlist" %>
 <% content_for :meta_description, @wishlist.description %>
-
+<%= render "shared/user_navbar" %>
 <div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
-     
-            <div>
-            <% if @wishlist.organization && @wishlist.organization.logo.attached? %>
-                <% if @wishlist.id == 104 %>
-                    <%= image_tag "logo-short.png", alt: "Wishlist logo", class: "avatar-large" %>
-                <% else %>
-                    <%= cl_image_tag @wishlist.user.organization.logo.key, alt: "#{@wishlist.user.organization}-logo", class: "avatar-large" %>
-                <% end %>
-            <% end %>
-            <h1><%= @wishlist.title %><br><div class="title-main-highlight" style="background-color: #<%= @wishlist.color %>"></div></h1>
-            </div>
+            <h1><%= @wishlist.title %></h1>
             <br>
-            <small><%= @wishlist.description %></small>
+            <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
         <div>
-        <%= link_to edit_wishlist_path(@wishlist) do %>
-            <%= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
-        <% end %>
-        <%= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
-            <%= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
-        <% end %>
+        <%# Move to Dashboard edit boards %>
+        <%# if user_signed_in? && current_user.owner?(@wishlist) %>
+            <%#= link_to edit_wishlist_path(@wishlist) do %>
+                <%#= image_tag "edit.png", alt: "edit icon", class: "header-icons" %>
+            <%# end %>
+            <%#= link_to wishlist_path(@wishlist), id: "delete-wishlist", data: {turbo_method: "delete", turbo_confirm: 'Are you sure?'} do %>
+                <%#= image_tag "trash.png", alt: "edit icon", class: "header-icons" %>
+            <%# end %>
+        <%# end %>
         </div>
     </div>
-    <div class="breadcrumbs-wrapper">
-        <small><%= render_breadcrumbs :separator => " / " %></small>
-    </div>
     <div class="cards-columns">
+        <div class="wishes-filter">
+            <%# Move to dashboard integrations %>
+            <%# unless @wishlist.asana_integration.present? %>
+                <%#= link_to new_wishlist_integration_path(@wishlist) do %>
+                    <%# <div class="integration-box">
+                            Connect to <%= image_tag "asana.svg", alt: "Asana logo" %>
+                    <%# </div> %>
+                <%# end %>
+            <%# end %>
+            <ul class="wishes-filter__list">
+                <h3> Filter by stage </h3>
+                <% Wish.stages.each do |stage| %>
+                    <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
+                <% end %>
+                <br>
+             <% if user_signed_in? %>
+                <%= turbo_frame_tag "new-wish" do %>
+                    <div class="new-wish-wrapper new-wish-sidebar-wrapper">
+                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat sidebar-button", style: "background-color: #{@wishlist&.organization&.color}", id: "add-wish" %>
+                    </div>
+                <% end %>
+            <% else %>
+                <div class="new-wish-wrapper">
+                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish" , style: "background-color: #{@wishlist&.organization&.color}"%>
+                </div>
+            <% end %>
+            <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
+                <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
+                <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
+                    <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
+                </button>
+            </div>
+            <br>
+            <small> Powered by Wyshlist©</small>
+
+            </ul>
+        </div>
         <div class="wishes-wrapper">
             <% if @wishes.any? %>
             <%= render "wishes/wishes", wishes: @wishes %>
-            <% elsif params[:stage]%>
+            <% elsif params[:stage] %>
                 <div class="no-wishes">
                     <h2> No contributions at this stage yet </h2>
                     <p> Stay tuned for upcoming changes in the pipeline</p>
@@ -48,32 +75,14 @@
             <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>
                     <div class="new-wish-wrapper">
-                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat", id: "add-wish" %>
+                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat", style: "background-color: #{@wishlist&.organization&.color}", id: "add-wish" %>
                     </div>
                 <% end %>
             <% else %>
                 <div class="new-wish-wrapper">
-                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish"%>
+                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish" , style: "background-color: #{@wishlist&.organization&.color}"%>
                 </div>
             <% end %>
         </div>
-        <div class="wishes-filter">
-            <ul class="wishes-filter__list">
-                <h2> Filter by stage </h2>
-                <% Wish.stages.each do |stage| %>
-                    <%= link_to wishlist_wishes_path(@wishlist, stage: stage) do%>
-                    <li><%= stage[0] %></li>
-                    <% end %>
-                <% end %>
-                <small>Copy the link and invite stakeholders to contribute to this board 🚀</small>
-                <div data-controller="clipboard" data-clipboard-success-content="Copied!" class="wishes__copy">
-                    <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
-                    <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
-                        <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
-                    </button>
-                </div>
-            </ul>
-        </div>
     </div>
 </div>
-
