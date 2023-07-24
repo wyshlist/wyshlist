@@ -1,18 +1,35 @@
-require 'test_helper'
+require 'rails_helper'
 
 class WishlistPolicyTest < ActiveSupport::TestCase
-  def test_scope
-  end
+  RSpec.describe WishlistPolicy do
+    subject { described_class.new(user, wishlist) }
 
-  def test_show
-  end
+    let(:wishlist) { FactoryBot.build_stubbed(:wishlist) }
 
-  def test_create
-  end
+    context 'with visitors' do
+      let(:user) { FactoryBot.build_stubbed(:no_record_owner_user) }
 
-  def test_update
-  end
+      it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
+    end
 
-  def test_destroy
+    context 'with wishlist owners' do
+      let(:user) { FactoryBot.build_stubbed(:super_team_member) }
+      let(:wishlist) { FactoryBot.build_stubbed(:wishlist, user:) }
+
+      it { is_expected.to permit_actions(%i[new create edit update destroy]) }
+    end
+
+    context 'with admins' do
+      let(:user) { FactoryBot.build_stubbed(:admin) }
+
+      it { is_expected.to permit_actions(%i[new create edit update destroy]) }
+    end
+
+    context 'with super team members' do
+      let(:user) { FactoryBot.build_stubbed(:super_team_member) }
+      let(:wishlist) { FactoryBot.build_stubbed(:wishlist, user:) }
+
+      it { is_expected.to permit_actions(%i[new create edit update destroy]) }
+    end
   end
 end
