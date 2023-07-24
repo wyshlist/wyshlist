@@ -9,15 +9,31 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :organization, optional: true
   has_one_attached :photo
-  enum :role => [:user, :team_member, :admin]
+  enum :role => [:user, :super_team_member, :team_member, :admin]
   after_create :signup_email
 
-  def is_team_member?
-    team_member_since.present?
+  def is_admin?
+    role == "admin"
   end
 
-  def is_user?
-    user_since.present?
+  def is_team_member?
+    role == "team_member"
+  end
+
+  def is_regular_user?
+    role == "user"
+  end
+
+  def is_super_team_member?
+    role == "super_team_member"
+  end
+
+  def is_owner_of(record)
+    record.user == self
+  end
+
+  def is_team_member_of(organization)
+    self.organization == organization
   end
 
   def has_an_organization?
@@ -26,10 +42,6 @@ class User < ApplicationRecord
 
   def team_members
     organization.users unless organization.nil?
-  end
-
-  def admin?
-    role == "admin"
   end
 
   def photo_attached?
@@ -51,13 +63,13 @@ class User < ApplicationRecord
     else
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
       relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
-      
+
     end
   end
-  
+
   private
 
   def signup_email
-    UserMailer.with(user: self).signup_email.deliver_now 
-  end 
+    UserMailer.with(user: self).signup_email.deliver_now
+  end
 end
