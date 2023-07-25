@@ -54,11 +54,14 @@ gem "image_processing", "~> 1.2"
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem "pundit"
+gem "faraday"
+gem 'asana'
 gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem 'postmark-rails'
+gem "pg_search"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -86,6 +89,9 @@ group :test do
   gem 'rspec-rails'
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'pundit-matchers', '~> 1.4', '>= 1.4.1'
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
 end
 
 gem "faker"

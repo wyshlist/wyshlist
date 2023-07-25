@@ -14,3 +14,13 @@
 .nav-item {
   margin: 0px 10px
 }
+
+.announcement-bar {
+  text-align: center;
+  background-color: $blue-bg;
+  padding: 15px 0px;
+  p {
+    margin: 0px;
+    font-size: color;
+  }
+}

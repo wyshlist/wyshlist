@@ -4,10 +4,6 @@
     flex-wrap: wrap;
   }
   
-  .category-item {
-
-  }
-  
   .category-selector {
     position: absolute;
     transform: scale(0);
@@ -15,6 +11,12 @@
 
   .form-control {
     border-radius: 8px;
+  }
+
+  .color-input {
+    width: 100px;
+    height: 70px;
+    margin: 0px auto;
   }
   
   .form-wrapper {
@@ -63,6 +65,10 @@
     border-radius: 4px;
     margin: 20px;
     width: 70px;
+  }
+
+  .tickets-searchbar {
+    margin-bottom: 25px;
   }
   
   .category-selector:checked + label {

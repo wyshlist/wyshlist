@@ -1,3 +1,12 @@
+<div class="announcement-bar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <p class="announcement-bar-text">📣 Announcing: lifetime free features for all beta users subscribed before 09/2023</p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
@@ -11,16 +20,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Feed", wishlists_path, class: "nav-link" %>
-          </li>
           <% if current_user.has_an_organization? %>
             <li class="nav-item active">
-              <%= link_to "Your team's boards", organization_path(current_user.organization), class: "nav-link" %>
+              <%= link_to "Feedback", authenticated_root_path, class: "nav-link" %>
             </li>
           <% end %>
           <li class="nav-item">
-            <%= link_to "New board", new_wishlist_path, class: "nav-link" %>
+            <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.attached? %>
@@ -43,10 +52,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Join now", new_user_registration_path, class: "nav-link primary-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link primary-link" %>
+            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
           </li>
         <% end %>
       </ul>

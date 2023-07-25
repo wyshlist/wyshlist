@@ -15,7 +15,7 @@
     <%= csp_meta_tag %>
     <%= favicon_link_tag "favicon.ico" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
@@ -23,11 +23,11 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNRQJX4"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <%= render "shared/navbar" %>
+    <%= render "shared/navbar" if end_user_views? %>
     <%= render "shared/flashes" %>
     <div class="page-wrapper">
       <%= yield %>
     </div>
-    <%= render "shared/footer" %>
+    <%= render "shared/footer" if end_user_views? %>
   </body>
 </html>
