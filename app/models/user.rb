@@ -11,9 +11,6 @@ class User < ApplicationRecord
   has_one_attached :photo
   enum :role => [:user, :admin]
   after_create :signup_email
-
-
-  
   
   def has_an_organization?
     !organization.nil?
@@ -41,15 +38,14 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.where(email: data['email']).first
+    user = User.find_by(email: data['email'])
 
     # Uncomment the section below if you want users to be created if they don't exist
     unless user
-        user = User.create(name: data['name'],
+        user = User.create(
            first_name: data['first_name'],
            last_name: data['last_name'],
            email: data['email'],
-           photo: data['image'],
            password: Devise.friendly_token[0,20]
         )
     end
