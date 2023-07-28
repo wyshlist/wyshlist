@@ -1,5 +1,7 @@
 class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
+    before_action :check_subdomain, only: [:feedback]
+
     def new
         @organization = Organization.new
         authorize @organization
@@ -55,6 +57,12 @@ class OrganizationsController < ApplicationController
     end
 
     private
+
+    def check_subdomain
+      if request.subdomain != current_user.organization.subdomain
+        redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+      end
+    end
 
     def set_organization
       @organization = Organization.find(params[:id])
