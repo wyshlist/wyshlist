@@ -3,6 +3,6 @@ module ApplicationHelper
         params[:controller] != "wishes" &&
         (params[:controller] != "organizations" && params[:action] != "show") &&
         params[:controller] != "users/registrations" &&
-        params[:controller] != "users/sessions"
+        params[:controller] != "devise/sessions"
     end
 end
