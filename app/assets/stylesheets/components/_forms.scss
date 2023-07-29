@@ -46,11 +46,19 @@
     margin: 12px 0;
   }
 
+  .form-text {
+    font-size: 12px;
+  }
+
   .form-control {
     border: none;
     padding: 6px 0;
     border-radius: 0;
     border-bottom: 1px solid $placeholder-gray;
+
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   .form-label {
