@@ -95,6 +95,7 @@ GEM
     breadcrumbs_on_rails (4.1.0)
       railties (>= 5.0)
     builder (3.2.4)
+    byebug (11.1.3)
     capybara (3.38.0)
       addressable
       matrix
@@ -128,6 +129,8 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.7.4)
@@ -236,6 +239,8 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.9.0)
+      rspec-rails (>= 3.0.0)
     racc (1.6.2)
     rack (2.2.6.4)
     rack-test (2.1.0)
@@ -372,11 +377,13 @@ DEPENDENCIES
   autoprefixer-rails
   bootsnap
   breadcrumbs_on_rails
+  byebug (~> 11.1, >= 11.1.3)
   capybara
   cloudinary
   debug
   devise
   dotenv-rails
+  factory_bot (~> 6.2, >= 6.2.1)
   faker
   faraday
   font-awesome-sass (~> 6.1)
@@ -389,6 +396,7 @@ DEPENDENCIES
   postmark-rails
   puma (~> 5.0)
   pundit
+  pundit-matchers (~> 1.4, >= 1.4.1)
   rails (~> 7.0.4, >= 7.0.4.2)
   rails_admin (= 3.0)
   rspec-rails

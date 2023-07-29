@@ -15,87 +15,108 @@ button {
 }
 
 .btn-flat {
-    color: white !important;
-    font-weight: bold;
-    padding: 12px 34px;
-    border-radius: 0.5rem;
-    background: $primary-color;
-    transition: background 0.3s ease;
-    border-width: 0px !important;
-    margin: 10px 0px;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.2);;
+  color: white !important;
+  font-weight: bold;
+  padding: 12px 34px;
+  border-radius: 8px;
+  background: $primary-color;
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+  margin: 10px 0px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.2);;
+}
+
+.btn-flat:hover {
+  background: $primary-color-hover;
+  color: white;
+}
+
+.sidebar-button {
+  width: 100%;
+  text-align: center;
+}
+
+.wish-update-secondary {
+  margin-top: 15px;
+  font-size: 16px !important;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.btn-black {
+  background: black;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid $placeholder-gray;
+  color: black !important;
+  box-shadow: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 24px;
+    margin-right: 8px;
   }
 
-  .sidebar-button {
+  &:hover {
+    background: transparent;
+  }
+}
+
+
+.primary-link {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  &:hover {
+    color: $primary-color-hover !important;
+  }
+}
+
+.ghost-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  border-radius: 6px;
+  &:hover {
+    background: $primary-color;
+    color: white;
+    transition: 0.3s ease;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .upvote-button {
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 
   .wish-update-secondary {
-    margin-top: 15px;
-    font-size: 16px !important;
-    padding: 5px 10px;
+    margin-top: 0px;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
-  .btn-black {
-    background: black;
+  .btn-flat {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
-  
-  .btn-flat:hover {
-    background: $primary-color-hover;
-    color: white;
+}
+
+.main-link {
+  color: $primary-color !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  &:hover {
+    color: $primary-color-hover !important;
   }
-
-  .primary-link {
-    color: $primary-color;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    &:hover {
-      color: $primary-color-hover !important;
-    }
-  }
-
-  .ghost-button {
-    padding: 10px 20px;
-    font-weight: bold;
-    color: $primary-color;
-    border: 1px solid $primary-color;
-    border-radius: 6px;
-    &:hover {
-      background: $primary-color;
-      color: white;
-      transition: 0.3s ease;
-    }
-  }
-
-
-  @media (max-width: 768px) {
-    .upvote-button {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .wish-update-secondary {
-      margin-top: 0px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .btn-flat {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  .main-link {
-    color: $primary-color !important;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    &:hover {
-      color: $primary-color-hover !important;
-    }
-  }
+}
