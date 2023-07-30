@@ -59,7 +59,9 @@ class OrganizationsController < ApplicationController
     private
 
     def check_subdomain
-      if request.subdomain != current_user.organization.subdomain
+      if current_user.organization.nil?
+        redirect_to new_organization_path
+      elsif request.subdomain != current_user.organization.subdomain
         redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
       end
     end
