@@ -2,8 +2,8 @@ class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
     def new
         @organization = Organization.new
-        authorize @organization
         @organization_search = ""
+        authorize @organization
     end
 
     def show

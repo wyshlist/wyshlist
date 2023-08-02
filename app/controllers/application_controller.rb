@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def skip_pundit?
-    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)/
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
   end
 
   def configure_permitted_parameters
@@ -40,10 +40,6 @@ class ApplicationController < ActionController::Base
   def store_user_location!
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
-  end
-
-  def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || request.referer || root_path
   end
 
 # Overwriting the sign_out redirect path method

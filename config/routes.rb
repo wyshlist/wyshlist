@@ -8,12 +8,16 @@ Rails.application.routes.draw do
   }
 
   authenticated(:user) do
-    root to: "organizations#feedback", as: :authenticated_root
+    root to: 'passthrough#index'
   end
 
   unauthenticated(:user) do
     root to: "pages#home", as: :unauthenticated_root
   end
+
+  get '/get-started', to: 'pages#home', as: :get_started 
+
+  get '/feedback', to: 'organizations#feedback', as: :feedback
 
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 
@@ -33,5 +37,4 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :wishlists, only: [:index]
   end
-
 end
