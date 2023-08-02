@@ -1,35 +1,38 @@
-<% session[:redirect_login] = request.referrer %>
+<%= render "shared/announcement_navbar" %>
 <div class="my-container">
-    <div class="card-product form-wrapper" data-controller="tab">
-      <h1>Log in</h1>
-      <p>Log in to your account to start creating boards and gathering feedback from your users.</p>
-      <div data-tab-target="second">
-        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat", data: { turbo: false } do %>
-          <span class="google-signin-button-text">Login with  <%= image_tag "google.png", class: "connect-icon" %></span>
-        <% end %>    
+    <div class="form-user">
+      <%= image_tag 'logo.jpg', alt: "wyshlist-logo", class: "logo mb-2" %>
+      <h1>Sign in</h1>
+      <p>Don’t have a Wyshlist account? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
+
+      <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
+        <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
+      <% end %>
+
+      <div class="login-separator">
+        <div class="separator__line"></div>
+        <p class="">Or</p>
+        <div class="separator__line"></div>
       </div>
-      <a class="btn-secondary" href="#pills-email" role="tab" data-action="click->tab#toggle">Login with email</a>
-      <div class="tab-content">
-        <div data-tab-target="first" class="hidden">
-          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
-            <div class="form-inputs">
-              <%= f.input :email,
-                          required: false,
-                          autofocus: true,
-                          input_html: { autocomplete: "email" } %>
-              <%= f.input :password,
-                          required: false,
-                          input_html: { autocomplete: "current-password" } %>
-              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-            </div>
 
-            <div class="form-actions">
-              <%= f.button :submit, "Log in", class: "btn-flat" %>
-            </div>
-          <% end %>
-
-          <%= render "devise/shared/links" %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" } %>
+          <%= f.input :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password" } %>
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
         </div>
-      </div> 
+
+        <div class="form-actions">
+          <%= f.button :submit, "Log in", class: "btn-flat w-100 mb-0" %>
+        </div>
+      <% end %>
+
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "mb-3" %>
+      <small>By Signing up you agree to Wyshlist’s <a href="#">Terms of service</a> and <a href="#">Privacy policy</a></small>
     </div>
 </div>
