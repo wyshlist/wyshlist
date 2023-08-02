@@ -1,12 +1,4 @@
-<div class="announcement-bar">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <p class="announcement-bar-text">📣 Announcing: lifetime free features for all beta users subscribed before 09/2023</p>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/announcement_navbar" %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
