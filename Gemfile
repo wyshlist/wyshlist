@@ -92,6 +92,7 @@ group :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'pundit-matchers', '~> 1.4', '>= 1.4.1'
   gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem 'factory_bot_rails'
 end
 
 gem "faker"
