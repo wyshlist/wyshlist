@@ -1,5 +1,9 @@
 class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
+    before_action :order_column_whitelist,
+                  :order_direction_whitelist,
+                  :set_stages,
+                  :set_wishlists, only: :feedback
     def new
         @organization = Organization.new
         authorize @organization
@@ -52,9 +56,34 @@ class OrganizationsController < ApplicationController
       organization = current_user.organization
       authorize organization
       @wishes = organization.wishes
+      if params[:filter].present?
+        @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
+      end
     end
 
     private
+
+    def order_column_whitelist
+      @order_column_whitelist ||=
+        Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
+    end
+
+    def order_direction_whitelist
+      @order_direction_whitelist ||=
+        Wishes::FeedbackFilterer::ORDER_DIRECTION_WHITELIST.map { [_1.titleize, _1] }
+    end
+
+    def set_stages
+      @stages = Wish.distinct.pluck(:stage)
+    end
+
+    def set_wishlists
+      @wishlists = current_user.organization.wishlists
+    end
+
+    def filter_params
+      params[:filter].permit(:stage, :wishlist_id, :order_column, :order_direction)
+    end
 
     def set_organization
       @organization = Organization.find(params[:id])
