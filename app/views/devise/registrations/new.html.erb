@@ -4,7 +4,7 @@
       <h1>Sign up</h1>
       <p>Already have a Wyshlist account? <%= link_to "Sign in", new_session_path(resource_name) %></p>
 
-      <%= link_to "#", class: "btn-flat btn-ghost vw-30" do %>
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
         <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
       <% end %>
 
@@ -16,7 +16,6 @@
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }, html: {data: {controller: "photo-preview"}}) do |f| %>
         <%= f.error_notification %>
-
         <div class="form-inputs">
           <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
           <%= f.input :first_name,
@@ -46,7 +45,6 @@
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
         </div>
-
         <div class="form-actions">
           <%= f.button :submit, "Sign up", class: "btn-flat w-100 mb-0" %>
         </div>

@@ -6,6 +6,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'devise'
+require 'factory_bot_rails'
 
 FactoryBot.definition_file_paths = [File.expand_path('spec/factories', Rails.root)]
 FactoryBot.find_definitions

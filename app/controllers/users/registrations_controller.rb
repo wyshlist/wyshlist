@@ -8,7 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     stored_location = stored_location_for(resource)
-
     if stored_location.match?(/wishlists|wishes/)
       resource.update(user_since: DateTime.now)
       sign_in(resource)
@@ -16,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       resource.update(team_member_since: DateTime.now)
       sign_in(resource)
-      redirect_to new_organization_path
+      redirect_to resource.is_user? ? stored_location : root_path
     end
   end
 end
