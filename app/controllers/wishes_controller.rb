@@ -1,5 +1,9 @@
 class WishesController < ApplicationController
     skip_before_action :authenticate_user!, only: [ :show, :index ] if :verify_private_wishlist
+    after_action :verify_authorized
+    before_action :order_column_whitelist,
+                  :order_direction_whitelist,
+                  :set_stages, only: :index
 
     def show
         @wish = Wish.find(params[:id])
@@ -17,15 +21,14 @@ class WishesController < ApplicationController
     end
 
     def index
-        @wishlist = Wishlist.find(params[:wishlist_id])
-        @wishes = policy_scope(@wishlist.wishes).sorted_by_votes
-        if params[:stage]
-            @wishes = @wishes.where(stage_params)
-        elsif params[:query].present?
-            @wishes = Wish.search_by_title_and_description(params[:query])
-        end
-        @vote = Vote.new
-        add_breadcrumb "< Boards", wishlists_path
+      @wishlist = Wishlist.find(params[:wishlist_id])
+      authorize @wishlist
+      @wishes = policy_scope(@wishlist.wishes)
+      if params[:filter].present?
+        @wishes = Wishes::Filterer.new(filter_params:, scope: @wishes).call
+      end
+
+      add_breadcrumb "< Boards", wishlists_path
     end
 
     def create
@@ -79,10 +82,23 @@ class WishesController < ApplicationController
 
     private
 
-    def stage_params
-        params.permit(stage: [])
+    def order_column_whitelist
+      @order_column_whitelist ||=
+        Wishes::Filterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
     end
 
+    def order_direction_whitelist
+      @order_direction_whitelist ||=
+        Wishes::Filterer::ORDER_DIRECTION_WHITELIST.map { [_1.titleize, _1] }
+    end
+
+    def set_stages
+      @stages = Wish.distinct.pluck(:stage)
+    end
+
+    def filter_params
+      params[:filter].permit(:stage, :order_column, :order_direction)
+    end
 
     def wish_params
         params.require(:wish).permit(:title, :description, :stage)
