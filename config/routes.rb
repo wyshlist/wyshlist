@@ -1,3 +1,5 @@
+require_relative '../lib/constraints/subdomain_constraint'
+
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy', to: 'pages#privacy_policy'
@@ -5,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
+    sessions: 'users/sessions'
   }
 
   authenticated(:user) do
@@ -16,25 +19,33 @@ Rails.application.routes.draw do
   end
 
   get '/get-started', to: 'pages#home', as: :get_started 
-
   get '/feedback', to: 'organizations#feedback', as: :feedback
 
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
 
-  resources :wishlists, except: :show do
-    resources :integrations, only: [:new, :create]
-    resources :wishes, only: [:new, :create, :index]
+  authenticated(:user) do
+    root to: "organizations#feedback", as: :authenticated_root
   end
 
-  resources :wishes, only: [:show, :edit, :update, :destroy] do
-    resources :votes, only: [:create]
-    resources :comments, only: [:create, :destroy, :edit, :update]
-  end
+  constraints SubdomainConstraint do
+    resources :organizations, only: [:edit, :update, :destroy, :show]
 
-  resources :votes, only: :destroy
-  resources :integrations, only: :destroy
+    resources :wishlists, except: :show do
+      resources :integrations, only: [:new, :create]
+      resources :wishes, only: [:new, :create, :index]
+    end
 
-  resources :users, only: [:show] do
-    resources :wishlists, only: [:index]
+    resources :wishes, only: [:show, :edit, :update, :destroy] do
+      resources :votes, only: [:create]
+      resources :comments, only: [:create, :destroy, :edit, :update]
+    end
+
+    resources :votes, only: :destroy
+
+    resources :integrations, only: :destroy
+
+    resources :users, only: [:show] do
+      resources :wishlists, only: [:index]
+    end
   end
 end
