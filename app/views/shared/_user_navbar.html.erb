@@ -1,13 +1,13 @@
 <div class="my-container">
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
         <div class="container-fluid">
-            <% if @wishlist %>
+            <% if @wishlist && @wishlist.organization %>
                 <%= link_to organization_path(@wishlist ? @wishlist.organization : @organization), class: "navbar-brand" do %>
                     <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
                 <% end %>
-            <% else %>
+            <% elsif @organization %>
                 <%= link_to organization_path(@organization), class: "navbar-brand" do %>
-                    <%#= image_tag @organization.logo.attached? ? @wishlist.organization.logo : 'logo.jpg', class: "logo"%>
+                    <%= image_tag @organization.logo.attached? ? @organization.logo : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
 

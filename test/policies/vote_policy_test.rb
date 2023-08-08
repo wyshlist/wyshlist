@@ -1,18 +1,44 @@
-require 'test_helper'
+require 'rails_helper'
 
 class VotePolicyTest < ActiveSupport::TestCase
-  def test_scope
-  end
 
-  def test_show
-  end
+  RSpec.describe VotePolicy do
+    subject { described_class.new(user, vote) }
 
-  def test_create
-  end
+    let(:vote) { FactoryBot.build_stubbed(:vote) }
 
-  def test_update
-  end
+    context 'with visitors' do
+      let(:user) { FactoryBot.build_stubbed(:no_record_owner_user) }
 
-  def test_destroy
+      it { is_expected.to permit_actions(%i[create]) }
+      it { is_expected.to forbid_actions(%i[destroy]) }
+    end
+
+    context 'with vote owners' do
+      let(:user) { FactoryBot.build_stubbed(:record_owner_user) }
+      let(:vote) { FactoryBot.build_stubbed(:vote, user: user) }
+
+      it { is_expected.to permit_actions(%i[destroy]) }
+    end
+
+    context 'with admins' do
+      let(:user) { FactoryBot.build_stubbed(:admin) }
+
+      it { is_expected.to permit_actions(%i[create destroy]) }
+    end
+
+    context 'with super team members' do
+      let(:user) { FactoryBot.build_stubbed(:super_team_member) }
+
+      it { is_expected.to permit_actions(%i[create]) }
+      it { is_expected.to forbid_actions(%i[destroy]) }
+    end
+
+    context 'with team members' do
+      let(:user) { FactoryBot.build_stubbed(:team_member) }
+
+      it { is_expected.to permit_actions(%i[create]) }
+      it { is_expected.to forbid_actions(%i[destroy]) }
+    end
   end
 end

@@ -2,31 +2,29 @@ class WishlistPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      scope = user.all_wishlists
+      organization = scope.first.user.organization
+      user.is_team_member(organization) ? scope.all : scope.where(private: false)
     end
   end
 
-  def index?
-    record.private == false || user_is_owner_or_team_member_or_admin?
-  end
-
-  def edit?
-    user_is_owner_or_admin?
-  end
-
   def new?
-    true
+    organization = record.user.organization
+    user.admin? || user.is_team_member_of(organization) && user.is_super_team_member?
   end
 
   def create?
-    true
+    new?
+  end
+
+  def edit?
+    new?
   end
 
   def update?
-    user_is_owner_or_admin?
+    new?
   end
 
   def destroy?
-    user_is_owner_or_admin?
+    new?
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   describe 'validations' do
     it 'validates the presence of content' do
-      comment = Comment.new(content: '')
+      let(:commment) { build(:comment) }
       expect(comment).not_to be_valid
     end
   end

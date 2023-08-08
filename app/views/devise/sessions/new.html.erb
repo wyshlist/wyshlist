@@ -1,11 +1,10 @@
-<%= render "shared/announcement_navbar" %>
 <div class="my-container">
     <div class="form-user">
       <%= image_tag 'logo.jpg', alt: "wyshlist-logo", class: "logo mb-2" %>
       <h1>Sign in</h1>
       <p>Don’t have a Wyshlist account? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
 
-      <%= link_to "#", class: "btn-flat btn-ghost vw-30" do %>
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
         <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
       <% end %>
 
@@ -34,6 +33,5 @@
 
       <%= link_to "Forgot your password?", new_password_path(resource_name), class: "mb-3" %>
       <small>By Signing up you agree to Wyshlist’s <a href="#">Terms of service</a> and <a href="#">Privacy policy</a></small>
-
     </div>
 </div>

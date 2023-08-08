@@ -4,8 +4,8 @@ class OrganizationsController < ApplicationController
 
     def new
         @organization = Organization.new
-        authorize @organization
         @organization_search = ""
+        authorize @organization
     end
 
     def show
