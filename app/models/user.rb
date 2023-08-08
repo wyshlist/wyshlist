@@ -2,22 +2,38 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :wishlists, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :wishes, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :organization, optional: true
   has_one_attached :photo
-  enum :role => [:user, :team_member, :admin]
+  enum :role => [:user, :super_team_member, :team_member, :admin]
   after_create :signup_email
 
-  def is_team_member?
-    team_member_since.present?
+  def is_admin?
+    role == "admin"
   end
 
-  def is_user?
-    user_since.present?
+  def is_team_member?
+    role == "team_member"
+  end
+
+  def is_regular_user?
+    role == "user"
+  end
+
+  def is_super_team_member?
+    role == "super_team_member"
+  end
+
+  def is_owner_of(record)
+    record.user == self
+  end
+
+  def is_team_member_of(organization)
+    self.organization == organization
   end
 
   def has_an_organization?
@@ -26,10 +42,6 @@ class User < ApplicationRecord
 
   def team_members
     organization.users unless organization.nil?
-  end
-
-  def admin?
-    role == "admin"
   end
 
   def photo_attached?
@@ -44,6 +56,22 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.find_by(email: data['email'])
+
+    # Uncomment the section below if you want users to be created if they don't exist
+    unless user
+        user = User.create(
+           first_name: data['first_name'],
+           last_name: data['last_name'],
+           email: data['email'],
+           password: Devise.friendly_token[0,20]
+        )
+    end
+    user
+  end
+
   def all_wishlists
     if has_an_organization?
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
@@ -51,13 +79,13 @@ class User < ApplicationRecord
     else
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
       relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
-      
+
     end
   end
-  
+
   private
 
   def signup_email
-    UserMailer.with(user: self).signup_email.deliver_now 
-  end 
+    UserMailer.with(user: self).signup_email.deliver_now
+  end
 end

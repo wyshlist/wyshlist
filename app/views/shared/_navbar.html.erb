@@ -1,15 +1,7 @@
-<div class="announcement-bar">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <p class="announcement-bar-text">📣 Announcing: lifetime free features for all beta users subscribed before 09/2023</p>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/announcement_navbar" %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
+    <%= link_to user_signed_in? ? root_path : unauthenticated_root_path, class: "navbar-brand" do %>
       <%= image_tag "logo.jpg", class: "logo"%>
     <% end %>
 
@@ -22,15 +14,15 @@
         <% if user_signed_in? %>
           <% if current_user.has_an_organization? %>
             <li class="nav-item active">
-              <%= link_to "Feedback", authenticated_root_path, class: "nav-link" %>
+              <%= link_to "Feedback", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
             </li>
           <% end %>
-          <li class="nav-item">
-            <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
-          </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.attached? %>
               <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>

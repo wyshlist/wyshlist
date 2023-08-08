@@ -11,10 +11,14 @@ class Organization < ApplicationRecord
     end
 
     def organization_owner?(user)
-        users.first == user
+      users.first == user
     end
 
     def organization_member?(user)
       users.include?(user)
+    end
+
+    def subdomain
+      self.name.gsub(" ", "_").downcase
     end
 end
