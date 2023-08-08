@@ -23,7 +23,11 @@ class WishesController < ApplicationController
     def index
       @wishlist = Wishlist.find(params[:wishlist_id])
       authorize @wishlist
-        @vote = Vote.new
+      @wishes = policy_scope(@wishlist.wishes)
+      if params[:filter].present?
+        @wishes = Wishes::Filterer.new(filter_params:, scope: @wishes).call
+      end
+
       add_breadcrumb "< Boards", wishlists_path
     end
 
