@@ -22,7 +22,7 @@
         <% if user_signed_in? %>
           <% if current_user.has_an_organization? %>
             <li class="nav-item active">
-              <%= link_to "Feedback", authenticated_root_path, class: "nav-link" %>
+              <%= link_to "Feedback", root_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
