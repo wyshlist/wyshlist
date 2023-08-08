@@ -1,6 +1,5 @@
 class WishesController < ApplicationController
     skip_before_action :authenticate_user!, only: [ :show, :index ] if :verify_private_wishlist
-    after_action :verify_authorized
 
     def show
         @wish = Wish.find(params[:id])
@@ -24,9 +23,7 @@ class WishesController < ApplicationController
             @wishes = @wishes.where(stage_params)
         elsif params[:query].present?
             @wishes = Wish.search_by_title_and_description(params[:query])
-
         end
-        authorize @wishlist
         @vote = Vote.new
         add_breadcrumb "< Boards", wishlists_path
     end
