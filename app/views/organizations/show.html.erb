@@ -1,10 +1,8 @@
 <%= render "shared/user_navbar" %>
 <div class="my-container">
     <div class="title-header">
-        <h1> 
-        <% if @organization.logo && @organization.logo.key %>
-            <%=  @organization.name  %> boards
-        <% end %>
+        <h1>
+          <%=  @organization.name  %> boards
         </h1>
     </div>
     <div class="breadcrumbs-wrapper">
@@ -19,4 +17,3 @@
         </div>
     <% end %>
 </div>
-

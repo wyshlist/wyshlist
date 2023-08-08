@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_141154) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_201349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,15 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_141154) do
     t.string "color", default: "#000000"
   end
 
-  create_table "pg_search_documents", force: :cascade do |t|
-    t.text "content"
-    t.string "searchable_type"
-    t.bigint "searchable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_141154) do
     t.string "first_name"
     t.string "last_name"
     t.datetime "team_member_since"
+    t.datetime "super_team_member_since"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

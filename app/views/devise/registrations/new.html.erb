@@ -1,44 +1,55 @@
 <div class="my-container">
-    <div class="card-product form-wrapper">
+    <div class="form-user">
+      <%= image_tag 'logo.jpg', alt: "wyshlist-logo", class: "logo mb-2" %>
       <h1>Sign up</h1>
+      <p>Already have a Wyshlist account? <%= link_to "Sign in", new_session_path(resource_name) %></p>
+
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
+        <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
+      <% end %>
+
+      <div class="login-separator">
+        <div class="separator__line"></div>
+        <p class="">Or</p>
+        <div class="separator__line"></div>
+      </div>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }, html: {data: {controller: "photo-preview"}}) do |f| %>
         <%= f.error_notification %>
-
         <div class="form-inputs">
-          <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
-          <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
+          <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
-                      placeholder: "ei: John",
+                      placeholder: "e.g John",
                       input_html: { autocomplete: "First name" } %>
           <%= f.input :last_name,
                       required: true,
-                      placeholder: "ei: Doe",
+                      placeholder: "e.g Doe",
                       autofocus: true,
                       input_html: { autocomplete: "Last name" } %>
           <%= f.input :email,
                       required: true,
-                      placeholder: "ei: john.doe@gmail.com",
+                      placeholder: "e.g john.doe@gmail.com",
                       autofocus: true,
                       input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                       required: true,
-                      placeholder: "Minimum 6 characters",
-                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      placeholder: "",
+                      hint: ("Minimum #{@minimum_password_length} characters" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
           <%= f.input :password_confirmation,
-                      placeholder: "Minimum 6 characters",
+                      placeholder: "",
                       required: true,
+                      hint: ("Minimum #{@minimum_password_length} characters" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
         </div>
-
         <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: "btn-flat" %>
+          <%= f.button :submit, "Sign up", class: "btn-flat w-100 mb-0" %>
         </div>
       <% end %>
 
-      <%= render "devise/shared/links" %>
+      <small>By Signing up you agree to Wyshlist’s <a href="#">Terms of service</a> and <a href="#">Privacy policy</a></small>
   </div>
 </div>

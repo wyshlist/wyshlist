@@ -17,4 +17,8 @@ class Organization < ApplicationRecord
     def organization_member?(user)
       users.include?(user)
     end
+
+    def subdomain
+      self.name.gsub(" ", "_").downcase
+    end
 end
