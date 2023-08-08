@@ -5,7 +5,7 @@
       <h1>Sign in</h1>
       <p>Don’t have a Wyshlist account? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
 
-      <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
         <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
       <% end %>
 
