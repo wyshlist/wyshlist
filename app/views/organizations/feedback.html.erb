@@ -2,6 +2,7 @@
 <div class="my-container">
   <div class="feedback-wrapper">
     <div class="feedback__column-left">
+      <%= render 'wishes/feedback_filters' %>
         <% @wishes.each do |wish| %>
           <%= link_to wish_path(wish), class:"card-product", data: {turbo_frame: "wish-view"} do %>
             <div class="card-product__info">
