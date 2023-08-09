@@ -97,3 +97,6 @@ end
 
 gem "faker"
 gem "sassc-rails"
+# Used for CircleCI
+gem 'execjs'
+gem 'mini_racer', '~> 0.8.0'
