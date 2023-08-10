@@ -1,29 +1,31 @@
-version: 2
+version: 2.1
 jobs:
   build:
+    working_directory: /home/circleci/project
     docker:
-      - image: ruby:2.7
-    working_directory: /app
+      - image: cimg/ruby:3.1.2-node
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: testuser
+          POSTGRES_DB: circle-test_test
     steps:
       - checkout
-      - run: Run migrations
-          command: bundle exec rake db:migrate
-      - run: Run seed data
-          command: bundle exec rake db:seed
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
+
+      # Bundle install dependencies
       - run:
-          name: Install Dependencies
+          name: Install dependencies
           command: bundle install
+
       - run:
-          name: Run Tests
+          name: Parallel RSpec
           command: bundle exec rspec
-      # - run:
-      #     name: Run Linter
-      #     command: bundle exec rubocop
-      # - run:
-      #     name: Run Security Scan
-      #     command: bundle exec brakeman
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
+
+      # Save artifacts
+      - store_test_results:
+          path: /tmp/test-results
