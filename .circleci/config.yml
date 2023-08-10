@@ -7,7 +7,7 @@ jobs:
       - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: testuser
-          POSTGRES_DB: circle-test_test
+          POSTGRES_DB: wyshlist_test
     steps:
       - checkout
 
