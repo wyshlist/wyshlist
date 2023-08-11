@@ -83,6 +83,13 @@ class User < ApplicationRecord
     end
   end
 
+  def accept_invitation!
+    super
+    self.role = 'team_member'
+    self.organization = self.invited_by.organization
+    self.save
+  end
+
   private
 
   def signup_email
