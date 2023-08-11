@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :check_subdomain, if: :devise_controller?
+
 
   include Pundit::Authorization
 

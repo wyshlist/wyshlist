@@ -57,6 +57,8 @@ gem "pundit"
 gem "faraday"
 gem 'asana'
 gem "devise"
+gem 'devise_invitable', '~> 2.0.0'
+
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
