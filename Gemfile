@@ -93,7 +93,12 @@ group :test do
   gem 'pundit-matchers', '~> 1.4', '>= 1.4.1'
   gem 'factory_bot', '~> 6.2', '>= 6.2.1'
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 5.3'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 end
 
 gem "faker"
 gem "sassc-rails"
+# Used for CircleCI
+gem 'execjs'
+gem 'mini_racer', '~> 0.8.0'

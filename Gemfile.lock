@@ -184,6 +184,8 @@ GEM
       addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
+    libv8-node (18.16.0.0-arm64-darwin)
+    libv8-node (18.16.0.0-x86_64-linux)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -200,6 +202,8 @@ GEM
     mime-types-data (3.2023.0218.1)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
+    mini_racer (0.8.0)
+      libv8-node (~> 18.16.0.0)
     minitest (5.18.1)
     msgpack (1.7.2)
     multi_xml (0.6.0)
@@ -279,6 +283,10 @@ GEM
       activesupport (= 7.0.6)
       bundler (>= 1.15.0)
       railties (= 7.0.6)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.1.1)
       activesupport (>= 5.0.0)
       minitest
@@ -345,6 +353,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -405,6 +415,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  execjs
   factory_bot (~> 6.2, >= 6.2.1)
   factory_bot_rails
   faker
@@ -414,6 +425,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   letter_opener
+  mini_racer (~> 0.8.0)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (~> 1.1)
@@ -423,10 +435,12 @@ DEPENDENCIES
   pundit
   pundit-matchers (~> 1.4, >= 1.4.1)
   rails (~> 7.0.4, >= 7.0.4.2)
+  rails-controller-testing (~> 1.0, >= 1.0.5)
   rails_admin (= 3.0)
   rspec-rails
   sassc-rails
   selenium-webdriver
+  shoulda-matchers (~> 5.3)
   simple_form!
   sprockets-rails
   stimulus-rails

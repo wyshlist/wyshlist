@@ -1,14 +1,11 @@
-#rspec tests for the passthrough controller
-
 require 'rails_helper'
 
 RSpec.describe PassthroughController, type: :controller do
   describe "GET #index" do
-    # get team member form factories
-    let(:team_member) { build(:team_member) }
-    let(:super_team_member) { build(:super_team_member) }
-    let(:admin) { build(:admin) }
-    let(:user) { build(:user) }
+    let(:team_member) { create(:team_member) }
+    let(:super_team_member) { create(:super_team_member) }
+    let(:admin) { create(:admin) }
+    let(:user) { create(:user) }
 
     context "when user is a team member" do
       before do
