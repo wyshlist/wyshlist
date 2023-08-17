@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
     redirect_to(authenticated_root_path)
   end
 
+  def check_team_member_subdomain
+    if current_user.organization.nil?
+      redirect_to new_organization_path
+    elsif request.subdomain != current_user.organization.subdomain
+      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+    end
+  end
+
   private
 
   def skip_pundit?
@@ -43,11 +51,6 @@ class ApplicationController < ActionController::Base
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
   end
-
-  # def after_sign_in_path_for(resource_or_scope)
-  #   redirect_to authenticated_root_url(subdomain: resource_or_scope.organization.subdomain), allow_other_host: true
-  #   # stored_location_for(resource_or_scope) || request.referer || authenticated_root_url(subdomain: resource_or_scope.organization.subdomain)
-  # end
 
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)

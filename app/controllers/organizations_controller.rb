@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
-    before_action :check_subdomain, only: [:feedback]
+    # before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
 
     def new
         @organization = Organization.new
@@ -58,13 +58,13 @@ class OrganizationsController < ApplicationController
 
     private
 
-    def check_subdomain
-      if current_user.organization.nil?
-        redirect_to new_organization_path
-      elsif request.subdomain != current_user.organization.subdomain
-        redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
-      end
-    end
+    # def check_subdomain
+    #   if current_user.organization.nil?
+    #     redirect_to new_organization_path
+    #   elsif request.subdomain != current_user.organization.subdomain
+    #     redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+    #   end
+    # end
 
     def set_organization
       @organization = Organization.find(params[:id])

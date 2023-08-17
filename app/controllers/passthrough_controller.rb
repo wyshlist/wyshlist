@@ -6,8 +6,8 @@ class PassthroughController < ApplicationController
         when 'team_member' || 'super_team_member'
           feedback_path
         when 'user'
-          get_started_path
+          organization_path || get_started_path
         end
-      redirect_to path   
+      redirect_to path
     end
 end
