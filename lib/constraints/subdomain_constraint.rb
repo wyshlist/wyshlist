@@ -8,7 +8,7 @@ class SubdomainConstraint
       key = request.params.keys.grep(/.*_id/).first
       model = key.gsub("_id", "").capitalize.constantize.find(request.params[key])
     else
-      return Organization.all.map(&:subdomain).include? request.subdomain
+      return Organization.select(:name).map(&:subdomain).include? request.subdomain
     end
 
     model = model.organization if model.respond_to?(:organization)
