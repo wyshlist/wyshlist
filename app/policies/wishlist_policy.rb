@@ -7,8 +7,12 @@ class WishlistPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    true
+  end
+
   def new?
-    organization = record.user.organization
+    organization = user.organization
     user.admin? || user.is_team_member_of(organization) && user.is_super_team_member?
   end
 

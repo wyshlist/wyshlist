@@ -20,7 +20,7 @@
               <%= link_to "Roadmap", "#", class: "nav-link", disabled: true %>
             </li>
             <li class="nav-item">
-              <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
+              <%= link_to "Public Preview", organization_path(subdomain: current_user.organization.subdomain), target: "_blank", class: "ghost-button nav-link" %>
             </li>
           <% end %>
           <li class="nav-item dropdown">

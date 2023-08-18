@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
-    # before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
+    before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
 
     def new
         @organization = Organization.new
@@ -36,7 +36,7 @@ class OrganizationsController < ApplicationController
         authorize @organization
         if @organization.update(organization_params)
             flash[:notice] = "Organization updated successfully"
-            redirect_to organization_path(@organization)
+            redirect_to organization_path(subdomain: @organization.subdomain)
         else
             flash[:alert] = "Organization not updated, try again later"
             render :edit, status: :unprocessable_entity
@@ -67,7 +67,8 @@ class OrganizationsController < ApplicationController
     # end
 
     def set_organization
-      @organization = Organization.find(params[:id])
+      @organization = Organization.find(params[:id]) if params[:id]
+      @organization = Organization.find_by(subdomain: request.subdomain)
       authorize @organization
     end
 

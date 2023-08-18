@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   constraints SubdomainConstraint do
+    get '/wishlists', to: 'organizations#show', as: :organization
     resources :organizations, only: [:edit, :update, :destroy]
 
     resources :wishlists, except: :show do
