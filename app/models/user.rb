@@ -83,11 +83,20 @@ class User < ApplicationRecord
     end
   end
 
-  def accept_invitation!
+  def invite!(email, name)
     super
-    self.role = 'team_member'
     self.organization = self.invited_by.organization
+    self.role = 'team_member'
     self.save
+  end
+
+  def invitation_status
+    if self.invited_by_type == 'User'
+      return 'Invitation Sent' if self.invitation_accepted_at.nil?
+      return 'Accepted' if invitation_accepted_at
+    else
+      return '-'
+    end
   end
 
   private

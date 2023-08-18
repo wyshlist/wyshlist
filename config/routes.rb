@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy', to: 'pages#privacy_policy'
   get 'terms_of_service', to: 'pages#terms_of_service'
-  
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     root to: "pages#home", as: :unauthenticated_root
   end
 
-  get '/get-started', to: 'pages#home', as: :get_started 
+  get '/get-started', to: 'pages#home', as: :get_started
   get '/feedback', to: 'organizations#feedback', as: :feedback
 
   resources :organizations, only: [:new, :create, :edit, :update, :destroy, :show]
@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   constraints SubdomainConstraint do
     resources :organizations, only: [:edit, :update, :destroy, :show]
+
+    get '/members', to: 'organizations#members'
+    patch '/remove_members/:user_id', to: 'organizations#remove_member', as: :remove_member
 
     resources :wishlists, except: :show do
       resources :integrations, only: [:new, :create]

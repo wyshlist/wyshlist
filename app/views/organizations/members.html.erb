@@ -1,0 +1,42 @@
+<%= render "shared/navbar" %>
+<div class="my-container">
+  <div class="d-flex justify-content-between">
+    <h1>Members</h1>
+    <%= link_to "Invite Member", new_user_invitation_path, class: "btn-flat" %>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Invitation Status</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each_with_index do |member, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= member.first_name %></td>
+          <td><%= member.last_name %></td>
+          <td><%= member.email %></td>
+          <td><%= member.role %></td>
+          <td><%= member.invitation_status %></td>
+          <td>
+            <%= link_to remove_member_path(member), data: { turbo_method: 'patch' } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </td>
+          <td>
+            <i class="fa-solid fa-pen-to-square"></i>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
