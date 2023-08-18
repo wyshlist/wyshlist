@@ -35,10 +35,10 @@
               <% end %>
               <% if current_user&.organization.present? && policy(current_user&.organization).edit? %>
                 <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item" %>
-                <%= link_to "Members", members_path, class: "dropdown-item" %>
               <% else %>
                 <%= link_to "Your team", new_organization_path, class: "dropdown-item"  %>
               <% end %>
+              <%= link_to "Members", members_path, class: "dropdown-item" %>
               <%= link_to "My account", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>

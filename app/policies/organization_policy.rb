@@ -36,10 +36,10 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def members?
-    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+    user.is_team_member_of(record)
   end
 
   def remove_member?
-    members?
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
   end
 end

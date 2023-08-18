@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
     def members
       @organization = Organization.find_by(subdomain: request.subdomain)
       authorize @organization
-      @members = @organization.users
+      @members = @organization.users.order(:first_name)
     end
 
     def remove_member
