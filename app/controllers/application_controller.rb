@@ -17,14 +17,6 @@ class ApplicationController < ActionController::Base
     redirect_to(authenticated_root_path)
   end
 
-  def check_team_member_subdomain
-    if current_user.organization.nil?
-      redirect_to new_organization_path
-    elsif request.subdomain != current_user.organization.subdomain
-      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
-    end
-  end
-
   private
 
   def skip_pundit?
