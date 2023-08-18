@@ -18,7 +18,7 @@
         <th scope="col">Invitation Status</th>
         <% if policy(@organization).remove_member? %>
           <th scope="col"></th>
-          <th scope="col"></th>
+          <%# <th scope="col"></th> %>
         <% end %>
       </tr>
     </thead>
@@ -33,13 +33,13 @@
           <td><%= member.invitation_status %></td>
           <% if policy(@organization).remove_member? %>
             <td>
-              <%= link_to remove_member_path(member), data: { turbo_method: 'patch' } do %>
+              <%= link_to remove_member_path(member), data: { turbo_method: 'patch' }, class: "text-dark" do %>
                 <i class="fa-solid fa-trash"></i>
               <% end %>
             </td>
-            <td>
-              <i class="fa-solid fa-pen-to-square"></i>
-            </td>
+            <%# <td> %>
+              <%# <i class="fa-solid fa-pen-to-square"></i> %>
+            <%# </td> %>
           <% end %>
         </tr>
       <% end %>
