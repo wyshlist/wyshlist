@@ -1,26 +1,31 @@
-<%= render "shared/navbar" %>
-<div class="my-container">
-  <div class="feedback-wrapper">
-    <div class="feedback__column-left">
-        <% @wishes.each do |wish| %>
-          <%= link_to wish_path(wish), class:"card-product", data: {turbo_frame: "wish-view"} do %>
-            <div class="card-product__info">
-              <div class="card-product-infos">
-                <h2><%= wish.title %></h2>
-              </div>
-            </div>
-            <div class="card-product__votes">
-              <div class=""><%= wish.votes.count %></div>
-            </div>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="separator">
-    </div>
-    <div class="feedback__column-right">
-      <div class="feedback__wrapper">
-          <%= turbo_frame_tag "wish-view" do %>
+<div class="d-flex">
+  <%= render "shared/sidebar" %>
+  <div class="flex-grow-1">
+    <%= render "shared/navbar" %>
+    <div class="my-container">
+      <div class="feedback-wrapper">
+        <div class="feedback__column-left">
+            <% @wishes.each do |wish| %>
+              <%= link_to wish_path(wish), class:"card-product", data: {turbo_frame: "wish-view"} do %>
+                <div class="card-product__info">
+                  <div class="card-product-infos">
+                    <h2><%= wish.title %></h2>
+                  </div>
+                </div>
+                <div class="card-product__votes">
+                  <div class=""><%= wish.votes.count %></div>
+                </div>
+            <% end %>
           <% end %>
+        </div>
+        <div class="separator">
+        </div>
+        <div class="feedback__column-right">
+          <div class="feedback__wrapper">
+              <%= turbo_frame_tag "wish-view" do %>
+              <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -102,11 +102,12 @@ button {
 }
 
 .ghost-button {
-  padding: 10px 20px;
+  font-size: 14px;
+  padding: 8px 24px;
   font-weight: bold;
   color: $primary-color;
   border: 1px solid $primary-color;
-  border-radius: 6px;
+  border-radius: 4px;
   &:hover {
     background: $primary-color;
     color: white;
