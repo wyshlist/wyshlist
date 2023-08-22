@@ -24,16 +24,11 @@
       </div>
       <div class="card-product__icons">
           <div class="card-product__icon">
-              <small><i class="fas fa-comment"></i> <%= @wish.comments.count %> comments</small>
+              <small><%= image_tag 'message-square.png', alt: "message-icon" %> <%= @wish.comments.count %> comments</small>
           </div>
       </div>
       <% @comments.each do |comment| %>
           <div class="card-comment">
-          <% if comment.user.photo_attached? %>
-              <%= cl_image_tag comment.user.photo.key, alt: "#{comment.user.full_name} wyshlist profile photo", class: "avatar dropdown-toggle" %>
-          <% else %>
-              <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle" %>
-          <% end %>
               <div class="card-product-infos">
                   <p><strong><%= comment.user.full_name %></strong><p>
                   <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
@@ -42,6 +37,11 @@
                   <% else %>
                     <p><%= comment.content %></p>
                   <% end %>
+                  <ul class='list-inline'>
+                    <li class="list-inline-item"><%= image_tag 'heart.png', alt: "text" %> 37</li>
+                    <li class="list-inline-item"><small><%= comment.created_at.strftime('%B %e, %Y') %></small></li>
+                    <li class="list-inline-item"><%= link_to 'Reply', '#', class: "text-reset text-decoration-underline" %></li>
+                  </ul>
               </div>
           </div>
       <% end %>

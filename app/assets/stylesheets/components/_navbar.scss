@@ -3,6 +3,8 @@
   background: white;
   height: 80px;
   border-bottom: 1px solid $border-gray;
+  position: sticky;
+  top: 0;
 }
 
 .navbar-lewagon .navbar-collapse {
