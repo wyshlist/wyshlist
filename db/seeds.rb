@@ -19,10 +19,11 @@ user = User.create!(email: "user1@gmail.com", password: "123123", username: "use
 
 # Generate a bunch of additional users.
 10.times do |n|
-    name = Faker::Name.name
+    first_name = Faker::Name.name
+    last_name = Faker::Name.name
     email = Faker::Internet.email
     password = "123123"
-    User.create!(email: email, password: password, username: name)
+    User.create!(email: email, password: password, first_name:, last_name:, username: "#{first_name}_#{last_name}")
     print "*"
 end
 puts "Creating main sample wishlist..."
@@ -95,4 +96,3 @@ puts ". . . . . . . . . . .*. . . . . . . ** *
 . . . . . . . . *
 . . . . . . . . *
 "
-

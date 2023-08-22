@@ -26,31 +26,41 @@
   margin-right: 4px;
 }
 
+.card-header {
+  border-bottom: solid 2px #e6e6e6;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
 .card-product {
   overflow: hidden;
   background: white;
-  border-bottom: solid 2px #e6e6e6;
-  // border-radius: .75rem;
-  padding: 10px 0;
+  border: solid 2px #e6e6e6;
+  border-radius: .75rem;
   display: flex;
   align-items: start;
   margin-bottom: 10px;
   justify-content: space-between;
+  padding: 10px;
   color: $font-color;
-  // &:hover {
-  //   border: solid 2px $light-gray;
-  // }
+  &:hover {
+    border: solid 2px $light-gray;
+  }
 }
 
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+
   .card-product {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
+
   .card-product h2 {
     font-size: 1.5rem;
     font-weight: 400;
@@ -122,7 +132,7 @@
 }
 
 .card-product__icons {
-  padding: 10px 0px;
+  padding: 20px 0px;
   display: flex;
   color: #b8b8b8;
   align-items: center;
@@ -163,13 +173,11 @@
 }
 
 .card-comment {
-  overflow: hidden;
-  background: white;
-  border-bottom: solid 1px $card-border;
-  display: flex;
-  align-items: start;
-  // margin-bottom: 20px;
-  // padding: 15px;
+  // overflow: hidden;
+  // background: white;
+  // display: flex;
+  // align-items: start;
+  padding: 10px 0;
   p {
     margin-bottom: 6px;
   }
@@ -178,6 +186,10 @@
     padding: 2px 8px;
     border-radius: 8px;
   }
+}
+
+.card-border-color {
+  border-color: $card-border;
 }
 
 .cards-columns {

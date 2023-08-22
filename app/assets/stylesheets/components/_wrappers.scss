@@ -260,3 +260,36 @@
   background-color: grey;
   margin: 0 10px;
 }
+
+
+.feedback-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    color: $gray;
+  }
+
+  .filter {
+    display: flex;
+    align-items: center;
+
+    .active {
+      background-color: $primary-color;
+      color: $white;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+  }
+
+  .sorting {
+    display: flex;
+    border-left: 2px solid $gray;
+
+    img {
+      height: 20px;
+      margin-left: 14px;
+    }
+  }
+}

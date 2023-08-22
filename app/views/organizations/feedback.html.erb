@@ -5,18 +5,29 @@
     <div class="feedback-wrapper">
       <div class="feedback__column-left">
         <div class="wrapper-container">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between align-items-start mb-3">
             <h2>Tickets</h2>
-            <a href="#">+</a>
+            <%= link_to '#', class: 'ghost-button dark' do %>
+              <i class="fa-solid fa-plus"></i>
+            <% end %>
           </div>
           <div class="feedback-filter">
-            <p>Backlog</p>
-            <p>In process</p>
-            <p>Completed</p>
-            |
-            <p>↕️</p>
-            <p>↕️</p>
-            <p>↕️</p>
+            <div class="filter">
+              <% Wish.stages.first(3).each do |key, value| %>
+                <%= link_to key, '#', class: "me-3 #{'active' if value == 1}" %>
+              <% end %>
+            </div>
+            <div class="sorting">
+              <%= link_to '#', class: '' do %>
+                <%= image_tag 'sort.png', alt: "sort-icon" %>
+              <% end %>
+              <%= link_to '#', class: '' do %>
+                <%= image_tag 'filter.png', alt: "filter-icon" %>
+              <% end %>
+              <%= link_to '#', class: '' do %>
+                <%= image_tag 'search.png', alt: "search-icon" %>
+              <% end %>
+            </div>
           </div>
         </div>
         <% @wishes.each do |wish| %>
@@ -25,8 +36,8 @@
               <p><strong><%= wish.title %></strong></p>
               <%= wish.description %>
               <ul class='list-inline'>
-                <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> 37</li>
-                <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> 37</li>
+                <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes.count %></li>
+                <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> <%= wish.comments.count %></li>
               </ul>
             </div>
           <% end %>
