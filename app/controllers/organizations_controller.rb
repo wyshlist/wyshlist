@@ -54,6 +54,9 @@ class OrganizationsController < ApplicationController
       organization = current_user.organization
       authorize organization
       @wishes = organization.wishes
+
+      # temporary filtering
+      @wishes = @wishes.where(stage: params[:stage]) if params[:stage]
     end
 
     private

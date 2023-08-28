@@ -14,7 +14,7 @@
           <div class="feedback-filter">
             <div class="filter">
               <% Wish.stages.first(3).each do |key, value| %>
-                <%= link_to key, '#', class: "me-3 #{'active' if value == 1}" %>
+                <%= link_to key, feedback_path(stage: key), class: "me-3 #{'active' if key == params[:stage]}" %>
               <% end %>
             </div>
             <div class="sorting">
