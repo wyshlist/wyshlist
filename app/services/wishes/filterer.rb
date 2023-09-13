@@ -5,7 +5,7 @@ module Wishes
     DEFAULT_COLUMN_DIRECTION = 'desc'
 
     ORDER_COLUMN_WHITELIST = %w[votes_count].freeze
-    ORDER_DIRECTION_WHITELIST = %w[ASC DESC].freeze
+    ORDER_DIRECTION_WHITELIST = %w[ASC DESC asc desc].freeze
 
     def initialize(filter_params:, scope:)
       @stage = filter_params.fetch(:stage, nil)
@@ -35,9 +35,7 @@ module Wishes
       return scope if order_column.blank?
 
       if order_column == 'votes_count'
-        @scope = scope.joins(:votes)
-                      .group('wishes.id')
-                      .order("COUNT(votes.id) #{order_direction}")
+        @scope = scope.order("votes_count #{order_direction}")
       else
         @scope = scope.order(order_column => order_direction)
       end

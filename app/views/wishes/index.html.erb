@@ -30,8 +30,9 @@
                     <%# </div> %>
                 <%# end %>
             <%# end %>
-              <%= render "user_filters" %>
-              <br>
+            <ul class="wishes-filter__list">
+               <%= render 'wishes/user_filters' %>
+                <br>
              <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>
                     <div class="new-wish-wrapper new-wish-sidebar-wrapper">

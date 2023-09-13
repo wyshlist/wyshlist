@@ -1,0 +1,24 @@
+<div class="sidebar">
+  <%= link_to user_signed_in? ? root_path : unauthenticated_root_path, class: "navbar-brand" do %>
+    <%= image_tag "logo-short.png", class: "logo"%>
+  <% end %>
+  <div class="dropdown">
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% else %>
+      <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <% end %>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <% if Wishlist.admin_wishlists.any? %>
+        <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.admin_wishlists.first), class: "dropdown-item main-link" %>
+      <% end %>
+      <% if current_user&.organization.present? && policy(current_user&.organization).edit? %>
+        <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item" %>
+      <% else %>
+        <%= link_to "Your team", new_organization_path, class: "dropdown-item"  %>
+      <% end %>
+      <%= link_to "My account", edit_user_registration_path, class: "dropdown-item" %>
+      <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+    </div>
+  </div>
+</div>

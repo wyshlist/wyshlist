@@ -10,27 +10,36 @@ class OrganizationPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    true
+  end
+
   def show?
     true
   end
 
   def edit?
-    record.users.include?(user)
-  end
-
-  def create?
-    true
+                  # super_team_member is a team_member
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
   end
 
   def update?
-    record.organization_owner?(user)
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
   end
 
   def destroy?
-    record.organization_owner?(user)
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
   end
 
   def feedback?
-    record.organization_member?(user) || user.admin?
+    user.admin? || user.is_team_member_of(record)
+  end
+
+  def members?
+    user.is_team_member_of(record)
+  end
+
+  def remove_member?
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
   end
 end

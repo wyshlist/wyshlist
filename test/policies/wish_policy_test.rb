@@ -1,18 +1,43 @@
-require 'test_helper'
+require 'rails_helper'
 
 class WishPolicyTest < ActiveSupport::TestCase
-  def test_scope
-  end
+  RSpec.describe WishPolicy do
+    subject { described_class.new(user, wish) }
 
-  def test_show
-  end
+    let(:wish) { FactoryBot.build_stubbed(:wish) }
 
-  def test_create
-  end
+    context 'with visitors' do
+      let(:user) { FactoryBot.build_stubbed(:no_record_owner_user) }
 
-  def test_update
-  end
+      it { is_expected.to permit_actions(%i[new create show]) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+    end
 
-  def test_destroy
+    context 'with wish owners' do
+      let(:user) { FactoryBot.build_stubbed(:record_owner_user) }
+      let(:wish) { FactoryBot.build_stubbed(:wish, user:) }
+
+      it { is_expected.to permit_actions(%i[new create show edit update destroy]) }
+    end
+
+    context 'with admins' do
+      let(:user) { FactoryBot.build_stubbed(:admin) }
+
+      it { is_expected.to permit_actions(%i[new create show edit update destroy]) }
+    end
+
+    context 'with super team members' do
+    let(:user) {FactoryBot.create(:super_team_member)}
+
+    it { is_expected.to permit_actions(%i[new create show]) }
+    it { is_expected.to forbid_actions(%i[edit update destroy]) }
+    end
+
+    context 'with team members' do
+      let(:user) {FactoryBot.create(:team_member)}
+
+      it { is_expected.to permit_actions(%i[new create show]) }
+      it { is_expected.to forbid_actions(%i[edit update destroy]) }
+    end
   end
 end

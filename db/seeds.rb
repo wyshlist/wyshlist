@@ -18,24 +18,25 @@ organization = Organization.create(name: "Le Wagon")
 user = User.create!(email: "user1@gmail.com", password: "123123", username: "user1", organization: organization, role: 1)
 
 # Generate a bunch of additional users.
-99.times do |n|
-    name = Faker::Name.name
+10.times do |n|
+    first_name = Faker::Name.name
+    last_name = Faker::Name.name
     email = Faker::Internet.email
     password = "123123"
-    User.create!(email: email, password: password, username: name)
+    User.create!(email: email, password: password, first_name:, last_name:, username: "#{first_name}_#{last_name}")
     print "*"
 end
 puts "Creating main sample wishlist..."
 # Create a main sample wishlist.
-Wishlist.create!(title: "Wishlist 1", description: "This is the first wishlist.", user: user)
+Wishlist.create!(title: "Wishlist 1", description: "This is the first wishlist.", user: user, organization: organization, color: Wishlist::COLORS.sample)
 puts ""
 puts "Creating main sample wish..."
 # Generate a bunch of additional wishlists.
-99.times do |n|
+25.times do |n|
     print "*"
     title = Faker::Lorem.sentence(word_count: 3)
     description = Faker::Lorem.sentence(word_count: 10)
-    Wishlist.create!(title: title, description: description, user: User.all.sample, color: Wishlist::COLORS.sample)
+    Wishlist.create!(title: title, description: description, user: User.all.sample, color: Wishlist::COLORS.sample, organization: Organization.all.sample)
 end
 puts ""
 puts "Creating main sample wish..."
@@ -53,7 +54,8 @@ puts "Creating main sample vote..."
 # Generate a bunch of additional votes.
 User.all.each do |user|
     print "*"
-    Vote.create!(user: user, wish: Wish.all.sample)
+    Vote.create!(user: user, wish: Wish.select { |wish| wish.user != user }.sample)
+
 end
 puts ""
 puts "Creating main sample comment..."
@@ -94,4 +96,3 @@ puts ". . . . . . . . . . .*. . . . . . . ** *
 . . . . . . . . *
 . . . . . . . . *
 "
-

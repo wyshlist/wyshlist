@@ -12,7 +12,6 @@ module Wishes
       @wishlist_id = filter_params.fetch(:wishlist_id, nil)
       @order_column = filter_params.fetch(:order_column, nil)
       @order_direction = filter_params.fetch(:order_direction, nil)
-
       @scope = scope
     end
 
@@ -27,28 +26,24 @@ module Wishes
 
     private
 
-    ## Filters to be applied here -->
     def apply_stage_filter
-      return scope if stage.blank?
+      return unless stage.present?
 
-      @scope = scope.where(stage:)
+      @scope = scope.where(stage: stage)
     end
 
     def apply_wishlist_filter
-      return scope if wishlist_id.blank?
+      return unless wishlist_id.present?
 
-      wishlist = Wishlist.find(wishlist_id)
-      @scope = scope.where(wishlist: wishlist)
+      wishlist = Wishlist.find_by(id: wishlist_id)
+      @scope = scope.where(wishlist: wishlist) if wishlist
     end
-    ## <-- Filters to be applied here
 
     def apply_order
-      return scope if order_column.blank?
+      return unless order_column.present?
 
       if order_column == 'votes_count'
-        @scope = scope.joins(:votes)
-                      .group('wishes.id')
-                      .order("COUNT(votes.id) #{order_direction}")
+        @scope = scope.order("votes_count #{order_direction}")
       else
         @scope = scope.order(order_column => order_direction)
       end

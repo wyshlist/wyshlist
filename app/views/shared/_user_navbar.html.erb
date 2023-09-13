@@ -1,13 +1,13 @@
 <div class="my-container">
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
         <div class="container-fluid">
-            <% if @wishlist %>
-                <%= link_to organization_path(@wishlist ? @wishlist.organization : @organization), class: "navbar-brand" do %>
+            <% if @wishlist && @wishlist.organization %>
+                <%= link_to organization_path(subdomain: @wishlist ? @wishlist.organization.subdomain : @organization.subdomain), class: "navbar-brand" do %>
                     <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
                 <% end %>
-            <% else %>
-                <%= link_to organization_path(@organization), class: "navbar-brand" do %>
-                    <%= image_tag @organization.logo.attached? ? @wishlist.organization.logo : 'logo.jpg', class: "logo"%>
+            <% elsif @organization %>
+                <%= link_to organization_path(subdomain: @organization.subdomain), class: "navbar-brand" do %>
+                    <%= image_tag @organization.logo.attached? ? @organization.logo : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
 
@@ -16,9 +16,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto align-items-center">
                     <% if @wishlist %>
-                        <li>
+                        <li class="nav-item">
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
                                     <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
@@ -29,7 +29,7 @@
                         <% if user_signed_in? %>
                             <li class="nav-item active">
                                 <% if @wishlist.has_an_organization? %>
-                                    <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+                                    <%= link_to "Explore", organization_path(subdomain: @wishlist.organization.subdomain), class: "nav-link" %>
                                 <% end %>
                             </li>
                             <li class="nav-item dropdown">

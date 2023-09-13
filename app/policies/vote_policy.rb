@@ -11,7 +11,6 @@ class VotePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user_is_owner_or_admin?
+   user.admin? || user_is_record_owner?
   end
-
 end

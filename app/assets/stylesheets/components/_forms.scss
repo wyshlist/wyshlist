@@ -1,92 +1,156 @@
 .category-wrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.category-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.form-control {
+  border-radius: 4px;
+}
+
+.color-input {
+  width: 100px;
+  height: 70px;
+  margin: 0px auto;
+}
+
+.form-wrapper {
+  text-align: center;
+}
+
+.form-user {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 34px;
   }
-  
-  .category-selector {
-    position: absolute;
-    transform: scale(0);
+
+  .vw-30 {
+    min-width: 30vw;
+  }
+
+  .form-header {
+    text-align: start;
+  }
+
+  form {
+    margin: 12px 0;
+    min-width: 30vw;
+  }
+
+  .form-text {
+    font-size: 12px;
   }
 
   .form-control {
-    border-radius: 8px;
-  }
+    border: none;
+    padding: 6px 0;
+    border-radius: 0;
+    border-bottom: 1px solid $placeholder-gray;
 
-  .color-input {
-    width: 100px;
-    height: 70px;
-    margin: 0px auto;
-  }
-  
-  .form-wrapper {
-    text-align: center;
-  }
-
-  .wishes__copy {
-    display: flex;
-    align-items: center;
-    height: 28px;
-    color: $primary-color;
-    button {
-      background-color: $bg-color;
-      padding: 0px 3px;
-      border: none;
-      border-radius: 0px 2px 2px 0px;
-      height: 28px;
-      color: $primary-color;
+    &:focus {
+      box-shadow: none;
     }
   }
 
-  .wishes__copy-link {
-    width: 12rem;
-    border-radius: 2px 0px 0px 2px;
-    border-left: 1px solid #EAEAEA;
-    border-top: 1px solid #EAEAEA;
-    border-bottom: 1px solid #EAEAEA;
-    border-right: none;
-  }
-
-  .wishes__clipboard {
-    width: 2rem;
-    height: 28px;
-    border-radius: 0px 2px 2px 0px;
-  }
-
-  .category-selector + label {
-    font-size: 1px;
-    padding: 25px;
-    display: block;
-    cursor: pointer;
-    box-sizing: border-box;
+  .form-label {
+    color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
-    text-align: left;
-    border: 1px solid #EAEAEA;
-    border-radius: 4px;
-    margin: 20px;
-    width: 70px;
+    margin: 0;
+  }
+}
+
+.login-separator {
+  margin-top: 12px;
+  display: grid;
+  min-width: 30vw;
+  grid-template-columns: 1fr auto 1fr;
+
+  p {
+    margin: 0 32px;
+    color: $placeholder-gray;
   }
 
-  .tickets-searchbar {
-    margin-bottom: 25px;
+  .separator__line {
+    border-bottom: 1px solid $placeholder-gray;
+    height: 0;
+    margin: auto 0;
   }
-  
-  .category-selector:checked + label {
-    border: 3px solid $light-gray !important;
-    background-color: #EAEAEA;
+}
+
+.wishes__copy {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  color: $primary-color;
+  button {
+    background-color: $bg-color;
+    padding: 0px 3px;
+    border: none;
+    border-radius: 0px 2px 2px 0px;
+    height: 28px;
+    color: $primary-color;
   }
-  
+}
+
+.wishes__copy-link {
+  width: 12rem;
+  border-radius: 2px 0px 0px 2px;
+  border-left: 1px solid #EAEAEA;
+  border-top: 1px solid #EAEAEA;
+  border-bottom: 1px solid #EAEAEA;
+  border-right: none;
+}
+
+.wishes__clipboard {
+  width: 2rem;
+  height: 28px;
+  border-radius: 0px 2px 2px 0px;
+}
+
+.category-selector + label {
+  font-size: 1px;
+  padding: 25px;
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 12px;
+  text-align: left;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  margin: 20px;
+  width: 70px;
+}
+
+.tickets-searchbar {
+  // margin-bottom: 25px;
+}
+
+.category-selector:checked + label {
+  border: 3px solid $light-gray !important;
+  background-color: #EAEAEA;
+}
+
 #wishlist_color_ecedfe + label {
     color: #ECEDFE;
     background-color: #ECEDFE;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #ECEDFE;
 }
 
 #wishlist_color_effeec + label {
     color: #EFFEEC;
     background-color: #EFFEEC;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #EFFEEC;
 }
 
@@ -97,28 +161,28 @@
 #wishlist_color_feecec + label {
     color: #FEECEC ;
     background-color: #FEECEC;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #FEECEC;
 }
 
 #wishlist_color_fefcec + label {
     color: #FEFCEC;
     background-color: #FEFCEC;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #FEFCEC;
 }
 
 #wishlist_color_f9ecfe + label {
     color: #F9ECFE;
     background-color: #F9ECFE;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #F9ECFE;
 }
 
 #wishlist_color_ecfefe + label {
     color: #ECFEFE;
     background-color: #ECFEFE;
-    border-radius: 100%; 
+    border-radius: 100%;
     border: 3px solid #ECFEFE;
 }
 
@@ -197,6 +261,10 @@
   background: white;
   border-radius: 8px;
   min-width: 30vw;
+}
+
+.logo {
+  height: 40px;
 }
 
 @media (max-width: 768px) {

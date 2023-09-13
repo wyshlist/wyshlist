@@ -1,0 +1,41 @@
+<div class="my-container">
+  <div class="form-user">
+    <h2><%= t "devise.invitations.edit.header" %></h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put, data: {controller: "photo-preview"} }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.hidden_field :invitation_token %>
+
+      <div class="form-inputs">
+          <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      placeholder: "e.g John",
+                      input_html: { autocomplete: "First name" } %>
+          <%= f.input :last_name,
+                      required: true,
+                      placeholder: "e.g Doe",
+                      autofocus: true,
+                      input_html: { autocomplete: "Last name" } %>
+          <%= f.input :password,
+                      required: true,
+                      placeholder: "",
+                      hint: ("Minimum #{@minimum_password_length} characters" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      placeholder: "",
+                      required: true,
+                      hint: ("Minimum #{@minimum_password_length} characters" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <div class="text-center">
+            <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
+          </div>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
+        </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn-flat w-100 mb-0" %>
+      </div>
+    <% end %>
+  </div>
+</div>

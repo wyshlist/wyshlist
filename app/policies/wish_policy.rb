@@ -5,8 +5,8 @@ class WishPolicy < ApplicationPolicy
     end
   end
 
-  def edit?
-    user_is_owner_or_admin?
+  def index?
+    true
   end
 
   def new?
@@ -21,11 +21,15 @@ class WishPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    user.admin? || user_is_record_owner?
+  end
+
   def update?
-    user_is_owner_or_admin?
+    user.admin? || user_is_record_owner?
   end
 
   def destroy?
-    user_is_owner_or_admin?
+    user.admin? || user_is_record_owner?
   end
 end

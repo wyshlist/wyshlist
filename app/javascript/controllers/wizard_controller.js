@@ -22,7 +22,6 @@ export default class extends Controller {
         }
 
         const data = await response.json();
-        console.log(data);
 
         const options = data.data.map(workspace => {
           return `<option name="workspace" value="${workspace.gid}" data-action="change->integration#showProjects">${workspace.name}</option>`;
@@ -73,15 +72,11 @@ export default class extends Controller {
   goToNext(event) {
     const nextStep = event.target.dataset.nextStep - 1;
     const actualStep = event.target.dataset.nextStep;
-    console.log(nextStep);
 
     if (nextStep === 0) {
       this.getWorkspaces();
-      console.log("In workspaces");
     } else if (nextStep === 1) {
       this.getProjects();
-    } else {
-      console.log('in actions');
     }
 
     this.stepTargets[nextStep].classList.add("hidden");
