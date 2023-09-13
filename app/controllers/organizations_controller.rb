@@ -56,6 +56,21 @@ class OrganizationsController < ApplicationController
       @wishes = organization.wishes
     end
 
+    def members
+      @organization = Organization.find_by(subdomain: request.subdomain)
+      authorize @organization
+      @members = @organization.users.order(:first_name)
+    end
+
+    def remove_member
+      @organization = Organization.find_by(subdomain: request.subdomain)
+      authorize @organization
+      @member = User.find(params[:user_id])
+      @member.update(organization: nil, role: 'user')
+      redirect_to members_path
+      flash[:notice] = "#{@member.email} has been removed from organization"
+    end
+
     private
 
     def check_team_member_subdomain

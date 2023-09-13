@@ -30,6 +30,9 @@ Rails.application.routes.draw do
     get '/wishlists', to: 'organizations#show', as: :organization
     resources :organizations, only: [:edit, :update, :destroy]
 
+    get '/members', to: 'organizations#members'
+    patch '/remove_members/:user_id', to: 'organizations#remove_member', as: :remove_member
+
     resources :wishlists, except: :show do
       resources :integrations, only: [:new, :create]
       resources :wishes, only: [:new, :create, :index]
