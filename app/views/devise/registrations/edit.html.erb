@@ -1,4 +1,4 @@
-<div class="my-container">
+<div class="my-container my-5">
     <div class="card-product form-wrapper">
       <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
@@ -7,9 +7,9 @@
 
         <div class="form-inputs">
           <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key, class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
+            <%= cl_image_tag current_user.photo.key, class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
           <% else %>
-            <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>        
+            <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
           <% end %>
           <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
           <%= f.input :first_name, required: true, autofocus: true %>

@@ -31,10 +31,7 @@
                 <%# end %>
             <%# end %>
             <ul class="wishes-filter__list">
-                <h3> Filter by stage </h3>
-                <% Wish.stages.each do |stage| %>
-                    <%= render "stage_filter", wishlist: @wishlist, stage: stage %>
-                <% end %>
+               <%= render 'wishes/user_filters' %>
                 <br>
              <% if user_signed_in? %>
                 <%= turbo_frame_tag "new-wish" do %>

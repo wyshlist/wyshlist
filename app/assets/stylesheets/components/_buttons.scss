@@ -7,6 +7,13 @@
     height: fit-content;
 }
 
+.connect-icon {
+    height: 20px;
+    width: 20px;
+    object-fit: center;
+    margin-left: 15px;
+    margin-top: -2px;
+}
 button {
     border: none;
     outline: none;
@@ -67,7 +74,6 @@ button {
   }
 }
 
-
 .primary-link {
   color: $primary-color;
   text-decoration: none;
@@ -77,12 +83,30 @@ button {
   }
 }
 
+.btn-secondary {
+  color: $primary-color;
+  padding: 12px 34px;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  border: solid 1px $primary-color;
+  transition: background-color 0.3s ease;
+  background-color: white;
+}
+
+.btn-secondary:hover {
+  background-color: $primary-color;
+  color: white;
+}
+
 .ghost-button {
   padding: 10px 20px;
   font-weight: bold;
   color: $primary-color;
   border: 1px solid $primary-color;
-  border-radius: 6px;
+  border-radius: 4px;
   &:hover {
     background: $primary-color;
     color: white;
@@ -90,12 +114,15 @@ button {
   }
 }
 
-
 @media (max-width: 768px) {
   .upvote-button {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .btn-secondary {
+    margin-top: 15px;
   }
 
   .wish-update-secondary {

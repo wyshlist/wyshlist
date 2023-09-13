@@ -1,22 +1,12 @@
 <div class="my-container">
-    <div class="form-user">
-      <%= image_tag 'logo.jpg', alt: "wyshlist-logo", class: "logo mb-2" %>
-      <h1>Sign up</h1>
-      <p>Already have a Wyshlist account? <%= link_to "Sign in", new_session_path(resource_name) %></p>
+  <div class="form-user">
+    <h2><%= t "devise.invitations.edit.header" %></h2>
 
-      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
-        <%= image_tag 'google_icon.png', alt: "google-login" %> Connect with Google
-      <% end %>
+    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put, data: {controller: "photo-preview"} }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.hidden_field :invitation_token %>
 
-      <div class="login-separator">
-        <div class="separator__line"></div>
-        <p class="">Or</p>
-        <div class="separator__line"></div>
-      </div>
-
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }, html: {data: {controller: "photo-preview"}}) do |f| %>
-        <%= f.error_notification %>
-        <div class="form-inputs">
+      <div class="form-inputs">
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
@@ -27,11 +17,6 @@
                       placeholder: "e.g Doe",
                       autofocus: true,
                       input_html: { autocomplete: "Last name" } %>
-          <%= f.input :email,
-                      required: true,
-                      placeholder: "e.g john.doe@gmail.com",
-                      autofocus: true,
-                      input_html: { autocomplete: "email" }%>
           <%= f.input :password,
                       required: true,
                       placeholder: "",
@@ -47,11 +32,10 @@
           </div>
           <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
         </div>
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: "btn-flat w-100 mb-0" %>
-        </div>
-      <% end %>
 
-      <small>By Signing up you agree to Wyshlist’s <a href="#">Terms of service</a> and <a href="#">Privacy policy</a></small>
+      <div class="form-actions">
+        <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn-flat w-100 mb-0" %>
+      </div>
+    <% end %>
   </div>
 </div>

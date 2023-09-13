@@ -53,11 +53,17 @@ class ApplicationPolicy
 
   private
 
-  def user_is_owner_or_admin?
-    record.user == user || user.admin? if !user.nil? || record.organization.organization_owner?(user)
+  def user_is_super_team_member?
+    # super_team_member is a team_member
+    user.super_team_member? && user_is_team_member?
   end
 
-  def user_is_owner_or_team_member_or_admin?
-    record.user == user || record.user.team_members&.include?(user) || user.admin? if !user.nil?
+  def user_is_team_member?
+    # record.user.organization.include?(user) --> prompt to errors (if we retrieve it from the user organization it will always be included)
+    user.is_team_member_of(record.user.organization)
+  end
+
+  def user_is_record_owner?
+    user.is_owner_of(record)
   end
 end

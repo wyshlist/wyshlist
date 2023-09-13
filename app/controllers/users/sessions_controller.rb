@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super do |resource|
-      if resource.persisted?
+      if resource.persisted? && resource.organization
         # redirect_url = stored_location_for(resource) || request.referer || authenticated_root_url(subdomain: resource.organization.subdomain)
         redirect_url = authenticated_root_url(subdomain: resource.organization.subdomain)
         redirect_to redirect_url, allow_other_host: true and return
