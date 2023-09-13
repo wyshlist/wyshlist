@@ -49,7 +49,7 @@ RSpec.feature 'Wishlists', type: :feature do
     scenario 'User creates a private wishlist' do
         visit new_wishlist_path
 
- 
+
         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
         fill_in 'Summarize the goals of this board', with: 'A wishlist'
         check 'Make this board private'
@@ -108,7 +108,7 @@ RSpec.feature 'Wishlists', type: :feature do
         user.update(organization: organization)
         other_user.update(organization: organization)
         other_wishlist = Wishlist.create(title: 'Other User Wishlist', user: other_user, description: 'A wishlist', private: true)
-        
+
         visit wishlist_wishes_path(other_wishlist)
 
         expect(page).to have_text('Other User Wishlist')
@@ -164,15 +164,15 @@ RSpec.feature 'Wishlists', type: :feature do
         Vote.create(user: user, wish: wish)
         Vote.create(user: user, wish: wish)
         Vote.create(user: user, wish: wish3)
-      
+
         visit wishlists_path
-      
+
         # Assuming the wishlist titles are displayed in a certain order, you can check the order of the titles
         wishlist_titles = page.all('.wishlist-title').map(&:text)
-      
+
         # Make sure the wishlists are sorted by number of votes in descending order
         expect(wishlist_titles).to eq(['Other Wishlist', 'Test Wishlist'])
-      
+
         # Additional assertions or expectations if needed
     end
 
@@ -185,16 +185,15 @@ RSpec.feature 'Wishlists', type: :feature do
         Vote.create(user: user, wish: wish)
         Vote.create(user: user, wish: wish)
         Vote.create(user: user, wish: wish3)
-      
-        visit organization_path(organization)
-      
+
+        visit organization_path(subdomain: organization.subdomain)
+
         # Assuming the wishlist titles are displayed in a certain order, you can check the order of the titles
         wishlist_titles = page.all('.wishlist-title').map(&:text)
-      
+
         # Make sure the wishlists are sorted by number of votes in descending order
         expect(wishlist_titles).to eq(['Other Wishlist', 'Test Wishlist'])
-      
+
         # Additional assertions or expectations if needed
     end
-end 
-
+end

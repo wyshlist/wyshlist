@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
     before_action :set_organization, only: [:show, :edit, :update, :destroy]
-    before_action :check_subdomain, only: [:feedback]
+    before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
 
     def new
         @organization = Organization.new
@@ -36,7 +36,7 @@ class OrganizationsController < ApplicationController
         authorize @organization
         if @organization.update(organization_params)
             flash[:notice] = "Organization updated successfully"
-            redirect_to organization_path(@organization)
+            redirect_to organization_path(subdomain: @organization.subdomain)
         else
             flash[:alert] = "Organization not updated, try again later"
             render :edit, status: :unprocessable_entity
@@ -58,7 +58,7 @@ class OrganizationsController < ApplicationController
 
     private
 
-    def check_subdomain
+    def check_team_member_subdomain
       if current_user.organization.nil?
         redirect_to new_organization_path
       elsif request.subdomain != current_user.organization.subdomain
@@ -67,12 +67,13 @@ class OrganizationsController < ApplicationController
     end
 
     def set_organization
-      @organization = Organization.find(params[:id])
+      @organization = Organization.find(params[:id]) if params[:id]
+      @organization = Organization.find_by(subdomain: request.subdomain)
       authorize @organization
     end
 
     def organization_params
-        params.require(:organization).permit(:name, :logo, :color)
+        params.require(:organization).permit(:name, :logo, :color, :subdomain)
     end
 
     def handle_existing_organization(organization_name)
@@ -87,7 +88,8 @@ class OrganizationsController < ApplicationController
     end
 
     def update_user_and_redirect(organization)
-        current_user.update(organization: organization)
-        redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
+        current_user.update(organization:, role: 'super_team_member', super_team_member_since: Time.now)
+        redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+        flash[:notice] = "Team #{organization.name} added successfully"
     end
 end

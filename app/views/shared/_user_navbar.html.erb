@@ -2,11 +2,11 @@
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
         <div class="container-fluid">
             <% if @wishlist && @wishlist.organization %>
-                <%= link_to organization_path(@wishlist ? @wishlist.organization : @organization), class: "navbar-brand" do %>
+                <%= link_to organization_path(subdomain: @wishlist ? @wishlist.organization.subdomain : @organization.subdomain), class: "navbar-brand" do %>
                     <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
                 <% end %>
             <% elsif @organization %>
-                <%= link_to organization_path(@organization), class: "navbar-brand" do %>
+                <%= link_to organization_path(subdomain: @organization.subdomain), class: "navbar-brand" do %>
                     <%= image_tag @organization.logo.attached? ? @organization.logo : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
@@ -29,7 +29,7 @@
                         <% if user_signed_in? %>
                             <li class="nav-item active">
                                 <% if @wishlist.has_an_organization? %>
-                                    <%= link_to "Explore", organization_path(@wishlist.organization), class: "nav-link" %>
+                                    <%= link_to "Explore", organization_path(subdomain: @wishlist.organization.subdomain), class: "nav-link" %>
                                 <% end %>
                             </li>
                             <li class="nav-item dropdown">

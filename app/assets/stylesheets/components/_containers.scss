@@ -3,25 +3,27 @@
     margin: 0 auto;
 }
 
+.full-screen {
+  min-height: 100vh;
+}
+
   // Smallest device
   @media (min-width: 100px) and (max-width: 575px) {
     .my-container {
       padding: 0 20px;
     }
   }
-  
+
   // Small devices (landscape phones, 576px and up)
   @media (min-width: 576px) {
     .my-container {
         padding: 0 20px;
       }
   }
-  
+
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) {
     .my-container {
         padding: 0 20px;
     }
   }
-
-
