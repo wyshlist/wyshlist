@@ -1,0 +1,41 @@
+<div class="card-product">
+    <div class="card-product__info">
+        <div class="card-product-infos">
+            <h1><%= @wish.title %></h1>
+            <small>Posted by <%= @wish.user.full_name %></small>
+            <p><%= @wish.description %></p>
+        </div>
+    </div>
+    <% if user_signed_in? && policy(@wish).edit? %>
+        <div>
+            <%= render "wishes/stage_form" %>
+        </div>
+    <% else %>
+        <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
+            <%= @wish.stage %>
+        </div>
+    <% end %>
+</div>
+<div class="card-product__icons">
+    <div class="card-product__icon">
+        <small><i class="fas fa-comment"></i> <%= @wish.comments.count %> comments</small>
+    </div>
+</div>
+<% @comments.each do |comment| %>
+    <div class="card-comment">
+    <% if comment.user.photo_attached? %>
+        <%= cl_image_tag comment.user.photo.key, alt: "#{comment.user.full_name} wyshlist profile photo", class: "avatar dropdown-toggle" %>
+    <% else %>
+        <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle" %>
+    <% end %>
+        <div class="card-product-infos">
+            <p><strong><%= comment.user.full_name %></strong><p>
+            <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
+              <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
+              <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).stage_color %>"><%= wish.downcase %></span></p>
+            <% else %>
+              <p><%= comment.content %></p>
+            <% end %>
+        </div>
+    </div>
+<% end %>

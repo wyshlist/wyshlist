@@ -60,6 +60,14 @@ class OrganizationsController < ApplicationController
     @wishes = organization.wishes
   end
 
+    def feedback
+      organization = current_user.organization
+      authorize organization
+      @wishes = organization.wishes
+
+      # temporary filtering
+      @wishes = @wishes.where(stage: params[:stage]) if params[:stage]
+    end
   def members
     @organization = Organization.find_by(subdomain: request.subdomain)
     authorize @organization
