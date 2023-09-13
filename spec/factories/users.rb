@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :record_owner_user, class: User do
-    email { "user1@gmail.com" }
+    sequence(:email) { |n| "user#{n}@wyshlist" }
     password { "123123" }
     username { "user1" }
   end
@@ -20,7 +20,7 @@ FactoryBot.define do
   end
 
   factory :team_member, class: User do
-    email { "team_member@wyshlist.com" }
+    sequence(:email) { |n| "team_member#{n}@wyshlist" }
     password { "123123" }
     username { "team_member" }
     role { "team_member" }
