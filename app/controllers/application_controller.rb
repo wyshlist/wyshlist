@@ -47,16 +47,10 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
-  # def after_sign_in_path_for(resource_or_scope)
-  #   redirect_to authenticated_root_url(subdomain: resource_or_scope.organization.subdomain), allow_other_host: true
-  #   # stored_location_for(resource_or_scope) || request.referer || authenticated_root_url(subdomain: resource_or_scope.organization.subdomain)
-  # end
-
   def after_invite_path_for(resource)
     members_path
   end
 
-  # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     new_organization_path(subdomain: '')
   end
