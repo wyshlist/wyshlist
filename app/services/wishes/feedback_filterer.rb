@@ -1,15 +1,17 @@
 module Wishes
   class FeedbackFilterer
-    DEFAULT_COLUMN_DIRECTION = 'desc'.freeze
-    DEFAULT_ORDER_COLUMN = 'votes_count'.freeze
-    ORDER_COLUMN_WHITELIST = %w[votes_count created_at updated_at].freeze
-    ORDER_DIRECTION_WHITELIST = %w[ASC DESC].freeze
+
+    DEFAULT_COLUMN_DIRECTION = 'desc'
+    DEFAULT_ORDER_COLUMN = 'votes_count'
+
+    ORDER_COLUMN_WHITELIST = %w[votes_count created_at updated_at]
+    ORDER_DIRECTION_WHITELIST = %w[ASC DESC]
 
     def initialize(filter_params:, scope:)
-      @stage = filter_params[:stage]
-      @wishlist_id = filter_params[:wishlist_id]
-      @order_column = filter_params[:order_column]
-      @order_direction = filter_params[:order_direction]
+      @stage = filter_params.fetch(:stage, nil)
+      @wishlist_id = filter_params.fetch(:wishlist_id, nil)
+      @order_column = filter_params.fetch(:order_column, nil)
+      @order_direction = filter_params.fetch(:order_direction, nil)
       @scope = scope
     end
 

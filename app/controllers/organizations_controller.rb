@@ -2,7 +2,8 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
   before_action :order_column_whitelist,
                 :order_direction_whitelist,
-                :set_stages, only: :feedback
+                :set_stages,
+                :set_wishlists, only: :feedback
   before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
 
   def new
@@ -58,16 +59,11 @@ class OrganizationsController < ApplicationController
     organization = current_user.organization
     authorize organization
     @wishes = organization.wishes
-  end
-
-    def feedback
-      organization = current_user.organization
-      authorize organization
-      @wishes = organization.wishes
-
-      # temporary filtering
-      @wishes = @wishes.where(stage: params[:stage]) if params[:stage]
+    if params[:filter].present?
+      @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
     end
+  end
+  
   def members
     @organization = Organization.find_by(subdomain: request.subdomain)
     authorize @organization
@@ -83,7 +79,33 @@ class OrganizationsController < ApplicationController
     flash[:notice] = "#{@member.email} has been removed from organization"
   end
 
-  private
+private
+  def order_column_whitelist
+    @order_column_whitelist ||=
+      Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
+  end
+
+  def order_direction_whitelist
+    @order_direction_whitelist ||=
+      Wishes::FeedbackFilterer::ORDER_DIRECTION_WHITELIST.map { [_1.titleize, _1] }
+  end
+
+  def set_stages
+    @stages = Wish.distinct.pluck(:stage)
+  end
+
+  def set_wishlists
+    @wishlists = current_user.organization.wishlists
+  end
+
+  def filter_params
+    params[:filter].permit(:stage, :wishlist_id, :order_column, :order_direction)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:id])
+    authorize @organization
+  end
 
   def check_team_member_subdomain
     if current_user.organization.nil?
@@ -92,8 +114,6 @@ class OrganizationsController < ApplicationController
       redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
     end
   end
-
-  private
 
   def order_column_whitelist
     @order_column_whitelist ||=
