@@ -1,0 +1,67 @@
+<head>
+    <style>
+        .email-body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 4px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-weight: bold;
+            text-align: right;
+        }
+    </style>
+</head>
+<body class="email-body">
+    <div class="container">
+        <div class="logo">
+            <img src="https://www.wyshlist.net/assets/logo-087e78c08af123ef29284793918422f8c22da0ffc663e15fb4db0aa0b2ff7109.jpg" alt="Wyshlist.net logo">
+        </div>
+        <h1>Welcome to Wyshlist.net!</h1>
+        <p>Hey there, fellow product geek! </p>
+        <p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>
+        <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %></p>
+        <% if @resource.invitation_due_at %>
+          <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+        <% end %>
+        <p><%= t("devise.mailer.invitation_instructions.ignore") %></p>
+        <p>If you have any questions, feedback, or even wild feature suggestions, don't be shy! Reach out to us or <a href="https://www.wyshlist.net/wishlists/104/wishes" style="color: $primary-color">contribute to Wyshlist</a> with your genius ideas. We're here to assist you on this thrilling journey.</p>
+        <p>Once again, welcome to Wyshlist! Together, let's revolutionize product development!</p>
+        <div class="signature">
+            <p>Best regards,</p>
+            <p>Daniel</p>
+            <p>Founder, Wyshlist.net</p>
+        </div>
+    </div>
+</body>
+</html>

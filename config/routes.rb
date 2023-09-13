@@ -1,5 +1,3 @@
-require_relative '../lib/constraints/subdomain_constraint'
-
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'privacy_policy', to: 'pages#privacy_policy'
@@ -29,7 +27,11 @@ Rails.application.routes.draw do
   end
 
   constraints SubdomainConstraint do
-    resources :organizations, only: [:edit, :update, :destroy, :show]
+    get '/wishlists', to: 'organizations#show', as: :organization
+    resources :organizations, only: [:edit, :update, :destroy]
+
+    get '/members', to: 'organizations#members'
+    patch '/remove_members/:user_id', to: 'organizations#remove_member', as: :remove_member
 
     resources :wishlists, except: :show do
       resources :integrations, only: [:new, :create]

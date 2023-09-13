@@ -120,6 +120,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.8)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -404,6 +407,7 @@ DEPENDENCIES
   cloudinary
   debug
   devise
+  devise_invitable (~> 2.0.0)
   dotenv-rails
   factory_bot (~> 6.2, >= 6.2.1)
   factory_bot_rails

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :wishlists, dependent: :destroy
   has_many :votes, dependent: :destroy
@@ -80,6 +80,22 @@ class User < ApplicationRecord
       votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
       relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
 
+    end
+  end
+
+  def invite!(email, name)
+    super
+    self.organization = self.invited_by.organization
+    self.role = 'team_member'
+    self.save
+  end
+
+  def invitation_status
+    if self.invited_by_type == 'User'
+      return 'Invitation Sent' if self.invitation_accepted_at.nil?
+      return 'Accepted' if invitation_accepted_at
+    else
+      return '-'
     end
   end
 

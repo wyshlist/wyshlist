@@ -34,4 +34,12 @@ class OrganizationPolicy < ApplicationPolicy
   def feedback?
     user.admin? || user.is_team_member_of(record)
   end
+
+  def members?
+    user.is_team_member_of(record)
+  end
+
+  def remove_member?
+    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+  end
 end
