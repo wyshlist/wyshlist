@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
       @organization_search = ""
       authorize @organization
   end
-  
+
   def show
       @wishlists = @organization.wishlists.sort { |a,b| b.wishes.count <=> a.wishes.count }
       @wishlist = @organization.wishlists.first
@@ -35,7 +35,7 @@ class OrganizationsController < ApplicationController
   def edit
       authorize @organization
   end
-  
+
   def update
       authorize @organization
       if @organization.update(organization_params)
@@ -59,11 +59,12 @@ class OrganizationsController < ApplicationController
     organization = current_user.organization
     authorize organization
     @wishes = organization.wishes
+
     if params[:filter].present?
       @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
     end
   end
-  
+
   def members
     @organization = Organization.find_by(subdomain: request.subdomain)
     authorize @organization
@@ -80,6 +81,7 @@ class OrganizationsController < ApplicationController
   end
 
 private
+
   def order_column_whitelist
     @order_column_whitelist ||=
       Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
@@ -119,7 +121,7 @@ private
     @order_column_whitelist ||=
       Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
   end
-  
+
   def set_organization
     @organization = Organization.find(params[:id]) if params[:id]
     @organization = Organization.find_by(subdomain: request.subdomain)
@@ -144,7 +146,8 @@ private
   end
 
   def set_organization
-    @organization = Organization.find(params[:id])
+    @organization = Organization.find(params[:id]) if params[:id]
+    @organization = Organization.find_by(subdomain: request.subdomain) if request.subdomain
     authorize @organization
   end
 
@@ -167,7 +170,7 @@ private
       current_user.update(organization: organization)
       redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
   end
-  
+
   def update_user_and_redirect(organization)
       current_user.update(organization:, role: 'super_team_member', super_team_member_since: Time.now)
       redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true

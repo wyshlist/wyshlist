@@ -5,7 +5,7 @@
       <% if user_signed_in? %>
         <% if current_user.has_an_organization? %>
           <li class="nav-item">
-            <%= link_to "Public Preview", organization_path(current_user.organization), target: "_blank", class: "ghost-button nav-link" %>
+            <%= link_to "Public Preview", organization_path, target: "_blank", class: "ghost-button nav-link" %>
           </li>
         <% end %>
       <% else %>
