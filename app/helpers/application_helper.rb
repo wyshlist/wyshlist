@@ -1,8 +1,6 @@
 module ApplicationHelper
     def end_user_views?
-        params[:controller] != "wishes" &&
-        (params[:controller] != "organizations" && params[:action] != "show") &&
-        params[:controller] != "users/registrations" &&
-        params[:controller] != "devise/sessions"
-    end
+        disallowed_controllers = ["wishes", "organizations", "users/registrations", "devise/sessions", "pages"]
+        !disallowed_controllers.include?(params[:controller])
+      end
 end
