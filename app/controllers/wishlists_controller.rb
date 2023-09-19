@@ -66,6 +66,6 @@ class WishlistsController < ApplicationController
       subdomain = request.subdomain
       @organization = Organization.find_by(subdomain:)
 
-      redirect_to root_url(subdomain: 'www'), alert: 'Organization not found' unless @organization
+      redirect_to root_url(subdomain: 'www'), allow_other_host: true unless @organization
     end
 end
