@@ -1,17 +1,9 @@
 class WishlistsController < ApplicationController
     add_breadcrumb "home", :root_path
+    before_action :set_organization, only: [:index]
 
     def index
-        @organization = current_user.organization
-        @wishlists = policy_scope(Wishlist)
-        .joins("LEFT JOIN wishes ON wishes.wishlist_id = wishlists.id")
-        .joins("LEFT JOIN votes ON votes.wish_id = wishes.id")
-        .joins("LEFT JOIN comments ON comments.wish_id = wishes.id")
-        .where("wishlists.user_id = ? OR wishes.user_id = ? OR comments.user_id = ? OR votes.user_id = ?", current_user.id, current_user.id, current_user.id, current_user.id)
-        .select("wishlists.*, COUNT(DISTINCT wishes.id) AS wishes_count")
-        .group("wishlists.id")
-        .distinct
-        .order("wishes_count DESC")
+      @wishlists = policy_scope(@organization.wishlists).includes(:wishes)
     end
 
     def new
@@ -68,5 +60,12 @@ class WishlistsController < ApplicationController
 
     def wishlist_params
         params.require(:wishlist).permit(:title, :description, :color, :private, :organization_id)
+    end
+
+    def set_organization
+      subdomain = request.subdomain
+      @organization = Organization.find_by(subdomain:)
+
+      redirect_to root_url(subdomain: 'www'), alert: 'Organization not found' unless @organization
     end
 end
