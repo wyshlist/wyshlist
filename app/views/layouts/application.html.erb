@@ -24,6 +24,7 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <%= render "shared/navbar" if end_user_views? %>
+    <%= render "shared/pages_navbar" if params[:controller] == "pages" %>
     <%= render "shared/flashes" %>
     <div class="page-wrapper">
       <%= yield %>
