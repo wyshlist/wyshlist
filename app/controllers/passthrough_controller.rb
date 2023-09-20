@@ -8,7 +8,7 @@ class PassthroughController < ApplicationController
         when 'super_team_member'
           feedback_path
         when 'user'
-          get_started_path
+          wishlists_path
         end
       redirect_to path
     end

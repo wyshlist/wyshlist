@@ -22,12 +22,11 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:new, :create]
 
-  authenticated(:user) do
-    root to: "organizations#feedback", as: :authenticated_root
-  end
+  # authenticated(:user) do
+  #   root to: "organizations#feedback", as: :authenticated_root
+  # end
 
   constraints SubdomainConstraint do
-    get '/wishlists', to: 'organizations#show', as: :organization
     resources :organizations, only: [:edit, :update, :destroy]
 
     get '/members', to: 'organizations#members'
@@ -46,9 +45,5 @@ Rails.application.routes.draw do
     resources :votes, only: :destroy
 
     resources :integrations, only: :destroy
-
-    resources :users, only: [:show] do
-      resources :wishlists, only: [:index]
-    end
   end
 end
