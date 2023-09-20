@@ -2,8 +2,7 @@ class WishlistPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      organization = scope.first.user.organization
-      user.is_team_member(organization) ? scope.all : scope.where(private: false)
+      scope.all
     end
   end
 

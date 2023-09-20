@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_15_041949) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_041949) do
     t.datetime "updated_at", null: false
     t.string "color", default: "#000000"
     t.string "subdomain"
+    t.index ["subdomain"], name: "index_organizations_on_subdomain", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_041949) do
     t.integer "role", default: 0
     t.string "first_name"
     t.string "last_name"
+    t.datetime "user_since"
     t.datetime "team_member_since"
     t.datetime "super_team_member_since"
     t.string "invitation_token"
