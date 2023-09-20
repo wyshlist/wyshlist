@@ -1,0 +1,41 @@
+<div class="about-us-section">
+    <div class="about-us-section__body">
+        <h2>How it works</h2>
+    </div>
+
+    <div class="about-us-section__grid">
+        <%= link_to "#gather", class: "card-link" do %>
+            <div class="about-us-section__grid-card">
+                <%= image_tag "ideas_icon.svg", alt: "ideas icon for wishlist", class: "about-us-section__icon" %>
+                <div>
+                    <h3>Gather feedback</h3>
+                    <p>
+                        Allow your users to submit feedback on your product and easily manage it.
+                    </p>
+                </div>
+            </div>
+        <% end %>
+        <%= link_to "#roadmap", class: "card-link" do %>
+            <div class="about-us-section__grid-card">
+                <%= image_tag "roadmap_icon.svg", alt: "roadmap icon for product managers", class: "about-us-section__icon" %>
+                <div>
+                    <h3>Expose your roadmap</h3>
+                    <p>
+                        Backlog, in development, in review... Thanks to our intruitive tags system, you can easily inform of the stage each feature.
+                    </p>
+                </div>
+            </div>
+        <% end %>
+        <%= link_to "#votes", class: "card-link"  do %>
+            <div class="about-us-section__grid-card">
+                <%= image_tag "votes_icon.svg", alt: "voting feature for product managers", class: "about-us-section__icon" %>
+                <div>
+                    <h3>Let the votes speak</h3>
+                    <p>
+                    Eliminate redundency and easily prioritize your product development through users votes.
+                    </p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

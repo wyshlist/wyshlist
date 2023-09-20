@@ -1,12 +1,15 @@
 <div class="my-container">
     <div class="banner">
         <div class="banner__body">
-            <h1>Let your users <br><em><span class="highlight">contribute & vote</span></em><br> on the next<br> product decision</h1>
+            <h1>Find your way forward through <span class="highlight">customer's feedback</h1>
+            <p>Simple feedback management system for tech teams. Eliminate redundancy and enable data-driven decision-making</p>
             <% if user_signed_in? %>
                 <%= link_to "Boards", wishlists_path, class: "btn-flat" %>
             <% else %>
                 <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
-                <p>Free sign up & no credit card required </p>
+                <br>
+                <br>
+                <small>Free sign up & no credit card required</small>
             <% end %>
         </div>
         <%= image_tag "home-mockup.svg", alt: "text", class: "banner__mockup" %>
@@ -14,44 +17,10 @@
 </div>
 <div class="my-container">
     <section class="section-wrapper">
-        <div class="about-us-section">
-            <div class="about-us-section__body">
-                <h2>How it works</h2>
-            </div>
-
-            <div class="about-us-section__grid">
-                <div class="about-us-section__grid-card">
-                    <%= image_tag "ideas_icon.svg", alt: "ideas icon for wishlist", class: "about-us-section__icon" %>
-                    <div>
-                        <h3>Gather ideas</h3>
-                        <p>
-                        Allow your team or customers to submit improvement ideas they would like to be solved.
-                        </p>
-                    </div>
-                </div>
-                <div class="about-us-section__grid-card">
-                    <%= image_tag "roadmap_icon.svg", alt: "roadmap icon for product managers", class: "about-us-section__icon" %>
-                    <div>
-                        <h3>Expose your roadmap</h3>
-                        <p>
-                            Backlog, in development, in review ... Thanks to our intruitive tags system, you can easily inform stakeholders of the stage each product or idea.
-                        </p>
-                    </div>
-                </div>
-                <div class="about-us-section__grid-card">
-                    <%= image_tag "votes_icon.svg", alt: "voting feature for product managers", class: "about-us-section__icon" %>
-                    <div>
-                        <h3>Let the votes speak</h3>
-                        <p>
-                            Easily prioritize your product development based on your <br>users votes.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%= render "pages/components/how_it_works" %>
     </section>
     <section>
-        <div class="card-info">
+        <div class="card-info" id="gather">
             <%= image_tag "gather-ideas.png", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
                 <h2>Improve your product decision-making process</h2>
@@ -62,7 +31,7 @@
             <%= image_tag "gather-ideas.png", class: "card-info__img right-image desktop-display" %>
             <%= image_tag "line-inverted.svg", class: "vector-inverted desktop-display" %>
         </div>
-        <div class="card-info">
+        <div class="card-info" id="votes">
             <%= image_tag "roadmap.png", class: "card-info__img left-image" %>
             <div class="card-info__body">
                 <h2>Maintain active engagement with product updates</h2>
@@ -72,7 +41,7 @@
             </div>
              <%= image_tag "line-s.svg", class: "vector desktop-display" %>
         </div>
-        <div class="card-info">
+        <div class="card-info" id="roadmap">
             <%= image_tag "votes.png", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
                 <h2>Leverage a product feature voting board to organize customer feedback</h2>
@@ -100,7 +69,7 @@
                 <h2>Why our users <em>love</em> Wyshlist.</h2>
                 <div class="testimonial-text-card">
                     <p>
-                        "Wyshlist is a great tool to collect feedback from our users. It helps us to prioritize our product roadmap and to communicate with our users."
+                        "Wyshlist is simple to use and has helped us steering our product development strategy."
                     </p>
                 </div>
                 <div class="mobile-display">
@@ -124,7 +93,7 @@
             <h2>Let's fullfill wishes!</h2>
             <p>Create your free account today</p>
             <br>
-            <%= link_to "Get started", new_organization_path, class: "btn-flat" %>
+            <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
             <p>
             <small>Free sign up & no credit card required</small>
             </p>
