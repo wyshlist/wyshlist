@@ -63,14 +63,13 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-
   img {
     height: 24px;
     margin-right: 8px;
   }
-
   &:hover {
-    background: transparent;
+    background: $bg-color;
+    color: white;
   }
 }
 
