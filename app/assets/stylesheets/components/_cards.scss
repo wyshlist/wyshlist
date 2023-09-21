@@ -68,6 +68,10 @@
   }
 }
 
+.card-link:hover {
+ background-color: $bg-gray;
+ transition: 0.3s;
+}
 
 .card-product__color {
   margin-right: 20px;
