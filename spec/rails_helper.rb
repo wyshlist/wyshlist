@@ -9,9 +9,6 @@ require 'rspec/rails'
 require 'devise'
 require 'factory_bot_rails'
 
-FactoryBot.definition_file_paths = [File.expand_path('spec/factories', Rails.root)]
-FactoryBot.find_definitions
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

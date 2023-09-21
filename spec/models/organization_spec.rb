@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
+  let (:organization) { FactoryBot.create(:organization) }
   describe 'associations' do
     it 'has many users' do
       association = Organization.reflect_on_association(:users)
@@ -10,14 +11,16 @@ RSpec.describe Organization, type: :model do
   end
 
   describe 'validations' do
-    it 'is valid with valid attributes' do
-      organization = Organization.new(name: 'Test Organization')
-      expect(organization).to be_valid
+    it 'validates the presence of name' do
+      organization.name = nil
+
+      expect(organization).not_to be_valid
     end
 
-    it 'is not valid without a name' do
-      organization = Organization.new(name: nil)
-      expect(organization).to_not be_valid
+    it 'validates the presence of subdomain' do
+      organization.subdomain = nil
+
+      expect(organization).not_to be_valid
     end
   end
 end
