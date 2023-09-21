@@ -1,14 +1,11 @@
-#rspec tests for the passthrough controller
-
 require 'rails_helper'
 
 RSpec.describe PassthroughController, type: :controller do
   describe "GET #index" do
-    # get team member form factories
-    let(:team_member) { build(:team_member) }
-    let(:super_team_member) { build(:super_team_member) }
-    let(:admin) { build(:admin) }
-    let(:user) { build(:user) }
+    let(:team_member) { FactoryBot.create(:team_member) }
+    let(:super_team_member) { FactoryBot.create(:super_team_member) }
+    let(:admin) { FactoryBot.create(:admin) }
+    let(:user) { FactoryBot.create(:no_record_owner_user) }
 
     context "when user is a team member" do
       before do
@@ -50,7 +47,7 @@ RSpec.describe PassthroughController, type: :controller do
 
       it "redirects to the get started page" do
         get :index
-        expect(response).to redirect_to(get_started_path)
+        expect(response).to redirect_to(wishlists_path)
       end
     end
   end
