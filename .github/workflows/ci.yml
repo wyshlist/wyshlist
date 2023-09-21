@@ -1,41 +1,49 @@
-name: CI
+name: "CI"
 
 on:
+  push:
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
-
+    branches: [ "master" ]
 jobs:
   test:
     runs-on: ubuntu-latest
-
     services:
       postgres:
-        image: postgres:13
+        image: postgres:11-alpine
         ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Ruby 3.1.2
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.1.2
-        bundler-cache: true
-
-    - name: Setup test database
-      run: |
-        sudo apt-get -yqq install libpq-dev
-        cp config/database.ci.yml config/database.yml
-        bundle exec rake db:create db:schema:load --trace
-
-    - name: Run RSpec
-      run: bundle exec rspec
-
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
-      PGHOST: localhost
-      PGUSER: postgres
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Run tests
+        run: bin/rake
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+      - name: Security audit application code
+        run: bin/brakeman -q -w2
+      - name: Lint Ruby files
+        run: bin/rubocop --parallel# This workflow uses actions that are not certified by GitHub.  They are
