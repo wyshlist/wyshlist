@@ -40,4 +40,4 @@ jobs:
       PGHOST: localhost
       PGUSER: postgres
 
-  style:
+  lint:
