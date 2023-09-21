@@ -40,7 +40,7 @@ class OrganizationsController < ApplicationController
       authorize @organization
       if @organization.update(organization_params)
           flash[:notice] = "Organization updated successfully"
-          redirect_to organization_path(subdomain: @organization.subdomain)
+          redirect_to wishlists_url(subdomain: @organization.subdomain)
       else
           flash[:alert] = "Organization not updated, try again later"
           render :edit, status: :unprocessable_entity
