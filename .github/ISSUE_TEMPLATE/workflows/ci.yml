@@ -39,3 +39,5 @@ jobs:
       RAILS_ENV: test
       PGHOST: localhost
       PGUSER: postgres
+
+  style:
