@@ -1,0 +1,10 @@
+<%= link_to wish_path(wish), data: {turbo_frame: "wish-view"} do %>
+  <div class="card-wish wrapper-container">
+    <p><strong><%= wish.title %></strong></p>
+    <%= wish.description %>
+    <ul class='list-inline'>
+      <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes.count %></li>
+      <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> <%= wish.comments.count %></li>
+    </ul>
+  </div>
+<% end %>
