@@ -29,9 +29,10 @@
                       input_html: { autocomplete: "Last name" } %>
           <%= f.input :email,
                       required: true,
-                      placeholder: "e.g john.doe@gmail.com",
+                      placeholder: "e.g john.doe@mycompany.com",
                       autofocus: true,
-                      input_html: { autocomplete: "email" }%>
+                      label: "Work Email",
+                      input_html: { autocomplete: "work email" }%>
           <%= f.input :password,
                       required: true,
                       placeholder: "",

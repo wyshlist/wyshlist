@@ -1,5 +1,5 @@
 class WishlistsController < ApplicationController
-    add_breadcrumb "home", :root_path
+    add_breadcrumb "home", :authenticated_root_path
     before_action :set_organization, only: [:index]
 
     def index

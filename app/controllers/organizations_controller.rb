@@ -20,15 +20,15 @@ class OrganizationsController < ApplicationController
 
   def create
       if params[:organization_search] && params[:organization_search] != ""
-          handle_existing_organization(params[:organization_search])
+        handle_existing_organization(params[:organization_search])
       else
-          @organization = Organization.create(organization_params)
-          authorize @organization
-          if @organization.save
-              update_user_and_redirect(@organization)
-          else
-              render :new, status: :unprocessable_entity
-          end
+        @organization = Organization.new(organization_params)
+        authorize @organization
+        if @organization.save
+            update_user_and_redirect(@organization)
+        else
+            render :new, status: :unprocessable_entity
+        end
       end
   end
 
@@ -40,7 +40,7 @@ class OrganizationsController < ApplicationController
       authorize @organization
       if @organization.update(organization_params)
           flash[:notice] = "Organization updated successfully"
-          redirect_to organization_path(subdomain: @organization.subdomain)
+          redirect_to authenticated_root_path(subdomain: @organization.subdomain), allow_other_host: true
       else
           flash[:alert] = "Organization not updated, try again later"
           render :edit, status: :unprocessable_entity
@@ -52,7 +52,7 @@ class OrganizationsController < ApplicationController
       authorize @organization
       @organization.destroy
       flash[:notice] = "Organization deleted successfully"
-      redirect_to root_path
+      redirect_to authenticated_root_path
   end
 
   def feedback
@@ -148,10 +148,6 @@ private
     authorize @organization
   end
 
-  def organization_params
-      params.require(:organization).permit(:name, :logo, :color)
-  end
-
   def handle_existing_organization(organization_name)
       @organization = Organization.where('LOWER(name) ILIKE ?', organization_name.downcase).first || @organization = Organization.new
       if @organization.id
@@ -169,7 +165,7 @@ private
   end
   
   def update_user_and_redirect(organization)
-      current_user.update(organization:, role: 'super_team_member', super_team_member_since: Time.now)
+      current_user.update(organization: organization, role: 'super_team_member', super_team_member_since: Time.now)
       redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
       flash[:notice] = "Team #{organization.name} added successfully"
   end
