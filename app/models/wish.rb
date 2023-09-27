@@ -42,6 +42,10 @@ class Wish < ApplicationRecord
     end
   end
 
+  def self.filter_stages
+    ["Backlog", "In process", "Launced"]
+  end
+
   private
 
   def create_comment

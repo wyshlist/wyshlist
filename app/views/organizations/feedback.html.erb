@@ -13,8 +13,8 @@
           </div>
           <div class="feedback-filter">
             <div class="filter">
-              <% Wish.stages.first(3).each do |key, value| %>
-                <%= link_to key, feedback_path(stage: key), class: "me-3 #{'active' if key == params[:stage]}" %>
+              <% Wish.filter_stages.each do |stage| %>
+                <%= link_to stage, feedback_path(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
               <% end %>
             </div>
             <div class="sorting">

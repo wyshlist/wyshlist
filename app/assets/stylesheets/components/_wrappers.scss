@@ -275,7 +275,7 @@
   justify-content: space-between;
 
   a {
-    color: $gray;
+    color: $mid-grey;
   }
 
   .filter {
@@ -283,8 +283,8 @@
     align-items: center;
 
     .active {
-      background-color: $primary-color;
-      color: $white;
+      background-color: $blue-bg;
+      color: $primary-color;
       padding: 4px 8px;
       border-radius: 4px;
     }
@@ -292,7 +292,7 @@
 
   .sorting {
     display: flex;
-    border-left: 2px solid $gray;
+    border-left: 2px solid $mid-grey;
 
     img {
       height: 20px;
