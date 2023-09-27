@@ -2,8 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Wish, type: :model do
   let(:user) { User.create(email: 'test@gmail.com', password: 'password', first_name: 'Test', last_name: 'User') }
-  let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description", color: "ECEDFE") }
-  let(:integration) { Integration.create(name: 'Asana', workspace: '523123124', project: '123123123', action: 'Create a new task', wishlist: wishlist, api_token: '123123123', user: user) }
+  let(:wishlist) do
+    Wishlist.create(title: 'Test Wishlist', user:, description: "Test description", color: "ECEDFE")
+  end
+  let(:integration) do
+    Integration.create(name: 'Asana', workspace: '523123124', project: '123123123', action: 'Create a new task',
+                       wishlist:, api_token: '123123123', user:)
+  end
 
   describe 'validations' do
     it 'validates the presence of a title' do
@@ -39,7 +44,7 @@ RSpec.describe Wish, type: :model do
     let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
 
     it 'create a new comment everytime there is an update' do
-      wish = Wish.create(title: "New Wish", wishlist: wishlist, user: owner)
+      wish = Wish.create(title: "New Wish", wishlist:, user: owner)
       expect { wish.update(stage: 'In review') }.to change { wish.comments.count }.by(1)
     end
   end
@@ -50,7 +55,7 @@ RSpec.describe Wish, type: :model do
     let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
 
     it "automatically upvotes the wish by the owner" do
-      wish = Wish.create(title: "New Wish", wishlist: wishlist, user: owner)
+      wish = Wish.create(title: "New Wish", wishlist:, user: owner)
       expect(wish.votes.count).to eq(1)
       expect(wish.votes.first.user).to eq(owner)
     end

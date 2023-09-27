@@ -16,7 +16,12 @@ RSpec.feature 'integrations', type: :feature do
   # end
 
   # scenario 'User cannot create an integration if it alreasy exists' do
-  #   integration = Integration.create(name: 'Asana' , workspace: '523123124', project: '123123123', action: 'Create a new task', wishlist: wishlist, api_token: '123123123', user: user)
+  #   integration = Integration.create(name: 'Asana' ,
+  #                                    workspace: '523123124',
+  #                                    project: '123123123',
+  #                                    action: 'Create a new task',
+  #                                    wishlist: wishlist,
+  #                                    api_token: '123123123', user: user)
   #   visit wishlist_wishes_path(wishlist)
 
   #   expect(page).to_not have_content("Connect to")

@@ -12,9 +12,11 @@ class Wishlist < ApplicationRecord
     status == "admin"
   end
 
+  # rubocop:disable Naming/PredicateName
   def has_an_organization?
     !organization.nil?
   end
+  # rubocop:enable Naming/PredicateName
 
   def self.admin_wishlists
     Wishlist.where(status: "admin")

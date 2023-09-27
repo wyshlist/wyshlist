@@ -59,11 +59,10 @@ class ApplicationPolicy
   end
 
   def user_is_team_member?
-    # record.user.organization.include?(user) --> prompt to errors (if we retrieve it from the user organization it will always be included)
-    user.is_team_member_of(record.user.organization)
+    user.team_member_of(record.user.organization)
   end
 
   def user_is_record_owner?
-    user.is_owner_of(record)
+    user.owner_of(record)
   end
 end

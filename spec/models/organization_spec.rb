@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-  let (:organization) { FactoryBot.create(:organization) }
+  let(:organization) { FactoryBot.create(:organization) }
   describe 'associations' do
     it 'has many users' do
       association = Organization.reflect_on_association(:users)

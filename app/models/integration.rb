@@ -4,6 +4,6 @@ class Integration < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :wishlist }
   validates :api_token, presence: true
-  APPS = %w[Asana].freeze
-  ACTIONS = ["Create a new task"].freeze
+  APPS = %w[Asana]
+  ACTIONS = ["Create a new task"]
 end
