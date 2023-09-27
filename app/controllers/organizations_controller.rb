@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
       @organization_search = ""
       authorize @organization
   end
-  
+
   def show
       @wishlists = @organization.wishlists.sort { |a,b| b.wishes.count <=> a.wishes.count }
       @wishlist = @organization.wishlists.first
@@ -34,7 +34,7 @@ class OrganizationsController < ApplicationController
   def edit
       authorize @organization
   end
-  
+
   def update
       authorize @organization
       if @organization.update(organization_params)
@@ -62,7 +62,7 @@ class OrganizationsController < ApplicationController
       @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
     end
   end
-  
+
   def members
     @organization = Organization.find_by(subdomain: request.subdomain)
     authorize @organization
@@ -110,7 +110,7 @@ private
     if current_user.organization.nil?
       redirect_to new_organization_path
     elsif request.subdomain != current_user.organization.subdomain
-      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+      redirect_to root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
     end
   end
 
@@ -118,7 +118,7 @@ private
     @order_column_whitelist ||=
       Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
   end
-  
+
   def set_organization
     @organization = Organization.find(params[:id]) if params[:id]
     @organization = Organization.find_by(subdomain: request.subdomain)
@@ -161,6 +161,5 @@ private
   def update_user_and_redirect(organization)
       current_user.update(organization: organization)
       redirect_to authenticated_root_path(subdomain: current_user.organization.subdomain), allow_other_host: true
-      flash[:notice] = "Team #{organization.name} added successfully"
   end
 end

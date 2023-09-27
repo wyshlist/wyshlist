@@ -29,6 +29,6 @@
     <div class="page-wrapper">
       <%= yield %>
     </div>
-    <%= render "shared/footer" if end_user_views? %>
+    <%= render "shared/footer" if params[:controller] == "pages"%>
   </body>
 </html>
