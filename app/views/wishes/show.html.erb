@@ -5,28 +5,59 @@
     <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-3 d-inline-block" %>
     <%= turbo_frame_tag "wish-view" do %>
       <div class="card-header">
-          <div class="card-product__info">
-              <div class="card-product-infos">
-                  <h1><%= @wish.title %></h1>
-                  <small>Posted by <%= @wish.user.full_name %></small>
-                  <p><%= @wish.description %></p>
+        <div class="flex-between mb-3">
+          <div class="flex-between">
+            <% if @wish.user.photo.attached? %>
+              <%= cl_image_tag @wish.user.photo.key, class: "avatar-small" %>
+            <% else %>
+              <div class="avatar-small avatar-name">
+                <%= @wish.user.initial %>
               </div>
+            <% end %>
+            <small class="ms-2 user-name"><%= @wish.user.full_name %></small>
           </div>
-          <% if user_signed_in? && policy(@wish).edit? %>
-              <div>
-                  <%= render "wishes/stage_form" %>
-              </div>
-          <% else %>
-              <div class="card-product__status" style="background-color: <%= @wish.stage_color %>">
-                  <%= @wish.stage %>
-              </div>
-          <% end %>
+          <div class="flex-between">
+            <div class="card-ghost me-2">
+              <span class="me-1">80</span>
+              <%= image_tag "carrot-up.png", width: '12px', alt: "text" %>
+            </div>
+            <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= @wish.stage_color %>; color: <%= @wish.stage_color %>">
+                <%= @wish.stage %>
+                <!--
+                  <% if user_signed_in? && policy(@wish).edit? %>
+                    <div>
+                      <%= render "wishes/stage_form" %>
+                    </div>
+                  <% end %>
+                -->
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-between">
+          <h1><%= @wish.title %></h1>
+          <div class="flex-between">
+            <% if user_signed_in? && policy(@wish).edit? %>
+              <%= link_to edit_wish_path(@wish) do  %>
+                <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
+              <% end %>
+            <% end %>
+            <% if user_signed_in? && policy(@wish).destroy? %>
+              <%= link_to wish_path(@wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <p><%= @wish.description %></p>
       </div>
+      <!--
       <div class="card-product__icons">
           <div class="card-product__icon">
               <small><%= image_tag 'message-square.png', alt: "message-icon" %> <%= @wish.comments.count %> comments</small>
           </div>
       </div>
+      -->
       <% @comments.each do |comment| %>
           <div class="card-comment <%= 'border-bottom card-border-color' unless comment == @comments.last %>">
             <p><strong><%= comment.user.full_name %></strong><p>

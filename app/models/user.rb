@@ -56,6 +56,10 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
+  def initial
+    first_name[0].upcase + last_name[0].upcase
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.find_by(email: data['email'])

@@ -33,12 +33,12 @@ class Wish < ApplicationRecord
   end
 
   def stage_color
-    case stage
-      when "Backlog" then "#F9ECFE"
-      when "In process" then "#ECFEFE"
-      when "In review" then "#ECEDFE"
-      when "Beta" then "#FEFCEC"
-      when "Launched" then "#EFFEEC"
+    case stage.capitalize
+    when "Backlog" then "#F9ECFE"
+    when "In process" then "#F278F2"
+    when "In review" then "#F278F2"
+    when "Beta" then "#FEFCEC"
+    when "Launched" then "#F278F2"
     end
   end
 

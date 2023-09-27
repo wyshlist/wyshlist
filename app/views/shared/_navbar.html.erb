@@ -18,7 +18,9 @@
             <% if current_user.photo.attached? %>
               <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% else %>
-              <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <div class="avatar flex-center avatar-name" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup=true aria-expanded=false >
+                <%= current_user.initial %>
+              </div>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
