@@ -19,7 +19,7 @@
   height: 65px;
 }
 
-.navbar img {
+.navbar .wyshlist-logo {
   height: 65px;
 }
 
@@ -35,4 +35,10 @@
     margin: 0px;
     font-size: color;
   }
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+  object-fit: cover;
 }

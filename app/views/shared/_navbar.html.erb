@@ -5,8 +5,26 @@
       <% if user_signed_in? %>
         <% if current_user.has_an_organization? %>
           <li class="nav-item">
-            <%= link_to "Public Preview", wishlists_path, target: "_blank", class: "ghost-button nav-link" %>
+            <%= link_to '#', target: "_blank", class: "nav-link px-0" do %>
+              <%= image_tag 'eye.png', class: "icon", alt: "notification" %>
+            <% end %>
           </li>
+          <li class="nav-item">
+            <%= link_to wishlists_path, target: "_blank", class: "nav-link px-0" do %>
+              <%= image_tag 'bell.png', class: "icon", alt: "notification" %>
+            <% end %>
+          </li>
+          <div class="dropdown nav-item">
+            <% if current_user.photo.attached? %>
+              <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% else %>
+              <%= image_tag "default-avatar.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% end %>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </div>
         <% end %>
       <% else %>
         <li class="nav-item">
