@@ -71,3 +71,26 @@ small {
         align-items: center;
     }
 }
+
+h4 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

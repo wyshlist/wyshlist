@@ -69,6 +69,33 @@
   }
 }
 
+.form-comment {
+  width: 100%;
+
+  .divider {
+    border-top: 1px solid $border-gray;
+    margin: 0 -50%;
+  }
+
+  form {
+    display: flex;
+  }
+
+  .comment_content {
+    flex-grow: 1;
+  }
+
+  textarea {
+    border: none;
+    height: 40px;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
 .login-separator {
   margin-top: 12px;
   display: grid;

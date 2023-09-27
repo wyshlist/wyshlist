@@ -30,12 +30,14 @@
             </div>
           </div>
         </div>
-        <% @wishes.each do |wish| %>
-          <%= render 'wishes/ticket', wish: wish %>
-        <% end %>
+        <div class="tickets">
+          <% @wishes.each do |wish| %>
+            <%= render 'wishes/ticket', wish: wish %>
+          <% end %>
+        </div>
       </div>
       <div class="feedback__column-right">
-        <div class="wrapper-container">
+        <div class="wrapper-container pb-0">
           <%= turbo_frame_tag "wish-view" do %>
           <% end %>
         </div>

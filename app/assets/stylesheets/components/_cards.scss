@@ -4,6 +4,22 @@
   width: 100%;
 }
 
+.card-show-wish {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+
+  .card-comments {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comments {
+    overflow-y: scroll;
+    height: 400px;
+  }
+}
+
 .list-inline {
   display: flex;
   margin-top: 12px;
@@ -27,7 +43,7 @@
 }
 
 .card-header {
-  padding-bottom: 40px;
+  // padding-bottom: 40px;
 
   h1 {
     font-size: 24px;
