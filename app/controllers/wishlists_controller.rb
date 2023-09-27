@@ -1,6 +1,7 @@
 class WishlistsController < ApplicationController
     add_breadcrumb "home", :authenticated_root_path
     before_action :set_organization, only: [:index]
+    skip_before_action :authenticate_user!, only: [:index]
 
     def index
       @wishlists = policy_scope(@organization.wishlists).includes(:wishes)

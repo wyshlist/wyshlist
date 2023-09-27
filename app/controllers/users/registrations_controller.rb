@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @role = set_role
+    @role = assign_role
     super
   end
 
@@ -39,16 +39,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # protected
+
+  def assign_role
+    if set_organization == "" || set_organization == "www"
+      "super_team_member"
+    else
+      "user"
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
   # end
-
-  def set_role
-    role = 2
-  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

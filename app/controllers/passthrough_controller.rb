@@ -8,7 +8,7 @@ class PassthroughController < ApplicationController
         when 'super_team_member'
           feedback_path(subdomain: current_user.organization.subdomain)
         when 'user'
-          feedback_path(subdomain: current_user.organization.subdomain)
+          wishlists_url(subdomain: request.subdomain)
         end
       redirect_to path, allow_other_host: true
     end
