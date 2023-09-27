@@ -4,7 +4,6 @@ class OrganizationsController < ApplicationController
                 :order_direction_whitelist,
                 :set_stages,
                 :set_wishlists, only: :feedback
-  before_action :check_team_member_subdomain, only: [:feedback, :edit, :update]
 
   def new
       @organization = Organization.new
@@ -161,12 +160,7 @@ private
 
   def update_user_and_redirect(organization)
       current_user.update(organization: organization)
-      redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
-  end
-  
-  def update_user_and_redirect(organization)
-      current_user.update(organization: organization, role: 'super_team_member', super_team_member_since: Time.now)
-      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+      redirect_to authenticated_root_path(subdomain: current_user.organization.subdomain), allow_other_host: true
       flash[:notice] = "Team #{organization.name} added successfully"
   end
 end

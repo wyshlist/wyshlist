@@ -4,12 +4,12 @@ class PassthroughController < ApplicationController
         when 'admin'
           rails_admin_path
         when 'team_member'
-          feedback_path
+          feedback_path(subdomain: current_user.organization.subdomain)
         when 'super_team_member'
-          feedback_path
+          feedback_path(subdomain: current_user.organization.subdomain)
         when 'user'
-          store_location_for(current_user)
+          feedback_path(subdomain: current_user.organization.subdomain)
         end
-      redirect_to path
+      redirect_to path, allow_other_host: true
     end
 end
