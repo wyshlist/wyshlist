@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
   before_action :order_column_whitelist,
@@ -138,3 +139,4 @@ class OrganizationsController < ApplicationController
     redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
   end
 end
+# rubocop:enable Metrics/ClassLength
