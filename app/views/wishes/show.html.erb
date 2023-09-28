@@ -2,7 +2,7 @@
 <% content_for :meta_description, @wish.description %>
 <%#= render "shared/user_navbar" %>
 <div class="my-container fix-page-wrapper">
-    <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-3 d-inline-block" %>
+    <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-2 d-inline-block" %>
     <%= turbo_frame_tag "wish-view", class: "flex-grow-1" do %>
       <div class="card-show-wish">
         <div class="card-header">
@@ -84,7 +84,8 @@
         </div>
         <div class="form-comment">
           <div class="divider"></div>
-          <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-4" } do |f| %>
+          <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3" } do |f| %>
+            <div class="flex-between">
               <% if current_user.photo.attached? %>
                 <%= cl_image_tag current_user.photo.key, class: "avatar" %>
               <% else %>
@@ -93,9 +94,8 @@
                 </div>
               <% end %>
               <%= f.input :content, label: false, placeholder: "Leave a comment" %>
-              <button type="submit" class="">
-                <i class="fa-regular fa-paper-plane"></i>
-              </button>
+            </div>
+            <%= f.submit 'Submit', class: "btn-flat px-4 py-2 mb-0" %>
           <% end %>
         </div>
       </div>
