@@ -2,9 +2,8 @@ name: CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - "**" # Push to any branch
 
 jobs:
   test:
@@ -23,7 +22,7 @@ jobs:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -35,19 +34,14 @@ jobs:
 
   rubocop:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
-      with:
-        ruby-version: 2.6
+      uses: actions/checkout@v4
     - name: Install Ruby and gems
       uses: ruby/setup-ruby@v1
       with:
+        ruby-version: '3.1.2'
         bundler-cache: true
     - name: Rubocop run
       run: bundle exec rubocop --parallel
