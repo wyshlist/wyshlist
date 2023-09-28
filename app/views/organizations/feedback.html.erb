@@ -18,9 +18,31 @@
               <% end %>
             </div>
             <div class="sorting">
-              <%= image_tag 'sort.png', alt: "sort-icon" %>
-              <%= image_tag 'filter.png', alt: "filter-icon" %>
-              <%= image_tag 'search.png', alt: "search-icon", data: { action: "click->search-wishes#search" } %>
+              <div class="dropdown">
+                <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= image_tag 'sort.png', alt: "sort-icon" %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown__header">SORT BY</li>
+                  <li class="dropdown__item"><a href="#">Newest</a></li>
+                  <li class="dropdown__item"><a href="#">Oldest</a></li>
+                  <li class="dropdown__item"><a href="#">Votes</a></li>
+                </ul>
+              </div>
+              <div class="dropdown">
+                <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= image_tag 'filter.png', alt: "filter-icon" %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown__header">FILTER BY</li>
+                  <li class="dropdown__item"><a href="#">Date</a></li>
+                  <li class="dropdown__item"><a href="#">Board</a></li>
+                  <li class="dropdown__item dropdown__footer"><a href="#">Clear all</a></li>
+                </ul>
+              </div>
+              <button class="p-0" type="button">
+                <%= image_tag 'search.png', alt: "search-icon", data: { action: "click->search-wishes#search" } %>
+              </button>
             </div>
           </div>
           <div class="search-bar">

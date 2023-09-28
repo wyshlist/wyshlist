@@ -10,6 +10,10 @@ input[type="submit"] {
     border-width: 0px !important;
 }
 
+input::placeholder {
+    color: $mid-grey !important;
+}
+
 .title-main-highlight {
     height: 20px;
     border-radius: 20px;
