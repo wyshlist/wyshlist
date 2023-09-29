@@ -1,7 +1,32 @@
 .card-wish {
-  border-top: solid 1px $card-border;
+  border: solid 2px transparent;
+  outline: solid 1px $card-border;
   color: $font-color;
   width: 100%;
+}
+
+.card-wish.active {
+  border: solid 2px $primary-color !important;
+  border-top: solid 3px $primary-color !important;
+  border-bottom: solid 3px $primary-color !important;
+  box-sizing: border-box;
+}
+
+.card-show-wish {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr auto;
+
+  .card-comments {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comments {
+    overflow-y: scroll;
+    height: 400px;
+    flex-grow: 1;
+  }
 }
 
 .list-inline {
@@ -27,11 +52,17 @@
 }
 
 .card-header {
-  border-bottom: solid 2px #e6e6e6;
-  padding-bottom: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
+  // padding-bottom: 40px;
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+.user-name {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: $primary-color;
 }
 
 .card-product {
@@ -69,8 +100,8 @@
 }
 
 .card-link:hover {
- background-color: $bg-gray;
- transition: 0.3s;
+  background-color: $bg-gray;
+  transition: 0.3s;
 }
 
 .card-product__color {
@@ -230,6 +261,21 @@
   }
 }
 
+.card-ghost {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  line-height: 24px;
+  border: 1px solid $black;
+  color: $black;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.card-ghost-wide {
+  padding: 6px 16px;
+}
 
 .no-wishes {
   display: flex;

@@ -4,38 +4,72 @@
     <%= render "shared/navbar" %>
     <div class="feedback-wrapper">
       <div class="feedback__column-left">
-        <div class="wrapper-container">
+        <div class="wrapper-container" data-controller="search-wishes">
           <div class="d-flex justify-content-between align-items-start mb-3">
             <h2>Tickets</h2>
-            <%= link_to '#', class: 'ghost-button dark' do %>
+            <%= link_to '#', class: 'ghost-button' do %>
               <i class="fa-solid fa-plus"></i>
             <% end %>
           </div>
           <div class="feedback-filter">
             <div class="filter">
-              <% Wish.stages.first(3).each do |key, value| %>
-                <%= link_to key, feedback_path(stage: key), class: "me-3 #{'active' if key == params[:stage]}" %>
+              <% Wish.filter_stages.each do |stage| %>
+                <%= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
               <% end %>
             </div>
             <div class="sorting">
-              <%= link_to '#', class: '' do %>
-                <%= image_tag 'sort.png', alt: "sort-icon" %>
-              <% end %>
-              <%= link_to '#', class: '' do %>
-                <%= image_tag 'filter.png', alt: "filter-icon" %>
-              <% end %>
-              <%= link_to '#', class: '' do %>
-                <%= image_tag 'search.png', alt: "search-icon" %>
-              <% end %>
+              <div class="dropdown">
+                <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
+                  <% if params[:filter_by] %>
+                    <div class="circle"></div>
+                  <% end %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown__header">SORT BY</li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
+                </ul>
+              </div>
+              <div class="dropdown">
+                <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
+                  <% if params[:filter_by] %>
+                    <div class="circle"></div>
+                  <% end %>
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown__header">FILTER BY</li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
+                  <li class="dropdown__item dropdown__footer"><%= link_to "Clear all", feedback_path %></li>
+                </ul>
+              </div>
+              <button class="p-0" type="button">
+                <%= image_tag 'search.png', alt: "search-icon", data: { action: "click->search-wishes#search" } %>
+              </button>
             </div>
           </div>
+          <div class="search-bar">
+            <%= form_with url: request.url, method: :get, html: {class:
+                "", data: {search_wishes_target: "form"}} do |f| %>
+                <%= f.text_field :query,
+                                class: "form-control",
+                                placeholder: "Search...",
+                                value: params[:query],
+                                data: {search_wishes_target: "input"} %>
+            <% end %>
+          </div>
         </div>
-        <% @wishes.each do |wish| %>
-          <%= render 'wishes/ticket', wish: wish %>
-        <% end %>
+        <div class="tickets" data-controller="show-ticket-details">
+          <% @wishes.each do |wish| %>
+            <%= render 'wishes/ticket', wish: wish %>
+          <% end %>
+        </div>
       </div>
       <div class="feedback__column-right">
-        <div class="wrapper-container">
+        <div class="wrapper-container pb-0">
           <%= turbo_frame_tag "wish-view" do %>
           <% end %>
         </div>

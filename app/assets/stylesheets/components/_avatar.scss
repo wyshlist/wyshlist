@@ -1,7 +1,26 @@
 .avatar {
   width: 40px;
+  height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
+
+.avatar-small {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  font-size: 12px;
+}
+
+.avatar-name {
+  background-color: #414BEA;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .avatar-large {
   width: 56px;
   border-radius: 50%;
