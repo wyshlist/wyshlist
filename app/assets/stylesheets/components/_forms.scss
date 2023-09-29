@@ -107,6 +107,17 @@
   padding: 12px 16px;
   border-radius: 4px;
 
+  li {
+    position: relative;
+  }
+
+  .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: calc(100% + 17px);
+    top: -7px;
+  }
+
   .dropdown__header {
     color: $mid-grey;
     padding-bottom: 12px;
@@ -140,6 +151,18 @@
   }
 }
 
+.dropdown-menu > li:hover > .dropdown-submenu {
+  display: block;
+}
+
+.dropdown-hover:hover>.dropdown-menu {
+  display: inline-block;
+}
+
+.dropdown-hover>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
 
 .form-comment {
   width: 100%;
