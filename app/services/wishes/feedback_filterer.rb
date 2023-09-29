@@ -1,6 +1,5 @@
 module Wishes
   class FeedbackFilterer
-
     DEFAULT_COLUMN_DIRECTION = 'desc'
     DEFAULT_ORDER_COLUMN = 'votes_count'
 
@@ -29,14 +28,14 @@ module Wishes
     def apply_stage_filter
       return unless stage.present?
 
-      @scope = scope.where(stage: stage)
+      @scope = scope.where(stage:)
     end
 
     def apply_wishlist_filter
       return unless wishlist_id.present?
 
       wishlist = Wishlist.find_by(id: wishlist_id)
-      @scope = scope.where(wishlist: wishlist) if wishlist
+      @scope = scope.where(wishlist:) if wishlist
     end
 
     def apply_order

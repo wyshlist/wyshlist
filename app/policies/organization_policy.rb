@@ -19,27 +19,27 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def edit?
-                  # super_team_member is a team_member
-    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+    # super_team_member is a team_member
+    user.admin? || (user.team_member_of(record) && user.super_team_member?)
   end
 
   def update?
-    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+    user.admin? || (user.team_member_of(record) && user.super_team_member?)
   end
 
   def destroy?
-    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+    user.admin? || (user.team_member_of(record) && user.super_team_member?)
   end
 
   def feedback?
-    user.admin? || user.is_team_member_of(record)
+    user.admin? || user.team_member_of(record)
   end
 
   def members?
-    user.is_team_member_of(record)
+    user.team_member_of(record)
   end
 
   def remove_member?
-    user.admin? || user.is_team_member_of(record) && user.is_super_team_member?
+    user.admin? || (user.team_member_of(record) && user.super_team_member?)
   end
 end

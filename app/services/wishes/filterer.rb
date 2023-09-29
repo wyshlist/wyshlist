@@ -1,11 +1,10 @@
 module Wishes
   class Filterer
-
-    DEFAULT_ORDER_COLUMN = 'votes_count'.freeze
+    DEFAULT_ORDER_COLUMN = 'votes_count'
     DEFAULT_COLUMN_DIRECTION = 'desc'
 
-    ORDER_COLUMN_WHITELIST = %w[votes_count].freeze
-    ORDER_DIRECTION_WHITELIST = %w[ASC DESC asc desc].freeze
+    ORDER_COLUMN_WHITELIST = %w[votes_count]
+    ORDER_DIRECTION_WHITELIST = %w[ASC DESC asc desc]
 
     def initialize(filter_params:, scope:)
       @stage = filter_params.fetch(:stage, nil)

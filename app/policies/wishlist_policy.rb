@@ -12,7 +12,7 @@ class WishlistPolicy < ApplicationPolicy
 
   def new?
     organization = user.organization
-    user.admin? || user.is_team_member_of(organization) && user.is_super_team_member?
+    user.admin? || (user.team_member_of(organization) && user.super_team_member?)
   end
 
   def create?

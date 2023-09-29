@@ -25,13 +25,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :photo])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name photo])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :photo])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo])
 
     # For additional in app/views/devise/invitation/accept.html.erb
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :photo])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[first_name last_name photo])
   end
 
   def storable_location?
@@ -47,11 +47,11 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
-  def after_invite_path_for(resource)
+  def after_invite_path_for(_resource)
     members_path
   end
 
-  def after_sign_out_path_for(resource_or_scope)
+  def after_sign_out_path_for(_resource_or_scope)
     new_organization_path(subdomain: '')
   end
 end
