@@ -2,14 +2,6 @@
 # require 'rails_helper'
 
 # RSpec.feature 'Wishlists', type: :feature do
-#     let(:user) { User.create(email: 'test@example.com', password: 'password') }
-#     let(:other_user) { User.create(email: 'other@example.com', password: 'password') }
-#     let(:wish) { Wish.create(title: 'Test Wish', user: user) }
-#     let(:other_wish) { Wish.create(title: 'Other Wish', user: other_user) }
-#     let(:organization) { Organization.create(name: 'Test Organization') }
-#     let(:wishlist) { Wishlist.create(title: 'Test Wishlist', user: user, description: "Test description", color: "ECEDFE", organization: organization) }
-#     let(:other_wishlist) { Wishlist.create(title: 'Other Wishlist', user: other_user, description: "Test description", color: "ECEDFE", organization: organization) }
-
 #     before do
 #         sign_in user
 #     end
@@ -19,7 +11,6 @@
 
 #         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
 #         fill_in 'Summarize the goals of this board', with: 'A wishlist'
-
 
 #         click_button 'Submit'
 
@@ -48,7 +39,6 @@
 
 #     scenario 'User creates a private wishlist' do
 #         visit new_wishlist_path
-
 
 #         fill_in 'Insert a descriptive title', with: 'Test Wishlist'
 #         fill_in 'Summarize the goals of this board', with: 'A wishlist'
@@ -89,14 +79,18 @@
 #     end
 
 #     scenario 'User views a wishlist' do
-#         wishlist = Wishlist.create(title: 'Test Wishlist', user: user, description: 'A wishlist')
+#         wishlist = Wishlist.create(title: 'Test Wishlist', user:,
+#                                     description: 'A wishlist')
 #         visit wishlist_wishes_path(wishlist)
 
 #         expect(page).to have_text('Test Wishlist')
 #     end
 
 #     scenario 'User not teammate views a private wishlist' do
-#         other_wishlist = Wishlist.create(title: 'Other User Wishlist', user: other_user, description: 'A wishlist', private: true)
+#         other_wishlist = Wishlist.create(title: 'Other User Wishlist',
+#                                           user: other_user,
+#                                           description: 'A wishlist',
+#                                           private: true)
 
 #         visit wishlist_wishes_path(other_wishlist)
 
@@ -178,10 +172,6 @@
 
 #     scenario "organization's wishlists are sorted by number of votes" do
 #         # Create a wishlist with 3 wishes
-#         wishlist = Wishlist.create(title: 'Test Wishlist', user: user, description: 'A wishlist', color: "ECEDFE", organization: organization)
-#         wish = Wish.create(title: 'Test Wish', wishlist: other_wishlist, user: other_user)
-#         wish2 = Wish.create(title: 'Test Wish 2', wishlist: other_wishlist, user: other_user)
-#         wish3 = Wish.create(title: 'Test Wish 3', wishlist: other_wishlist, user: other_user)
 #         Vote.create(user: user, wish: wish)
 #         Vote.create(user: user, wish: wish)
 #         Vote.create(user: user, wish: wish3)

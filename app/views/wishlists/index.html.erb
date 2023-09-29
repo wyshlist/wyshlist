@@ -4,7 +4,7 @@
             <h1>Your Feed</h1>
             <small>Here you can find all the boards you have created or contributed to either by creating a ticket, voting or commenting</small>
         </div>
-        <% if user_signed_in? && current_user.is_team_member? %>
+        <% if user_signed_in? && current_user.team_member? %>
           <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
         <% end %>
     </div>

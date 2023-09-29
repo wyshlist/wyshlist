@@ -9,7 +9,11 @@ AllCops:
     - 'support/**/*'
     - 'tmp/**/*'
     - 'test/**/*'
+    - 'vendor/**/*'
+    - 'spec/**/*'
 
+Lint/LiteralAsCondition:
+  Enabled: false
 Style/ConditionalAssignment:
   Enabled: false
 Style/StringLiterals:
