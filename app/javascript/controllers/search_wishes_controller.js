@@ -10,6 +10,7 @@ export default class extends Controller {
 
   search(event) {
     console.log('open search bar');
+    this.formTarget.classList.toggle('d-none')
     this.inputTarget.classList.toggle('active')
     event.currentTarget.classList.toggle('active')
   }
