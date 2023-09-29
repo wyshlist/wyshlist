@@ -51,9 +51,9 @@
               </button>
             </div>
           </div>
-          <div class="search-bar">
+          <div class="search-bar d-none" data-search-wishes-target="form">
             <%= form_with url: request.url, method: :get, html: {class:
-                "", data: {search_wishes_target: "form"}} do |f| %>
+                ""} do |f| %>
                 <%= f.text_field :query,
                                 class: "form-control",
                                 placeholder: "Search...",
