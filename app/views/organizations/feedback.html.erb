@@ -14,30 +14,36 @@
           <div class="feedback-filter">
             <div class="filter">
               <% Wish.filter_stages.each do |stage| %>
-                <%= link_to stage, feedback_path(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
+                <%= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
               <% end %>
             </div>
             <div class="sorting">
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <%= image_tag 'sort.png', alt: "sort-icon" %>
+                  <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
+                  <% if params[:filter_by] %>
+                    <div class="circle"></div>
+                  <% end %>
                 </button>
                 <ul class="dropdown-menu">
                   <li class="dropdown__header">SORT BY</li>
-                  <li class="dropdown__item"><a href="#">Newest</a></li>
-                  <li class="dropdown__item"><a href="#">Oldest</a></li>
-                  <li class="dropdown__item"><a href="#">Votes</a></li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
+                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
                 </ul>
               </div>
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <%= image_tag 'filter.png', alt: "filter-icon" %>
+                  <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
+                  <% if params[:filter_by] %>
+                    <div class="circle"></div>
+                  <% end %>
                 </button>
                 <ul class="dropdown-menu">
                   <li class="dropdown__header">FILTER BY</li>
-                  <li class="dropdown__item"><a href="#">Date</a></li>
-                  <li class="dropdown__item"><a href="#">Board</a></li>
-                  <li class="dropdown__item dropdown__footer"><a href="#">Clear all</a></li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
+                  <li class="dropdown__item dropdown__footer"><%= link_to "Clear all", feedback_path %></li>
                 </ul>
               </div>
               <button class="p-0" type="button">
