@@ -43,7 +43,7 @@ module Users
     # protected
 
     def assign_role
-      if set_organization == "" || set_organization == "www"
+      if request.subdomain == "www" || request.subdomain.blank? 
         "super_team_member"
       else
         "user"

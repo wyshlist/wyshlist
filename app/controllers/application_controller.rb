@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_organization
-    @organization = Organization.find_by(subdomain: request.subdomain)
+    Organization.find_by(subdomain: request.subdomain)
   end
 
   def configure_permitted_parameters
@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if current_user.is_super_team_member? && !current_user.has_an_organization?
+    if current_user.super_team_member? && !current_user.has_an_organization?
       new_organization_path
     else
       authenticated_root_path

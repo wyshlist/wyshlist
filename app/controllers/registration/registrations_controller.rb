@@ -5,10 +5,9 @@ class Registration::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    @role = assign_role
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
   # def create
@@ -39,16 +38,7 @@ class Registration::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
-
-  def assign_role
-    if set_organization == "" || set_organization == "www"
-      2
-    else
-      0
-    end
-  end
-
+  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
