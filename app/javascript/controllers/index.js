@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AddCommentController from "./add_comment_controller"
+application.register("add-comment", AddCommentController)
+
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
