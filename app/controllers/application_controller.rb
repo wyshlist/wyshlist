@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :set_organization
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -23,15 +23,19 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
   end
 
+  def set_organization
+    @organization = Organization.find_by(subdomain: request.subdomain)
+  end
+
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name photo])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :photo, :role])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :photo, :role])
 
     # For additional in app/views/devise/invitation/accept.html.erb
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[first_name last_name photo])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :photo, :role])
   end
 
   def storable_location?
@@ -53,5 +57,13 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(_resource_or_scope)
     new_organization_path(subdomain: '')
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    if current_user.is_super_team_member? && !current_user.has_an_organization?
+      new_organization_path
+    else
+      authenticated_root_path
+    end
   end
 end

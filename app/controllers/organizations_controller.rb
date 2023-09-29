@@ -5,7 +5,6 @@ class OrganizationsController < ApplicationController
                 :order_direction_whitelist,
                 :set_stages,
                 :set_wishlists, only: :feedback
-  before_action :check_team_member_subdomain, only: %i[feedback edit update]
 
   def new
     @organization = Organization.new
@@ -22,17 +21,17 @@ class OrganizationsController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
     if params[:organization_search] && params[:organization_search] != ""
-      handle_existing_organization(params[:organization_search])
+       handle_existing_organization(params[:organization_search])
     else
-      @organization = Organization.create(organization_params)
-      authorize @organization
-      if @organization.save
-        update_user_and_redirect(@organization)
-      else
-        render :new, status: :unprocessable_entity
-      end
-    end
-  end
+       @organization = Organization.new(organization_params)
+       authorize @organization
+       if @organization.save
+          update_user_and_redirect(@organization)
+       else
+          render :new, status: :unprocessable_entity
+       end
+     end
+   end
   # rubocop:enable Metrics/MethodLength
 
   def edit
@@ -42,11 +41,11 @@ class OrganizationsController < ApplicationController
   def update
     authorize @organization
     if @organization.update(organization_params)
-      flash[:notice] = "Organization updated successfully"
-      redirect_to wishlists_url(subdomain: @organization.subdomain)
+        flash[:notice] = "Organization updated successfully"
+        redirect_to authenticated_root_path(subdomain: @organization.subdomain), allow_other_host: true
     else
-      flash[:alert] = "Organization not updated, try again later"
-      render :edit, status: :unprocessable_entity
+        flash[:alert] = "Organization not updated, try again later"
+        render :edit, status: :unprocessable_entity
     end
   end
 
@@ -54,7 +53,7 @@ class OrganizationsController < ApplicationController
     authorize @organization
     @organization.destroy
     flash[:notice] = "Organization deleted successfully"
-    redirect_to root_path
+    redirect_to authenticated_root_path
   end
 
   def feedback
@@ -120,23 +119,41 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :logo, :color, :subdomain)
+      params.require(:organization).permit(:name, :logo, :color, :subdomain)
   end
 
-  def handle_existing_organization(organization_name)
-    @organization = Organization.where('LOWER(name) ILIKE ?',
-                                       organization_name.downcase).first || @organization = Organization.new
-    if @organization.id
-      update_user_and_redirect(@organization)
-    else
-      redirect_to new_organization_path, alert: "Team not found, maybe you should create it?"
-    end
+  def order_direction_whitelist
+    @order_direction_whitelist ||=
+      Wishes::FeedbackFilterer::ORDER_DIRECTION_WHITELIST.map { [_1.titleize, _1] }
+  end
+
+  def set_stages
+    @stages = Wish.distinct.pluck(:stage)
+  end
+
+  def filter_params
+    params[:filter].permit(:stage, :wishlist_id, :order_column, :order_direction)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:id])
     authorize @organization
   end
 
+  def handle_existing_organization(organization_name)
+      @organization = Organization.where('LOWER(name) ILIKE ?', organization_name.downcase).first || @organization = Organization.new
+      if @organization.id
+          update_user_and_redirect(@organization)
+          authorize @organization
+      else
+          redirect_to new_organization_path, alert: "Team not found, maybe you should create it?"
+          authorize @organization
+      end
+  end
+
   def update_user_and_redirect(organization)
-    current_user.update(organization:)
-    redirect_to wishlists_path, alert: "Team #{organization.name} added successfully"
+      current_user.update(organization: organization)
+      redirect_to authenticated_root_path(subdomain: current_user.organization.subdomain), allow_other_host: true
   end
 end
 # rubocop:enable Metrics/ClassLength

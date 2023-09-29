@@ -1,6 +1,7 @@
 class WishlistsController < ApplicationController
-  add_breadcrumb "home", :root_path
-  before_action :set_organization, only: [:index]
+    add_breadcrumb "home", :authenticated_root_path
+    before_action :set_organization, only: [:index]
+    skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @wishlists = policy_scope(@organization.wishlists).includes(:wishes)
@@ -72,7 +73,6 @@ class WishlistsController < ApplicationController
   def set_organization
     subdomain = request.subdomain
     @organization = Organization.find_by(subdomain:)
-
-    redirect_to root_url(subdomain: 'www'), allow_other_host: true unless @organization
+    redirect_to authenticated_root_url(subdomain: 'www'), allow_other_host: true unless @organization
   end
 end

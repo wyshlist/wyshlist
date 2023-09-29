@@ -17,6 +17,8 @@
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }, html: {data: {controller: "photo-preview"}}) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
+
+          <%= f.input :role, as: :hidden, input_html: { value: @role} %>
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
@@ -29,9 +31,10 @@
                       input_html: { autocomplete: "Last name" } %>
           <%= f.input :email,
                       required: true,
-                      placeholder: "e.g john.doe@gmail.com",
+                      placeholder: "e.g john.doe@mycompany.com",
                       autofocus: true,
-                      input_html: { autocomplete: "email" }%>
+                      label: "Work Email",
+                      input_html: { autocomplete: "work email" }%>
           <%= f.input :password,
                       required: true,
                       placeholder: "",

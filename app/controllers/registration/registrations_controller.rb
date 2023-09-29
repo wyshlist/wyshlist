@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-module Users
-  class RegistrationsController < Devise::RegistrationsController
-    # before_action :configure_sign_up_params, only: [:create]
-    # before_action :configure_account_update_params, only: [:update]
+class Registration::RegistrationsController < Devise::RegistrationsController
+  # before_action :configure_sign_up_params, only: [:create]
+  # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
@@ -40,15 +39,16 @@ module Users
   #   super
   # end
 
-  # protected
+  protected
 
   def assign_role
     if set_organization == "" || set_organization == "www"
-      "super_team_member"
+      2
     else
-      "user"
+      0
     end
   end
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

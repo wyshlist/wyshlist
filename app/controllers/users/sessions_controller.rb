@@ -10,19 +10,15 @@ module Users
     # end
 
     # POST /resource/sign_in
-    def create
-      super do |resource|
-        if resource.persisted? && resource.organization
-          redirect_url = root_url(subdomain: resource.organization.subdomain)
-          redirect_to redirect_url, allow_other_host: true and return
-        end
-      end
-    end
+    # def create
+    #   super
+    # end
+
     # DELETE /resource/sign_out
     # def destroy
     #   super
     # end
-
+    
     # protected
 
     # If you have extra params to permit, append them to the sanitizer.

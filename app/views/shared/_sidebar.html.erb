@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <%= link_to user_signed_in? ? root_path : unauthenticated_root_path, class: "navbar-brand" do %>
+  <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
     <%= image_tag "logo-short.png", class: "logo"%>
   <% end %>
   <div class="dropdown">

@@ -23,6 +23,16 @@
   text-align: center;
 }
 
+.organization_subdomain {
+  flex-grow: 1;
+}
+
+.subdomain-input-wrapper {
+  display: flex; 
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .form-user {
   padding: 24px 0;
   display: flex;
