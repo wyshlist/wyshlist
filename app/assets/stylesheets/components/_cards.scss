@@ -1,7 +1,15 @@
 .card-wish {
-  border-bottom: solid 1px $card-border;
+  border: solid 2px transparent;
+  outline: solid 1px $card-border;
   color: $font-color;
   width: 100%;
+}
+
+.card-wish.active {
+  border: solid 2px $primary-color !important;
+  border-top: solid 3px $primary-color !important;
+  border-bottom: solid 3px $primary-color !important;
+  box-sizing: border-box;
 }
 
 .card-show-wish {

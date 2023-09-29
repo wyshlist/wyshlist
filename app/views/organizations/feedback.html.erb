@@ -62,7 +62,7 @@
             <% end %>
           </div>
         </div>
-        <div class="tickets">
+        <div class="tickets" data-controller="show-ticket-details">
           <% @wishes.each do |wish| %>
             <%= render 'wishes/ticket', wish: wish %>
           <% end %>
