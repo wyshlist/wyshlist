@@ -9,7 +9,7 @@ class Wish < ApplicationRecord
   has_rich_text :description
   has_many :comments, dependent: :destroy
 
-  enum stage: { "Backlog": 0, "In process": 1, "In review": 2, "Beta": 3, "launched": 4 }
+  enum stage: { Backlog: 0, 'In process': 1, 'In review': 2, Beta: 3, launched: 4 }
   after_create :send_to_asana, if: :asana_integration?
   # after_create_commit { broadcast_append_to "wishes" }
   after_update :create_comment, if: :saved_change_to_stage?
@@ -17,13 +17,13 @@ class Wish < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_title_and_description,
-    against: [ :title, :description ],
-    using: {
-      tsearch: { prefix: true }
-    }
+                  against: %i[title description],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 
   def user_vote(user)
-    votes.find_by(user: user)
+    votes.find_by(user:)
   end
 
   def self.sorted_by_votes
@@ -32,20 +32,28 @@ class Wish < ApplicationRecord
       .order('COUNT(votes.id) DESC')
   end
 
+  # rubocop:disable Style/HashLikeCase
   def stage_color
-    case stage
-      when "Backlog" then "#F9ECFE"
-      when "In process" then "#ECFEFE"
-      when "In review" then "#ECEDFE"
-      when "Beta" then "#FEFCEC"
-      when "Launched" then "#EFFEEC"
+    case stage.capitalize
+    when "Backlog" then "#A0A0A0"
+    when "In process" then "#F278F2"
+    when "In review" then "#F278F2"
+    when "Beta" then "#2FC888"
+    when "Launched" then "#2FC888"
+    # when "Completed" then "#2FC888"
+    # when "Archived" then "#ED9D02"
     end
+  end
+  # rubocop:enable Style/HashLikeCase
+
+  def self.filter_stages
+    ["Backlog", "In process", "Launced"]
   end
 
   private
 
   def create_comment
-    Comment.create(content: "The stage of this ticket has been updated to: #{stage}", user: user, wish: self)
+    Comment.create(content: "The stage of this ticket has been updated to: #{stage}", user:, wish: self)
   end
 
   def asana_integration?
@@ -58,6 +66,6 @@ class Wish < ApplicationRecord
   end
 
   def upvote
-    Vote.create!(wish: self, user: self.user)
+    Vote.create!(wish: self, user:)
   end
 end

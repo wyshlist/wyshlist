@@ -51,11 +51,11 @@ class ApplicationController < ActionController::Base
     store_location_for(:user, request.fullpath)
   end
 
-  def after_invite_path_for(resource)
+  def after_invite_path_for(_resource)
     members_path
   end
 
-  def after_sign_out_path_for(resource_or_scope)
+  def after_sign_out_path_for(_resource_or_scope)
     new_organization_path(subdomain: '')
   end
 

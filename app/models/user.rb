@@ -9,39 +9,41 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :organization, optional: true
   has_one_attached :photo
-  enum :role => [:user, :super_team_member, :team_member, :admin]
+  enum role: %i[user super_team_member team_member admin]
   after_create :signup_email
 
-  def is_admin?
+  def admin?
     role == "admin"
   end
 
-  def is_team_member?
+  def team_member?
     role == "team_member"
   end
 
-  def is_regular_user?
+  def regular_user?
     role == "user"
   end
 
-  def is_super_team_member?
+  def super_team_member?
     role == "super_team_member"
   end
 
-  def is_owner_of(record)
+  def owner_of(record)
     record.user == self
   end
 
-  def is_team_member_of(organization)
+  def team_member_of(organization)
     self.organization == organization
   end
 
+  # rubocop:disable Naming/PredicateName
   def has_an_organization?
     !organization.nil?
   end
+  # rubocop:enable Naming/PredicateName
 
   def team_members
-    organization.users unless organization.nil?
+    organization&.users
   end
 
   def photo_attached?
@@ -56,47 +58,48 @@ class User < ApplicationRecord
     wishlist.user == self
   end
 
+  def initial
+    first_name[0].upcase + last_name[0].upcase
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.find_by(email: data['email'])
 
     # Uncomment the section below if you want users to be created if they don't exist
-    unless user
-        user = User.create(
-           first_name: data['first_name'],
-           last_name: data['last_name'],
-           email: data['email'],
-           password: Devise.friendly_token[0,20]
-        )
-    end
+    user ||= User.create(
+      first_name: data['first_name'],
+      last_name: data['last_name'],
+      email: data['email'],
+      password: Devise.friendly_token[0, 20]
+    )
     user
   end
 
   def all_wishlists
+    votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
     if has_an_organization?
-      votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
-      relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id))).or(Wishlist.where(user: organization.users))
+      Wishlist.where(id: votes_wishlists)
+              .or(Wishlist
+              .where(id: wishlists.map(&:id)))
+              .or(Wishlist
+              .where(user: organization.users))
     else
-      votes_wishlists = votes.includes(wish: :wishlist).map(&:wish).map(&:wishlist)
-      relation = Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
-
+      Wishlist.where(id: votes_wishlists).or(Wishlist.where(id: wishlists.map(&:id)))
     end
   end
 
   def invite!(email, name)
     super
-    self.organization = self.invited_by.organization
+    self.organization = invited_by.organization
     self.role = 'team_member'
-    self.save
+    save
   end
 
   def invitation_status
-    if self.invited_by_type == 'User'
-      return 'Invitation Sent' if self.invitation_accepted_at.nil?
-      return 'Accepted' if invitation_accepted_at
-    else
-      return '-'
-    end
+    return '-' unless invited_by_type == 'User'
+    return 'Invitation Sent' if invitation_accepted_at.nil?
+    return 'Accepted' if invitation_accepted_at
   end
 
   private

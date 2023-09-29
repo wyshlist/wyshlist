@@ -7,7 +7,14 @@
 }
 
 .page-wrapper {
-    min-height: 90vh;
+    min-height: calc(100vh - 80px);
+    overflow-x: hidden;
+}
+
+.fix-page-wrapper {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-wrapper {
@@ -250,16 +257,33 @@
 .feedback__column-left {
   background-color: $bg-gray;
   width: 525px;
-  overflow-y: scroll;
+  flex-shrink: 0;
+  border-right: 1px solid $border-gray;
+  display: flex;
+  flex-direction: column;
+
+  .wrapper-container {
+    border-bottom: 1px solid $border-gray;
+  }
 
   .feedback-filter {
     display: flex;
+  }
+
+  .tickets {
+    flex-grow: 1;
+    overflow-y: scroll;
   }
 }
 
 .feedback__column-right {
   flex-grow: 1;
   overflow-y: scroll;
+  overflow-x: hidden;
+
+  .wrapper-container {
+    height: 100%;
+  }
 }
 
 .separator {
@@ -275,16 +299,17 @@
   justify-content: space-between;
 
   a {
-    color: $gray;
+    color: $mid-grey;
   }
 
   .filter {
     display: flex;
     align-items: center;
+    font-size: 14px;
 
     .active {
-      background-color: $primary-color;
-      color: $white;
+      background-color: $blue-bg;
+      color: $primary-color;
       padding: 4px 8px;
       border-radius: 4px;
     }
@@ -292,11 +317,16 @@
 
   .sorting {
     display: flex;
-    border-left: 2px solid $gray;
+    border-left: 2px solid $mid-grey;
 
     img {
       height: 20px;
       margin-left: 14px;
+      opacity: 0.35;
+    }
+
+    img.active {
+      opacity: 1;
     }
   }
 }

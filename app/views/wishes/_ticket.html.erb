@@ -1,5 +1,5 @@
 <%= link_to wish_path(wish), data: {turbo_frame: "wish-view"} do %>
-  <div class="card-wish wrapper-container">
+  <div class="card-wish wrapper-container" data-action="click->show-ticket-details#active" data-show-ticket-details="ticket">
     <p><strong><%= wish.title %></strong></p>
     <%= wish.description %>
     <ul class='list-inline'>
