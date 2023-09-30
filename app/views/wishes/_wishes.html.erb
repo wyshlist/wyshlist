@@ -9,9 +9,9 @@
                     </div>
                     <%= wish.description.to_plain_text.truncate(150) %>
                     <div class="card-product__icons">
-                        <div class="card-product__icon">
-                            <div class="card-product__status" style="background-color: <%= wish.stage_color %>">
-                                <small><%= wish.stage %></small>
+                        <div class="card-product__icon me-2">
+                            <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= wish.stage_color %>; color: <%= wish.stage_color %>">
+                                <%= wish.stage %>
                             </div>
                         </div>
                         <div class="card-product__icon">
