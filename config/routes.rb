@@ -18,11 +18,11 @@ Rails.application.routes.draw do
   end
 
   get '/get-started', to: 'pages#home', as: :get_started
-  get '/feedback', to: 'organizations#feedback', as: :feedback
 
   resources :organizations, only: [:new, :create]
 
   constraints SubdomainConstraint do
+    get '/feedback', to: 'organizations#feedback', as: :feedback
     resources :organizations, only: [:edit, :update, :destroy]
 
     get '/members', to: 'organizations#members'
