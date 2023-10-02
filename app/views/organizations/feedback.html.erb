@@ -21,15 +21,13 @@
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
-                  <% if params[:filter_by] %>
-                    <div class="circle"></div>
-                  <% end %>
                 </button>
                 <ul class="dropdown-menu">
-                  <li class="dropdown__header">SORT BY</li>
-                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
-                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
-                  <li class="dropdown__item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
+                  <li class="dropdown-header">SORT BY</li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li class="dropdown-item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
+                  <li class="dropdown-item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
+                  <li class="dropdown-item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
                 </ul>
               </div>
               <div class="dropdown">
@@ -40,10 +38,12 @@
                   <% end %>
                 </button>
                 <ul class="dropdown-menu">
-                  <li class="dropdown__header">FILTER BY</li>
-                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
-                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
-                  <li class="dropdown__item dropdown__footer"><%= link_to "Clear all", feedback_path %></li>
+                  <li class="dropdown-header">FILTER BY</li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
+                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li class="dropdown-item"><%= link_to "Clear all", feedback_path %></li>
                 </ul>
               </div>
               <button class="p-0" type="button">
