@@ -18,6 +18,7 @@
               <% end %>
             </div>
             <div class="sorting">
+              <%# Sorting %>
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
@@ -30,6 +31,7 @@
                   <li class="dropdown-item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
                 </ul>
               </div>
+              <%# Filter %>
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
@@ -40,8 +42,29 @@
                 <ul class="dropdown-menu">
                   <li class="dropdown-header">FILTER BY</li>
                   <li><hr class="dropdown-divider"></li>
-                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
-                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
+                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Date" %>">
+                    <a href="#">
+                      Date
+                    </a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                      <li class="dropdown-item">
+                        Start Date
+                      </li>
+                      <li class="dropdown-item">
+                        End Date
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>">
+                    <a href="#">
+                      Board
+                    </a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                      <li class="dropdown-item">
+                        Search...
+                      </li>
+                    </ul>
+                  </li>
                   <li><hr class="dropdown-divider"></li>
                   <li class="dropdown-item"><%= link_to "Clear all", feedback_path %></li>
                 </ul>
@@ -51,9 +74,9 @@
               </button>
             </div>
           </div>
-          <div class="search-bar">
+          <div class="search-bar d-none" data-search-wishes-target="form">
             <%= form_with url: request.url, method: :get, html: {class:
-                "", data: {search_wishes_target: "form"}} do |f| %>
+                ""} do |f| %>
                 <%= f.text_field :query,
                                 class: "form-control",
                                 placeholder: "Search...",

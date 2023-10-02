@@ -42,7 +42,7 @@ class OrganizationsController < ApplicationController
     authorize @organization
     if @organization.update(organization_params)
         flash[:notice] = "Organization updated successfully"
-        redirect_to authenticated_root_path(subdomain: @organization.subdomain), allow_other_host: true
+        redirect_to authenticated_root_url(subdomain: @organization.subdomain), allow_other_host: true
     else
         flash[:alert] = "Organization not updated, try again later"
         render :edit, status: :unprocessable_entity
@@ -153,7 +153,7 @@ class OrganizationsController < ApplicationController
 
   def update_user_and_redirect(organization)
       current_user.update(organization: organization)
-      redirect_to authenticated_root_path(subdomain: current_user.organization.subdomain), allow_other_host: true
+      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
   end
 end
 # rubocop:enable Metrics/ClassLength
