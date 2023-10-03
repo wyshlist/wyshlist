@@ -116,6 +116,25 @@
   font-size: 14px;
   border-radius: 4px;
 
+  input[type="date"] {
+    color: $mid-grey !important;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    color: hotpink;
+  }
+
+  .form-control {
+    border: none !important;
+
+
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
   li {
     position: relative;
   }
@@ -125,6 +144,12 @@
     position: absolute;
     left: 100%;
     top: 0;
+    width: max-content;
+
+    .dropdown-item {
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+    }
   }
 
   .dropdown-header {

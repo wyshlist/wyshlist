@@ -47,12 +47,21 @@
                       Date
                     </a>
                     <ul class="dropdown-menu dropdown-submenu">
-                      <li class="dropdown-item">
-                        Start Date
-                      </li>
-                      <li class="dropdown-item">
-                        End Date
-                      </li>
+                      <%= form_with url: request.url, method: :get, html: {class:
+                          ""} do |f| %>
+                          <li class="dropdown-item flex-between">
+                            <%= f.label :start_date, "From" %>
+                            <%= f.date_field :start_date,
+                                              class: "form-control",
+                                              value: params[:start_date] %>
+                          </li>
+                          <li class="dropdown-item flex-between">
+                            <%= f.label :end_date, "To" %>
+                            <%= f.date_field :end_date,
+                                              class: "form-control",
+                                              value: params[:end_date] %>
+                          </li>
+                      <% end %>
                     </ul>
                   </li>
                   <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>">
@@ -60,9 +69,13 @@
                       Board
                     </a>
                     <ul class="dropdown-menu dropdown-submenu">
-                      <li class="dropdown-item">
-                        Search...
-                      </li>
+                      <%= form_with url: request.url, method: :get, html: {class:
+                          ""} do |f| %>
+                          <%= f.text_field :query,
+                                          class: "dropdown-item form-control",
+                                          placeholder: "Start typing...",
+                                          value: params[:query] %>
+                      <% end %>
                     </ul>
                   </li>
                   <li><hr class="dropdown-divider"></li>
