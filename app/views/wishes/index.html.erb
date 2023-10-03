@@ -32,7 +32,12 @@
                 <%# end %>
             <%# end %>
             <ul class="wishes-filter__list">
+              <%# OLD FILTERS %>
+              <%#= render "wishes/user_filters" %>
+              <%# <br> %>
               <% if user_signed_in? %>
+                  <h4>Add a new ticket</h4>
+                  <br>
                   <div class="new-wish-wrapper new-wish-sidebar-wrapper">
                     <%= render "form", wish: @wish, wishlist: @wishlist %>
                   </div>
@@ -55,7 +60,7 @@
             <%= render "filter" %>
             <br>
             <% if @wishes.any? %>
-            <%= render "wishes/wishes", wishes: @wishes %>
+                <%= render "wishes/wishes", wishes: @wishes %>
             <% elsif params[:stage] %>
                 <div class="no-wishes">
                     <h2> No contributions at this stage yet </h2>
