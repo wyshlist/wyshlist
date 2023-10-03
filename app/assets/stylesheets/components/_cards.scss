@@ -237,6 +237,11 @@
 
 .wishes-wrapper {
   flex-grow: 1;
+
+  .dropdown-menu .dropdown-submenu {
+    right: 100%;
+    left: unset;
+  }
 }
 
 .wishes-filter {

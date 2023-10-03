@@ -257,7 +257,8 @@
 }
 
 .wishes__copy-link {
-  width: 12rem;
+  // width: 12rem;
+  flex-grow: 1;
   border-radius: 2px 0px 0px 2px;
   border-left: 1px solid #EAEAEA;
   border-top: 1px solid #EAEAEA;

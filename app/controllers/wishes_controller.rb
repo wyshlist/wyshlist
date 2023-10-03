@@ -22,6 +22,7 @@ class WishesController < ApplicationController
 
   def index
     @wishlist = Wishlist.find(params[:wishlist_id])
+    @wish = Wish.new
     authorize @wishlist
     @wishes = policy_scope(@wishlist.wishes)
     @wishes = Wishes::Filterer.new(filter_params:, scope: @wishes).call if params[:filter].present?
