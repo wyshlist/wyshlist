@@ -18,7 +18,6 @@
               <% end %>
             </div>
             <div class="sorting">
-              <%# Sorting %>
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
@@ -33,7 +32,6 @@
                   <li class="dropdown__item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
                 </ul>
               </div>
-              <%# Filter %>
               <div class="dropdown">
                 <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
