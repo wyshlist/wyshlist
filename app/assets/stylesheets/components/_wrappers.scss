@@ -133,6 +133,10 @@
   justify-content: center;
   align-items: center;
   padding: 50px;
+
+  form {
+    width: -webkit-fill-available;
+  }
 }
 
 .new-wish-sidebar-wrapper {

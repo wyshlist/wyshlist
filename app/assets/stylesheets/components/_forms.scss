@@ -28,7 +28,7 @@
 }
 
 .subdomain-input-wrapper {
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
@@ -114,8 +114,26 @@
 
 .dropdown-menu {
   font-size: 14px;
-  padding: 12px 16px;
   border-radius: 4px;
+
+  input[type="date"] {
+    color: $mid-grey !important;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    color: hotpink;
+  }
+
+  .form-control {
+    border: none !important;
+
+
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
 
   li {
     position: relative;
@@ -124,40 +142,44 @@
   .dropdown-submenu {
     display: none;
     position: absolute;
-    left: calc(100% + 17px);
-    top: -7px;
-  }
+    left: 100%;
+    top: 0;
+    width: max-content;
 
-  .dropdown__header {
-    color: $mid-grey;
-    padding-bottom: 12px;
-    border-bottom: 1px solid $placeholder-gray;
-    margin-bottom: 12px;
-  }
-
-  .dropdown__item {
-    padding-bottom: 12px;
-
-    a {
-      color: black;
-
-      &:hover {
-        color: $primary-color;
-      }
+    .dropdown-item {
+      display: grid;
+      grid-template-columns: 1fr 4fr;
     }
   }
 
-  .dropdown__item.active a {
-    color: $primary-color;
+  .dropdown-header {
+    color: $mid-grey;
   }
 
-  .dropdown__item:last-child {
-    padding-bottom: 0;
+  .dropdown-divider {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 
-  .dropdown__footer {
-    padding-top: 12px;
-    border-top: 1px solid $placeholder-gray;
+  .dropdown-item {
+    &:hover {
+      a {
+        color: $primary-color !important;
+      }
+      background-color: transparent;
+    }
+
+    a {
+      color: black;
+    }
+  }
+
+  .dropdown-item.active {
+    background-color: transparent;
+
+    a {
+      color: $primary-color;
+    }
   }
 }
 
@@ -235,7 +257,8 @@
 }
 
 .wishes__copy-link {
-  width: 12rem;
+  // width: 12rem;
+  flex-grow: 1;
   border-radius: 2px 0px 0px 2px;
   border-left: 1px solid #EAEAEA;
   border-top: 1px solid #EAEAEA;
