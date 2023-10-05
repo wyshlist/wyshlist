@@ -41,8 +41,29 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li class="dropdown__header">FILTER BY</li>
-                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Date" %>"><%= link_to "Date", request.params.merge(filter_by: "Date") %></li>
-                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Board" %>"><%= link_to "Board", request.params.merge(filter_by: "Board") %></li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Date" %>">
+                    <a href="#">
+                      Date
+                    </a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                      <li class="dropdown__item">
+                        Start Date
+                      </li>
+                      <li class="dropdown__item">
+                        End Date
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown__item <%= "active" if params[:filter_by] == "Board" %>">
+                    <a href="#">
+                      Board
+                    </a>
+                    <ul class="dropdown-menu dropdown-submenu">
+                      <li class="dropdown__item">
+                        Search...
+                      </li>
+                    </ul>
+                  </li>
                   <li class="dropdown__item dropdown__footer"><%= link_to "Clear all", feedback_path %></li>
                 </ul>
               </div>
@@ -51,9 +72,9 @@
               </button>
             </div>
           </div>
-          <div class="search-bar">
+          <div class="search-bar d-none" data-search-wishes-target="form">
             <%= form_with url: request.url, method: :get, html: {class:
-                "", data: {search_wishes_target: "form"}} do |f| %>
+                ""} do |f| %>
                 <%= f.text_field :query,
                                 class: "form-control",
                                 placeholder: "Search...",

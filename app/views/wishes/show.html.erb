@@ -84,7 +84,7 @@
         </div>
         <div class="form-comment">
           <div class="divider"></div>
-          <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3" } do |f| %>
+          <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3", data: { controller: "add-comment" }} do |f| %>
             <div class="flex-between">
               <% if current_user.photo.attached? %>
                 <%= cl_image_tag current_user.photo.key, class: "avatar" %>
@@ -93,9 +93,20 @@
                   <%= current_user.initial %>
                 </div>
               <% end %>
-              <%= f.input :content, label: false, placeholder: "Leave a comment" %>
+              <%= f.input :content,
+                          label: false,
+                          placeholder: "Leave a comment",
+                          input_html: {
+                            data: {
+                              action: "
+                                focus->add-comment#showButton
+                                blur->add-comment#hideButton
+                                keyup->add-comment#activateButton
+                              "
+                            }
+                          } %>
             </div>
-            <%= f.submit 'Submit', class: "btn-flat px-4 py-2 mb-0" %>
+            <%= f.button :submit, 'Submit', class: "btn-flat px-4 py-2 mb-0 d-none", disabled: true, data: { add_comment_target: "button" } %>
           <% end %>
         </div>
       </div>

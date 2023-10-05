@@ -22,7 +22,7 @@ button {
 }
 
 .btn-flat {
-  color: white !important;
+  color: white;
   font-weight: bold;
   padding: 12px 34px;
   border-radius: 4px;
@@ -36,6 +36,11 @@ button {
 .btn-flat:hover {
   background: $primary-color-hover;
   color: white;
+}
+
+.btn-flat:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
 .sidebar-button {
