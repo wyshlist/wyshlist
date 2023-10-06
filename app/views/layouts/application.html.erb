@@ -23,7 +23,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNRQJX4"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <%= render "shared/navbar" if dashboard_views? %>
+    <%#= render "shared/dashboard_navbar" if dashboard_views? %>
     <%= render "shared/pages_navbar" if params[:controller].match?(/pages/) %>
     <%= render "shared/flashes" %>
     <div class="page-wrapper">
