@@ -49,7 +49,7 @@
         </div>
         <h1>Welcome to Wyshlist.net!</h1>
         <p>Hey there, fellow product geek! </p>
-        <p>Someone has invited you to <%= unauthenticated_root_url %>, you can accept it through the link below.</p>
+        <p>Someone has invited you to <%= authenticated_root_url %>, you can accept it through the link below.</p>
         <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %></p>
         <% if @resource.invitation_due_at %>
           <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
@@ -60,7 +60,7 @@
         <div class="signature">
             <p>Best regards,</p>
             <p>Daniel</p>
-            <p>Founder, Wyshlist.net</p>
+            <p>Co-Founder, Wyshlist.net</p>
         </div>
     </div>
 </body>
