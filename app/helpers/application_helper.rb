@@ -1,6 +1,6 @@
 module ApplicationHelper
-    def end_user_views?
-        disallowed_controllers = ["wishes", "organizations", "devise/registrations", "devise/sessions", "pages"]
-        !disallowed_controllers.include?(params[:controller])
+    def dashboard_views?
+        allowed_view_paths = ["/feedbacks", "/members", "/organizations", "wishes", "wishlists/new"]
+        allowed_view_paths.include?(request.path)
     end
 end
