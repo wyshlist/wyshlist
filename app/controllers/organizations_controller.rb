@@ -1,6 +1,7 @@
 # rubocop:disable Metrics/ClassLength
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
+  before_action :check_team_member_subdomain, only: %i[feedback members edit]
   before_action :order_column_whitelist,
                 :order_direction_whitelist,
                 :set_stages,
@@ -108,7 +109,7 @@ class OrganizationsController < ApplicationController
     if current_user.organization.nil?
       redirect_to new_organization_path
     elsif request.subdomain != current_user.organization.subdomain
-      redirect_to root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
     end
   end
 
