@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  authenticated :user do
-    root to: 'passthrough#index', as: :authenticated_root
-  end
-
   unauthenticated :user do
     root to: "pages#home", as: :unauthenticated_root
   end
@@ -22,6 +18,10 @@ Rails.application.routes.draw do
   resources :organizations, only: [:new, :create]
 
   constraints SubdomainConstraint do
+    authenticated :user do
+      root to: 'passthrough#index', as: :authenticated_root
+    end
+
     get '/feedback', to: 'organizations#feedback', as: :feedback
     resources :organizations, only: [:edit, :update, :destroy]
 
