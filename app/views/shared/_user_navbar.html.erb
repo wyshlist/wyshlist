@@ -46,7 +46,10 @@
                             </li>
                         <% end %>
                     <% else %>
-                        <%= link_to " New wishlist", new_wishlist_path, class: "nav-link upvote-button btn-flat mx-auto" %>
+                        <%= link_to " New wishlist", new_wishlist_path, class: "nav-link mx-auto link " %>
+                    <% end %>
+                    <% if User.has_valid_organization_member?(current_user) %>
+                        <%= link_to "Dashboard", authenticated_root_path, class: "upvote-button mx-auto" %>
                     <% end %>
                 </ul>
             </div>

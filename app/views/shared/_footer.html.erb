@@ -1,8 +1,8 @@
 <div class="footer">
   <div class="footer-copyright">
-      <%= link_to "Privacy policy", privacy_policy_path, class: "primary-link" %>
+      <%= link_to "Privacy policy", privacy_path, class: "primary-link" %>
       |
-      <%= link_to "Terms of service", terms_of_service_path, class: "primary-link" %>
+      <%= link_to "Terms of service", terms_path, class: "primary-link" %>
     <div class="footer-links">
       <% if Wishlist.admin_wishlists.any? %>
         <%= link_to "Contribute to Wyshlist", wishlist_wishes_path(Wishlist.admin_wishlists.first), class: "main-link" %>
