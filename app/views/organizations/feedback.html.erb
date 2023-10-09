@@ -14,16 +14,29 @@
           <%= render "wishes/filter" %>
         </div>
         <div class="tickets" data-controller="show-ticket-details">
+
+          <% if @wishes.empty? %>
+            <div class="wrapper-container border-0">
+              <small>No tickets yet. Start creating one...</small>
+            </div>
+          <% end %>
+
           <% @wishes.each do |wish| %>
             <%= render 'wishes/ticket', wish: wish %>
           <% end %>
         </div>
       </div>
-      <div class="feedback__column-right">
-        <div class="wrapper-container pb-0">
-          <%= turbo_frame_tag "wish-view" do %>
-          <% end %>
-        </div>
+      <div class="feedback__column-right <%= 'flex-center' if @wishes.empty? %>">
+        <% if @organization.wishlists.empty? %>
+          <%= link_to "Create Wishlist", new_wishlist_path, class: "btn-flat" %>
+        <% elsif @wishes.empty? %>
+          <%= link_to "Create Ticket", new_wishlist_path, class: "btn-flat" %>
+        <% else %>
+          <div class="wrapper-container pb-0">
+            <%= turbo_frame_tag "wish-view" do %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
