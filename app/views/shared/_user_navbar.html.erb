@@ -3,11 +3,11 @@
         <div class="container-fluid">
             <% if @wishlist && @wishlist.organization %>
                 <%= link_to wishlists_url(subdomain: @wishlist ? @wishlist.organization.subdomain : @organization.subdomain), class: "navbar-brand" do %>
-                    <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
+                    <%= cl_image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo.key : 'logo.jpg' , class: "logo" %>
                 <% end %>
             <% elsif @organization %>
                 <%= link_to wishlists_url(subdomain: @organization.subdomain), class: "navbar-brand" do %>
-                    <%= image_tag @organization.logo.attached? ? @organization.logo : 'logo.jpg', class: "logo"%>
+                    <%= cl_image_tag @organization.logo.attached? ? @organization.logo.key : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
 
