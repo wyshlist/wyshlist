@@ -1,4 +1,4 @@
-<%= simple_form_for(:filter, url: root_path, method: :get) do |f| %>
+<%= simple_form_for(:filter, url: authenticated_root_path, method: :get) do |f| %>
   <%= f.input :stage, collection: @stages, include_blank: true %>
   <%= f.input :wishlist_id, collection: @wishlists, include_blank: true %>
   <%= f.input :order_column, collection: @order_column_whitelist %>
