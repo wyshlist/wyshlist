@@ -8,8 +8,10 @@ export default class extends Controller {
     this.buttonTarget.classList.remove('d-none')
   }
 
-  hideButton() {
-    this.buttonTarget.classList.add('d-none')
+  hideButton(event) {
+    if (event.currentTarget.value.length === 0) {
+      this.buttonTarget.classList.add('d-none')
+    }
   }
 
   activateButton(event) {
