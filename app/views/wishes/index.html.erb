@@ -47,17 +47,6 @@
                     <p> Be the first to add an idea to this board! Create a new ticket! 🚀</p>
                 </div>
             <% end %>
-            <% if user_signed_in? %>
-                <%= turbo_frame_tag "new-wish" do %>
-                    <div class="new-wish-wrapper">
-                        <%= link_to "Add a new ticket", new_wishlist_wish_path(@wishlist), class: "btn-flat", style: "background-color: #{@wishlist&.organization&.color}", id: "add-wish" %>
-                    </div>
-                <% end %>
-            <% else %>
-                <div class="new-wish-wrapper">
-                    <%= link_to "Add a new ticket", new_user_session_path, class: "btn-flat", id: "add-wish" , style: "background-color: #{@wishlist&.organization&.color}"%>
-                </div>
-            <% end %>
         </div>
     </div>
 </div>
