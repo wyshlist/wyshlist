@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     if current_user.super_team_member? && !current_user.has_an_organization?
       new_organization_path
     else
-      authenticated_root_path
+      stored_location_for(resource_or_scope) || super
     end
   end
 end
