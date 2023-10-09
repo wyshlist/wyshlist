@@ -1,7 +1,7 @@
 Welcome to Wyshlist.net!
 Hey there, fellow product geek!
 
-Someone has invited you to <%= root_url %>, you can accept it through the link below.
+Someone has invited you to <%= unauthenticated_root_url %>, you can accept it through the link below.
 
 <%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %>
 
