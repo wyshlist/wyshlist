@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'privacy_policy', to: 'pages#privacy_policy'
-  get 'terms_of_service', to: 'pages#terms_of_service'
+  get 'privacy_policy', to: 'pages#privacy_policy', as: :privacy
+  get 'terms_of_service', to: 'pages#terms_of_service', as: :terms
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
