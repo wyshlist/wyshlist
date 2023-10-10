@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
+  before_action :set_wish_params, only: [:create]
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_organization
@@ -18,6 +19,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_wish_params
+    if params["wish"].present?
+      session[:wish_params] = params["wish"]
+    end
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
