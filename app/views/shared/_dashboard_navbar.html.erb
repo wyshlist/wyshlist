@@ -1,10 +1,9 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon border-bottom">
-  
   <div class="container-fluid justify-content-end">
     <ul class="navbar-nav">
       <% if user_signed_in? %>
         <% if current_user.has_an_organization? %>
-          <li> 
+          <li>
             <%= link_to "Feedbacks", feedback_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
