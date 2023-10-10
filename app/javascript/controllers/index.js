@@ -13,6 +13,9 @@ application.register("clipboard", ClipboardController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ModalPassValueController from "./modal_pass_value_controller"
+application.register("modal-pass-value", ModalPassValueController)
+
 import PhotoPreviewController from "./photo_preview_controller"
 application.register("photo-preview", PhotoPreviewController)
 
