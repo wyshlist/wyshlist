@@ -34,12 +34,13 @@ class WishesController < ApplicationController
   def create
     @wish = Wish.new(wish_params)
     @wish.user = current_user
-    @wish.wishlist = Wishlist.find(params[:wishlist_id])
+    @wish.wishlist = Wishlist.find(params[:wishlist_id]) if params[:wishlist_id]
     @wishlist = @wish.wishlist
     authorize @wish
     if @wish.save
       session[:wish_params] = nil
       flash[:notice] = "Ticket created successfully"
+      redirect_to authenticated_root_path and return if request.referer.split('/').last == 'feedback'
       redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
     else
       flash[:alert] = "Ticket not created, try again later"
@@ -103,6 +104,6 @@ class WishesController < ApplicationController
   end
 
   def wish_params
-    params.require(:wish).permit(:title, :description, :stage)
+    params.require(:wish).permit(:title, :description, :stage, :wishlist_id)
   end
 end

@@ -58,9 +58,11 @@ class OrganizationsController < ApplicationController
   end
 
   def feedback
-    organization = current_user.organization
-    authorize organization
-    @wishes = organization.wishes
+    @organization = current_user.organization
+    @wishlists = @organization.wishlists
+    authorize @organization
+    @wish = Wish.new
+    @wishes = @organization.wishes
     return unless params[:filter].present?
 
     @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
