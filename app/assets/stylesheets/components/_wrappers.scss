@@ -334,3 +334,9 @@
     }
   }
 }
+
+.team-content {
+  height: 100vh;
+  overflow-y: scroll;
+  flex-grow: 1;
+}

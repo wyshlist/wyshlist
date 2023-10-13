@@ -1,33 +1,33 @@
- <% @wishes.each do |wish| %>
-    <%= link_to wish_path(wish), class: "card-product__link" do %>
-        <div class="card-product" id="wish-<%= wish.id %>">
-            <div class="card-product__info">
-                <div class="card-product-infos">
-                    <h2><%= wish.title %></h2>
-                    <div class="card-product__icon">
-                        <small>Posted by  <%= wish.user.full_name %></small>
-                    </div>
-                    <%= wish.description.to_plain_text.truncate(150) %>
-                    <div class="card-product__icons">
-                        <div class="card-product__icon me-2">
-                            <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= wish.stage_color %>; color: <%= wish.stage_color %>">
-                                <%= wish.stage %>
-                            </div>
-                        </div>
-                        <div class="card-product__icon">
-                            <small><i class="fas fa-comment"></i> <%= wish.comments.count %> comments</small>
-                        </div>
-                    </div>
-                </div>
+<% @wishes.each do |wish| %>
+  <%= link_to wish_path(wish), class: "card-product__link flex-grow-1" do %>
+    <div class="card-product" id="wish-<%= wish.id %>">
+      <div class="card-product__info">
+        <div class="card-product-infos">
+          <h2><%= wish.title %></h2>
+          <div class="card-product__icon">
+            <small>Posted by  <%= wish.user.full_name %></small>
+          </div>
+          <%= wish.description.to_plain_text.truncate(150) %>
+          <div class="card-product__icons">
+            <div class="card-product__icon me-2">
+              <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= wish.stage_color %>; color: <%= wish.stage_color %>">
+                <%= wish.stage %>
+              </div>
             </div>
-            <div class="card-product__votes">
-                <div class="card-product__vote-count"><%= wish.votes.count %> <small>votes</small></div>
-                <% if wish.user_vote(current_user) %>
-                    <%= link_to "downvote", vote_path(wish.user_vote(current_user)), data: { turbo_method: "delete" }, class: "upvote-button", id: "downvote" %>
-                <% else %>
-                    <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button", id: "upvote" %>
-                <% end %>
+            <div class="card-product__icon">
+              <small><i class="fas fa-comment"></i> <%= wish.comments.count %> comments</small>
             </div>
+          </div>
         </div>
-    <% end %>
+      </div>
+      <div class="card-product__votes">
+        <div class="card-product__vote-count"><%= wish.votes.count %> <small>votes</small></div>
+        <% if wish.user_vote(current_user) %>
+          <%= link_to "downvote", vote_path(wish.user_vote(current_user)), data: { turbo_method: "delete" }, class: "upvote-button", id: "downvote" %>
+        <% else %>
+          <%= link_to "Upvote", wish_votes_path(wish), data: { turbo_method: "post" }, class: "upvote-button", id: "upvote" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

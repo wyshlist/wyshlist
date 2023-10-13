@@ -23,24 +23,30 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNRQJX4"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <%= render "shared/pages_navbar" if params[:controller].match?(/pages|users|registrations|sessions/) && !(params[:controller].match?('registrations') && params[:action].match?('edit')) && request.referrer.split('/').last == 'feedback' %>
     <%= render "shared/flashes" %>
 
-    <div class="page-wrapper">
-      <% if params[:controller].match?(/organizations/) ||
-            (params[:controller].match?('wishlists') && params[:action].match?('new')) ||
-            (params[:controller].match?('registrations') && params[:action].match?('edit')) && request.referrer.split('/').last == 'feedback' %>
+    <% if pages_view? %>
+      <%= render "shared/pages_navbar" if pages_view? %>
+      <%= yield %>
+    <% elsif team_views? %>
+      <div class="page-wrapper">
         <div class="d-flex">
           <%= render "shared/sidebar" %>
-          <div class="flex-grow-1">
+          <div class="team-content">
             <%= render "shared/dashboard_navbar" %>
             <%= yield %>
           </div>
         </div>
-      <% else %>
+      </div>
+    <% elsif end_user_views? %>
+      <div class="page-wrapper">
+        <%= render "shared/user_navbar" %>
         <%= yield %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <%= params[:controller] %>
+      <%= params[:action] %>
+    <% end %>
 
     <%= render "shared/footer" if params[:controller] == "pages"%>
   </body>
