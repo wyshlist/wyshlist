@@ -1,53 +1,47 @@
-<div class="d-flex">
-  <%= render "shared/sidebar" %>
-  <div class="flex-grow-1">
-    <%= render "shared/dashboard_navbar" %>
-    <div class="my-container">
-      <div class="d-flex justify-content-between mt-4">
-        <h1>Members</h1>
-        <% if policy(@organization).remove_member? %>
-          <%= link_to "Invite Member", new_user_invitation_path, class: "btn-flat" %>
-        <% end %>
-      </div>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Invitation Status</th>
-            <% if policy(@organization).remove_member? %>
-              <th scope="col"></th>
-              <%# <th scope="col"></th> %>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @members.each_with_index do |member, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= member.first_name %></td>
-              <td><%= member.last_name %></td>
-              <td><%= member.email %></td>
-              <td><%= member.role %></td>
-              <td><%= member.invitation_status %></td>
-              <% if policy(@organization).remove_member? %>
-                <td>
-                  <%= link_to remove_member_path(member), data: { turbo_method: 'patch' }, class: "text-dark" do %>
-                    <i class="fa-solid fa-trash"></i>
-                  <% end %>
-                </td>
-                <%# <td> %>
-                  <%# <i class="fa-solid fa-pen-to-square"></i> %>
-                <%# </td> %>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<div class="my-container">
+  <div class="d-flex justify-content-between mt-4">
+    <h1>Members</h1>
+    <% if policy(@organization).remove_member? %>
+      <%= link_to "Invite Member", new_user_invitation_path, class: "btn-flat" %>
+    <% end %>
   </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Invitation Status</th>
+        <% if policy(@organization).remove_member? %>
+          <th scope="col"></th>
+          <%# <th scope="col"></th> %>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each_with_index do |member, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= member.first_name %></td>
+          <td><%= member.last_name %></td>
+          <td><%= member.email %></td>
+          <td><%= member.role %></td>
+          <td><%= member.invitation_status %></td>
+          <% if policy(@organization).remove_member? %>
+            <td>
+              <%= link_to remove_member_path(member), data: { turbo_method: 'patch' }, class: "text-dark" do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </td>
+            <%# <td> %>
+              <%# <i class="fa-solid fa-pen-to-square"></i> %>
+            <%# </td> %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

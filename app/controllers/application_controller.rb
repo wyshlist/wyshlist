@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
     redirect_to(authenticated_root_path)
   end
 
+  # def team_view?
+  #   params[:controller].match?(/pages|users|registrations|sessions/) ||
+  #     (params[:controller].match?('wishlists') && params[:action].match?('new'))
+  # end
+
   private
 
   def set_wish_params
