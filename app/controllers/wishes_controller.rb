@@ -38,6 +38,7 @@ class WishesController < ApplicationController
     @wishlist = @wish.wishlist
     authorize @wish
     if @wish.save
+      session[:wish_params] = nil
       flash[:notice] = "Ticket created successfully"
       redirect_to authenticated_root_path and return if request.referer.split('/').last == 'feedback'
       redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")

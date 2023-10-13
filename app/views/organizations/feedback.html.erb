@@ -49,6 +49,26 @@
           <button type="button" class="btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Create a ticket
           </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog rounded">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add a new ticket</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= simple_form_for @wish do |f| %>
+                    <%= f.association :wishlist, collection: @wishlists, label: false, placeholder: "Title" %>
+                    <%= f.input :title, label: false, placeholder: "Title" %>
+                    <%= f.rich_text_area :description, label: "Add a decription for this ticket", placeholder: "i.e: At the moment our current solution is this, it would be great to have...", as: :text %>
+                    <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
         <% else %>
           <div class="wrapper-container pb-0">
             <%= turbo_frame_tag "wish-view" do %>

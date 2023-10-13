@@ -17,7 +17,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto align-items-center">
-                    <% if @wishlist %>
+                    <% if @wishlist%>
                         <li class="nav-item">
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
@@ -45,8 +45,8 @@
                                 <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
                             </li>
                         <% end %>
-                    <% else %>
-                        <%= link_to " New wishlist", new_wishlist_path, class: "nav-link mx-auto link " %>
+                    <% elsif User.has_valid_organization_member?(current_user) %>
+                        <%= link_to " New Board", new_wishlist_path, class: "nav-link mx-auto link " %>
                     <% end %>
                     <% if User.has_valid_organization_member?(current_user) %>
                         <%= link_to "Dashboard", authenticated_root_path, class: "upvote-button mx-auto" %>
