@@ -8,9 +8,8 @@ module ApplicationHelper
 
   def pages_view?
     (params[:controller].match?('organizations') && params[:action].match?('new')) ||
-      (params[:controller].match?(/pages|users\/sessions/) ||
-      (params[:controller].match?('users/registrations') && params[:action].match?('new')) ||
-      (params[:controller].match?('users/registrations') && params[:action].match?('edit') && current_user.role == 'user'))
+      params[:controller].match?(%r{pages|users/sessions}) ||
+      (params[:controller].match?('users/registrations') && params[:action].match?('new'))
   end
 
   def end_user_views?
