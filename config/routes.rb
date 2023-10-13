@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       resources :wishes, only: [:new, :create, :index]
     end
 
+    resources :wishes, only: [:create]
+
     resources :wishes, only: [:show, :edit, :update, :destroy] do
       resources :votes, only: [:create]
       resources :comments, only: [:create, :destroy, :edit, :update]
