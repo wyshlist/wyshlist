@@ -217,6 +217,11 @@
   // display: flex;
   // align-items: start;
   padding: 10px 0;
+
+  small {
+    font-size: 12px;
+  }
+
   p {
     margin-bottom: 6px;
   }
@@ -224,6 +229,13 @@
   .pill {
     padding: 2px 8px;
     border-radius: 8px;
+  }
+
+  .staff-pill {
+    border-radius: 10px;
+    padding: 0px 4px;
+    background-color: $card-border;
+    color: $black;
   }
 }
 

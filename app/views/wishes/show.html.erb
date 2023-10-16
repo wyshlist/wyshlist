@@ -66,6 +66,9 @@
                       </div>
                     <% end %>
                     <small class="ms-2 user-name"><%= comment.user.full_name %></small>
+                    <% if comment.user.organization == @wishlist.organization %>
+                      <small class="ms-2 staff-pill"><%= comment.user.organization.name %></small>
+                    <% end %>
                   </div>
                   <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
                     <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
