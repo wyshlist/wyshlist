@@ -16,6 +16,9 @@ application.register("hello", HelloController)
 import PhotoPreviewController from "./photo_preview_controller"
 application.register("photo-preview", PhotoPreviewController)
 
+import ScrollDownController from "./scroll_down_controller"
+application.register("scroll-down", ScrollDownController)
+
 import SearchWishesController from "./search_wishes_controller"
 application.register("search-wishes", SearchWishesController)
 

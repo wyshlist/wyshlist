@@ -1,0 +1,23 @@
+<div class="card-comment <%= 'border-bottom card-border-color' unless comment == comments.last %>" id="comment-<%= comment.id %>">
+  <div class="flex-start mb-2">
+    <% if comment.user.photo.attached? %>
+      <%= cl_image_tag comment.user.photo.key, class: "avatar-small" %>
+    <% else %>
+      <div class="avatar-small avatar-name">
+        <%= comment.user.initial %>
+      </div>
+    <% end %>
+    <small class="ms-2 user-name"><%= comment.user.full_name %></small>
+  </div>
+  <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
+    <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
+    <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).stage_color %>"><%= wish.downcase %></span></p>
+  <% else %>
+    <p><%= comment.content %></p>
+  <% end %>
+  <ul class='list-inline'>
+    <!-- <li class="list-inline-item"><%= image_tag 'heart.png', alt: "text" %> 37</li> -->
+    <li class="list-inline-item"><small><%= comment.created_at.strftime('%B %e, %Y') %></small></li>
+    <!-- <li class="list-inline-item"><%= link_to 'Reply', '#', class: "text-reset text-decoration-underline" %></li> -->
+  </ul>
+</div>
