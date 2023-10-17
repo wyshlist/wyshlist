@@ -32,6 +32,6 @@
       <% end %>
 
       <%= link_to "Forgot your password?", new_password_path(resource_name), class: "mb-3" %>
-      <small>By Signing up you agree to Wyshlist’s <a href="#">Terms of service</a> and <a href="#">Privacy policy</a></small>
+      <small>By Signing up you agree to Wyshlist’s <%= link_to "terms of service", terms_path %> and <%= link_to "privacy policy", privacy_path %></small>
     </div>
 </div>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'privacy_policy', to: 'pages#privacy_policy'
-  get 'terms_of_service', to: 'pages#terms_of_service'
+  get 'privacy_policy', to: 'pages#privacy_policy', as: :privacy
+  get 'terms_of_service', to: 'pages#terms_of_service', as: :terms
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       resources :integrations, only: [:new, :create]
       resources :wishes, only: [:new, :create, :index]
     end
+
+    resources :wishes, only: [:create]
 
     resources :wishes, only: [:show, :edit, :update, :destroy] do
       resources :votes, only: [:create]

@@ -3,11 +3,11 @@
         <div class="container-fluid">
             <% if @wishlist && @wishlist.organization %>
                 <%= link_to wishlists_url(subdomain: @wishlist ? @wishlist.organization.subdomain : @organization.subdomain), class: "navbar-brand" do %>
-                    <%= image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo : 'logo.jpg' , class: "logo"%>
+                    <%= cl_image_tag (@wishlist && @wishlist.organization.logo.attached?) ? @wishlist.organization.logo.key : 'logo.jpg' , class: "logo" %>
                 <% end %>
             <% elsif @organization %>
                 <%= link_to wishlists_url(subdomain: @organization.subdomain), class: "navbar-brand" do %>
-                    <%= image_tag @organization.logo.attached? ? @organization.logo : 'logo.jpg', class: "logo"%>
+                    <%= cl_image_tag @organization.logo.attached? ? @organization.logo.key : 'logo.jpg', class: "logo"%>
                 <% end %>
             <% end %>
 
@@ -17,7 +17,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto align-items-center">
-                    <% if @wishlist %>
+                    <% if @wishlist%>
                         <li class="nav-item">
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
@@ -45,8 +45,11 @@
                                 <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
                             </li>
                         <% end %>
-                    <% else %>
-                        <%= link_to " New wishlist", new_wishlist_path, class: "nav-link upvote-button btn-flat mx-auto" %>
+                    <% elsif User.has_valid_organization_member?(current_user) %>
+                        <%= link_to " New Board", new_wishlist_path, class: "nav-link mx-auto link " %>
+                    <% end %>
+                    <% if User.has_valid_organization_member?(current_user) %>
+                        <%= link_to "Dashboard", authenticated_root_path, class: "upvote-button mx-auto" %>
                     <% end %>
                 </ul>
             </div>

@@ -32,6 +32,10 @@ class User < ApplicationRecord
     record.user == self
   end
 
+  def self.has_valid_organization_member?(user)
+    user && user.has_an_organization? && user.organization.organization_member?(user)
+  end
+
   def team_member_of(organization)
     self.organization == organization
   end
