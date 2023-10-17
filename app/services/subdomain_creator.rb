@@ -14,7 +14,7 @@ class SubdomainCreator < ApplicationService
         {
             Accept: "application/vnd.heroku+json; version=3",
             Content_Type: "application/json",
-            Authorization: "Bearer 682e356d-b131-4f6b-a881-a283acb8e64a",
+            Authorization: "Bearer #{ENV['HEROKU_API_KEY']}",
             Accept_encoding: "utf8"
         }
     end
