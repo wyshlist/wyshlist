@@ -35,6 +35,10 @@ class OrganizationPolicy < ApplicationPolicy
     user.admin? || user.team_member_of(record)
   end
 
+  def boards?
+    user.admin? || user.team_member_of(record)
+  end
+
   def members?
     user.team_member_of(record)
   end

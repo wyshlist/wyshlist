@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/ClassLength
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
-  before_action :check_team_member_subdomain, only: %i[feedback members edit]
+  before_action :check_team_member_subdomain, only: %i[feedback boards members edit]
   before_action :order_column_whitelist,
                 :order_direction_whitelist,
                 :set_stages,
@@ -22,17 +22,17 @@ class OrganizationsController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
     if params[:organization_search] && params[:organization_search] != ""
-       handle_existing_organization(params[:organization_search])
+      handle_existing_organization(params[:organization_search])
     else
-       @organization = Organization.new(organization_params)
-       authorize @organization
-       if @organization.save
-          update_user_and_redirect(@organization)
-       else
-          render :new, status: :unprocessable_entity
-       end
-     end
-   end
+      @organization = Organization.new(organization_params)
+      authorize @organization
+      if @organization.save
+        update_user_and_redirect(@organization)
+      else
+        render :new, status: :unprocessable_entity
+      end
+    end
+  end
   # rubocop:enable Metrics/MethodLength
 
   def edit
@@ -66,6 +66,12 @@ class OrganizationsController < ApplicationController
     return unless params[:filter].present?
 
     @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
+  end
+
+  def boards
+    @organization = current_user.organization
+    @wishlists = @organization.wishlists
+    authorize @organization
   end
 
   def members
