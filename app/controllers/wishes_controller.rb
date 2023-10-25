@@ -8,7 +8,7 @@ class WishesController < ApplicationController
   def show
     @wish = Wish.find(params[:id])
     @wishlist = @wish.wishlist
-    @comments = @wish.comments
+    @comments = @wish.comments.order(created_at: :desc)
     @comment = Comment.new
     authorize @wish
     add_breadcrumb "Tickets", wishlist_wishes_path(@wishlist)
