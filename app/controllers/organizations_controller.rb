@@ -27,6 +27,7 @@ class OrganizationsController < ApplicationController
        @organization = Organization.new(organization_params)
        authorize @organization
        if @organization.save
+          SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
           update_user_and_redirect(@organization)
        else
           render :new, status: :unprocessable_entity
