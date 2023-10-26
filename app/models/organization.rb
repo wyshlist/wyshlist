@@ -3,7 +3,7 @@ class Organization < ApplicationRecord
   has_many :wishlists, dependent: :destroy
   has_many :wishes, through: :wishlists
   validates :name, presence: true, uniqueness: true
-  validates :subdomain, presence: true, uniqueness: true, format: { with: /\A\w+\z/ }
+  validates :subdomain, presence: true, uniqueness: true, format: { with: /\A[\w\-]+\z/ }
   before_save :titleize_name
   has_one_attached :logo
 
