@@ -22,18 +22,18 @@ class OrganizationsController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
     if params[:organization_search] && params[:organization_search] != ""
-       handle_existing_organization(params[:organization_search])
+      handle_existing_organization(params[:organization_search])
     else
-       @organization = Organization.new(organization_params)
-       authorize @organization
-       if @organization.save
-          SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
-          update_user_and_redirect(@organization)
-       else
-          render :new, status: :unprocessable_entity
-       end
-     end
-   end
+      @organization = Organization.new(organization_params)
+      authorize @organization
+      if @organization.save
+        SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
+        update_user_and_redirect(@organization)
+      else
+        render :new, status: :unprocessable_entity
+      end
+    end
+  end
   # rubocop:enable Metrics/MethodLength
 
   def edit
@@ -156,7 +156,7 @@ class OrganizationsController < ApplicationController
   end
 
   def update_user_and_redirect(organization)
-      current_user.update(organization: organization)
+      current_user.update(organization: organization, role: 'super_team_member', super_team_member_since: Time.now)
       redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
   end
 end
