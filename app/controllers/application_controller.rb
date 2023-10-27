@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :set_wish_params, only: [:create]
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_organization
+  before_action :find_organization
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(authenticated_root_path)
+  end
+  
+  def find_organization
+    @current_organization = Organization.find_by(subdomain: request.subdomain)
   end
 
   private
@@ -30,9 +34,6 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
   end
 
-  def set_organization
-    Organization.find_by(subdomain: request.subdomain)
-  end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
