@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/ClassLength
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
-  before_action :check_team_member_subdomain, only: %i[feedback members edit]
+  before_action :check_team_member_subdomain, only: %i[feedback boards members edit]
   before_action :order_column_whitelist,
                 :order_direction_whitelist,
                 :set_stages,
@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
   end
 
   def feedback
-    @organization = current_user.organization
+    @organization = @current_organization
     @wishlists = @organization.wishlists
     authorize @organization
     @wish = Wish.new
@@ -67,6 +67,12 @@ class OrganizationsController < ApplicationController
     return unless params[:filter].present?
 
     @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
+  end
+
+  def boards
+    @organization = @current_organization
+    @wishlists = @organization.wishlists
+    authorize @organization
   end
 
   def members
@@ -101,7 +107,7 @@ class OrganizationsController < ApplicationController
   end
 
   def set_wishlists
-    @wishlists = current_user.organization.wishlists
+    @wishlists = @current_organization.wishlists
   end
 
   def filter_params

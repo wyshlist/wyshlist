@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
 
     get '/feedback', to: 'organizations#feedback', as: :feedback
+    get '/boards', to: 'organizations#boards', as: :boards
     resources :organizations, only: [:edit, :update, :destroy]
 
     get '/members', to: 'organizations#members'
