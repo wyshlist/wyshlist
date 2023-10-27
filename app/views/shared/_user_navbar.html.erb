@@ -13,7 +13,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto align-items-center">
-                    <% if @wishlist%>
+                    <% if @wishlist %>
                         <li class="nav-item">
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
@@ -47,6 +47,23 @@
                             <%= link_to "Dashboard", authenticated_root_path, class: "upvote-button mx-auto" %>
                         </li>
                     <% end %>
+
+                    <% if user_signed_in? %>
+                      <div class="dropdown nav-item">
+                        <% if current_user.photo.attached? %>
+                          <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                        <% else %>
+                          <div class="avatar flex-center avatar-name" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup=true aria-expanded=false >
+                            <%= current_user.initial %>
+                          </div>
+                        <% end %>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                          <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
+                          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                        </div>
+                      </div>
+                    <% end %>
+
                 </ul>
             </div>
         </div>

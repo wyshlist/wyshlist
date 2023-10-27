@@ -1,6 +1,5 @@
 <% content_for :meta_title, "#{@wish.title} | Wyshlist" %>
 <% content_for :meta_description, @wish.description %>
-<%= render "shared/user_navbar" %>
 <div class="my-container fix-page-wrapper">
     <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-2 d-inline-block" %>
     <%= turbo_frame_tag "wish-view", class: "flex-grow-1" do %>

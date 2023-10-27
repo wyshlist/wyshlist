@@ -1,81 +1,34 @@
-<div class="d-flex">
-  <%= render "shared/sidebar" %>
-  <div class="flex-grow-1">
-    <%= render "shared/dashboard_navbar" %>
-    <div class="feedback-wrapper" data-controller="modal-pass-value">
-      <div class="feedback__column-left">
-        <div class="wrapper-container">
-          <div class="d-flex justify-content-between align-items-start mb-3">
-            <h2>Tickets</h2>
-            <div class="dropdown">
-              <button class="ghost-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li class="dropdown-item">
-                  <%= link_to "Add a new wishlist", new_wishlist_path %>
-                </li>
-                <li class="dropdown-item">
-                  Add a new ticket
-                  <ul class="dropdown-menu dropdown-submenu">
-                    <% @wishlists.each do |wishlist| %>
-                      <button type="button" data-value="<%= wishlist.id %>" class="w-100 text-start" data-bs-toggle="modal" data-bs-target="#exampleModal" data-action="click->modal-pass-value#passValue">
-                        <%= wishlist.title %>
-                      </button>
-                    <% end %>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <%= render "wishes/filter" %>
-        </div>
-        <div class="tickets" data-controller="show-ticket-details">
-          <% if @wishes.empty? %>
-            <div class="wrapper-container border-0">
-              <small>No tickets yet. Start creating one...</small>
-            </div>
-          <% end %>
-          <% @wishes.each do |wish| %>
-            <%= render 'wishes/ticket', wish: wish %>
-          <% end %>
-        </div>
-      </div>
-      <div class="feedback__column-right <%= 'flex-center' if @wishes.empty? %>">
-        <% if @wishlists.empty? %>
-          <%= link_to "Create Wishlist", new_wishlist_path, class: "btn-flat" %>
-        <% elsif @wishes.empty? %>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Create a ticket
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog rounded">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add a new ticket</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <%= simple_form_for @wish do |f| %>
-                    <%= f.association :wishlist, collection: @wishlists, label: false, placeholder: "Title" %>
-                    <%= f.input :title, label: false, placeholder: "Title" %>
-                    <%= f.rich_text_area :description, label: "Add a decription for this ticket", placeholder: "i.e: At the moment our current solution is this, it would be great to have...", as: :text %>
-                    <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }%>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <div class="wrapper-container pb-0">
-            <%= turbo_frame_tag "wish-view" do %>
-            <% end %>
-          </div>
+<div class="feedback-wrapper">
+  <div class="feedback__column-left">
+    <div class="wrapper-container">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <h2>Tickets</h2>
+        <%= link_to new_wishlist_path, class: 'ghost-button' do %>
+          <i class="fa-solid fa-plus"></i>
         <% end %>
       </div>
+      <%= render "wishes/filter" %>
+    </div>
+    <div class="tickets" data-controller="show-ticket-details">
+      <% if @wishes.empty? %>
+        <div class="wrapper-container border-0">
+          <small>No tickets yet. Start creating one...</small>
+        </div>
+      <% end %>
+      <% @wishes.each do |wish| %>
+        <%= render 'wishes/ticket', wish: wish %>
+      <% end %>
+    </div>
+  </div>
+  <div class="feedback__column-right <%= 'flex-center' if @wishes.empty? %>">
+    <% if @wishlists.empty? %>
+      <%= link_to "Create Wishlist", new_wishlist_path, class: "btn-flat" %>
+    <% elsif @wishes.empty? %>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create a ticket
+      </button>
+
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog rounded">
@@ -86,7 +39,7 @@
             </div>
             <div class="modal-body">
               <%= simple_form_for @wish do |f| %>
-                <%= f.association :wishlist, collection: @wishlists, label: false, input_html: { data: { modal_pass_value_target: "input" } } %>
+                <%= f.association :wishlist, collection: @wishlists, label: false, placeholder: "Title" %>
                 <%= f.input :title, label: false, placeholder: "Title" %>
                 <%= f.rich_text_area :description, label: "Add a decription for this ticket", placeholder: "i.e: At the moment our current solution is this, it would be great to have...", as: :text %>
                 <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }%>
@@ -95,6 +48,11 @@
           </div>
         </div>
       </div>
-    </div>
+    <% else %>
+      <div class="wrapper-container pb-0">
+        <%= turbo_frame_tag "wish-view" do %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
