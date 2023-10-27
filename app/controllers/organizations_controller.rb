@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
   end
 
   def feedback
-    @organization = current_user.organization
+    @organization = @current_organization
     @wishlists = @organization.wishlists
     authorize @organization
     @wish = Wish.new
@@ -70,7 +70,7 @@ class OrganizationsController < ApplicationController
   end
 
   def boards
-    @organization = current_user.organization
+    @organization = @current_organization
     @wishlists = @organization.wishlists
     authorize @organization
   end
@@ -107,7 +107,7 @@ class OrganizationsController < ApplicationController
   end
 
   def set_wishlists
-    @wishlists = current_user.organization.wishlists
+    @wishlists = @current_organization.wishlists
   end
 
   def filter_params
