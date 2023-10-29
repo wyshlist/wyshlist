@@ -1,7 +1,7 @@
 <%= link_to wish_path(wish), data: {turbo_frame: "wish-view"} do %>
   <div class="card-wish wrapper-container" data-action="click->show-ticket-details#active" data-show-ticket-details="ticket">
     <p><strong><%= wish.title %></strong></p>
-    <%= wish.description %>
+    <%= wish.description.to_plain_text.truncate(150) %>
     <ul class='list-inline'>
       <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes.count %></li>
       <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> <%= wish.comments.count %></li>
