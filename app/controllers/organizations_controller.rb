@@ -27,7 +27,6 @@ class OrganizationsController < ApplicationController
       @organization = Organization.new(organization_params)
       authorize @organization
       if @organization.save
-        SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
         update_user_and_redirect(@organization)
       else
         render :new, status: :unprocessable_entity
@@ -53,8 +52,12 @@ class OrganizationsController < ApplicationController
 
   def destroy
     authorize @organization
-    @organization.destroy
-    flash[:notice] = "Organization deleted successfully"
+    if @organization.destroy && current_user.update(organization: nil, role: 'user')
+      flash[:notice] = "Organization deleted successfully"
+    else
+      flash[:alert] = "Organization not deleted, try again later"
+      render :edit, status: :unprocessable_entity
+    end
     redirect_to authenticated_root_path
   end
 

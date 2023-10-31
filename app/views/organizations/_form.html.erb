@@ -4,7 +4,11 @@
     <%= f.input :name, required: true, label: "Create your team", placeholder: "ie: My Company", name: "name"  %>
     <label class="form-label string required" for="subdomain_name">Choose your subdomain<abbr title="required">*</abbr></label>
     <div class="subdomain-input-wrapper">
-        <%= f.input :subdomain, required: true, label: false, placeholder: "ie: mycompany", name: "subdomain" %>
+        <% if params[:action] == "edit" %>
+            <%= f.input :subdomain, required: true, label: false, placeholder: "ie: mycompany", name: "subdomain",  input_html: { disabled: true, value: @organization.subdomain } %>
+        <% else %>
+            <%= f.input :subdomain, required: true, label: false, placeholder: "ie: mycompany", name: "subdomain" %>
+        <% end %>
         <small>.wyshlist.net<small>
     </div>
     <%= f.input :color,
@@ -14,4 +18,8 @@
          input_html: { class: 'color-input'}
     %>
     <%= f.submit "Submit", class: "btn-flat"%>
+<% end %>
+<br>
+<% if params[:action] == "edit" %> 
+    <%= link_to "Delete organziation", organization_path(@organization), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your team? Your team, boards and customer's tickets will also be deleted forever 🤯" }, class: "delete-link" %>
 <% end %>
