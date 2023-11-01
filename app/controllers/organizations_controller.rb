@@ -43,11 +43,11 @@ class OrganizationsController < ApplicationController
   def update
     authorize @organization
     if @organization.update(organization_params)
-        flash[:notice] = "Organization updated successfully"
-        redirect_to authenticated_root_url(subdomain: @organization.subdomain), allow_other_host: true
+      flash[:notice] = "Organization updated successfully"
+      redirect_to authenticated_root_url(subdomain: @organization.subdomain), allow_other_host: true
     else
-        flash[:alert] = "Organization not updated, try again later"
-        render :edit, status: :unprocessable_entity
+      flash[:alert] = "Organization not updated, try again later"
+      render :edit, status: :unprocessable_entity
     end
   end
 
