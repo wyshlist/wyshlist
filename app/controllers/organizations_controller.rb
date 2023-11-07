@@ -26,11 +26,15 @@ class OrganizationsController < ApplicationController
     else
       @organization = Organization.new(organization_params)
       authorize @organization
-      if @organization.save
-        SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
-        update_user_and_redirect(@organization)
-      else
-        render :new, status: :unprocessable_entity
+      respond_to do |format|
+        if @organization.save
+          SubdomainCreator.new(@organization.subdomain).call if Rails.env.production?
+          current_user.update(organization: @organization, role: 'super_team_member', super_team_member_since: Time.now)
+          format.html { update_user_and_redirect(@organization) }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
+        format.json
       end
     end
   end

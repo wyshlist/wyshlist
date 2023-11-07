@@ -1,11 +1,15 @@
-<div class="my-container full-screen d-flex align-items-center">
-    <div class="card-product form-wrapper flex-grow-1">
-        <h1>Create a team</h1>
-        <p>Wyshlists provides you with a personalised landing page for your team</p>
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab" tabindex="0">
-                <%= render "form" %>
-            </div>
-        </div>
+<div class="my-container full-screen d-flex align-items-center position-relative" data-controller="loading-organization">
+  <div class="card-product form-wrapper flex-grow-1">
+    <h1>Create a team</h1>
+    <p>Wyshlists provides you with a personalised landing page for your team</p>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab" tabindex="0">
+        <%= render "form" %>
+      </div>
     </div>
+  </div>
+
+  <div class="loading-page d-none" data-loading-organization-target="loader">
+    <div class="spinner"></div>
+  </div>
 </div>
