@@ -57,8 +57,12 @@ class OrganizationsController < ApplicationController
 
   def destroy
     authorize @organization
-    @organization.destroy
-    flash[:notice] = "Organization deleted successfully"
+    if @organization.destroy && current_user.update(organization: nil, role: 'user')
+      flash[:notice] = "Organization deleted successfully"
+    else
+      flash[:alert] = "Organization not deleted, try again later"
+      render :edit, status: :unprocessable_entity
+    end
     redirect_to authenticated_root_path
   end
 

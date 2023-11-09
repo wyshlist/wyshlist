@@ -69,6 +69,11 @@ small {
     display: none;
 }
 
+.delete-link {
+    color: red;
+    font-weight: 600;
+}
+
 @media (max-width: 768px) {
     .title-header {
         flex-direction: column;
