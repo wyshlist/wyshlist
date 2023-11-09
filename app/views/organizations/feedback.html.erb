@@ -22,7 +22,7 @@
   </div>
   <div class="feedback__column-right <%= 'flex-center' if @wishes.empty? %>">
     <% if @wishlists.empty? %>
-      <%= link_to "Create Wishlist", new_wishlist_path, class: "btn-flat" %>
+      <%= link_to "Create Board", new_wishlist_path, class: "btn-flat" %>
     <% elsif @wishes.empty? %>
       <!-- Button trigger modal -->
       <button type="button" class="btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
