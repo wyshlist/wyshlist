@@ -12,3 +12,37 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+.loading-page {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: -80px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.spinner {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 8px solid #007CB7;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: rotate-spinner  .5s  infinite linear;
+}
+
+@keyframes rotate-spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
