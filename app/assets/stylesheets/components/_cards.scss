@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.card-wish a {
+  color: $font-color;
+}
+
 .card-wish.active {
   border: solid 2px $primary-color !important;
   border-top: solid 3px $primary-color !important;

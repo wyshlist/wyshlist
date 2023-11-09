@@ -36,18 +36,6 @@
 
           <div class="flex-between">
             <h1><%= @wish.title %></h1>
-            <div class="flex-between">
-              <% if user_signed_in? && policy(@wish).edit? %>
-                <%= link_to edit_wish_path(@wish) do  %>
-                  <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
-                <% end %>
-              <% end %>
-              <% if user_signed_in? && policy(@wish).destroy? %>
-                <%= link_to wish_path(@wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                  <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
-                <% end %>
-              <% end %>
-            </div>
           </div>
           <p><%= @wish.description %></p>
         </div>

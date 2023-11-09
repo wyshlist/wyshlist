@@ -55,7 +55,7 @@ class ApplicationPolicy
 
   def user_is_super_team_member?
     # super_team_member is a team_member
-    user.super_team_member? && user_is_team_member?
+    user.super_team_member?
   end
 
   def user_is_team_member?
