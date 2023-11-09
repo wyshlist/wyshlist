@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [:new, :create]
 
-  constraints SubdomainConstraint do
-    authenticated :user do
-      root to: 'passthrough#index', as: :authenticated_root
-    end
+  authenticated :user do
+    root to: 'passthrough#index', as: :authenticated_root
+  end
 
+  constraints SubdomainConstraint do
     get '/feedback', to: 'organizations#feedback', as: :feedback
     get '/boards', to: 'organizations#boards', as: :boards
     resources :organizations, only: [:edit, :update, :destroy]

@@ -13,6 +13,9 @@ application.register("clipboard", ClipboardController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import LoadingOrganizationController from "./loading_organization_controller"
+application.register("loading-organization", LoadingOrganizationController)
+
 import ModalPassValueController from "./modal_pass_value_controller"
 application.register("modal-pass-value", ModalPassValueController)
 

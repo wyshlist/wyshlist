@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :set_wish_params, only: [:create]
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :remove_unauthenticated_user_subdomain, if: :unauthenticated_user?
   before_action :find_organization
   include Pundit::Authorization
 
@@ -17,9 +18,9 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(authenticated_root_path)
   end
-  
+
   def find_organization
-    @current_organization = Organization.find_by(subdomain: request.subdomain)
+    @current_organization = Organization.find_by(subdomain: request.subdomain) unless request.subdomain == 'www'
   end
 
   private
@@ -34,6 +35,15 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
   end
 
+  def unauthenticated_user?
+    (params[:controller] =~ /(^pages$)/)
+  end
+
+  def remove_unauthenticated_user_subdomain
+    if !user_signed_in? && request.subdomain != 'www'
+      redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true
+    end
+  end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
@@ -64,12 +74,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource_or_scope)
-    new_organization_path(subdomain: '')
+    unauthenticated_root_path
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if current_user.super_team_member? && !current_user.has_an_organization?
+    if !current_user.has_an_organization?
       new_organization_path
+    elsif current_user.has_an_organization?
+      authenticated_root_path
     else
       stored_location_for(resource_or_scope) || super
     end
