@@ -3,7 +3,11 @@
         <div class="container-fluid">
             <% if @current_organization %>
                 <%= link_to wishlists_url(subdomain: @current_organization.subdomain), class: "navbar-brand" do %>
-                    <%= cl_image_tag (@current_organization.logo.attached?) ? @current_organization.logo.key : 'logo.jpg' , class: "logo" %>
+                    <% if @current_organization.logo.attached? %>
+                        <%= cl_image_tag @current_organization.logo.key, class: "logo" %>
+                    <% else %>
+                        <%=  image_tag 'logo.jpg', class: "logo" %>
+                    <% end %>
                 <% end %>
             <% end %>
 

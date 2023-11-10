@@ -2,7 +2,7 @@
     <div class="card-product form-wrapper">
         <%= image_tag "asana.png", class: "avatar-x-large" %>
         <h1> New API connection </h1>
-        <strong>Connecting to baord: <%= @wishlist.title %></strong>
+        <strong>Connecting to board: <%= @wishlist.title %></strong>
         <div data-controller="wizard">
             <%= simple_form_for [@wishlist, @integration] do |f|%>
                 <div data-wizard-target="step">

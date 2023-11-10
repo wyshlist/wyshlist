@@ -4,6 +4,7 @@
     <% end %>
     <%= f.input :title, required: true, label: "Insert a descriptive title", placeholder: "i.e: Product development, Improve wyshlist.net..." %>
     <%= f.input :description, label: "Summarize the goals of this board", type: :text, placeholder: "i.e: This board is for the product development team..." %>
-    <%= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
+    <%# Removed private as we are not sure about the logic yet %>
+    <%#= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
     <%= f.submit "Submit", class: "btn-flat"%>
 <% end %>
