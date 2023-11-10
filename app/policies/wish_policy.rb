@@ -22,7 +22,7 @@ class WishPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.admin? || user_is_record_owner?
+    user.admin? || user_is_record_owner? 
   end
 
   def update?

@@ -40,8 +40,7 @@ class WishesController < ApplicationController
     if @wish.save
       session[:wish_params] = nil
       flash[:notice] = "Ticket created successfully"
-      redirect_to authenticated_root_path and return if request.referer.split('/').last == 'feedback'
-      redirect_to wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
+      redirect_to  request.referrer.include?("feedback") ? authenticated_root_path : wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
     else
       flash[:alert] = "Ticket not created, try again later"
       render :new, status: :unprocessable_entity
@@ -71,10 +70,10 @@ class WishesController < ApplicationController
     authorize @wish
     if @wish.destroy
       flash[:notice] = "Ticket deleted successfully"
-      redirect_to wishlist_wishes_path(@wish.wishlist)
+      redirect_to request.referer
     else
       flash[:alert] = "Ticket not deleted, try again later"
-      redirect_to wish_path(@wish)
+      redirect_to request.referer
     end
   end
 
