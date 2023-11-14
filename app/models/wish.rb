@@ -17,7 +17,18 @@ class Wish < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_title_and_description,
-                  against: %i[title description],
+                  against: %i[title],
+                  associated_against: {
+                    rich_text_description: %i[body]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
+  pg_search_scope :search_by_board_name,
+                  associated_against: {
+                    wishlist: %i[title]
+                  },
                   using: {
                     tsearch: { prefix: true }
                   }

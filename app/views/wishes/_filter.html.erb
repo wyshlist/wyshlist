@@ -22,15 +22,15 @@
       <%# Filter %>
       <div class="dropdown">
         <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
-          <% if params[:filter_by] %>
+          <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:board].present? || params[:start_date].present? || params[:end_date].present?) %>
+          <% if params[:board].present? || params[:start_date].present? || params[:end_date].present? %>
             <div class="circle"></div>
           <% end %>
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-header">FILTER BY</li>
           <li><hr class="dropdown-divider"></li>
-          <li class="dropdown-item <%= "active" if params[:filter_by] == "Date" %>">
+          <li class="dropdown-item <%= "active" if params[:start_date].present? || params[:end_date].present? %>">
             <a href="#">
               Date
             </a>
@@ -38,6 +38,9 @@
               <%= form_with url: request.url, method: :get, html: {class:
                   ""} do |f| %>
                   <li class="dropdown-item flex-between">
+                    <%= hidden_field_tag :query, params[:query] %>
+                    <%= hidden_field_tag :board, params[:board] %>
+                    <%= hidden_field_tag :stage, params[:stage] %>
                     <%= f.label :start_date, "From" %>
                     <%= f.date_field :start_date,
                                       class: "form-control",
@@ -49,20 +52,25 @@
                                       class: "form-control",
                                       value: params[:end_date] %>
                   </li>
+                  <%= f.submit 'Filter', class:"d-none" %>
               <% end %>
             </ul>
           </li>
-          <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>">
+          <li class="dropdown-item <%= "active" if params[:board].present? %>">
             <a href="#">
               Board
             </a>
             <ul class="dropdown-menu dropdown-submenu">
               <%= form_with url: request.url, method: :get, html: {class:
                   ""} do |f| %>
-                  <%= f.text_field :query,
+                  <%= hidden_field_tag :query, params[:query] %>
+                  <%= hidden_field_tag :start_date, params[:start_date] %>
+                  <%= hidden_field_tag :end_date, params[:end_date] %>
+                  <%= hidden_field_tag :stage, params[:stage] %>
+                  <%= f.text_field :board,
                                   class: "dropdown-item form-control",
                                   placeholder: "Start typing...",
-                                  value: params[:query] %>
+                                  value: params[:board] %>
               <% end %>
             </ul>
           </li>
@@ -78,6 +86,10 @@
   <div class="search-bar d-none" data-search-wishes-target="form">
     <%= form_with url: request.url, method: :get, html: {class:
         ""} do |f| %>
+        <%= hidden_field_tag :board, params[:board] %>
+        <%= hidden_field_tag :start_date, params[:start_date] %>
+        <%= hidden_field_tag :end_date, params[:end_date] %>
+        <%= hidden_field_tag :stage, params[:stage] %>
         <%= f.text_field :query,
                         class: "form-control",
                         placeholder: "Search...",
