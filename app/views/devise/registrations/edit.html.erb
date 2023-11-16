@@ -1,46 +1,44 @@
 <div class="my-container my-4">
-    <div class="form-wrapper">
-      <h1>Edit <%= resource_name.to_s.humanize %></h1>
+  <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, html: {data: {controller: "photo-preview"}}) do |f| %>
-        <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, html: {data: {controller: "photo-preview"}}) do |f| %>
+    <%= f.error_notification %>
 
-        <div class="form-inputs">
-          <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key, class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
-          <% else %>
-            <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
-          <% end %>
-          <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
-          <%= f.input :first_name, required: true, autofocus: true %>
-          <%= f.input :last_name, required: true, autofocus: true %>
-          <%= f.input :email, required: true, autofocus: true %>
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-          <% end %>
-
-          <%= f.input :password,
-                      hint: "leave it blank if you don't want to change it",
-                      required: false,
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :password_confirmation,
-                      required: false,
-                      input_html: { autocomplete: "new-password" } %>
-          <%= f.input :current_password,
-                      hint: "we need your current password to confirm your changes",
-                      required: true,
-                      input_html: { autocomplete: "current-password" } %>
-        </div>
-        <div class="form-actions">
-          <%= f.button :submit, "Update", class: "btn-flat" %>
-        </div>
+    <div class="form-inputs">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
+      <% else %>
+        <%= image_tag "default-avatar.png", class: "hidden avatar-x-large", data: { photo_preview_target: "preview" } %>
+      <% end %>
+      <%= f.input :photo, as: :file, input_html: { class: 'd-none', data: { photo_preview_target: "input", action:"change->photo-preview#displayPreview" }}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo'%>
+      <%= f.input :first_name, required: true, autofocus: true %>
+      <%= f.input :last_name, required: true, autofocus: true %>
+      <%= f.input :email, required: true, autofocus: true %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
-      <%# <h3>Cancel my account</h3>
+      <%= f.input :password,
+                  hint: "leave it blank if you don't want to change it",
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :current_password,
+                  hint: "we need your current password to confirm your changes",
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Update", class: "btn-flat" %>
+    </div>
+  <% end %>
 
-      <div>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
-      <%# </div> %>
+  <%# <h3>Cancel my account</h3>
 
-      <%= link_to "Back", :back %> <br>
-  </div>
+  <div>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+  <%# </div> %>
+
+  <%= link_to "Back", :back %> <br>
 </div>
