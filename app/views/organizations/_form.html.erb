@@ -15,7 +15,7 @@
         as: :color,
         label: "Choose a brand color",
         placeholder: "Color",
-        input_html: { class: 'color-input'}
+        input_html: { class: "color-input #{'color-center' if params[:action] == 'new'}" }
     %>
     <%= f.submit "Submit", class: "btn-flat"%>
 <% end %>
