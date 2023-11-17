@@ -20,7 +20,7 @@ class WishlistsController < ApplicationController
     authorize @wishlist
     if @wishlist.save
       flash[:notice] = "Board created successfully"
-      redirect_to wishlist_wishes_path(@wishlist)
+      redirect_to wishlists_path
     else
       flash[:alert] = "There was a problem creating your board, try again later"
       render :new, status: :unprocessable_entity
