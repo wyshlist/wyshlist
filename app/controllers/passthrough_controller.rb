@@ -9,6 +9,8 @@ class PassthroughController < ApplicationController
               feedback_url(subdomain: current_user.organization.subdomain)
             when 'user'
               wishlists_url(subdomain: request.subdomain)
+            else
+              get_started_path
             end
     redirect_to path, allow_other_host: true
   end

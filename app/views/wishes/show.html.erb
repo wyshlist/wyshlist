@@ -76,11 +76,11 @@
           <div class="divider"></div>
           <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3", data: { controller: "add-comment" }} do |f| %>
             <div class="flex-between">
-              <% if current_user.photo.attached? %>
+              <% if current_user&.photo_attached? %>
                 <%= cl_image_tag current_user.photo.key, class: "avatar" %>
               <% else %>
                 <div class="avatar avatar-name">
-                  <%= current_user.initial %>
+                  <%= current_user&.initial %>
                 </div>
               <% end %>
               <%= f.input :content,

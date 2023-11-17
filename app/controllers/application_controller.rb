@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if !current_user.has_an_organization?
+    if !current_user.has_an_organization? && current_user.role == 'super_team_member'
       new_organization_path
     elsif current_user.has_an_organization?
       authenticated_root_path
