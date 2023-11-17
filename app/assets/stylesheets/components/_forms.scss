@@ -199,6 +199,11 @@
   pointer-events: none;
 }
 
+.form-comment__input {
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
 .form-comment {
   width: 100%;
 
@@ -209,6 +214,7 @@
 
   form {
     text-align: end;
+    display: flex;
   }
 
   .comment_content {
