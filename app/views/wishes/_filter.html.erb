@@ -9,14 +9,14 @@
       <%# Sorting %>
       <div class="dropdown">
         <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
+          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:order_column]) %>
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-header">SORT BY</li>
           <li><hr class="dropdown-divider"></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
+          <li class="dropdown-item <%= "active" if params[:order_column] == "created_at" && params[:order_direction] == "DESC" %>"><%= link_to "Newest", request.params.merge(order_column: "created_at", order_direction: "DESC") %></li>
+          <li class="dropdown-item <%= "active" if params[:order_column] == "created_at" && params[:order_direction] == "ASC" %>"><%= link_to "Oldest", request.params.merge(order_column: "created_at", order_direction: "ASC") %></li>
+          <li class="dropdown-item <%= "active" if params[:order_column] == "votes_count" && params[:order_direction] == "DESC" %>"><%= link_to "Votes", request.params.merge(order_column: "votes_count", order_direction: "DESC") %></li>
         </ul>
       </div>
       <%# Filter %>
@@ -30,6 +30,7 @@
         <ul class="dropdown-menu">
           <li class="dropdown-header">FILTER BY</li>
           <li><hr class="dropdown-divider"></li>
+
           <li class="dropdown-item <%= "active" if params[:start_date].present? || params[:end_date].present? %>">
             <a href="#">
               Date

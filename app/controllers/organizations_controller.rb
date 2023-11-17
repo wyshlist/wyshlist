@@ -73,39 +73,38 @@ class OrganizationsController < ApplicationController
     @wish = Wish.new
     @wishes = @organization.wishes
 
-    if params[:stage].present?
-      @wishes = @wishes.where(stage: params[:stage])
-    end
+    # if params[:stage].present?
+    #   @wishes = @wishes.where(stage: params[:stage])
+    # end
 
-    if params[:query].present?
-      @wishes = @wishes.search_by_title_and_description(params[:query])
-    end
+    # if params[:query].present?
+    #   @wishes = @wishes.search_by_title_and_description(params[:query])
+    # end
 
-    if params[:board].present?
-      @wishes = @wishes.search_by_board_name(params[:board])
-    end
+    # if params[:board].present?
+    #   @wishes = @wishes.search_by_board_name(params[:board])
+    # end
 
-    if params[:start_date].present?
-      @wishes = @wishes.where('wishes.created_at >= ?', params[:start_date])
-    end
+    # if params[:start_date].present?
+    #   @wishes = @wishes.where('wishes.created_at >= ?', params[:start_date])
+    # end
 
-    if params[:end_date].present?
-      @wishes = @wishes.where('wishes.created_at < ?', params[:end_date].to_date + 1.day)
-    end
+    # if params[:end_date].present?
+    #   @wishes = @wishes.where('wishes.created_at < ?', params[:end_date].to_date + 1.day)
+    # end
 
-    if params[:sort_by].present?
-      @wishes = case params[:sort_by]
-        when 'Oldest' then @wishes.order(created_at: :asc)
-        when 'Votes' then @wishes.select("wishes.*, count(votes.id) AS v_count").joins(:votes).group("wishes.id").order("v_count DESC")
-        when 'Newest' then @wishes.order(created_at: :desc)
-      end
-    else
-      @wishes = @wishes.order(created_at: :desc)
-    end
+    # if params[:sort_by].present?
+    #   @wishes = case params[:sort_by]
+    #     when 'Oldest' then @wishes.order(created_at: :asc)
+    #     when 'Votes' then @wishes.select("wishes.*, count(votes.id) AS v_count").joins(:votes).group("wishes.id").order("v_count DESC")
+    #     when 'Newest' then @wishes.order(created_at: :desc)
+    #   end
+    # else
+    #   @wishes = @wishes.order(created_at: :desc)
+    # end
 
     # return unless params[:filter].present?
-
-    # @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
+    @wishes = Wishes::FeedbackFilterer.new(filter_params: params, scope: @wishes).call
   end
 
   def boards

@@ -4,7 +4,6 @@ class Wish < ApplicationRecord
   has_one :organization, through: :wishlist
   validates :title, presence: true
   has_many :votes, dependent: :destroy
-  # has_many :users
   belongs_to :user
   has_rich_text :description
   has_many :comments, dependent: :destroy
@@ -37,13 +36,6 @@ class Wish < ApplicationRecord
     votes.find_by(user:)
   end
 
-  def self.sorted_by_votes
-    left_joins(:votes)
-      .group(:id)
-      .order('COUNT(votes.id) DESC')
-  end
-
-  # rubocop:disable Style/HashLikeCase
   def stage_color
     case stage.capitalize
     when "Backlog" then "#A0A0A0"
@@ -55,7 +47,6 @@ class Wish < ApplicationRecord
     # when "Archived" then "#ED9D02"
     end
   end
-  # rubocop:enable Style/HashLikeCase
 
   def self.filter_stages
     ["Backlog", "In process", "Launched"]
