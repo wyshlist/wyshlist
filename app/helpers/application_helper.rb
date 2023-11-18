@@ -23,6 +23,21 @@ module ApplicationHelper
 
   def filter_link(text, column)
     active = params[column] == text
-    link_to(text, request.params.merge(column => text), class: ('active' if active))
+
+    if params[column] == text
+      link_to(text, request.params.merge(column => ''), class: ('active' if active))
+    else
+      link_to(text, request.params.merge(column => text), class: ('active' if active))
+    end
+  end
+
+  def hidden_fields
+    hidden_field_tag(:order_column, params[:order_column]) +
+      hidden_field_tag(:order_direction, params[:order_direction]) +
+      hidden_field_tag(:query, params[:query]) +
+      hidden_field_tag(:stage, params[:stage]) +
+      hidden_field_tag(:board, params[:board]) +
+      hidden_field_tag(:start_date, params[:start_date]) +
+      hidden_field_tag(:end_date, params[:end_date])
   end
 end

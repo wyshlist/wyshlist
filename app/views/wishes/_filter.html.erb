@@ -2,7 +2,6 @@
   <div class="feedback-filter">
     <div class="filter">
       <% Wish.filter_stages.each do |stage| %>
-        <%#= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
         <%= filter_link(stage, :stage) %>
       <% end %>
     </div>
@@ -10,7 +9,7 @@
       <%# Sorting %>
       <div class="dropdown">
         <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:order_column]) %>
+          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:order_column].present?) %>
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-header">SORT BY</li>
@@ -31,24 +30,21 @@
         <ul class="dropdown-menu">
           <li class="dropdown-header">FILTER BY</li>
           <li><hr class="dropdown-divider"></li>
-
-          <li class="dropdown-item <%= "active" if params[:start_date].present? || params[:end_date].present? %>">
-            <a href="#">
+          <li class="dropdown-item">
+            <a href="#" class="<%= "active" if params[:start_date].present? || params[:end_date].present? %>">
               Date
             </a>
             <ul class="dropdown-menu dropdown-submenu">
-              <%= form_with url: request.url, method: :get, html: {class:
-                  ""} do |f| %>
+              <%= form_with url: request.url, method: :get do |f| %>
                   <li class="dropdown-item flex-between">
-                    <%= hidden_field_tag :query, params[:query] %>
-                    <%= hidden_field_tag :board, params[:board] %>
-                    <%= hidden_field_tag :stage, params[:stage] %>
+                    <%= hidden_fields %>
                     <%= f.label :start_date, "From" %>
                     <%= f.date_field :start_date,
                                       class: "form-control",
                                       value: params[:start_date] %>
                   </li>
                   <li class="dropdown-item flex-between">
+                    <%= hidden_fields %>
                     <%= f.label :end_date, "To" %>
                     <%= f.date_field :end_date,
                                       class: "form-control",
@@ -58,17 +54,13 @@
               <% end %>
             </ul>
           </li>
-          <li class="dropdown-item <%= "active" if params[:board].present? %>">
-            <a href="#">
+          <li class="dropdown-item">
+            <a href="#" class="<%= "active" if params[:board].present? %>">
               Board
             </a>
             <ul class="dropdown-menu dropdown-submenu">
-              <%= form_with url: request.url, method: :get, html: {class:
-                  ""} do |f| %>
-                  <%= hidden_field_tag :query, params[:query] %>
-                  <%= hidden_field_tag :start_date, params[:start_date] %>
-                  <%= hidden_field_tag :end_date, params[:end_date] %>
-                  <%= hidden_field_tag :stage, params[:stage] %>
+              <%= form_with url: request.url, method: :get do |f| %>
+                  <%= hidden_fields %>
                   <%= f.text_field :board,
                                   class: "dropdown-item form-control",
                                   placeholder: "Start typing...",
@@ -88,10 +80,7 @@
   <div class="search-bar d-none" data-search-wishes-target="form">
     <%= form_with url: request.url, method: :get, html: {class:
         ""} do |f| %>
-        <%= hidden_field_tag :board, params[:board] %>
-        <%= hidden_field_tag :start_date, params[:start_date] %>
-        <%= hidden_field_tag :end_date, params[:end_date] %>
-        <%= hidden_field_tag :stage, params[:stage] %>
+        <%= hidden_fields %>
         <%= f.text_field :query,
                         class: "form-control",
                         placeholder: "Search...",
