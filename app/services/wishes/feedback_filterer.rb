@@ -24,7 +24,6 @@ module Wishes
       apply_date_filter
       apply_wishlist_filter
       apply_query_filter
-
       apply_order
       scope
     end

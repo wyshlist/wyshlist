@@ -2,7 +2,8 @@
   <div class="feedback-filter">
     <div class="filter">
       <% Wish.filter_stages.each do |stage| %>
-        <%= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
+        <%#= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
+        <%= filter_link(stage, :stage) %>
       <% end %>
     </div>
     <div class="sorting">
@@ -14,9 +15,9 @@
         <ul class="dropdown-menu">
           <li class="dropdown-header">SORT BY</li>
           <li><hr class="dropdown-divider"></li>
-          <li class="dropdown-item <%= "active" if params[:order_column] == "created_at" && params[:order_direction] == "DESC" %>"><%= link_to "Newest", request.params.merge(order_column: "created_at", order_direction: "DESC") %></li>
-          <li class="dropdown-item <%= "active" if params[:order_column] == "created_at" && params[:order_direction] == "ASC" %>"><%= link_to "Oldest", request.params.merge(order_column: "created_at", order_direction: "ASC") %></li>
-          <li class="dropdown-item <%= "active" if params[:order_column] == "votes_count" && params[:order_direction] == "DESC" %>"><%= link_to "Votes", request.params.merge(order_column: "votes_count", order_direction: "DESC") %></li>
+          <li class="dropdown-item"><%= sortable_link("Newest", "created_at", "DESC") %></li>
+          <li class="dropdown-item"><%= sortable_link("Oldest", "created_at", "ASC") %></li>
+          <li class="dropdown-item"><%= sortable_link("Votes", "votes_count", "DESC") %></li>
         </ul>
       </div>
       <%# Filter %>

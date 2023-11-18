@@ -15,4 +15,14 @@ module ApplicationHelper
   def end_user_views?
     team_views? == false && pages_view? == false
   end
+
+  def sortable_link(text, column, direction)
+    active = params[:order_column] == column && params[:order_direction] == direction
+    link_to(text, request.params.merge(order_column: column, order_direction: direction), class: ('active' if active))
+  end
+
+  def filter_link(text, column)
+    active = params[column] == text
+    link_to(text, request.params.merge(column => text), class: ('active' if active))
+  end
 end
