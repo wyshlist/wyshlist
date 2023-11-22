@@ -105,11 +105,6 @@ class OrganizationsController < ApplicationController
       Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
   end
 
-  def order_direction_whitelist
-    @order_direction_whitelist ||=
-      Wishes::FeedbackFilterer::ORDER_DIRECTION_WHITELIST.map { [_1.titleize, _1] }
-  end
-
   def set_stages
     @stages = Wish.distinct.pluck(:stage)
   end
@@ -137,7 +132,7 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-      params.require(:organization).permit(:name, :logo, :color, :subdomain)
+    params.require(:organization).permit(:name, :logo, :color, :subdomain)
   end
 
   def order_direction_whitelist

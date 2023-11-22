@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_wish_params
-    session[:wish_params] = params["wish"]  if params["wish"].present?
+    session[:wish_params] = params["wish"] if params["wish"].present?
   end
 
   def skip_pundit?
@@ -38,18 +38,20 @@ class ApplicationController < ActionController::Base
   end
 
   def remove_unauthenticated_user_subdomain
-    redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true  if !user_signed_in? && request.subdomain != 'www'
+    return if user_signed_in? || request.subdomain == 'www'
+
+    redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true
   end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name photo role])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo role])
 
     # For additional in app/views/devise/invitation/accept.html.erb
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[first_name last_name photo role])
   end
 
   def storable_location?
