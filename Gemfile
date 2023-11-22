@@ -91,7 +91,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.0.0'
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'byebug', '~> 11.1', '>= 11.1.3'
