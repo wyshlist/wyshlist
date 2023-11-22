@@ -105,16 +105,8 @@ class OrganizationsController < ApplicationController
       Wishes::FeedbackFilterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
   end
 
-  def set_stages
-    @stages = Wish.distinct.pluck(:stage)
-  end
-
   def set_wishlists
     @wishlists = @current_organization.wishlists
-  end
-
-  def filter_params
-    params[:filter].permit(:stage, :wishlist_id, :order_column, :order_direction)
   end
 
   def check_team_member_subdomain
@@ -148,25 +140,21 @@ class OrganizationsController < ApplicationController
     params[:filter].permit(:stage, :wishlist_id, :order_column, :order_direction)
   end
 
-  def set_organization
-    @organization = Organization.find(params[:id])
-    authorize @organization
-  end
-
   def handle_existing_organization(organization_name)
-      @organization = Organization.where('LOWER(name) ILIKE ?', organization_name.downcase).first || @organization = Organization.new
-      if @organization.id
-          update_user_and_redirect(@organization)
-          authorize @organization
-      else
-          redirect_to new_organization_path, alert: "Team not found, maybe you should create it?"
-          authorize @organization
-      end
+    organization_name_downcase = organization_name.downcase
+    @organization = Organization.where('LOWER(name) ILIKE ?', organization_name_downcase).first ||
+                    Organization.new
+    authorize @organization
+    if @organization.id
+      update_user_and_redirect(@organization)
+    else
+      redirect_to new_organization_path, alert: "Team not found, maybe you should create it?"
+    end
   end
 
   def update_user_and_redirect(organization)
-      current_user.update(organization: organization, role: 'super_team_member', super_team_member_since: Time.now)
-      redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
+    current_user.update(organization: organization, role: 'super_team_member', super_team_member_since: Time.now)
+    redirect_to authenticated_root_url(subdomain: current_user.organization.subdomain), allow_other_host: true
   end
 end
 # rubocop:enable Metrics/ClassLength
