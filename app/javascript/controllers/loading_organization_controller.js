@@ -15,7 +15,9 @@ export default class extends Controller {
       .then(response => response.json())
       .then((data) => {
         if (data.response) {
-          window.location.replace(`${window.location.origin}/`);
+          setTimeout(() => {
+            window.location.replace(`${window.location.origin}/`);
+          }, 2000);
         }
       })
   }
