@@ -26,9 +26,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_wish_params
-    if params["wish"].present?
-      session[:wish_params] = params["wish"]
-    end
+    session[:wish_params] = params["wish"]  if params["wish"].present?
   end
 
   def skip_pundit?
@@ -40,9 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def remove_unauthenticated_user_subdomain
-    if !user_signed_in? && request.subdomain != 'www'
-      redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true
-    end
+    redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true  if !user_signed_in? && request.subdomain != 'www'
   end
 
   def configure_permitted_parameters
