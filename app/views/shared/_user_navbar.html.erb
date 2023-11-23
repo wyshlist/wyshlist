@@ -40,7 +40,7 @@
                     </li>
                     <% if !user_signed_in? %>
                         <li class="nav-item">
-                            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+                            <%= link_to "Log in", new_user_session_path, class: "ghost-black" %>
                         </li>
                     <% end %>
                     <% if User.has_valid_organization_member?(current_user) %>
