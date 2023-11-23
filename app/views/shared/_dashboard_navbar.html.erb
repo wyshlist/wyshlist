@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon border-bottom">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon border-bottom"  data-controller="active-navbar">
   <div class="container-fluid justify-content-end">
     <ul class="navbar-nav">
       <% if user_signed_in? %>
@@ -9,7 +9,6 @@
           <li class="nav-item">
             <%= link_to boards_path, class: "nav-link px-0" do %>
               Boards
-              <%#= image_tag 'eye.png', class: "icon", alt: "public view" %>
             <% end %>
           </li>
           <li class="nav-item">
@@ -18,8 +17,7 @@
             <% end %>
           </li>
           <li class="nav-item d-none">
-            <%# To uncomment when notifications feature liveg %>
-            <% link_to '#', target: "_blank", class: "nav-link px-0" do %> 
+            <% link_to '#', target: "_blank", class: "nav-link px-0" do %>
               <%= image_tag 'bell.png', class: "icon", alt: "notification" %>
             <% end %>
           </li>
