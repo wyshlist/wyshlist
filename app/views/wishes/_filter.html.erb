@@ -31,9 +31,7 @@
           <li class="dropdown-header">FILTER BY</li>
           <li><hr class="dropdown-divider"></li>
           <li class="dropdown-item">
-            <a href="#" class="<%= "active" if params[:start_date].present? || params[:end_date].present? %>">
-              Date
-            </a>
+            <%= link_to 'Date', '#', class: ("active" if params[:start_date].present? || params[:end_date].present?) %>
             <ul class="dropdown-menu dropdown-submenu">
               <%= form_with url: request.url, method: :get do |f| %>
                   <li class="dropdown-item flex-between">
@@ -55,9 +53,7 @@
             </ul>
           </li>
           <li class="dropdown-item">
-            <a href="#" class="<%= "active" if params[:board].present? %>">
-              Board
-            </a>
+            <%= link_to 'Board', '#', class: ("active" if params[:board].present?) %>
             <ul class="dropdown-menu dropdown-submenu">
               <%= form_with url: request.url, method: :get do |f| %>
                   <%= hidden_fields %>
