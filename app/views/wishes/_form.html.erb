@@ -1,4 +1,5 @@
 <%= simple_form_for [@wish], id: "add-wish" do |f| %>
+    <%= f.input :wishlist_id, as: :hidden, input_html: { value: @wishlist.id } %>
     <%= f.input :title, label: false, input_html: { value: session["wish_params"]&.[]("title")}, placeholder: "Title" %>
     <%= f.rich_text_area :description, label: "Add a decription for this ticket", as: :text, placeholder: "i.e: At the moment our current solution is this, it would be great to have..." , value: (session["wish_params"]&.[]("description") unless session["wish_params"]&.[]("description") == false) %>
     <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }, style: "background-color: #{@wishlist&.organization&.color}" %>

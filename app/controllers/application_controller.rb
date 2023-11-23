@@ -26,9 +26,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_wish_params
-    if params["wish"].present?
-      session[:wish_params] = params["wish"]
-    end
+    session[:wish_params] = params["wish"] if params["wish"].present?
   end
 
   def skip_pundit?
@@ -40,20 +38,20 @@ class ApplicationController < ActionController::Base
   end
 
   def remove_unauthenticated_user_subdomain
-    if !user_signed_in? && request.subdomain != 'www'
-      redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true
-    end
+    return if user_signed_in? || request.subdomain == 'www'
+
+    redirect_to unauthenticated_root_url(subdomain: 'www'), allow_other_host: true
   end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name photo role])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo role])
 
     # For additional in app/views/devise/invitation/accept.html.erb
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :photo, :role])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[first_name last_name photo role])
   end
 
   def storable_location?
@@ -80,7 +78,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     if !current_user.has_an_organization? && current_user.role == 'super_team_member'
       new_organization_path
-    elsif current_user.has_an_organization?
+    elsif current_user.has_an_organization? && current_user.role == 'team_member'
       authenticated_root_path
     else
       stored_location_for(resource_or_scope) || super

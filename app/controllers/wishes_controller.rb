@@ -34,8 +34,6 @@ class WishesController < ApplicationController
   def create
     @wish = Wish.new(wish_params)
     @wish.user = current_user
-    @wish.wishlist = Wishlist.find(params[:wishlist_id]) if params[:wishlist_id]
-    @wishlist = @wish.wishlist
     authorize @wish
     if @wish.save
       session[:wish_params] = nil
@@ -43,7 +41,7 @@ class WishesController < ApplicationController
       redirect_to  request.referrer.include?("feedback") ? authenticated_root_path : wishlist_wishes_path(@wish.wishlist, anchor: "wish-#{@wish.id}")
     else
       flash[:alert] = "Ticket not created, try again later"
-      render :new, status: :unprocessable_entity
+      redirect_to request.referrer
     end
   end
   # rubocop:enable Metrics/MethodLength
