@@ -1,8 +1,13 @@
 <% content_for :meta_title, "#{@wish.title} | Wyshlist" %>
 <% content_for :meta_description, @wish.description %>
 <div class="my-container fix-page-wrapper">
-    <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-2 d-inline-block" %>
-    <%= turbo_frame_tag "wish-view", class: "flex-grow-1" do %>
+    <%= turbo_frame_tag "wish-view", class: "flex-grow-1 d-flex flex-column" do %>
+      <% if params[:source] == 'feedback' %>
+        <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-2 d-inline-block" %>
+      <% else %>
+        <%= link_to "< Back", '#', class: "my-2 d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
+      <% end %>
+
       <div class="card-show-wish">
         <div class="card-header">
           <div class="flex-between mb-3">

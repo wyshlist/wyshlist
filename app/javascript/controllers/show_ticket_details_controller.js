@@ -9,9 +9,6 @@ export default class extends Controller {
   }
 
   active(event) {
-    // this.ticketTargets.forEach((ticket) => {
-    //   ticket.classList.remove('active')
-    // })
     if (this.activeTicket) {
       this.activeTicket.classList.remove('active')
     }
