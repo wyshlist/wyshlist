@@ -195,6 +195,8 @@
   z-index: 1;
   position: absolute;
   top: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .separator {
@@ -334,8 +336,6 @@
 
   .feedback__column-right {
     flex-grow: 1;
-    overflow-y: scroll;
-    overflow-x: hidden;
     position: initial;
 
     .wrapper-container {

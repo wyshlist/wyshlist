@@ -3,12 +3,12 @@
 <div class="my-container fix-page-wrapper">
     <%= turbo_frame_tag "wish-view", class: "flex-grow-1 d-flex flex-column" do %>
       <% if params[:source] == 'feedback' %>
-        <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "my-2 d-inline-block" %>
+        <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "d-inline-block" %>
       <% else %>
-        <%= link_to "< Back", '#', class: "my-2 d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
+        <%= link_to "< Back", '#', class: "d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
       <% end %>
 
-      <div class="card-show-wish">
+      <div class="card-show-wish mt-1">
         <div class="card-header">
           <div class="flex-between mb-3">
             <div class="flex-between">
