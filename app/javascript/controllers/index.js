@@ -25,9 +25,6 @@ application.register("photo-preview", PhotoPreviewController)
 import SearchWishesController from "./search_wishes_controller"
 application.register("search-wishes", SearchWishesController)
 
-import ShowTicketDetailsController from "./show_ticket_details_controller"
-application.register("show-ticket-details", ShowTicketDetailsController)
-
 import TabController from "./tab_controller"
 application.register("tab", TabController)
 

@@ -1,6 +1,5 @@
 <div class="card-wish wrapper-container"
-    data-action="click->ticket-popup#show click->ticket-popup#active"
-    data-show-ticket-details="ticket">
+    data-action="click->ticket-popup#show click->ticket-popup#active">
   <div class="d-flex justify-content-between align-items-start">
     <%= link_to wish_path(wish), data: {turbo_frame: "wish-view"}, style: "flex-grow: 1" do %>
       <div>
