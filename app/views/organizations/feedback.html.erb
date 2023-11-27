@@ -32,8 +32,7 @@
       <!-- Modal -->
     <% else %>
       <div class="wrapper-container pb-0 h-100">
-        <%= turbo_frame_tag "wish-view", src: wish_path(@wishes.first, source: 'feedback'), class: "h-100 flex-grow-1 d-flex flex-column" do %>
-        <% end %>
+        <%= turbo_frame_tag "wish-view", src: wish_path(@wishes.first, source: 'feedback'), class: "h-100 flex-grow-1 d-flex flex-column" %>
       </div>
     <% end %>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

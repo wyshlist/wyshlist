@@ -1,109 +1,109 @@
 <% content_for :meta_title, "#{@wish.title} | Wyshlist" %>
 <% content_for :meta_description, @wish.description %>
 <div class="my-container fix-page-wrapper">
-    <%= turbo_frame_tag "wish-view", class: "flex-grow-1 d-flex flex-column" do %>
-      <% if params[:source] == 'feedback' %>
-        <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "d-inline-block" %>
-      <% else %>
-        <%= link_to "< Back", '#', class: "d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
-      <% end %>
+  <%= turbo_frame_tag "wish-view", class: "flex-grow-1 d-flex flex-column" do %>
+    <% if params[:source] == 'feedback' %>
+      <%= link_to "< Back", '#', class: "d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
+    <% else %>
+      <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "d-inline-block", data: { turbo_frame: :_top } %>
+    <% end %>
 
-      <div class="card-show-wish mt-2">
-        <div class="card-header">
-          <div class="flex-between mb-3">
-            <div class="flex-between">
-              <% if @wish.user.photo.attached? %>
-                <%= cl_image_tag @wish.user.photo.key, class: "avatar-small" %>
-              <% else %>
-                <div class="avatar-small avatar-name">
-                  <%= @wish.user.initial %>
-                </div>
-              <% end %>
-              <small class="ms-2 user-name"><%= @wish.user.full_name %></small>
-            </div>
-            <div class="flex-between">
-              <div class="card-ghost me-2">
-                <span class="me-1"><%= @wish.votes.count %></span>
-                <%= image_tag "carrot-up.png", width: '12px', alt: "text" %>
-              </div>
-              <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= @wish.stage_color %>; color: <%= @wish.stage_color %>">
-                  <%= @wish.stage %>
-                  <!--
-                    <% if user_signed_in? && policy(@wish).edit? %>
-                      <div>
-                        <%= render "wishes/stage_form" %>
-                      </div>
-                    <% end %>
-                  -->
-              </div>
-            </div>
-          </div>
-
+    <div class="card-show-wish mt-2">
+      <div class="card-header">
+        <div class="flex-between mb-3">
           <div class="flex-between">
-            <h1><%= @wish.title %></h1>
-          </div>
-          <p><%= @wish.description %></p>
-        </div>
-        <div class="card-comments">
-          <h4 class="my-4">Activity</h4>
-          <div class="comments">
-            <% @comments.each do |comment| %>
-                <div class="card-comment <%= 'border-bottom card-border-color' unless comment == @comments.last %>">
-                  <div class="flex-start mb-2">
-                    <% if comment.user.photo.attached? %>
-                      <%= cl_image_tag comment.user.photo.key, class: "avatar-small" %>
-                    <% else %>
-                      <div class="avatar-small avatar-name">
-                        <%= comment.user.initial %>
-                      </div>
-                    <% end %>
-                    <small class="ms-2 user-name"><%= comment.user.full_name %></small>
-                    <% if comment.from_team?(@wishlist.organization) %>
-                      <small class="ms-2 staff-pill"><%= comment.user.organization.name %></small>
-                    <% end %>
-                  </div>
-                  <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
-                    <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
-                    <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).stage_color %>"><%= wish.downcase %></span></p>
-                  <% else %>
-                    <p><%= comment.content %></p>
-                  <% end %>
-                  <ul class='list-inline'>
-                    <!-- <li class="list-inline-item"><%= image_tag 'heart.png', alt: "text" %> 37</li> -->
-                    <li class="list-inline-item"><small><%= comment.created_at.strftime('%B %e, %Y') %></small></li>
-                    <!-- <li class="list-inline-item"><%= link_to 'Reply', '#', class: "text-reset text-decoration-underline" %></li> -->
-                  </ul>
-                </div>
+            <% if @wish.user.photo.attached? %>
+              <%= cl_image_tag @wish.user.photo.key, class: "avatar-small" %>
+            <% else %>
+              <div class="avatar-small avatar-name">
+                <%= @wish.user.initial %>
+              </div>
             <% end %>
+            <small class="ms-2 user-name"><%= @wish.user.full_name %></small>
+          </div>
+          <div class="flex-between">
+            <div class="card-ghost me-2">
+              <span class="me-1"><%= @wish.votes.count %></span>
+              <%= image_tag "carrot-up.png", width: '12px', alt: "text" %>
+            </div>
+            <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= @wish.stage_color %>; color: <%= @wish.stage_color %>">
+                <%= @wish.stage %>
+                <!--
+                  <% if user_signed_in? && policy(@wish).edit? %>
+                    <div>
+                      <%= render "wishes/stage_form" %>
+                    </div>
+                  <% end %>
+                -->
+            </div>
           </div>
         </div>
-        <div class="form-comment">
-          <div class="divider"></div>
-          <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3", data: { controller: "add-comment" }} do |f| %>
-            <div class="flex-between form-comment__input">
-              <% if current_user&.photo_attached? %>
-                <%= cl_image_tag current_user.photo.key, class: "avatar" %>
-              <% else %>
-                <div class="avatar avatar-name">
-                  <%= current_user&.initial %>
+
+        <div class="flex-between">
+          <h1><%= @wish.title %></h1>
+        </div>
+        <p><%= @wish.description %></p>
+      </div>
+      <div class="card-comments">
+        <h4 class="my-4">Activity</h4>
+        <div class="comments">
+          <% @comments.each do |comment| %>
+              <div class="card-comment <%= 'border-bottom card-border-color' unless comment == @comments.last %>">
+                <div class="flex-start mb-2">
+                  <% if comment.user.photo.attached? %>
+                    <%= cl_image_tag comment.user.photo.key, class: "avatar-small" %>
+                  <% else %>
+                    <div class="avatar-small avatar-name">
+                      <%= comment.user.initial %>
+                    </div>
+                  <% end %>
+                  <small class="ms-2 user-name"><%= comment.user.full_name %></small>
+                  <% if comment.from_team?(@wishlist.organization) %>
+                    <small class="ms-2 staff-pill"><%= comment.user.organization.name %></small>
+                  <% end %>
                 </div>
-              <% end %>
-              <%= f.input :content,
-                          label: false,
-                          placeholder: "Leave a comment",
-                          input_html: {
-                            data: {
-                              action: "
-                                focus->add-comment#showButton
-                                blur->add-comment#hideButton
-                                keyup->add-comment#activateButton
-                              "
-                            }
-                          } %>
-            </div>
-            <%= f.button :submit, 'Submit', class: "btn-flat px-4 py-2 mb-0 d-none", disabled: true, data: { add_comment_target: "button" } %>
+                <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
+                  <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
+                  <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).stage_color %>"><%= wish.downcase %></span></p>
+                <% else %>
+                  <p><%= comment.content %></p>
+                <% end %>
+                <ul class='list-inline'>
+                  <!-- <li class="list-inline-item"><%= image_tag 'heart.png', alt: "text" %> 37</li> -->
+                  <li class="list-inline-item"><small><%= comment.created_at.strftime('%B %e, %Y') %></small></li>
+                  <!-- <li class="list-inline-item"><%= link_to 'Reply', '#', class: "text-reset text-decoration-underline" %></li> -->
+                </ul>
+              </div>
           <% end %>
         </div>
       </div>
-    <% end %>
+      <div class="form-comment">
+        <div class="divider"></div>
+        <%= simple_form_for [@wish, @comment], defaults: { wrapper: false }, html: { class: "my-3", data: { controller: "add-comment" }} do |f| %>
+          <div class="flex-between form-comment__input">
+            <% if current_user&.photo_attached? %>
+              <%= cl_image_tag current_user.photo.key, class: "avatar" %>
+            <% else %>
+              <div class="avatar avatar-name">
+                <%= current_user&.initial %>
+              </div>
+            <% end %>
+            <%= f.input :content,
+                        label: false,
+                        placeholder: "Leave a comment",
+                        input_html: {
+                          data: {
+                            action: "
+                              focus->add-comment#showButton
+                              blur->add-comment#hideButton
+                              keyup->add-comment#activateButton
+                            "
+                          }
+                        } %>
+          </div>
+          <%= f.button :submit, 'Submit', class: "btn-flat px-4 py-2 mb-0 d-none", disabled: true, data: { add_comment_target: "button" } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
