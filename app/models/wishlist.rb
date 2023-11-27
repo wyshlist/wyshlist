@@ -1,7 +1,7 @@
 class Wishlist < ApplicationRecord
   belongs_to :user
   belongs_to :organization, optional: true
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 250 }
   validates :description, presence: true
   has_many :wishes, dependent: :destroy
   has_many :integrations, dependent: :destroy
