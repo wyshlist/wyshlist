@@ -48,6 +48,7 @@ class WishesController < ApplicationController
 
   def edit
     @wish = Wish.find(params[:id])
+    @wishlist = @wish.wishlist
     authorize @wish
   end
 

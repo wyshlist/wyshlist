@@ -11,11 +11,15 @@
       </div>
     <% end %>
     <div class="">
-      <%= link_to edit_wish_path(wish) do %>
-        <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
+      <% if policy(wish).edit? %>
+        <%= link_to edit_wish_path(wish) do %>
+          <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
+        <% end %>
       <% end %>
-      <%= link_to wish_path(wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-        <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
+      <% if policy(wish).destroy? %>
+        <%= link_to wish_path(wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
+        <% end %>
       <% end %>
     </div>
   </div>
