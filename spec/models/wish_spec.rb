@@ -60,4 +60,19 @@ RSpec.describe Wish, type: :model do
       expect(wish.votes.first.user).to eq(owner)
     end
   end
+
+  describe 'stages' do
+    let(:organization) { Organization.create(name: "New Organization") }
+    let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", organization_id: organization.id, password: '123123') }
+    let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
+    let(:wish) { Wish.create(title: "New Wish", wishlist:, user: owner) } 
+
+    it "returns the correct color for each stage" do
+      expect(wish.stage_color).to eq("#A0A0A0")
+      wish.update(stage: "In process")
+      expect(wish.stage_color).to eq("#F278F2")
+      wish.update(stage: "Launched")
+      expect(wish.stage_color).to eq("#2FC888")
+    end
+  end
 end
