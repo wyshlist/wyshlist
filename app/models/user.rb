@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_one_attached :photo
   enum role: %i[user super_team_member team_member admin]
   after_create :signup_email
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def admin?
     role == "admin"
