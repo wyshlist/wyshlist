@@ -9,20 +9,12 @@ class WishPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    true
-  end
-
   def create?
     true
   end
 
   def show?
     true
-  end
-
-  def edit?
-    user.admin? || user_is_record_owner? 
   end
 
   def update?

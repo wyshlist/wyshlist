@@ -1,0 +1,25 @@
+<% item_class = type == 'navbar' ? 'nav-item d-none d-lg-flex' : 'dropdown-item d-flex d-lg-none' %>
+
+<li class="<%= item_class %>">
+  <%= link_to "Feedbacks", feedback_path, class: "#{'nav-link' if type == 'navbar'}" %>
+</li>
+<li class="<%= item_class %>">
+  <%= link_to boards_path, class: "#{'nav-link' if type == 'navbar'} px-0" do %>
+    Boards
+  <% end %>
+</li>
+<li class="<%= item_class %>">
+  <%= link_to wishlists_path, target: "_blank", class: "#{'nav-link' if type == 'navbar'} px-0" do %>
+    <% if type == 'navbar' %>
+      <%= image_tag 'eye.png', class: "icon", alt: "public view" %>
+    <% else %>
+      Public View
+    <% end %>
+  <% end %>
+</li>
+<li class="<%= item_class %> d-none">
+  <%# To uncomment when notifications feature liveg %>
+  <% link_to '#', target: "_blank", class: "#{'nav-link' if type == 'navbar'} px-0" do %>
+    <%= image_tag 'bell.png', class: "icon", alt: "notification" %>
+  <% end %>
+</li>

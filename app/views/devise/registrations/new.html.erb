@@ -3,12 +3,10 @@
       <%= image_tag 'logo.jpg', alt: "wyshlist-logo", class: "logo mb-2" %>
       <h1>Sign up</h1>
       <p>Already have a Wyshlist account? <%= link_to "Sign in", new_session_path(resource_name) %></p>
-
       <%#= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn-flat btn-ghost vw-30", data: { turbo: false } do %>
         <%#= image_tag 'google_icon.png', alt: "google-login" %> 
         <%# Connect with Google %>
       <%# end %>
-
       <%# <div class="login-separator">
         <div class="separator__line"></div>
         <p class="">Or</p>

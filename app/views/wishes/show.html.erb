@@ -59,7 +59,7 @@
                   </div>
                   <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
                     <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
-                    <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).stage_color %>"><%= wish.downcase %></span></p>
+                    <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).bg_stage_color %>"><%= wish.downcase %></span></p>
                   <% else %>
                     <p><%= comment.content %></p>
                   <% end %>

@@ -1,0 +1,11 @@
+<% item_class = type == 'sidebar' ? 'd-none d-lg-flex' : 'd-flex d-lg-none' %>
+
+<li><hr class="dropdown-divider d-lg-none"></li>
+
+<% if Wishlist.admin_wishlists.any? %>
+  <%= link_to "Contribute to Wyshlist", wishlist_wishes_url( Wishlist.admin_wishlists.first, subdomain: "wyshlist"), class: "dropdown-item #{item_class} main-link" %>
+<% end %>
+<% if current_user.organization.present? && policy(current_user.organization).edit? %>
+  <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item #{item_class}" %>
+<% end %>
+<%= link_to "Team members", members_path, class: "dropdown-item #{item_class}"  %>

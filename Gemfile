@@ -30,7 +30,6 @@ gem "breadcrumbs_on_rails"
 gem 'image_processing', '~> 1.2'
 gem "cloudinary"
 gem "rails_admin", "3.0"
-gem "faraday"
 gem "json"
 
 # Use Redis adapter to run Action Cable in production
@@ -91,7 +90,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.0.0'
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'byebug', '~> 11.1', '>= 11.1.3'

@@ -22,8 +22,8 @@ class WishlistsController < ApplicationController
       flash[:notice] = "Board created successfully"
       redirect_to boards_path
     else
-      flash[:alert] = "There was a problem creating your board, try again later"
-      render :new, status: :unprocessable_entity
+      flash[:alert] = "There was a problem creating your board, try again later: #{@wishlist.errors.full_messages.join(", ")}"
+      redirect_to new_wishlist_path
     end
   end
 

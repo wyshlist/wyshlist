@@ -118,6 +118,20 @@ button {
   }
 }
 
+.ghost-black {
+  font-size: 14px;
+  padding: 8px 14px;
+  font-weight: bold;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  &:hover {
+    background: black;
+    color: white;
+    transition: 0.3s ease;
+  }
+}
+
 .dark {
   color: $gray;
   border: 1px solid $gray;
