@@ -78,11 +78,6 @@ RSpec.describe User, type: :model do
       expect(user.owner?(wishlist)).to eq(true)
     end
 
-    # it 'returns true if the user has a photo attached' do
-    #   user = User.new(photo: double('photo'))
-    #   expect(user.photo_attached?).to eq(true)
-    # end
-
     it 'returns the full name of the user' do
       user = User.new(first_name: 'John', last_name: 'Doe')
       expect(user.full_name).to eq('John Doe')
