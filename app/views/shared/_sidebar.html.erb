@@ -1,17 +1,11 @@
-<div class="sidebar">
+<div class="sidebar d-none d-lg-flex">
   <%= link_to user_signed_in? ? authenticated_root_path : unauthenticated_root_path, class: "navbar-brand" do %>
     <%= image_tag "logo-short.png", class: "logo"%>
   <% end %>
   <div class="dropdown">
     <%= image_tag "setting.png", class: "icon dropdown-toggle", id: "sidebarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarDropdown">
-      <% if Wishlist.admin_wishlists.any? %>
-        <%= link_to "Contribute to Wyshlist", wishlist_wishes_url( Wishlist.admin_wishlists.first, subdomain: "wyshlist"), class: "dropdown-item main-link" %>
-      <% end %>
-      <% if current_user.organization.present? && policy(current_user.organization).edit? %>
-        <%= link_to current_user.organization.name, edit_organization_path(current_user.organization), class: "dropdown-item" %>
-      <% end %>
-      <%= link_to "Team members", members_path, class: "dropdown-item"  %>
+      <%= render 'shared/sidebar_links', type: 'sidebar' %>
     </div>
   </div>
 </div>
