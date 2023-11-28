@@ -2,67 +2,65 @@
   <div class="feedback-filter">
     <div class="filter">
       <% Wish.filter_stages.each do |stage| %>
-        <%= link_to stage, request.params.merge(stage: stage), class: "me-2 me-lg-3 #{'active' if stage == params[:stage]}" %>
+        <%= filter_link(stage, :stage) %>
       <% end %>
     </div>
     <div class="sorting">
       <%# Sorting %>
       <div class="dropdown">
         <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:sort_by]) %>
+          <%= image_tag 'sort.png', alt: "sort-icon", class: ("active" if params[:order_column].present?) %>
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-header">SORT BY</li>
           <li><hr class="dropdown-divider"></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Newest" %>"><%= link_to "Newest", request.params.merge(sort_by: "Newest") %></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Oldest" %>"><%= link_to "Oldest", request.params.merge(sort_by: "Oldest") %></li>
-          <li class="dropdown-item <%= "active" if params[:sort_by] == "Votes" %>"><%= link_to "Votes", request.params.merge(sort_by: "Votes") %></li>
+          <li class="dropdown-item"><%= sortable_link("Newest", "created_at", "DESC") %></li>
+          <li class="dropdown-item"><%= sortable_link("Oldest", "created_at", "ASC") %></li>
+          <li class="dropdown-item"><%= sortable_link("Votes", "votes_count", "DESC") %></li>
         </ul>
       </div>
       <%# Filter %>
       <div class="dropdown">
         <button class="p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:filter_by]) %>
-          <% if params[:filter_by] %>
+          <%= image_tag 'filter.png', alt: "filter-icon", class: ("active" if params[:board].present? || params[:start_date].present? || params[:end_date].present?) %>
+          <% if params[:board].present? || params[:start_date].present? || params[:end_date].present? %>
             <div class="circle"></div>
           <% end %>
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-header">FILTER BY</li>
           <li><hr class="dropdown-divider"></li>
-          <li class="dropdown-item <%= "active" if params[:filter_by] == "Date" %>">
-            <a href="#">
-              Date
-            </a>
+          <li class="dropdown-item">
+            <%= link_to 'Date', '#', class: ("active" if params[:start_date].present? || params[:end_date].present?) %>
             <ul class="dropdown-menu dropdown-submenu">
-              <%= form_with url: request.url, method: :get, html: {class:
-                  ""} do |f| %>
+              <%= form_with url: request.url, method: :get do |f| %>
                   <li class="dropdown-item flex-between">
+                    <%= hidden_fields %>
                     <%= f.label :start_date, "From" %>
                     <%= f.date_field :start_date,
                                       class: "form-control",
                                       value: params[:start_date] %>
                   </li>
                   <li class="dropdown-item flex-between">
+                    <%= hidden_fields %>
                     <%= f.label :end_date, "To" %>
                     <%= f.date_field :end_date,
                                       class: "form-control",
                                       value: params[:end_date] %>
                   </li>
+                  <%= f.submit 'Filter', class:"d-none" %>
               <% end %>
             </ul>
           </li>
-          <li class="dropdown-item <%= "active" if params[:filter_by] == "Board" %>">
-            <a href="#">
-              Board
-            </a>
+          <li class="dropdown-item">
+            <%= link_to 'Board', '#', class: ("active" if params[:board].present?) %>
             <ul class="dropdown-menu dropdown-submenu">
-              <%= form_with url: request.url, method: :get, html: {class:
-                  ""} do |f| %>
-                  <%= f.text_field :query,
+              <%= form_with url: request.url, method: :get do |f| %>
+                  <%= hidden_fields %>
+                  <%= f.text_field :board,
                                   class: "dropdown-item form-control",
                                   placeholder: "Start typing...",
-                                  value: params[:query] %>
+                                  value: params[:board] %>
               <% end %>
             </ul>
           </li>
@@ -78,6 +76,7 @@
   <div class="search-bar d-none" data-search-wishes-target="form">
     <%= form_with url: request.url, method: :get, html: {class:
         ""} do |f| %>
+        <%= hidden_fields %>
         <%= f.text_field :query,
                         class: "form-control",
                         placeholder: "Search...",

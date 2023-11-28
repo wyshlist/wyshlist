@@ -177,10 +177,9 @@
     }
   }
 
-  .dropdown-item.active {
-    background-color: transparent;
-
-    a {
+  .dropdown-item {
+    a.active {
+      background-color: transparent;
       color: $primary-color;
     }
   }
@@ -425,6 +424,11 @@
 
 .logo {
   height: 60px;
+}
+
+.character-count {
+  display: flex;
+  justify-content: space-between
 }
 
 @media (max-width: 768px) {

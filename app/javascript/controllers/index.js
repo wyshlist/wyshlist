@@ -7,6 +7,9 @@ import { application } from "./application"
 import AddCommentController from "./add_comment_controller"
 application.register("add-comment", AddCommentController)
 
+import CharacterCounterController from "./character_counter_controller"
+application.register("character-counter", CharacterCounterController)
+
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 

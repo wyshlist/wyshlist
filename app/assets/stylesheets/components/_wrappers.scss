@@ -178,10 +178,6 @@
     border-bottom: 1px solid $border-gray;
   }
 
-  .feedback-filter {
-    display: flex;
-  }
-
   .tickets {
     flex-grow: 1;
     overflow-y: scroll;
@@ -225,10 +221,6 @@
       padding: 4px 8px;
       border-radius: 4px;
     }
-
-    a {
-      font-size: 12px;
-    }
   }
 
   .sorting {
@@ -245,6 +237,11 @@
       opacity: 1;
     }
   }
+}
+
+.filter a {
+  font-size: 12px;
+  margin-right: 8px;
 }
 
 .team-content {
@@ -353,6 +350,7 @@
 
   .filter a {
     font-size: 14px;
+    margin-right: 12px;
   }
 }
 

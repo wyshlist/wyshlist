@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_one_attached :photo
   enum role: %i[user super_team_member team_member admin]
   after_create :signup_email
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   def admin?
     role == "admin"
@@ -69,13 +71,12 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.find_by(email: data['email'])
-
-    # Uncomment the section below if you want users to be created if they don't exist
     user ||= User.create(
       first_name: data['first_name'],
       last_name: data['last_name'],
       email: data['email'],
-      password: Devise.friendly_token[0, 20]
+      password: Devise.friendly_token[0, 20],
+      role: 'super_team_member'
     )
     user
   end

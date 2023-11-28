@@ -6,6 +6,16 @@ RSpec.describe User, type: :model do
       user = User.new(email: '')
       expect(user).not_to be_valid
     end
+
+    it 'validates the presence of a first name' do
+      user = User.new(first_name: '')
+      expect(user).not_to be_valid
+    end
+
+    it 'validates the presence of the last name' do
+      user = User.new(last_name: '')
+      expect(user).not_to be_valid
+    end
   end
 
   describe 'associations' do

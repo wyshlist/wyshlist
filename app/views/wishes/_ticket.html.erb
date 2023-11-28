@@ -6,17 +6,21 @@
         <p><strong><%= wish.title %></strong></p>
         <%= wish.description.to_plain_text.truncate(150) %>
         <ul class='list-inline'>
-          <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes.count %></li>
+          <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes_count %></li>
           <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> <%= wish.comments.count %></li>
         </ul>
       </div>
     <% end %>
     <div class="">
-      <%= link_to edit_wish_path(wish) do %>
-        <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
+      <% if policy(wish).edit? %>
+        <%= link_to edit_wish_path(wish) do %>
+          <%= image_tag 'edit.png', class: "icon-small me-3", alt: "edit" %>
+        <% end %>
       <% end %>
-      <%= link_to wish_path(wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-        <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
+      <% if policy(wish).destroy? %>
+        <%= link_to wish_path(wish), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <%= image_tag 'trash.png', class: "icon-small", alt: "delete" %>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -71,10 +71,8 @@ class OrganizationsController < ApplicationController
     @wishlists = @organization.wishlists
     authorize @organization
     @wish = Wish.new
-    @wishes = @organization.wishes.order(created_at: :desc)
-    return unless params[:filter].present?
-
-    @wishes = Wishes::FeedbackFilterer.new(filter_params:, scope: @wishes).call
+    @wishes = @organization.wishes
+    @wishes = Wishes::FeedbackFilterer.new(filter_params: params, scope: @wishes).call
   end
 
   def boards

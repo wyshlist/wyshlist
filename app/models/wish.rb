@@ -4,7 +4,6 @@ class Wish < ApplicationRecord
   has_one :organization, through: :wishlist
   validates :title, presence: true
   has_many :votes, dependent: :destroy
-  # has_many :users
   belongs_to :user
   has_rich_text :description
   has_many :comments, dependent: :destroy
@@ -17,7 +16,18 @@ class Wish < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_title_and_description,
-                  against: %i[title description],
+                  against: %i[title],
+                  associated_against: {
+                    rich_text_description: %i[body]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
+
+  pg_search_scope :search_by_board_name,
+                  associated_against: {
+                    wishlist: %i[title]
+                  },
                   using: {
                     tsearch: { prefix: true }
                   }
@@ -26,13 +36,6 @@ class Wish < ApplicationRecord
     votes.find_by(user:)
   end
 
-  def self.sorted_by_votes
-    left_joins(:votes)
-      .group(:id)
-      .order('COUNT(votes.id) DESC')
-  end
-
-  # rubocop:disable Style/HashLikeCase
   def stage_color
     case stage.capitalize
     when "Backlog" then "#A0A0A0"
@@ -42,6 +45,17 @@ class Wish < ApplicationRecord
     when "Launched" then "#2FC888"
     # when "Completed" then "#2FC888"
     # when "Archived" then "#ED9D02"
+    end
+  end
+
+  # rubocop:enable Style/HashLikeCase
+  def bg_stage_color
+    case stage.capitalize
+    when "Backlog" then "#EBEBEB"
+    when "In process" then "#FAC7FA"
+    when "In review" then "#FAC7FA"
+    when "Beta" then "#ACECD1"
+    when "Launched" then "#ACECD1"
     end
   end
   # rubocop:enable Style/HashLikeCase
