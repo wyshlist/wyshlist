@@ -5,7 +5,7 @@
         <p><strong><%= wish.title %></strong></p>
         <%= wish.description.to_plain_text.truncate(150) %>
         <ul class='list-inline'>
-          <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes.count %></li>
+          <li class="list-inline-item"><%= image_tag 'star.png', alt: "text" %> <%= wish.votes_count %></li>
           <li class="list-inline-item"><%= image_tag 'message-square.png', alt: "text" %> <%= wish.comments.count %></li>
         </ul>
       </div>

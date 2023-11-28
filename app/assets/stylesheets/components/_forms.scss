@@ -177,10 +177,9 @@
     }
   }
 
-  .dropdown-item.active {
-    background-color: transparent;
-
-    a {
+  .dropdown-item {
+    a.active {
+      background-color: transparent;
       color: $primary-color;
     }
   }
