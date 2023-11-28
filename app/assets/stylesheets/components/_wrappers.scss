@@ -225,6 +225,10 @@
       padding: 4px 8px;
       border-radius: 4px;
     }
+
+    a {
+      font-size: 12px;
+    }
   }
 
   .sorting {
@@ -345,6 +349,10 @@
 
   .about-us-section__grid {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .filter a {
+    font-size: 14px;
   }
 }
 

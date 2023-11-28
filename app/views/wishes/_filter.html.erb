@@ -2,7 +2,7 @@
   <div class="feedback-filter">
     <div class="filter">
       <% Wish.filter_stages.each do |stage| %>
-        <%= link_to stage, request.params.merge(stage: stage), class: "me-3 #{'active' if stage == params[:stage]}" %>
+        <%= link_to stage, request.params.merge(stage: stage), class: "me-2 me-lg-3 #{'active' if stage == params[:stage]}" %>
       <% end %>
     </div>
     <div class="sorting">
