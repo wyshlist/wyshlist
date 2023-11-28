@@ -427,6 +427,11 @@
   height: 60px;
 }
 
+.character-count {
+  display: flex;
+  justify-content: space-between
+}
+
 @media (max-width: 768px) {
   .category-selector + label {
     padding: 15px;

@@ -40,7 +40,7 @@ RSpec.describe Wish, type: :model do
   end
 
   describe 'after update' do
-    let(:owner) { User.create(email: "john@example.com", password: '123123') }
+    let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", password: '123123') }
     let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
 
     it 'create a new comment everytime there is an update' do
@@ -51,7 +51,7 @@ RSpec.describe Wish, type: :model do
 
   describe 'after commit' do
     let(:organization) { Organization.create(name: "New Organization") }
-    let(:owner) { User.create(email: "john@example.com", organization_id: organization.id, password: '123123') }
+    let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", organization_id: organization.id, password: '123123') }
     let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
 
     it "automatically upvotes the wish by the owner" do

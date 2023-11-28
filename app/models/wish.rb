@@ -44,6 +44,17 @@ class Wish < ApplicationRecord
     # when "Archived" then "#ED9D02"
     end
   end
+
+  # rubocop:enable Style/HashLikeCase
+  def bg_stage_color
+    case stage.capitalize
+    when "Backlog" then "#EBEBEB"
+    when "In process" then "#FAC7FA"
+    when "In review" then "#FAC7FA"
+    when "Beta" then "#ACECD1"
+    when "Launched" then "#ACECD1"
+    end
+  end
   # rubocop:enable Style/HashLikeCase
 
   def self.filter_stages

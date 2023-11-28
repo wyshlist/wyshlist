@@ -34,13 +34,13 @@
                         <%= link_to "Give feedback", "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <% @current_organization.wishlists.each do |wishlist| %>
-                                <%= link_to wishlist.title, wishlist_wishes_path(wishlist), class: "dropdown-item" %>
+                                <%= link_to wishlist.title.truncate(20), wishlist_wishes_path(wishlist), class: "dropdown-item" %>
                             <% end %>
                         </div>
                     </li>
                     <% if !user_signed_in? %>
                         <li class="nav-item">
-                            <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+                            <%= link_to "Log in", new_user_session_path, class: "ghost-black" %>
                         </li>
                     <% end %>
                     <% if User.has_valid_organization_member?(current_user) %>

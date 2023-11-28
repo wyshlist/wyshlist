@@ -14,7 +14,7 @@ RSpec.describe PassthroughController, type: :controller do
 
       it "redirects to the feedback page" do
         get :index
-        expect(response).to redirect_to(feedback_path)
+        expect(response).to redirect_to(feedback_url(subdomain: team_member.organization.subdomain))
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe PassthroughController, type: :controller do
 
       it "redirects to the feedback page" do
         get :index
-        expect(response).to redirect_to(feedback_path)
+        expect(response).to redirect_to(feedback_url(subdomain: super_team_member.organization.subdomain))
       end
     end
 
