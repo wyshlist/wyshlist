@@ -8,7 +8,7 @@ class Wish < ApplicationRecord
   has_rich_text :description
   has_many :comments, dependent: :destroy
 
-  enum stage: { Backlog: 0, 'In process': 1, 'In review': 2, Beta: 3, Launched: 4 }
+  enum stage: { Backlog: 0, 'In process': 1, Launched: 3 }
   after_create :send_to_asana, if: :asana_integration?
   # after_create_commit { broadcast_append_to "wishes" }
   after_update :create_comment, if: :saved_change_to_stage?
@@ -40,8 +40,6 @@ class Wish < ApplicationRecord
     case stage.capitalize
     when "Backlog" then "#A0A0A0"
     when "In process" then "#F278F2"
-    when "In review" then "#F278F2"
-    when "Beta" then "#2FC888"
     when "Launched" then "#2FC888"
     # when "Completed" then "#2FC888"
     # when "Archived" then "#ED9D02"
@@ -53,8 +51,6 @@ class Wish < ApplicationRecord
     case stage.capitalize
     when "Backlog" then "#EBEBEB"
     when "In process" then "#FAC7FA"
-    when "In review" then "#FAC7FA"
-    when "Beta" then "#ACECD1"
     when "Launched" then "#ACECD1"
     end
   end

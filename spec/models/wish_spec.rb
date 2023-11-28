@@ -45,7 +45,7 @@ RSpec.describe Wish, type: :model do
 
     it 'create a new comment everytime there is an update' do
       wish = Wish.create(title: "New Wish", wishlist:, user: owner)
-      expect { wish.update(stage: 'In review') }.to change { wish.comments.count }.by(1)
+      expect { wish.update(stage: 'In process') }.to change { wish.comments.count }.by(1)
     end
   end
 
