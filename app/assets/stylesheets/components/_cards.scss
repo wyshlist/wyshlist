@@ -18,7 +18,7 @@
 
 .card-show-wish {
   display: grid;
-  height: 100%;
+  flex-grow: 1;
   grid-template-rows: auto 1fr auto;
 
   .card-comments {
@@ -216,10 +216,6 @@
 }
 
 .card-comment {
-  // overflow: hidden;
-  // background: white;
-  // display: flex;
-  // align-items: start;
   padding: 10px 0;
 
   small {
@@ -232,7 +228,8 @@
 
   .pill {
     padding: 2px 8px;
-    border-radius: 8px;
+    border-radius: 10px;
+    margin-left: 4px;
   }
 
   .staff-pill {

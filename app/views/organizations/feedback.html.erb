@@ -1,4 +1,4 @@
-<div class="feedback-wrapper">
+<div class="feedback-wrapper" data-controller="ticket-popup">
   <div class="feedback__column-left">
     <div class="wrapper-container">
       <div class="d-flex justify-content-between align-items-start mb-3">
@@ -6,11 +6,10 @@
         <button type="button" class="ghost-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <i class="fa-solid fa-plus"></i>
         </button>
-
       </div>
       <%= render "wishes/filter" %>
     </div>
-    <div class="tickets" data-controller="show-ticket-details">
+    <div class="tickets">
       <% if @wishes.empty? %>
         <div class="wrapper-container border-0">
           <small>No tickets yet.</small>
@@ -21,7 +20,7 @@
       <% end %>
     </div>
   </div>
-  <div class="feedback__column-right <%= 'flex-center' if @wishes.empty? %>">
+  <div class="feedback__column-right d-none d-lg-block <%= 'flex-center' if @wishes.empty? %>" data-ticket-popup-target="popup">
     <% if @wishlists.empty? %>
       <%= link_to "Create Board", new_wishlist_path, class: "btn-flat" %>
     <% elsif @wishes.empty? %>
@@ -32,9 +31,8 @@
 
       <!-- Modal -->
     <% else %>
-      <div class="wrapper-container pb-0">
-        <%= turbo_frame_tag "wish-view", src: wish_path(@wishes.first) do %>
-        <% end %>
+      <div class="wrapper-container pb-0 h-100">
+        <%= turbo_frame_tag "wish-view", src: wish_path(@wishes.first, source: 'feedback'), class: "h-100 flex-grow-1 d-flex flex-column" %>
       </div>
     <% end %>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

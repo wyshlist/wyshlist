@@ -1,10 +1,16 @@
- <%= simple_form_for @wishlist do |f| %>
-    <% if @organization %>
-        <%= f.input :organization_id, input_html: { value: @organization.id }, wrapper_html: { class: "d-none" } %>
-    <% end %>
-    <%= f.input :title, required: true, label: "Insert a descriptive title", placeholder: "i.e: Product development, Improve wyshlist.net..." %>
-    <%= f.input :description, label: "Summarize the goals of this board", type: :text, placeholder: "i.e: This board is for the product development team..." %>
-    <%# Removed private as we are not sure about the logic yet %>
-    <%#= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
-    <%= f.submit "Submit", class: "btn-flat"%>
-<% end %>
+<div data-controller="character-counter">
+  <%= simple_form_for @wishlist do |f| %>
+      <% if @organization %>
+          <%= f.input :organization_id, input_html: { value: @organization.id }, wrapper_html: { class: "d-none" } %>
+      <% end %>
+      <div class = "character-count">
+        <label for="">Insert a descriptiom title</label>
+        <span data-target="character-counter.message" class="text-muted"></span>
+      </div>
+      <%= f.input :title, label: false, required: true, placeholder: "i.e: Product development, Improve wyshlist.net...", maxlength: 100, input_html: { data: { target: "character-counter.input", action: "keyup->character-counter#updateMessage" } } %>
+      <%= f.input :description, label: "Summarize the goals of this board", type: :text, placeholder: "i.e: This board is for the product development team..." %>
+      <%# Removed private as we are not sure about the logic yet %>
+      <%#= f.input :private, label: "Make this board private", input_html: { class: "toggle" } %>
+      <%= f.submit "Submit", class: "btn-flat"%>
+  <% end %>
+</div>
