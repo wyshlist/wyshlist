@@ -59,7 +59,7 @@ class ApplicationPolicy
   end
 
   def user_is_team_member?
-    user.team_member_of(record.user.organization)
+    user.team_member_of(record.wishlist.organization)
   end
 
   def user_is_record_owner?

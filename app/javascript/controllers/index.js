@@ -34,5 +34,8 @@ application.register("tab", TabController)
 import TicketPopupController from "./ticket_popup_controller"
 application.register("ticket-popup", TicketPopupController)
 
+import WishStatusUpdateController from "./wish_status_update_controller"
+application.register("wish-status-update", WishStatusUpdateController)
+
 import WizardController from "./wizard_controller"
 application.register("wizard", WizardController)
