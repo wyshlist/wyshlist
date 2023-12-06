@@ -58,6 +58,7 @@ class WishesController < ApplicationController
     if @wish.update(wish_params)
       flash[:notice] = "Ticket updated successfully, only you as a board owner can update the stage of a wish"
       redirect_to wish_path(@wish)
+      create_comment if params[:wish][:stage].present?
     else
       flash[:alert] = "Ticket not updated, try again later"
       render "show", status: :unprocessable_entity
@@ -86,6 +87,10 @@ class WishesController < ApplicationController
   def order_column_whitelist
     @order_column_whitelist ||=
       Wishes::Filterer::ORDER_COLUMN_WHITELIST.map { [_1.titleize, _1] }
+  end
+
+  def create_comment
+    Comment.create(user: current_user, wish: @wish, content: "The stage of this ticket has been updated to: #{@wish.stage}")
   end
 
   def order_direction_whitelist
