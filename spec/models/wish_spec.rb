@@ -39,6 +39,16 @@ RSpec.describe Wish, type: :model do
     end
   end
 
+  describe 'after update' do
+    let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", password: '123123') }
+    let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
+
+    it 'create a new comment everytime there is an update' do
+      wish = Wish.create(title: "New Wish", wishlist:, user: owner)
+      expect { wish.update(stage: 'In process') }.to change { wish.comments.count }.by(1)
+    end
+  end
+
   describe 'after commit' do
     let(:organization) { Organization.create(name: "New Organization") }
     let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", organization_id: organization.id, password: '123123') }
@@ -48,6 +58,21 @@ RSpec.describe Wish, type: :model do
       wish = Wish.create(title: "New Wish", wishlist:, user: owner)
       expect(wish.votes.count).to eq(1)
       expect(wish.votes.first.user).to eq(owner)
+    end
+  end
+
+  describe 'stages' do
+    let(:organization) { Organization.create(name: "New Organization") }
+    let(:owner) { User.create(first_name: 'John', last_name: 'Doe', email: "john@example.com", organization_id: organization.id, password: '123123') }
+    let(:wishlist) { Wishlist.create(title: "New Wishlist", user_id: owner.id, description: "Lorem ipsum") }
+    let(:wish) { Wish.create(title: "New Wish", wishlist:, user: owner) } 
+
+    it "returns the correct color for each stage" do
+      expect(wish.stage_color).to eq("#A0A0A0")
+      wish.update(stage: "In process")
+      expect(wish.stage_color).to eq("#F278F2")
+      wish.update(stage: "Launched")
+      expect(wish.stage_color).to eq("#2FC888")
     end
   end
 end
