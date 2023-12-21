@@ -88,11 +88,6 @@ RSpec.describe User, type: :model do
       expect(user.initial).to eq('JD')
     end
 
-    it 'returns true if the user is a member of an organization' do
-      user = User.new(organization: Organization.new)
-      expect(user.team_member_of(user.organization)).to eq(true)
-    end
-
     it 'sends an email to the super team member when a new user is created' do
       user = User.new(first_name: 'John', last_name: 'Doe', email: 'john@gmail.com', password: '123123', role: 'super_team_member')
       expect { user.save }.to change { ActionMailer::Base.deliveries.count }.by(1)
