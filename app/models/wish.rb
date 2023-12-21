@@ -11,7 +11,6 @@ class Wish < ApplicationRecord
   enum stage: { Backlog: 0, 'In process': 1, Launched: 3 }
   after_create :send_to_asana, if: :asana_integration?
   # after_create_commit { broadcast_append_to "wishes" }
-  after_update :create_comment, if: :saved_change_to_stage?
   after_create :upvote
 
   include PgSearch::Model
@@ -61,10 +60,6 @@ class Wish < ApplicationRecord
   end
 
   private
-
-  def create_comment
-    Comment.create(content: "The stage of this ticket has been updated to: #{stage}", user:, wish: self)
-  end
 
   def asana_integration?
     wishlist.integrations.find_by(name: "Asana").present?

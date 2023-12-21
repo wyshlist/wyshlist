@@ -18,10 +18,10 @@ class WishPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user_is_record_owner?
+    user.admin? || user_is_team_member?
   end
 
   def destroy?
-    user.admin? || user_is_record_owner?
+    user.admin? || user_is_record_owner? || user_is_team_member?
   end
 end

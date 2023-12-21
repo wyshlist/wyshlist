@@ -5,5 +5,6 @@ require 'rails_helper'
 RSpec.describe WishesController, type: :controller do
     describe "GET #index" do
     end
+    # update
 end
 

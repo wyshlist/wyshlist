@@ -110,6 +110,6 @@ class User < ApplicationRecord
   private
 
   def signup_email
-    UserMailer.with(user: self).signup_email.deliver_now
+    UserMailer.with(user: self).signup_email.deliver_now if self.role == 'super_team_member' || self.role == 'team_member'
   end
 end

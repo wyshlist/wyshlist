@@ -4,7 +4,7 @@
   height: 80px;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1;
 }
 
 .border-bottom {
@@ -34,5 +34,23 @@
   p {
     margin: 0px;
     font-size: color;
+  }
+}
+
+@media (min-width: 100px) and (max-width: 575px) {
+  .navbar-collapse {
+    background: white;
+    border: solid 1px lightgrey;
+    border-radius: 12px;
+    padding: 0.5em;
+    align-items: flex-end;
+
+    .navbar-nav {
+      align-items: end;
+    }
+
+    a, .avatar {
+      margin: 0.4em;
+    }
   }
 }

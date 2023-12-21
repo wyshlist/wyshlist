@@ -42,3 +42,4 @@
 
 # Ignore byebug history file
 .byebug_history
+.env*

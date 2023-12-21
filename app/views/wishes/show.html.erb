@@ -26,16 +26,13 @@
               <span class="me-1"><%= @wish.votes.count %></span>
               <%= image_tag "carrot-up.png", width: '12px', alt: "text" %>
             </div>
-            <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= @wish.stage_color %>; color: <%= @wish.stage_color %>">
-                <%= @wish.stage %>
-                <!--
-                  <% if user_signed_in? && policy(@wish).edit? %>
-                    <div>
-                      <%= render "wishes/stage_form" %>
-                    </div>
-                  <% end %>
-                -->
-            </div>
+            <% if user_signed_in? && policy(@wish).update? %>
+              <%= render "wishes/stage_form" %>
+            <% else %>
+              <div class="card-ghost card-ghost-wide card-product__status" style="border-color: <%= @wish.stage_color %>; color: <%= @wish.stage_color %>">
+                  <%= @wish.stage %>
+              </div>
+            <% end %>
           </div>
         </div>
 
