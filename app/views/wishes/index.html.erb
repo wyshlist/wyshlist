@@ -8,6 +8,13 @@
             <small class="title-header__description"><%= @wishlist.description %></small>
         </div>
         <div>
+            <% if user_signed_in? && (current_user.team_member? || current_user.super_team_member?) %>
+                <%= link_to edit_wishlist_path(@wishlist) do %>
+                    <div class="card-product__edit">
+                        Edit Board <i class="fa-solid fa-pencil"></i>
+                    </div>
+                <% end %>
+            <% end %>
         </div>
     </div>
     <div class="cards-columns">
