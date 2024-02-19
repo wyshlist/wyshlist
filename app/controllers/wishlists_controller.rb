@@ -55,10 +55,10 @@ class WishlistsController < ApplicationController
     end
     authorize @wishlist
     if @wishlist.update(wishlist_params)
-      flash[:notice] = "Wishlist updated successfully"
+      flash[:notice] = "Board updated successfully"
       redirect_to wishlist_wishes_path(@wishlist)
     else
-      flash[:alert] = "There was a problem updating your wishlist, try again later"
+      flash[:alert] = "There was a problem updating your board, try again later"
       render :edit
     end
   end
