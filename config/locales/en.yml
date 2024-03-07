@@ -79,3 +79,17 @@ en:
     log_out: "Log out"
     log_in: "Log in"
     create_account: "Create account"
+  dashboard_navbar:
+    edit_my_account: "Edit my account"
+    log_out: "Log out"
+    log_in: "Log in"
+  sign_up_email:
+    logo_alt: "Wyshlist.net logo"
+    welcome: "Welcome to Wyshlist.net %{first_name}"
+    intro: "Hey there, fellow product geek! We have created Wyshlist to help software companies gather valuable customer suggestions and make better product decisions. Because, let's face it, who knows what users want better than the users themselves, right?"
+    beta_offer: "As a valued BETA member, you'll get FREE access to ALL current and future features of Wyshlist.net while we are on Beta. That's right, unlimited access to our toolbox of wonders for a limited time, but worry not. You will always have access to wyshlist basic features."
+    hold_on: "Hold on tight as we work our magic and sprinkle Wyshlist with new features and updates."
+    reach_out: "If you have any questions, feedback, or even wild feature suggestions, don't be shy! Reach out to us or contribute to Wyshlist with your genius ideas. We're here to assist you on this thrilling journey."
+    closing: "Once again, welcome to Wyshlist! Together, let's revolutionize product development!"
+    best_regards: "Best regards"
+    team: "Wyshlist team"

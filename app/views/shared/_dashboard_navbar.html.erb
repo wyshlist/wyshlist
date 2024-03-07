@@ -17,15 +17,15 @@
             <% end %>
             <ul class="dropdown-menu position-absolute dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= render 'shared/nav_links', type: 'dropdown' %>
-              <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to t('dashboard_navbar.edit_my_account'), edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to t('dashboard_navbar.log_out'), destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               <%= render 'shared/sidebar_links', type: 'dropdown' %>
             </ul>
           </div>
         <% end %>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Log in", new_user_session_path, class: "ghost-button" %>
+          <%= link_to t('dashboard_navbar.log_in'), new_user_session_path, class: "ghost-button" %>
         </li>
       <% end %>
     </ul>
