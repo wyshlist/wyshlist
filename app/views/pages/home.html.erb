@@ -1,15 +1,15 @@
 <div class="my-container">
     <div class="banner">
         <div class="banner__body">
-            <h1>Find your way forward through <span class="highlight">customer's feedback</h1>
-            <p>Simple feedback management system for tech teams. Eliminate redundancy and enable data-driven decision-making</p>
+            <h1><%= t('home.title').html_safe %></h1>
+            <p><%= t('home.subtitle') %></p>
             <% if user_signed_in? %>
-                <%= link_to "Boards", wishlists_path, class: "btn-flat" %>
+                <%= link_to t('boards'), wishlists_path, class: "btn-flat" %>
             <% else %>
-                <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
+                <%= link_to t('get_started'), new_user_registration_path, class: "btn-flat" %>
                 <br>
                 <br>
-                <small>Free sign up & no credit card required</small>
+                <small><%= t('free_sign_up') %></small>
             <% end %>
         </div>
         <%= image_tag "home-mockup.svg", alt: "text", class: "banner__mockup" %>
@@ -23,10 +23,8 @@
         <div class="card-info" id="gather">
             <%= image_tag "gather-ideas.png", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
-                <h2>Improve your product decision-making process</h2>
-                <p>
-                    Gain insights into the most requested features, easily filter feedback based on user segments and impact, and establish clear use cases from the beginning. Avoid wasting valuable time on developing irrelevant functionalities.
-                </p>
+                <h2><%= t('home.gather_ideas') %></h2>
+                <p><%= t('home.gather_ideas_text') %></p>
             </div>
             <%= image_tag "gather-ideas.png", class: "card-info__img right-image desktop-display" %>
             <%= image_tag "line-inverted.svg", class: "vector-inverted desktop-display" %>
@@ -34,22 +32,22 @@
         <div class="card-info" id="roadmap">
             <%= image_tag "roadmap.png", class: "card-info__img left-image" %>
             <div class="card-info__body">
-                <h2>Maintain active engagement with product updates</h2>
+                <h2><%= t('home.roadmap.title') %></h2>
                 <p>
-                   Ensure seamless communication by automatically providing updates to users whenever a new feature is released. Keep the feedback loop throughout the entire product development process.
+                <%= t('home.roadmap.description') %>
                 </p>
             </div>
-             <%= image_tag "line-s.svg", class: "vector desktop-display" %>
+            <%= image_tag "line-s.svg", class: "vector desktop-display" %>
         </div>
         <div class="card-info" id="votes">
             <%= image_tag "votes.png", class: "card-info__img right-image mobile-display" %>
             <div class="card-info__body">
-                <h2>Leverage a product feature voting board to organize customer feedback</h2>
+                <h2><%= t('home.votes.title') %></h2>
                 <p>
-                    Create a dedicated feedback board where customers can openly or privately share their input. As ideas are shared, the most popular ones naturally emerge to the top.
+                    <%= t('home.votes.description') %>
                     <ul>
-                        <li>Efficiently group similar requests</li>
-                        <li>Facilitate communication among users with shared requests, votes and encourage discussions</li>
+                        <li><%= t('home.votes.list.group_requests') %></li>
+                        <li><%= t('home.votes.list.facilitate_communication') %></li>
                     </ul>
                 </p>
             </div>
@@ -57,27 +55,27 @@
         </div>
     </section>
 </div>
-<section  class="bg-section">
+<section class="bg-section">
     <div class="my-container">
         <div class="testimonial-wrapper">
             <div class="desktop-display">
                 <%= image_tag "testimonial.svg", class: "testimonial-img" %>
-                <p class= "testimonial-name">Mike Torello</p>
-                <p class= "testimonial-position">Product Manager at Avenist</p>
+                <p class= "testimonial-name"><%= t('home.testimonial.name') %></p>
+                <p class= "testimonial-position"><%= t('home.testimonial.position') %></p>
             </div>
             <div class="testimonial-body">
-                <h2>Why our users <em>love</em> Wyshlist.</h2>
+                <h2><%= t('home.testimonial.header').html_safe %></h2>
                 <div class="testimonial-text-card">
                     <p>
-                        "Wyshlist is simple to use and has helped us steering our product development strategy."
+                        <%= t('home.testimonial.quote') %>
                     </p>
                 </div>
                 <div class="mobile-display">
                     <div class="mobile-display-testimonial">
                         <%= image_tag "testimonial.svg", class: "testimonial-img" %>
                         <div class="mobile-display-testimonial-text">
-                            <p class= "testimonial-name">Mike Torello</p>
-                            <p class= "testimonial-position">Product Manager at Avenist</p>
+                            <p class= "testimonial-name"><%= t('home.testimonial.name').html_safe %></p>
+                            <p class= "testimonial-position"><%= t('home.testimonial.position') %></p>
                         </div>
                     </div>
                 </div>
@@ -87,14 +85,14 @@
 </section>
 <div class="my-container">
     <section class="section-wrapper">
-          <div class="banner__body big-wrapper">
-            <%= image_tag "wish-icon.svg", alt: "icon of wishes for product managers", class: "wish-icon" %>
-            <h2>Let's fullfill wishes!</h2>
-            <p>Create your free account today</p>
+        <div class="banner__body big-wrapper">
+            <%= image_tag "wish-icon.svg", alt: t('home.wishes.alt'), class: "wish-icon" %>
+            <h2><%= t('home.wishes.header') %></h2>
+            <p><%= t('home.wishes.subheader') %></p>
             <br>
-            <%= link_to "Get started", new_user_registration_path, class: "btn-flat" %>
+            <%= link_to t('home.wishes.cta'), new_user_registration_path, class: "btn-flat" %>
             <p>
-            <small>Free sign up & no credit card required</small>
+            <small><%= t('home.wishes.disclaimer') %></small>
             </p>
         </div>
     </section>

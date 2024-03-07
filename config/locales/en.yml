@@ -30,4 +30,52 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  boards: 'Boards'
+  get_started: 'Get Started'
+  free_sign_up: 'Free sign up & no credit card required'
+  home:
+    title: 'Find your way forward through <span class="highlight">customer feedback</span>'
+    subtitle: 'Simple feedback management system for tech teams. Eliminate redundancy and enable data-driven decision-making'
+    gather_ideas: 'Improve your product decision-making process'
+    gather_ideas_text: 'Gain insights into the most requested features, easily filter feedback based on user segments and impact, and establish clear use cases from the beginning. Avoid wasting valuable time on developing irrelevant functionalities.'
+    roadmap:
+      title: "Maintain active engagement with product updates"
+      description: "Ensure seamless communication by automatically providing updates to users whenever a new feature is released. Keep the feedback loop throughout the entire product development process."
+    votes:
+      title: "Leverage a product feature voting board to organize customer feedback"
+      description: "Create a dedicated feedback board where customers can openly or privately share their input. As ideas are shared, the most popular ones naturally emerge to the top."
+      list:
+        group_requests: "Efficiently group similar requests"
+        facilitate_communication: "Facilitate communication among users with shared requests, votes and encourage discussions"
+    testimonial:
+      name: "Mike Torello"
+      position: "Product Manager at Avenist"
+      header: "Why our users <em>love</em> Wyshlist."
+      quote: "\"Wyshlist is simple to use and has helped us steering our product development strategy.\""
+    wishes:
+      alt: "icon of wishes for product managers"
+      header: "Let's fulfill wishes!"
+      subheader: "Create your free account today"
+      cta: "Get started"
+      disclaimer: "Free sign up & no credit card required"
+  footer:
+    privacy_policy: "Privacy policy"
+    terms_of_service: "Terms of service"
+    contribute: "Contribute to Wyshlist"
+    copy_right: "Wyshlist © %{year} by Wyshlist"
+  navbar:
+    toggle_navigation: "Toggle navigation"
+    search_placeholder: "Search for a ticket"
+    search: "Search"
+    explore: "Explore"
+    give_feedback: "Give feedback"
+    log_in: "Log in"
+    new_board: "New Board"
+    dashboard: "Dashboard"
+    edit_my_account: "Edit my account"
+    log_out: "Log out"
+  pages_navbar:
+    public_preview: "Public Preview"
+    log_out: "Log out"
+    log_in: "Log in"
+    create_account: "Create account"

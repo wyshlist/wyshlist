@@ -6,12 +6,12 @@
                     <% if @current_organization.logo.attached? %>
                         <%= cl_image_tag @current_organization.logo.key, class: "logo" %>
                     <% else %>
-                        <%=  image_tag 'logo.jpg', class: "logo" %>
+                        <%= image_tag 'logo.jpg', class: "logo" %>
                     <% end %>
                 <% end %>
             <% end %>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t('navbar.toggle_navigation') %>">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -21,17 +21,17 @@
                         <li class="nav-item">
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
-                                    <%= text_field_tag :query, params[:query], placeholder: "Search for a ticket", class: "tickets-searchbar__input form-control" %>
-                                    <% submit_tag "Search", class: "tickets-searchbar__button" %>
+                                    <%= text_field_tag :query, params[:query], placeholder: t('navbar.search_placeholder'), class: "tickets-searchbar__input form-control" %>
+                                    <%= submit_tag t('navbar.search'), class: "tickets-searchbar__button" %>
                                 </div>
                             <% end %>
                         </li>
                     <% end %>
                     <li class="nav-item active">
-                        <%= link_to "Explore", wishlists_url(subdomain: @current_organization.subdomain), class: "nav-link" %>
+                        <%= link_to t('navbar.explore'), wishlists_url(subdomain: @current_organization.subdomain), class: "nav-link" %>
                     </li>
                     <li class="nav-item dropdown">
-                        <%= link_to "Give feedback", "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                        <%= link_to t('navbar.give_feedback'), "#", class: "nav-link dropdown-toggle", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <% @current_organization.wishlists.each do |wishlist| %>
                                 <%= link_to wishlist.title.truncate(20), wishlist_wishes_path(wishlist), class: "dropdown-item" %>
@@ -40,15 +40,15 @@
                     </li>
                     <% if !user_signed_in? %>
                         <li class="nav-item">
-                            <%= link_to "Log in", new_user_session_path, class: "ghost-black" %>
+                            <%= link_to t('navbar.log_in'), new_user_session_path, class: "ghost-black" %>
                         </li>
                     <% end %>
                     <% if User.has_valid_organization_member?(current_user) %>
                         <li class="nav-item">
-                            <%= link_to " New Board", new_wishlist_path, class: "nav-link mx-auto link " %>
+                            <%= link_to t('navbar.new_board'), new_wishlist_path, class: "nav-link mx-auto link " %>
                         </li>
                         <li class="nav-item align-items-center d-flex">
-                            <%= link_to "Dashboard", authenticated_root_path, class: "upvote-button mx-auto" %>
+                            <%= link_to t('navbar.dashboard'), authenticated_root_path, class: "upvote-button mx-auto" %>
                         </li>
                     <% end %>
 
@@ -62,8 +62,8 @@
                           </div>
                         <% end %>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                          <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
-                          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                          <%= link_to t('navbar.edit_my_account'), edit_user_registration_path, class: "dropdown-item" %>
+                          <%= link_to t('navbar.log_out'), destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
                         </div>
                       </div>
                     <% end %>
