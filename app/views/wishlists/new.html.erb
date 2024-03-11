@@ -1,9 +1,9 @@
 <div class="my-container my-5">
     <% if @organization %>
-        <h1>New Team board for <%= current_user.organization.name.capitalize %></h1>
+        <h1><%= t('new_board.title_with_org', org_name: current_user.organization.name.capitalize) %></h1>
     <% else %>
-        <h1>Add a new board</h1>
+        <h1><%= t('new_board.title') %></h1>
     <% end %>
-    <p>Create a new board for your teammates or customers to collaborate on new ideas for product development and vote on their most important one.</p>
+    <p><%= t('new_board.description') %></p>
     <%= render "form" %>
 </div>

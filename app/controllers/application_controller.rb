@@ -10,9 +10,27 @@ class ApplicationController < ActionController::Base
   # Pundit: allow-list approach
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+  around_action :switch_locale
 
   # Uncomment when you *really understand* Pundit!
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def switch_locale(&action)
+    locale = params[:locale] || locale_from_header || I18n.default_locale
+    if locale.present? && I18n.available_locales.include?(locale.to_sym)
+      I18n.with_locale(locale, &action) || I18n.default_locale
+    else
+      I18n.with_locale(I18n.default_locale, &action)
+    end
+  end
+
+  def default_url_options
+    { locale: I18n.locale == I18n.default_locale ? nil : I18n.locale }
+  end
+
+  def locale_from_header
+    request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first
+  end
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
@@ -30,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_pundit?
-    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)|(^wishes$)|(^passthrough$)/ || params[:action] =~/(^set_locale$)/
   end
 
   def unauthenticated_user?

@@ -14,7 +14,7 @@ class IntegrationsController < ApplicationController
     authorize @integration
     if @integration.save!
       redirect_to wishlist_path(@wishlist)
-      flash[:notice] = "Integration created successfully"
+      flash[:notice] = t('flash.integration.success')
     else
       render :new, status: :unprocessable_entity
     end

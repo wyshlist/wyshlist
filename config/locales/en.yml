@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   boards: 'Boards'
   get_started: 'Get Started'
@@ -51,7 +20,7 @@ en:
       name: "Mike Torello"
       position: "Product Manager at Avenist"
       header: "Why our users <em>love</em> Wyshlist."
-      quote: "\"Wyshlist is simple to use and has helped us steering our product development strategy.\""
+      quote: '"Wyshlist is simple to use and has helped us steering our product development strategy.'
     wishes:
       alt: "icon of wishes for product managers"
       header: "Let's fulfill wishes!"
@@ -93,3 +62,38 @@ en:
     closing: "Once again, welcome to Wyshlist! Together, let's revolutionize product development!"
     best_regards: "Best regards"
     team: "Wyshlist team"
+  create_team:
+    title: "Create a team"
+    description: "Wyshlists provides you with a personalized landing page for your team"
+  tickets:
+    title: "Tickets"
+    no_tickets: "No tickets yet."
+    create_board: "Create Board"
+    create_ticket: "Create a ticket"
+    add_new_ticket: "Add a new ticket"
+    title_placeholder: "Title"
+    description_label: "Add a description for this ticket"
+    description_placeholder: "i.e: At the moment our current solution is this, it would be great to have..."
+    add_ticket_button: "Add a ticket"
+  new_board:
+    title_with_org: "New Team board for %{org_name}"
+    title: "Add a new board"
+    description: "Create a new board for your teammates or customers to collaborate on new ideas for product development and vote on their most important one."
+  wishlist_page:
+    edit_board: "Edit Board"
+    add_new_ticket: "Add a new ticket"
+    copied: "Copied!"
+    powered_by: "Powered by Wyshlist©"
+    no_contributions_stage: "No contributions at this stage yet"
+    stay_tuned: "Stay tuned for upcoming changes in the pipeline"
+    no_ideas_yet: "No ideas yet!"
+    be_first_add: "Be the first to add an idea to this board! Create a new ticket! 🚀"
+  user_feed:
+    title: "Your Feed"
+    description: "Here you can find all the boards you have created or contributed to either by creating a ticket, voting or commenting"
+    new_wishlist: "New wishlist"
+    no_boards_message: "There are no boards yet."
+    create_one_message: "Click on the button above to create one."
+  flash:
+    integration:
+      success: "Integration created successfully"

@@ -1,0 +1,3 @@
+<%= form_tag set_locale_path, class: "language-pill" do %>
+    <%= select_tag :locale, options_for_select([["🇬🇧 EN", :en], ["🇪🇸 ES", :es]], I18n.locale), :onchange => "this.form.submit();", style: "border: none; padding: 0px 5px; border-radius: 10px; border: 1px solid #ddd;"  %>
+<% end %>

@@ -1,6 +1,6 @@
 <div class="my-container">
   <div class="title-header align-items-center">
-    <h1>Boards</h1>
+    <h1><%= t("boards") %></h1>
     <% if user_signed_in? && (current_user.team_member? || current_user.super_team_member?) %>
       <%= link_to new_wishlist_path, class: 'ghost-button' do %>
         <i class="fa-solid fa-plus"></i>

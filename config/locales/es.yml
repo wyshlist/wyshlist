@@ -1,3 +1,96 @@
 es:
+  boards: 'Tableros'
+  get_started: 'Comenzar'
+  free_sign_up: 'Registro gratuito y sin necesidad de tarjeta de crédito'
   home:
-    welcome: 'Encuentra tu camino hacia adelante a través de <span class="highlight">la retroalimentación de los clientes</span>'
+    title: 'Encuentra tu camino a través de <span class="highlight">comentarios de los clientes</span>'
+    subtitle: 'Sistema de gestión de feedback simple para equipos técnicos. Elimina la redundancia y permite la toma de decisiones basada en datos'
+    gather_ideas: 'Mejora tu proceso de toma de decisiones de producto'
+    gather_ideas_text: 'Obtén información sobre las características más solicitadas, filtra fácilmente el feedback basado en segmentos de usuarios e impacto, y establece casos de uso claros desde el principio. Evita perder tiempo valioso en desarrollar funcionalidades irrelevantes.'
+    roadmap:
+      title: "Mantén un compromiso activo con las actualizaciones de producto"
+      description: "Asegura una comunicación fluida proporcionando automáticamente actualizaciones a los usuarios cada vez que se lance una nueva característica. Mantén el bucle de feedback a lo largo de todo el proceso de desarrollo del producto."
+    votes:
+      title: "Aprovecha un tablero de votación de características del producto para organizar el feedback de los clientes"
+      description: "Crea un tablero de feedback dedicado donde los clientes puedan compartir sus opiniones de manera abierta o privada. A medida que se comparten las ideas, las más populares emergen naturalmente a la cima."
+      list:
+        group_requests: "Agrupa eficientemente solicitudes similares"
+        facilitate_communication: "Facilita la comunicación entre usuarios con solicitudes y votos compartidos, y fomenta las discusiones"
+    testimonial:
+      name: "Mike Torello"
+      position: "Gerente de Producto en Avenist"
+      header: "Por qué nuestros usuarios <em>aman</em> Wyshlist."
+      quote: '"Wyshlist es simple de usar y nos ha ayudado a dirigir nuestra estrategia de desarrollo de producto.'
+    wishes:
+      alt: "icono de deseos para gerentes de producto"
+      header: "¡Cumplamos deseos!"
+      subheader: "Crea tu cuenta gratuita hoy"
+      cta: "Comenzar"
+      disclaimer: "Registro gratuito y sin necesidad de tarjeta de crédito"
+  footer:
+    privacy_policy: "Política de privacidad"
+    terms_of_service: "Términos de servicio"
+    contribute: "Contribuir a Wyshlist"
+    copy_right: "Wyshlist © %{year} por Wyshlist"
+  navbar:
+    toggle_navigation: "Alternar navegación"
+    search_placeholder: "Buscar un ticket"
+    search: "Buscar"
+    explore: "Explorar"
+    give_feedback: "Dar feedback"
+    log_in: "Iniciar sesión"
+    new_board: "Nuevo Tablero"
+    dashboard: "Dashboard"
+    edit_my_account: "Editar mi cuenta"
+    log_out: "Cerrar sesión"
+  pages_navbar:
+    public_preview: "Vista Pública"
+    log_out: "Cerrar sesión"
+    log_in: "Iniciar sesión"
+    create_account: "Crear cuenta"
+  dashboard_navbar:
+    edit_my_account: "Editar mi cuenta"
+    log_out: "Cerrar sesión"
+    log_in: "Iniciar sesión"
+  sign_up_email:
+    logo_alt: "logo de Wyshlist.net"
+    welcome: "Bienvenido a Wyshlist.net %{first_name}"
+    intro: "¡Hola, colega aficionado a los productos! Hemos creado Wyshlist para ayudar a las empresas de software a recopilar sugerencias valiosas de los clientes y tomar mejores decisiones de producto. Porque, seamos realistas, ¿quién sabe mejor lo que los usuarios quieren que los propios usuarios, verdad?"
+    beta_offer: "Como miembro BETA valorado, tendrás acceso GRATUITO a TODAS las características actuales y futuras de Wyshlist.net mientras estamos en Beta. Así es, acceso ilimitado a nuestra caja de herramientas de maravillas por un tiempo limitado, pero no te preocupes. Siempre tendrás acceso a las características básicas de wyshlist."
+    hold_on: "Mantente firme mientras trabajamos nuestra magia y espolvoreamos Wyshlist con nuevas características y actualizaciones."
+    reach_out: "Si tienes alguna pregunta, feedback, o incluso sugerencias de características salvajes, ¡no seas tímido! Comunícate con nosotros o contribuye a Wyshlist con tus ideas geniales. Estamos aquí para asistirte en este emocionante viaje."
+    closing: "Una vez más, ¡bienvenido a Wyshlist! Juntos, revolucionemos el desarrollo de productos."
+    best_regards: "Saludos cordiales"
+    team: "Equipo de Wyshlist"
+  create_team:
+    title: "Crear un equipo"
+    description: "Wyshlists te proporciona una página de aterrizaje personalizada para tu equipo"
+  tickets:
+    title: "Tickets"
+    no_tickets: "Aún no hay tickets."
+    create_board: "Crear Tablero"
+    create_ticket: "Crear un ticket"
+    add_new_ticket: "Agregar un nuevo ticket"
+    title_placeholder: "Título"
+    description_label: "Agrega una descripción para este ticket"
+    description_placeholder: "por ejemplo: En este momento nuestra solución actual es esta, sería genial tener..."
+    add_ticket_button: "Agregar un ticket"
+  new_board:
+    title_with_org: "Nuevo tablero de equipo para %{org_name}"
+    title: "Agregar un nuevo tablero"
+    description: "Crea un nuevo tablero para que tus compañeros de equipo o clientes colaboren en nuevas ideas para el desarrollo del producto y voten por la más importante."
+  wishlist_page:
+    edit_board: "Editar Tablero"
+    add_new_ticket: "Agregar un nuevo ticket"
+    copied: "¡Copiado!"
+    powered_by: "Impulsado por Wyshlist©"
+    no_contributions_stage: "Aún no hay contribuciones en esta etapa"
+    stay_tuned: "Mantente atento a los próximos cambios en el proceso"
+    no_ideas_yet: "¡Aún no hay ideas!"
+    be_first_add: "¡Sé el primero en agregar una idea a este tablero! ¡Crea un nuevo ticket! 🚀"
+  user_feed:
+    title: "Tu feed"
+    description: "Aquí puedes encontrar todos los tableros que has creado o contribuido ya sea creando un ticket, votando o comentando"
+    new_wishlist: "Nueva lista de deseos"
+    no_boards_message: "Aún no hay tableros."
+    create_one_message: "Haz clic"

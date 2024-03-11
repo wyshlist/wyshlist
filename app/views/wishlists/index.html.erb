@@ -1,19 +1,19 @@
 <div class="my-container">
     <div class="title-header">
         <div class="title-wrapper">
-            <h1>Your Feed</h1>
-            <small>Here you can find all the boards you have created or contributed to either by creating a ticket, voting or commenting</small>
+            <h1><%= t('user_feed.title') %></h1>
+            <small><%= t('user_feed.description') %></small>
         </div>
         <% if user_signed_in? && current_user.team_member? %>
-          <%= link_to " New wishlist", new_wishlist_path, class: " nav-link upvote-button btn-black" %>
+          <%= link_to t('user_feed.new_wishlist'), new_wishlist_path, class: "nav-link upvote-button btn-black" %>
         <% end %>
     </div>
     <% if @wishlists.empty? %>
         <div class="card-product">
-            <p>There are no boards yet.</p>
-            <p>Click on the button above to create one.</p>
+            <p><%= t('user_feed.no_boards_message') %></p>
+            <p><%= t('user_feed.create_one_message') %></p>
         </div>
     <% else %>
-        <%= render "wishlists_cards", wishlists: @wishlists  %>
+        <%= render "wishlists_cards", wishlists: @wishlists %>
     <% end %>
 </div>

@@ -11,7 +11,7 @@
             <% if user_signed_in? && (current_user.team_member? || current_user.super_team_member?) %>
                 <%= link_to edit_wishlist_path(@wishlist) do %>
                     <div class="card-product__edit">
-                        Edit Board <i class="fa-solid fa-pencil"></i>
+                        <%= t('wishlist_page.edit_board') %> <i class="fa-solid fa-pencil"></i>
                     </div>
                 <% end %>
             <% end %>
@@ -20,13 +20,13 @@
     <div class="cards-columns">
         <div class="wishes-filter">
             <ul class="wishes-filter__list">
-                <h4>Add a new ticket</h4>
+                <h4><%= t('wishlist_page.add_new_ticket') %></h4>
                 <br>
                 <div class="new-wish-wrapper new-wish-sidebar-wrapper">
                 <%= render "form", wish: @wish, wishlist: @wishlist %>
                 </div>
                 <br>
-                <div data-controller="clipboard" data-clipboard-feedback-text-value="Copied!" class="wishes__copy">
+                <div data-controller="clipboard" data-clipboard-feedback-text-value="<%= t('wishlist_page.copied') %>" class="wishes__copy">
                     <input type="text" value="<%= request.url %>" data-clipboard-target="source" class="wishes__copy-link" />
                     <button type="button" data-action="clipboard#copy" data-clipboard-target="button">
                         <%= image_tag "clipboard.png", class: "wishes__clipboard"%>
@@ -34,7 +34,7 @@
                 </div>
                 <br>
 
-                <small> Powered by Wyshlist©</small>
+                <small> <%= t('wishlist_page.powered_by') %></small>
             </ul>
         </div>
         <div class="wishes-wrapper">
@@ -44,13 +44,13 @@
                 <%= render "wishes/wishes", wishes: @wishes %>
             <% elsif params[:stage] %>
                 <div class="no-wishes">
-                    <h2> No contributions at this stage yet </h2>
-                    <p> Stay tuned for upcoming changes in the pipeline</p>
+                    <h2> <%= t('wishlist_page.no_contributions_stage') %> </h2>
+                    <p> <%= t('wishlist_page.stay_tuned') %> </p>
                 </div>
             <% else %>
                 <div class="no-wishes">
-                    <h2> No ideas yet! </h2>
-                    <p> Be the first to add an idea to this board! Create a new ticket! 🚀</p>
+                    <h2> <%= t('wishlist_page.no_ideas_yet') %> </h2>
+                    <p> <%= t('wishlist_page.be_first_add') %> </p>
                 </div>
             <% end %>
         </div>

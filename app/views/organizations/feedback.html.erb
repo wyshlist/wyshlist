@@ -2,7 +2,7 @@
   <div class="feedback__column-left">
     <div class="wrapper-container">
       <div class="d-flex justify-content-between align-items-start mb-3">
-        <h2>Tickets</h2>
+        <h2><%= t('tickets.title') %></h2>
         <button type="button" class="ghost-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <i class="fa-solid fa-plus"></i>
         </button>
@@ -12,7 +12,7 @@
     <div class="tickets">
       <% if @wishes.empty? %>
         <div class="wrapper-container border-0">
-          <small>No tickets yet.</small>
+          <small><%= t('tickets.no_tickets') %></small>
         </div>
       <% end %>
       <% @wishes.each do |wish| %>
@@ -22,13 +22,12 @@
   </div>
   <div class="feedback__column-right d-none d-lg-block <%= 'flex-center' if @wishes.empty? %>" data-ticket-popup-target="popup">
     <% if @wishlists.empty? %>
-      <%= link_to "Create Board", new_wishlist_path, class: "btn-flat" %>
+      <%= link_to t('tickets.create_board'), new_wishlist_path, class: "btn-flat" %>
     <% elsif @wishes.empty? %>
       <!-- Button trigger modal -->
       <button type="button" class="btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Create a ticket
+        <%= t('tickets.create_ticket') %>
       </button>
-
       <!-- Modal -->
     <% else %>
       <div class="wrapper-container pb-0 h-100">
@@ -39,15 +38,15 @@
       <div class="modal-dialog rounded">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add a new ticket</h5>
+            <h5 class="modal-title" id="exampleModalLabel"><%= t('tickets.add_new_ticket') %></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <%= simple_form_for @wish do |f| %>
-              <%= f.association :wishlist, collection: @wishlists, label: false, placeholder: "Title" %>
-              <%= f.input :title, label: false, placeholder: "Title" %>
-              <%= f.rich_text_area :description, label: "Add a decription for this ticket", placeholder: "i.e: At the moment our current solution is this, it would be great to have...", as: :text %>
-              <%= f.submit "Add a ticket", class: "btn-flat", data: { turbo: false }%>
+              <%= f.association :wishlist, collection: @wishlists, label: false, placeholder: t('tickets.title_placeholder') %>
+              <%= f.input :title, label: false, placeholder: t('tickets.title_placeholder') %>
+              <%= f.rich_text_area :description, label: t('tickets.description_label'), placeholder: t('tickets.description_placeholder'), as: :text %>
+              <%= f.submit t('tickets.add_ticket_button'), class: "btn-flat", data: { turbo: false }%>
             <% end %>
           </div>
         </div>

@@ -22,7 +22,7 @@
                             <%= form_tag wishlist_wishes_path(@wishlist), method: :get do %>
                                 <div class="tickets-searchbar">
                                     <%= text_field_tag :query, params[:query], placeholder: t('navbar.search_placeholder'), class: "tickets-searchbar__input form-control" %>
-                                    <%= submit_tag t('navbar.search'), class: "tickets-searchbar__button" %>
+                                    <% submit_tag t('navbar.search'), class: "tickets-searchbar__button" %>
                                 </div>
                             <% end %>
                         </li>
