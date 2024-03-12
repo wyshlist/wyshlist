@@ -3,9 +3,9 @@
 <div class="my-container fix-page-wrapper">
   <%= turbo_frame_tag "wish-view", class: "flex-grow-1 d-flex flex-column" do %>
     <% if params[:source] == 'feedback' %>
-      <%= link_to "< Back", '#', class: "d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
+      <%= link_to t('wish_details.back'), '#', class: "d-inline-block d-lg-none", data: {action: "click->ticket-popup#hide"} %>
     <% else %>
-      <%= link_to "< Back", wishlist_wishes_path(@wish.wishlist), class: "d-inline-block", data: { turbo_frame: :_top } %>
+      <%= link_to t('wish_details.back'), wishlist_wishes_path(@wish.wishlist), class: "d-inline-block", data: { turbo_frame: :_top } %>
     <% end %>
 
     <div class="card-show-wish mt-2">
@@ -24,7 +24,7 @@
           <div class="flex-between">
             <div class="card-ghost me-2">
               <span class="me-1"><%= @wish.votes.count %></span>
-              <%= image_tag "carrot-up.png", width: '12px', alt: "text" %>
+              <%= image_tag "carrot-up.png", width: '12px', alt: t('wish_details.votes_icon_alt') %>
             </div>
             <% if user_signed_in? && policy(@wish).update? %>
               <%= render "wishes/stage_form" %>
@@ -42,7 +42,7 @@
         <p><%= @wish.description %></p>
       </div>
       <div class="card-comments">
-        <h4 class="my-4">Activity</h4>
+        <h4 class="my-4"><%= t('wish_details.activity') %></h4>
         <div class="comments">
           <% @comments.each do |comment| %>
               <div class="card-comment <%= 'border-bottom card-border-color' unless comment == @comments.last %>">
@@ -59,16 +59,9 @@
                     <small class="ms-2 staff-pill"><%= comment.user.organization.name %></small>
                   <% end %>
                 </div>
-                <% if comment.content.starts_with? "The stage of this ticket has been updated to:" %>
-                  <% wish = comment.content.split("The stage of this ticket has been updated to: ")[1] %>
-                  <p>The stage of this ticket has been updated to<span class="pill" style="background-color: <%= Wish.new(stage: wish).bg_stage_color %>"><%= wish.downcase %></span></p>
-                <% else %>
-                  <p><%= comment.content %></p>
-                <% end %>
+                <p><%= comment.content %></p>
                 <ul class='list-inline'>
-                  <!-- <li class="list-inline-item"><%= image_tag 'heart.png', alt: "text" %> 37</li> -->
                   <li class="list-inline-item"><small><%= comment.created_at.strftime('%B %e, %Y') %></small></li>
-                  <!-- <li class="list-inline-item"><%= link_to 'Reply', '#', class: "text-reset text-decoration-underline" %></li> -->
                 </ul>
               </div>
           <% end %>
@@ -87,7 +80,7 @@
             <% end %>
             <%= f.input :content,
                         label: false,
-                        placeholder: "Leave a comment",
+                        placeholder: t('wish_details.leave_comment_placeholder'),
                         input_html: {
                           data: {
                             action: "
@@ -98,7 +91,7 @@
                           }
                         } %>
           </div>
-          <%= f.button :submit, 'Submit', class: "btn-flat px-4 py-2 mb-0 d-none", disabled: true, data: { add_comment_target: "button" } %>
+          <%= f.button :submit, t('wish_details.submit_button'), class: "btn-flat px-4 py-2 mb-0 d-none", disabled: true, data: { add_comment_target: "button" } %>
         <% end %>
       </div>
     </div>

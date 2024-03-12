@@ -94,3 +94,9 @@ es:
     new_wishlist: "Nueva lista de deseos"
     no_boards_message: "Aún no hay tableros."
     create_one_message: "Haz clic"
+  wish_details:
+    back: "< Volver"
+    votes_icon_alt: "icono de votos"
+    activity: "Actividad"
+    leave_comment_placeholder: "Deja un comentario"
+    submit_button: "Enviar"

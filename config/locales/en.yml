@@ -97,3 +97,9 @@ en:
   flash:
     integration:
       success: "Integration created successfully"
+  wish_details:
+    back: "< Back"
+    votes_icon_alt: "icon for votes"
+    activity: "Activity"
+    leave_comment_placeholder: "Leave a comment"
+    submit_button: "Submit"
