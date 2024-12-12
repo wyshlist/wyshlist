@@ -1,4 +1,4 @@
-
+testing CI 2
 ![Logo](https://github.com/Danrod16/wyshlist/blob/master/app/assets/images/logo.jpg?raw=true)
 
 # Community based wishlists for product managers and tech teams.
